@@ -5,11 +5,16 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 /**
- *
+ * few static utility methods
  * @author Prajwal Tuladhar
  */
 public class SailthruUtil {
 
+    /**
+     * generates MD5 Hash
+     * @param String data
+     * @return String 
+     */
     public static String md5(String data) {
         try {
             return DigestUtils.md5Hex(data.toString().getBytes("UTF-8"));
@@ -19,6 +24,11 @@ public class SailthruUtil {
         }
     }
 
+    /**
+     * Converts String ArrayList to CSV String
+     * @param ArrayList<String> list
+     * @return String
+     */
     public static String ArrayListToCSV(ArrayList<String> list) {
         StringBuilder csv = new StringBuilder();
         for (String str : list) {

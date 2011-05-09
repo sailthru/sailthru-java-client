@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * handles JSON response from server
  *
  * @author Prajwal Tuladhar <praj@sailthru.com>
  */
@@ -28,6 +29,7 @@ public class JSONHandler implements SailthruResponseHandler {
     }
 
     // http://stackoverflow.com/questions/2779251/convert-json-to-hashmap-using-gson-in-java/4799594#4799594
+    //Will get rid of this at some point
     private class NaturalDeserializer implements JsonDeserializer<Object>  {
 
         @Override
