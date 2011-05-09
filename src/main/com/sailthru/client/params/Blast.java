@@ -1,5 +1,7 @@
 package com.sailthru.client.params;
 
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 import java.net.URI;
 import java.util.Date;
 import java.util.HashMap;
@@ -8,7 +10,7 @@ import java.util.HashMap;
  *
  * @author Prajwal Tuladhar
  */
-public class Blast extends AbstractApiParams {
+public class Blast extends AbstractApiParams implements ApiParams {
     protected String name;
     protected String list;
     protected Date schedule_time;
@@ -17,8 +19,6 @@ public class Blast extends AbstractApiParams {
     protected String subject;
     protected String content_html;
     protected String content_text;
-
-    protected HashMap<String, Object> options;
 
     protected Integer blast_id;
     protected Integer copy_blast;
@@ -35,6 +35,21 @@ public class Blast extends AbstractApiParams {
     protected Integer abtest;
     protected Integer test_percent;
     protected String data_feed_url;
+
+    public Blast(String name, String list, Date scheduleTime, String fromName, String fromEmail, String subject, String contentHtml, String contentText) {
+        this.name = name;
+        this.list = list;
+        this.schedule_time = scheduleTime;
+        this.from_name = fromName;
+        this.from_email = fromEmail;
+        this.subject = subject;
+        this.content_html = contentHtml;
+        this.content_text = contentText;
+    }
+
+    public Blast() {
+        
+    }
 
     public Blast setName(String name) {
         this.name = name;
@@ -76,11 +91,7 @@ public class Blast extends AbstractApiParams {
         return this;
     }
 
-    public Blast setOptions(HashMap<String, Object> options) {
-        this.options = options;
-        return this;
-    }
-
+    
     public Blast setBlastId(Integer blastId) {
         this.blast_id = blastId;
         return this;
@@ -159,5 +170,10 @@ public class Blast extends AbstractApiParams {
     public Blast setDataFeedUrl(URI dataFeedUrl) {
         this.data_feed_url = dataFeedUrl.toString();
         return this;
+    }
+
+    public Type getType() {
+        Type type = new TypeToken<Blast>() {}.getType();
+        return type;
     }
 }
