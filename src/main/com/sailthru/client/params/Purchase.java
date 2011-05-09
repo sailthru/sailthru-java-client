@@ -23,11 +23,6 @@ public class Purchase extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-    //public Purchase setItems(ArrayList<HashMap<String, String>> items) {
-      //  this.items = items;
-        //return this;
-    //}
-
     public Purchase setItems(ArrayList<PurchaseItem> items) {
         this.items = new ArrayList<HashMap<String, String>>();
         for (PurchaseItem item : items) {
