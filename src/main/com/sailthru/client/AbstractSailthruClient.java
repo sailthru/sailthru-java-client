@@ -70,6 +70,10 @@ public abstract class AbstractSailthruClient {
         return new SailthruHttpClient(connManager, params);
     }
 
+    public SailthruHttpClient getSailthruHttpClient() {
+        return httpClient;
+    }
+
     protected Scheme getScheme() {
         String scheme = null;
         try {
