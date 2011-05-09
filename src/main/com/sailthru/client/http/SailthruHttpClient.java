@@ -1,8 +1,6 @@
 package com.sailthru.client.http;
 
 import com.sailthru.client.AbstractSailthruClient.HttpRequestMethod;
-import com.sailthru.client.response.AbstractResponse;
-import com.sailthru.client.response.ApiResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;

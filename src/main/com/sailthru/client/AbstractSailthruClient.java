@@ -7,7 +7,6 @@ import com.sailthru.client.handler.SailthruResponseHandler;
 import com.sailthru.client.http.SailthruHandler;
 import com.sailthru.client.http.SailthruHttpClient;
 import com.sailthru.client.params.ApiParams;
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Appinfo;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URI;
