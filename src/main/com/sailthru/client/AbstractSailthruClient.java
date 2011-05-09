@@ -122,7 +122,7 @@ public abstract class AbstractSailthruClient {
 
         Gson gson = new Gson();
         params.put("json", gson.toJson(data, data.getType()));
-        System.out.println(gson.toJson(data, data.getType()));
+        //System.out.println(gson.toJson(data, data.getType()));
 
         params.put("sig", getSignatureHash(params));
         return params;
