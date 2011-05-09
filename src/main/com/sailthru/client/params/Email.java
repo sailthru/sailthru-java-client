@@ -1,5 +1,7 @@
 package com.sailthru.client.params;
 
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -7,7 +9,7 @@ import java.util.HashMap;
  *
  * @author Prajwal Tuladhar
  */
-public class Email extends AbstractApiParams {
+public class Email extends AbstractApiParams implements ApiParams {
     protected String email;
     protected Integer verified;
     protected String optout;
@@ -66,5 +68,10 @@ public class Email extends AbstractApiParams {
     public Email setTextOnly() {
         this.vars.put("text_only", 1);
         return this;
+    }
+
+    public Type getType() {
+        Type type = new TypeToken<Email>() {}.getType();
+        return type;
     }
 }

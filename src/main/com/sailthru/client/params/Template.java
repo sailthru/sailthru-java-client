@@ -1,12 +1,14 @@
 package com.sailthru.client.params;
 
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 import java.util.HashMap;
 
 /**
  *
  * @author Prajwal Tuladhar
  */
-public class Template extends AbstractApiParams {
+public class Template extends AbstractApiParams implements ApiParams {
     protected String template;
     protected String sample;
     protected String from_name;
@@ -73,5 +75,10 @@ public class Template extends AbstractApiParams {
     public Template setLinkParams(HashMap<String, String> linkParams) {
         this.link_params = linkParams;
         return this;
+    }
+
+    public Type getType() {
+        Type type = new TypeToken<Template>() {}.getType();
+        return type;
     }
 }

@@ -1,5 +1,7 @@
 package com.sailthru.client.params;
 
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -7,7 +9,7 @@ import java.util.HashMap;
  *
  * @author Prajwal Tuladhar
  */
-public class Send extends AbstractApiParams {
+public class Send extends AbstractApiParams implements ApiParams {
     protected String template;
     protected String email;
     protected HashMap<String, Object> vars;
@@ -46,5 +48,10 @@ public class Send extends AbstractApiParams {
     public Send setScheduleTime(Date scheduleTime) {
         this.schedule_time = scheduleTime;
         return this;
+    }
+
+    public Type getType() {
+        Type type = new TypeToken<Send>() {}.getType();
+        return type;
     }
 }

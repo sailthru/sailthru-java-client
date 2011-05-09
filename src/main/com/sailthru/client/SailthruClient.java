@@ -43,14 +43,13 @@ public class SailthruClient extends AbstractSailthruClient {
     }
 
     public HashMap<String, Object> getEmail(String email) throws IOException {
-        Map<String, Object> data = new HashMap<String, Object>();
-        data.put("email", email);
-        return (HashMap<String, Object>)this.apiGet("email", data);
+        Email emailObj = new Email();
+        emailObj.setEmail(email);
+        return (HashMap<String, Object>)this.apiGet("email", emailObj);
     }
 
-    public HashMap<String, Object> setEmail(Email email) throws IOException {
-        HashMap<String, Object> data = email.toHashMap();
-        return (HashMap<String, Object>)this.apiPost("email", data);
+    public HashMap<String, Object> setEmail(Email email) throws IOException {        
+        return (HashMap<String, Object>)this.apiPost("email", email);
     }
 
     public HashMap<String, Object> getSend(String sendId) throws IOException {
@@ -59,14 +58,12 @@ public class SailthruClient extends AbstractSailthruClient {
         return (HashMap<String, Object>)this.apiGet("send", data);
     }
 
-    public HashMap<String, Object> send(Send send) throws IOException {
-        HashMap<String, Object> data = send.toHashMap();
-        return (HashMap<String, Object>)this.apiPost("send", data);
+    public HashMap<String, Object> send(Send send) throws IOException {        
+        return (HashMap<String, Object>)this.apiPost("send", send);
     }
 
-    public HashMap<String, Object> multiSend(MultiSend multiSend) throws IOException {
-        HashMap<String, Object> data = multiSend.toHashMap();
-        return (HashMap<String, Object>)this.apiPost("send", data);
+    public HashMap<String, Object> multiSend(MultiSend multiSend) throws IOException {        
+        return (HashMap<String, Object>)this.apiPost("send", multiSend);
     }
 
     public HashMap<String, Object> cancelSend(String sendId) throws IOException {
@@ -82,7 +79,6 @@ public class SailthruClient extends AbstractSailthruClient {
     }
 
     public HashMap<String, Object> scheduleBlast(Blast blast) throws IOException {
-        //Map<String, Object> data = new HashMap<String, Object>();
         return (HashMap<String, Object>)this.apiPost("blast", blast);
     }
 
@@ -101,10 +97,15 @@ public class SailthruClient extends AbstractSailthruClient {
         return (HashMap<String, Object>)this.apiPost("blast", data);
     }
 
+    public HashMap<String, Object> updateBlast(Integer blastId) throws IOException {
+        Blast blast = new Blast();
+        blast.setBlastId(blastId);
+        return (HashMap<String, Object>)this.apiPost("blast", blast);
+    }
+
     public HashMap<String, Object> updateBlast(Integer blastId, Blast blast) throws IOException {
-        Map<String, Object> data = blast.toHashMap();
-        data.put("blast_id", blastId);
-        return (HashMap<String, Object>)this.apiPost("blast", data);
+        blast.setBlastId(blastId);
+        return (HashMap<String, Object>)this.apiPost("blast", blast);
     }
 
     public HashMap<String, Object> deleteBlast(Integer blastId) throws IOException {
@@ -114,10 +115,11 @@ public class SailthruClient extends AbstractSailthruClient {
     }
 
     public HashMap<String, Object> cancelBlast(Integer blastId) throws IOException {
-        Map<String, Object> data = new HashMap<String, Object>();
-        data.put("blast_id", blastId);
-        data.put("schedule_time", null);
-        return (HashMap<String, Object>)this.apiPost("blast", data);
+        Blast blast = new Blast();
+        blast
+            .setBlastId(blastId)
+            .setScheduleTime(null);
+        return (HashMap<String, Object>)this.apiPost("blast", blast);
     }
 
     public HashMap<String, Object> getTemplate(String template) throws IOException {
@@ -126,9 +128,8 @@ public class SailthruClient extends AbstractSailthruClient {
         return (HashMap<String, Object>)this.apiGet("template", data);
     }
 
-    public HashMap<String, Object> saveTemplate(Template template) throws IOException {
-        Map<String, Object> data = template.toHashMap();
-        return (HashMap<String, Object>)this.apiPost("template", data);
+    public HashMap<String, Object> saveTemplate(Template template) throws IOException {        
+        return (HashMap<String, Object>)this.apiPost("template", template);
     }
 
     public HashMap<String, Object> deleteTemplate(String template) throws IOException {
@@ -138,8 +139,7 @@ public class SailthruClient extends AbstractSailthruClient {
     }
 
     public HashMap<String, Object> pushContent(Content content) throws IOException {
-        Map<String, Object> data = content.toHashMap();
-        return (HashMap<String, Object>)this.apiPost("content", data);
+        return (HashMap<String, Object>)this.apiPost("content", content);
     }
 
     public HashMap<String, Object> getAlert(String email) throws IOException {

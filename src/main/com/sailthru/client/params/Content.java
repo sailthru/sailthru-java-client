@@ -1,5 +1,7 @@
 package com.sailthru.client.params;
 
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -7,7 +9,7 @@ import java.util.HashMap;
  *
  * @author Prajwal Tuladhar
  */
-public class Content extends AbstractApiParams {
+public class Content extends AbstractApiParams implements ApiParams {
     protected String title;
     protected String url;
 
@@ -52,5 +54,10 @@ public class Content extends AbstractApiParams {
                 break;
         }
         return this;
+    }
+
+    public Type getType() {
+        Type type = new TypeToken<Content>() {}.getType();
+        return type;
     }
 }
