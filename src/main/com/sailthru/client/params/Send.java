@@ -7,7 +7,7 @@ import java.util.HashMap;
  *
  * @author Prajwal Tuladhar
  */
-public class Send extends ApiParams {
+public class Send extends AbstractApiParams {
     protected String template;
     protected String email;
     protected HashMap<String, Object> vars;

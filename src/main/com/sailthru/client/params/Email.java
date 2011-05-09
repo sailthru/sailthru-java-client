@@ -7,7 +7,7 @@ import java.util.HashMap;
  *
  * @author Prajwal Tuladhar
  */
-public class Email extends ApiParams {
+public class Email extends AbstractApiParams {
     protected String email;
     protected Integer verified;
     protected String optout;

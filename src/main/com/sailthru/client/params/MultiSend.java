@@ -8,7 +8,7 @@ import java.util.HashMap;
  *
  * @author Prajwal Tuladhar
  */
-public class MultiSend extends ApiParams {
+public class MultiSend extends AbstractApiParams {
     protected String email;
     protected String template;
     protected HashMap<String, Object> vars;

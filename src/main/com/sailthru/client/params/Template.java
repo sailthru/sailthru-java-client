@@ -6,7 +6,7 @@ import java.util.HashMap;
  *
  * @author Prajwal Tuladhar
  */
-public class Template extends ApiParams {
+public class Template extends AbstractApiParams {
     protected String template;
     protected String sample;
     protected String from_name;

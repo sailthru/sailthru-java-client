@@ -6,7 +6,7 @@ import java.util.ArrayList;
  *
  * @author Prajwal Tuladhar
  */
-public class List extends ApiParams {
+public class List extends AbstractApiParams {
     protected String list;
     protected String emails;
     protected Integer primary;

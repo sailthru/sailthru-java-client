@@ -7,7 +7,7 @@ import java.util.HashMap;
  *
  * @author Prajwal Tuladhar
  */
-public class Content extends ApiParams {
+public class Content extends AbstractApiParams {
     protected String title;
     protected String url;
 

@@ -1,5 +1,7 @@
 package com.sailthru.client.params;
 
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -8,7 +10,7 @@ import java.util.HashMap;
  *
  * @author Prajwal Tuladhar
  */
-public class Purchase extends ApiParams {
+public class Purchase extends AbstractApiParams implements ApiParams {
     protected String email;
     protected ArrayList<HashMap<String, String>> items;
     protected Integer incomplete;
@@ -31,7 +33,6 @@ public class Purchase extends ApiParams {
         for (PurchaseItem item : items) {
             this.items.add(item.toHashMap());
         }
-        //System.out.println(this.items);
         return this;
     }
 
@@ -53,5 +54,10 @@ public class Purchase extends ApiParams {
     public Purchase setReminderTime(Date reminderTime) {
         this.reminder_time = reminderTime;
         return this;
+    }
+
+    public Type getType() {
+        Type type = new TypeToken<Purchase>() {}.getType();
+        return type;
     }
 }

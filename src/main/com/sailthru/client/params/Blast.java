@@ -8,7 +8,7 @@ import java.util.HashMap;
  *
  * @author Prajwal Tuladhar
  */
-public class Blast extends ApiParams {
+public class Blast extends AbstractApiParams {
     protected String name;
     protected String list;
     protected Date schedule_time;
