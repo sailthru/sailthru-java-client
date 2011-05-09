@@ -149,8 +149,7 @@ public class SailthruClient extends AbstractSailthruClient {
     }
 
     public HashMap<String, Object> saveAlert(Alert alert) throws IOException {
-        Map<String, Object> data = alert.toHashMap();
-        return (HashMap<String, Object>)this.apiPost("alert", data);
+        return (HashMap<String, Object>)this.apiPost("alert", alert);
     }
 
     public HashMap<String, Object> deleteAlert(String email, String alertId) throws IOException {
