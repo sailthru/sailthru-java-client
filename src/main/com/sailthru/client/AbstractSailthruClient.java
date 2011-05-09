@@ -38,7 +38,7 @@ public abstract class AbstractSailthruClient {
     public static final String VERSION = "1.0";
     public static final String DEFAULT_ENCODING = "UTF-8";
 
-    protected static enum HandlerType { JSON };    //we can also add XML but who cares about it!
+    protected static enum HandlerType { JSON };    //we can also add XML but not now!
     public static enum HttpRequestMethod {GET, POST, DELETE}; //HTTP methods supported by Sailthru API
 
     protected String apiKey;
@@ -49,6 +49,13 @@ public abstract class AbstractSailthruClient {
 
     private SailthruHandler handler;
 
+
+    /**
+     * Main constructor class for setting up the client
+     * @param String apiKey
+     * @param String apiSecret
+     * @param String apiUrl
+     */
     public AbstractSailthruClient(String apiKey, String apiSecret, String apiUrl) {
         this.apiKey = apiKey;
         this.apiSecret = apiSecret;
@@ -57,6 +64,11 @@ public abstract class AbstractSailthruClient {
         this.httpClient = create();
     }
 
+
+    /**
+     * Create  SailthruHttpClient
+     * @return SailthruHttpClient
+     */
     protected SailthruHttpClient create() {
         HttpParams params = new BasicHttpParams();
         HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
@@ -71,10 +83,19 @@ public abstract class AbstractSailthruClient {
         return new SailthruHttpClient(connManager, params);
     }
 
+    /**
+     * Getter for SailthruHttpClient
+     * @return SailthruHttpClient
+     */
     public SailthruHttpClient getSailthruHttpClient() {
         return httpClient;
     }
 
+
+    /**
+     * Get Scheme Object
+     * @return Scheme
+     */
     protected Scheme getScheme() {
         String scheme = null;
         try {
@@ -92,6 +113,15 @@ public abstract class AbstractSailthruClient {
         }
     }
 
+
+    /**
+     * Make Http request to Sailthru API for given resource with given method and data
+     * @param String action
+     * @param HttpRequestMethod method
+     * @param Map<String, Object> data
+     * @return Object
+     * @throws IOException
+     */
     protected Object httpRequest(String action, HttpRequestMethod method, Map<String, Object> data) throws IOException {
         String url = this.apiUrl + "/" + action;
         
@@ -108,25 +138,40 @@ public abstract class AbstractSailthruClient {
         return this.httpClient.executeHttpRequest(url, method, params, handler);
     }
 
+    /**
+     * Make HTTP Request to Sailthru API but with Api Params rather than generalized HashMap, this is recommended way to make request if data structure is complex
+     * @param String action
+     * @param HttpRequestMethod method
+     * @param ApiParams data
+     * @return Object
+     * @throws IOException
+     */
     protected Object httpRequest(String action, HttpRequestMethod method, ApiParams data) throws IOException {
         String url = this.apiUrl + "/" + action;
         Map<String, String> params = buildPayload(data);
         return this.httpClient.executeHttpRequest(url, method, params, handler);
     }
 
+    /**
+     * Build HTTP Request Payload
+     * @param ApiParams data
+     * @return Map<String, String>
+     */
     private Map<String, String> buildPayload(ApiParams data) {
         Map<String, String> params = new HashMap<String, String>();
         params.put("api_key", this.apiKey);
         params.put("format", "json");
-
         Gson gson = new Gson();
         params.put("json", gson.toJson(data, data.getType()));
-        //System.out.println(gson.toJson(data, data.getType()));
-
         params.put("sig", getSignatureHash(params));
         return params;
     }
 
+    /**
+     * Get Signature Hash from given HashMap
+     * @param Map<String, String> parameters
+     * @return String
+     */
     protected String getSignatureHash(Map<String, String> parameters) {
         ArrayList<String> values = new ArrayList<String>();
 
@@ -145,30 +190,80 @@ public abstract class AbstractSailthruClient {
         return SailthruUtil.md5(data.toString());
     }
 
+
+    /**
+     * HTTP GET Request with HashMap
+     * @param String action
+     * @param Map<String, Object> data
+     * @return Object
+     * @throws IOException
+     */
     protected Object apiGet(String action, Map<String, Object> data) throws IOException {
         return httpRequest(action, HttpRequestMethod.GET, data);
     }
 
+    /**
+     * HTTP GET Request with Interface implementation of ApiParams
+     * @param String action
+     * @param ApiParams data
+     * @return Object
+     * @throws IOException
+     */
     protected Object apiGet(String action, ApiParams data) throws IOException {
         return httpRequest(action, HttpRequestMethod.GET, data);
     }
 
+
+    /**
+     * HTTP POST Request with HashMap
+     * @param String action
+     * @param Map<String, Object> data
+     * @return Object
+     * @throws IOException
+     */
     protected Object apiPost(String action, Map<String, Object> data) throws IOException {
         return httpRequest(action, HttpRequestMethod.POST, data);
     }
 
+
+    /**
+     * HTTP POST Request with Interface implementation of ApiParams
+     * @param String action
+     * @param ApiParams data
+     * @return Object
+     * @throws IOException
+     */
     protected Object apiPost(String action, ApiParams data) throws IOException {
         return httpRequest(action, HttpRequestMethod.POST, data);
     }
 
+
+    /**
+     * HTTP DELETE Request with HashMap
+     * @param String action
+     * @param Map<String, Object> data
+     * @return Object
+     * @throws IOException
+     */
     protected Object apiDelete(String action, Map<String, Object> data) throws IOException {
         return httpRequest(action, HttpRequestMethod.DELETE, data);
     }
 
+    /**
+     * HTTP DELETE Request with Interface implementation of ApiParams
+     * @param String action
+     * @param ApiParams data
+     * @return Object
+     * @throws IOException
+     */
     protected Object apiDelete(String action, ApiParams data) throws IOException {
         return httpRequest(action, HttpRequestMethod.DELETE, data);
     }
 
+    /**
+     * Set response Handler, currently only JSON is suported but XML can also be suported
+     * @param SailthruResponseHandler responseHandler
+     */
     public void setResponseHandler(SailthruResponseHandler responseHandler) {
         this.handler.setSailthruResponseHandler(responseHandler);
     }
