@@ -21,6 +21,13 @@ public class Email extends AbstractApiParams implements ApiParams {
     protected HashMap<String, Object> send_vars;
     protected HashMap<String, Object> vars;
 
+    public Email() {
+        this.vars = new HashMap<String, Object>();
+        this.send_vars = new HashMap<String, Object>();
+        this.lists = new HashMap<String, Integer>();
+        this.templates = new HashMap<String, Integer>();
+    }
+
     public Email setEmail(String email) {
         this.email = email;
         return this;
@@ -60,10 +67,12 @@ public class Email extends AbstractApiParams implements ApiParams {
         return this;
     }
 
+    @SuppressWarnings("unchecked")
     public Email setVars(HashMap<String, Object> vars) {
         this.vars = vars;
         return this;
     }
+    
 
     public Email setTextOnly() {
         this.vars.put("text_only", 1);
