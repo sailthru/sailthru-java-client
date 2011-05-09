@@ -161,7 +161,7 @@ public class SailthruClient extends AbstractSailthruClient {
     }
 
     public HashMap<String, Object> purchase(Purchase purchase) throws IOException {
-        return (HashMap<String, Object>)this.httpRequest("purchase", AbstractSailthruClient.HttpRequestMethod.POST, purchase);
+        return (HashMap<String, Object>)this.apiPost("purchase", purchase);
     }
 
     protected HashMap<String, Object> stats(Stats stats) throws IOException {
