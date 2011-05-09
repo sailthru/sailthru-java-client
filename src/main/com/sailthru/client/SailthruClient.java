@@ -82,8 +82,8 @@ public class SailthruClient extends AbstractSailthruClient {
     }
 
     public HashMap<String, Object> scheduleBlast(Blast blast) throws IOException {
-        Map<String, Object> data = new HashMap<String, Object>();
-        return (HashMap<String, Object>)this.apiPost("blast", data);
+        //Map<String, Object> data = new HashMap<String, Object>();
+        return (HashMap<String, Object>)this.apiPost("blast", blast);
     }
 
     public HashMap<String, Object> scheduleBlastFromTemplate(String template, String list, Date scheduleTime, HashMap<String, Object> options) throws IOException {
@@ -109,7 +109,7 @@ public class SailthruClient extends AbstractSailthruClient {
 
     public HashMap<String, Object> deleteBlast(Integer blastId) throws IOException {
         Map<String, Object> data = new HashMap<String, Object>();
-        data.put("blast", blastId);
+        data.put("blast_id", blastId);
         return (HashMap<String, Object>)this.apiDelete("blast", data);
     }
 
