@@ -8,10 +8,6 @@ public abstract class AbstractResponse implements ApiResponse {
     private Integer errorCode;
     private String errorMessage;
 
-    public AbstractResponse() {
-        
-    }
-
     public int getErrorCode() {
         return errorCode;
     }

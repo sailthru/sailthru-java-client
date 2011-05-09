@@ -6,6 +6,8 @@ import com.sailthru.client.handler.JSONHandler;
 import com.sailthru.client.handler.SailthruResponseHandler;
 import com.sailthru.client.http.SailthruHandler;
 import com.sailthru.client.http.SailthruHttpClient;
+import com.sailthru.client.params.ApiParams;
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Appinfo;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URI;
@@ -93,6 +95,7 @@ public abstract class AbstractSailthruClient {
 
     protected Object httpRequest(String action, HttpRequestMethod method, Map<String, Object> data) throws IOException {
         String url = this.apiUrl + "/" + action;
+        
         Map<String, String> params = new HashMap<String, String>();
         params.put("api_key", this.apiKey);
         params.put("format", "json");
@@ -103,9 +106,26 @@ public abstract class AbstractSailthruClient {
         params.put("json", gson.toJson(data, type));
         params.put("sig", getSignatureHash(params));
 
-        System.out.println(params);
-
         return this.httpClient.executeHttpRequest(url, method, params, handler);
+    }
+
+    protected Object httpRequest(String action, HttpRequestMethod method, ApiParams data) throws IOException {
+        String url = this.apiUrl + "/" + action;
+        Map<String, String> params = buildPayload(data);
+        return this.httpClient.executeHttpRequest(url, method, params, handler);
+    }
+
+    private Map<String, String> buildPayload(ApiParams data) {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("api_key", this.apiKey);
+        params.put("format", "json");
+
+        Gson gson = new Gson();
+        params.put("json", gson.toJson(data, data.getType()));
+        System.out.println(gson.toJson(data, data.getType()));
+
+        params.put("sig", getSignatureHash(params));
+        return params;
     }
 
     protected String getSignatureHash(Map<String, String> parameters) {
@@ -123,7 +143,6 @@ public abstract class AbstractSailthruClient {
         for( String value:values ) {
             data.append(value);
         }
-        //System.out.println(data.toString());
         return SailthruUtil.md5(data.toString());
     }
 
@@ -131,11 +150,23 @@ public abstract class AbstractSailthruClient {
         return httpRequest(action, HttpRequestMethod.GET, data);
     }
 
+    protected Object apiGet(String action, ApiParams data) throws IOException {
+        return httpRequest(action, HttpRequestMethod.GET, data);
+    }
+
     protected Object apiPost(String action, Map<String, Object> data) throws IOException {
         return httpRequest(action, HttpRequestMethod.POST, data);
     }
 
+    protected Object apiPost(String action, ApiParams data) throws IOException {
+        return httpRequest(action, HttpRequestMethod.POST, data);
+    }
+
     protected Object apiDelete(String action, Map<String, Object> data) throws IOException {
+        return httpRequest(action, HttpRequestMethod.DELETE, data);
+    }
+
+    protected Object apiDelete(String action, ApiParams data) throws IOException {
         return httpRequest(action, HttpRequestMethod.DELETE, data);
     }
 

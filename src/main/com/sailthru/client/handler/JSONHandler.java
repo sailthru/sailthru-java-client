@@ -29,7 +29,6 @@ public class JSONHandler implements SailthruResponseHandler {
         Gson gson = builder.create();
         return gson.fromJson(response, Object.class);
     }
-    
 
     // http://stackoverflow.com/questions/2779251/convert-json-to-hashmap-using-gson-in-java/4799594#4799594
     private class NaturalDeserializer implements JsonDeserializer<Object>  {
@@ -78,7 +77,6 @@ public class JSONHandler implements SailthruResponseHandler {
             for (int i = 0; i < array.length; i++) {
                 if (json.get(i).isJsonObject()) {
                     array[i] = handleObject((JsonObject)json.get(i), context);
-                    System.out.println(json.get(i).getClass());
                 }
                 else {
                     array[i] = context.deserialize(json.get(i), Object.class);

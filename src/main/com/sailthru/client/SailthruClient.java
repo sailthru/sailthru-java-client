@@ -1,18 +1,17 @@
 package com.sailthru.client;
 
-import com.sailthru.client.handler.JSONHandler;
-import com.sailthru.client.http.SailthruHandler;
 import com.sailthru.client.params.Alert;
 import com.sailthru.client.params.Blast;
+import com.sailthru.client.params.BlastStat;
 import com.sailthru.client.params.Content;
 import com.sailthru.client.params.Email;
+import com.sailthru.client.params.ListStat;
 import com.sailthru.client.params.MultiSend;
 import com.sailthru.client.params.Purchase;
-import com.sailthru.client.params.PurchaseItem;
 import com.sailthru.client.params.Send;
+import com.sailthru.client.params.Stats;
 import com.sailthru.client.params.Template;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -162,12 +161,18 @@ public class SailthruClient extends AbstractSailthruClient {
     }
 
     public HashMap<String, Object> purchase(Purchase purchase) throws IOException {
-        Map<String, Object> data = purchase.toHashMap();
-        //System.out.println(data);
-        return (HashMap<String, Object>)this.apiPost("purchase", data);
+        return (HashMap<String, Object>)this.httpRequest("purchase", AbstractSailthruClient.HttpRequestMethod.POST, purchase);
     }
 
-    
+    protected HashMap<String, Object> stats(Stats stats) throws IOException {
+        return (HashMap<String, Object>)this.apiGet("stats", stats);
+    }
 
-    
+    public HashMap<String, Object> listStats(ListStat stat) throws IOException {
+        return (HashMap<String, Object>)this.stats(stat);
+    }
+
+    public HashMap<String, Object> blastStats(BlastStat stat) throws IOException {
+        return (HashMap<String, Object>)this.stats(stat);
+    }
 }
