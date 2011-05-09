@@ -65,4 +65,5 @@ public class Alert extends AbstractApiParams implements ApiParams {
         java.lang.reflect.Type _type = new TypeToken<Alert>() {}.getType();
         return _type;
     }
+
 }

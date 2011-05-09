@@ -1,6 +1,7 @@
 package com.sailthru.client.http;
 
 import com.sailthru.client.handler.SailthruResponseHandler;
+import com.sailthru.client.response.ApiResponse;
 import java.io.IOException;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -32,15 +33,14 @@ public class SailthruHandler implements ResponseHandler<Object> {
         if (statusCode == STATUS_SUCCESS) {
             String jsonString = null;
             jsonString = EntityUtils.toString(httpResponse.getEntity());
-            //System.out.println(jsonString);
-            //com.google.gson.Gson gson = new com.google.gson.Gson();
-            //return gson.fromJson(jsonString, EmailResponse.class);
+            //return jsonString;
             return handler.parseResponse(jsonString);
         }
         else {
             return null;    //todo: handle it properly
         }
     }
+
 
     public void setSailthruResponseHandler(SailthruResponseHandler handler) {
         this.handler = handler;

@@ -8,4 +8,6 @@ import java.lang.reflect.Type;
  */
 public interface ApiParams {
     public Type getType();
+
+    //public Type getResponseType();
 }

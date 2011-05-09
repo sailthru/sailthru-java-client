@@ -5,18 +5,18 @@ package com.sailthru.client.response;
  * @author Prajwal Tuladhar
  */
 public abstract class AbstractResponse implements ApiResponse {
-    private Integer errorCode;
-    private String errorMessage;
+    private Integer error;
+    private String errormsg;
 
-    public int getErrorCode() {
-        return errorCode;
+    public Integer getErrorCode() {
+        return error;
     }
 
     public String getErrorMessage() {
-        return errorMessage;
+        return errormsg;
     }
 
     public boolean isOk() {
-        return (errorCode == null);
+        return (error == null);
     }
 }
