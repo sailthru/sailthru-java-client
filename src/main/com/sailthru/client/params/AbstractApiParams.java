@@ -12,7 +12,6 @@ public abstract class AbstractApiParams {
     public HashMap<String, Object> toHashMap() {
         Gson gson = new Gson();
         String json = gson.toJson(this);
-        //System.out.println(json);
         JSONHandler handler = new JSONHandler();
         return (HashMap<String, Object>)handler.parseResponse(json);
     }

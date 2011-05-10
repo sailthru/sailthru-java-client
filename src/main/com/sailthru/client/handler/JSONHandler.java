@@ -88,7 +88,6 @@ public class JSONHandler implements SailthruResponseHandler {
                     array[i] = context.deserialize(json.get(i), Object.class);
                 }                                
             }
-            //System.out.println(array.getClass());
             return array;
         }
 
