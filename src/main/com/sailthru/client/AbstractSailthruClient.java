@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.logging.Logger;
 import org.apache.http.HttpVersion;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
@@ -31,6 +32,9 @@ import org.apache.http.params.HttpProtocolParams;
  * @author Prajwal Tuladhar
  */
 public abstract class AbstractSailthruClient {
+
+    protected static Logger logger = Logger.getLogger(AbstractSailthruClient.class.getName());
+
     public static final String DEFAULT_API_URL = "https://api.sailthru.com";
     public static final int DEFAULT_HTTP_PORT = 80;
     public static final int DEFAULT_HTTPS_PORT = 443;
@@ -49,6 +53,8 @@ public abstract class AbstractSailthruClient {
 
     private SailthruHandler handler;
 
+    protected Gson gson;
+
 
     /**
      * Main constructor class for setting up the client
@@ -62,6 +68,7 @@ public abstract class AbstractSailthruClient {
         this.apiUrl = apiUrl;
         this.handler = new SailthruHandler(new JSONHandler());
         this.httpClient = create();
+        this.gson = new Gson();
     }
 
 
@@ -124,16 +131,11 @@ public abstract class AbstractSailthruClient {
      */
     protected Object httpRequest(String action, HttpRequestMethod method, Map<String, Object> data) throws IOException {
         String url = this.apiUrl + "/" + action;
-        
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("api_key", this.apiKey);
-        params.put("format", handler.getSailthruResponseHandler().getFormat());
 
-        Gson gson = new Gson();
         Type type = new TypeToken<HashMap<String, Object>>() {}.getType();
-        
-        params.put("json", gson.toJson(data, type));
-        params.put("sig", getSignatureHash(params));
+        String json = gson.toJson(data, type);
+
+        Map<String, String> params = buildPayload(json);
 
         return this.httpClient.executeHttpRequest(url, method, params, handler);
     }
@@ -148,7 +150,8 @@ public abstract class AbstractSailthruClient {
      */
     protected Object httpRequest(String action, HttpRequestMethod method, ApiParams data) throws IOException {
         String url = this.apiUrl + "/" + action;
-        Map<String, String> params = buildPayload(data);
+        String json = gson.toJson(data, data.getType());
+        Map<String, String> params = buildPayload(json);
         return this.httpClient.executeHttpRequest(url, method, params, handler);
     }
 
@@ -157,13 +160,13 @@ public abstract class AbstractSailthruClient {
      * @param ApiParams data
      * @return Map<String, String>
      */
-    private Map<String, String> buildPayload(ApiParams data) {
+    private Map<String, String> buildPayload(String jsonPayload) {
         Map<String, String> params = new HashMap<String, String>();
-        params.put("api_key", this.apiKey);
-        params.put("format", "json");
-        Gson gson = new Gson();
-        params.put("json", gson.toJson(data, data.getType()));
+        params.put("api_key", apiKey);
+        params.put("format", handler.getSailthruResponseHandler().getFormat());
+        params.put("json", jsonPayload);
         params.put("sig", getSignatureHash(params));
+        logger.info("Params: " + params.toString());
         return params;
     }
 
