@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.logging.Logger;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpDelete;
@@ -27,6 +28,8 @@ import org.apache.http.params.HttpParams;
  */
 public class SailthruHttpClient extends DefaultHttpClient {
 
+    protected static Logger logger = Logger.getLogger(SailthruHttpClient.class.getName());
+
     public SailthruHttpClient(ThreadSafeClientConnManager connManager,
 			HttpParams params) {
         super(connManager, params);
@@ -41,15 +44,18 @@ public class SailthruHttpClient extends DefaultHttpClient {
 
         switch(method) {
             case GET:
+                logger.info("Making HTTP GET Request");
                 HttpGet httpRequest = new HttpGet(urlString + "?" + extractQueryString(nameValuePairs));
                 return httpRequest;
 
             case POST:
+                logger.info("Making HTTP POST Request");
                 HttpPost httpPost = new HttpPost(urlString);
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 return httpPost;
 
             case DELETE:
+                logger.info("Making HTTP DELETE Request");
                 HttpDelete httpDelete = new HttpDelete(urlString + "?" + extractQueryString(nameValuePairs));
                 return httpDelete;
         }
