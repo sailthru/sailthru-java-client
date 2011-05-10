@@ -1,7 +1,6 @@
 package com.sailthru.client.params;
 
 import com.google.gson.reflect.TypeToken;
-import com.sailthru.client.response.EmailResponse;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
