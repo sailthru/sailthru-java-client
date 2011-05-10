@@ -6,4 +6,5 @@ package com.sailthru.client.handler;
  */
 public interface SailthruResponseHandler {
     public Object parseResponse (String response);
+    public String getFormat();
 }

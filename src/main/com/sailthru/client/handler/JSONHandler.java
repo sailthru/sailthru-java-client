@@ -20,12 +20,19 @@ import java.util.Map;
  */
 public class JSONHandler implements SailthruResponseHandler {
 
+    public static final String format = "json";
+
     @Override
     public Object parseResponse(String response) {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(Object.class, new NaturalDeserializer());
         Gson gson = builder.create();
         return gson.fromJson(response, Object.class);
+    }
+
+    @Override
+    public String getFormat() {
+        return format;
     }
 
     // http://stackoverflow.com/questions/2779251/convert-json-to-hashmap-using-gson-in-java/4799594#4799594

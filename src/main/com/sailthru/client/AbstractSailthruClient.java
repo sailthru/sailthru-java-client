@@ -127,7 +127,7 @@ public abstract class AbstractSailthruClient {
         
         Map<String, String> params = new HashMap<String, String>();
         params.put("api_key", this.apiKey);
-        params.put("format", "json");
+        params.put("format", handler.getSailthruResponseHandler().getFormat());
 
         Gson gson = new Gson();
         Type type = new TypeToken<HashMap<String, Object>>() {}.getType();

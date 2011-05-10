@@ -45,4 +45,8 @@ public class SailthruHandler implements ResponseHandler<Object> {
     public void setSailthruResponseHandler(SailthruResponseHandler handler) {
         this.handler = handler;
     }
+
+    public SailthruResponseHandler getSailthruResponseHandler() {
+        return handler;
+    }
 }
