@@ -32,7 +32,6 @@ public class SailthruHandler implements ResponseHandler<Object> {
         if (statusCode == STATUS_SUCCESS) {
             String jsonString = null;
             jsonString = EntityUtils.toString(httpResponse.getEntity());
-            //return jsonString;
             return handler.parseResponse(jsonString);
         }
         else {
