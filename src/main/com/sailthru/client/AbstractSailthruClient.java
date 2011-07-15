@@ -201,7 +201,7 @@ public abstract class AbstractSailthruClient {
      * @return Object
      * @throws IOException
      */
-    protected Object apiGet(String action, Map<String, Object> data) throws IOException {
+    public Object apiGet(String action, Map<String, Object> data) throws IOException {
         return httpRequest(action, HttpRequestMethod.GET, data);
     }
 
@@ -212,7 +212,7 @@ public abstract class AbstractSailthruClient {
      * @return Object
      * @throws IOException
      */
-    protected Object apiGet(String action, ApiParams data) throws IOException {
+    public Object apiGet(String action, ApiParams data) throws IOException {
         return httpRequest(action, HttpRequestMethod.GET, data);
     }
 
@@ -224,7 +224,7 @@ public abstract class AbstractSailthruClient {
      * @return Object
      * @throws IOException
      */
-    protected Object apiPost(String action, Map<String, Object> data) throws IOException {
+    public Object apiPost(String action, Map<String, Object> data) throws IOException {
         return httpRequest(action, HttpRequestMethod.POST, data);
     }
 
@@ -236,7 +236,7 @@ public abstract class AbstractSailthruClient {
      * @return Object
      * @throws IOException
      */
-    protected Object apiPost(String action, ApiParams data) throws IOException {
+    public Object apiPost(String action, ApiParams data) throws IOException {
         return httpRequest(action, HttpRequestMethod.POST, data);
     }
 
@@ -248,7 +248,7 @@ public abstract class AbstractSailthruClient {
      * @return Object
      * @throws IOException
      */
-    protected Object apiDelete(String action, Map<String, Object> data) throws IOException {
+    public Object apiDelete(String action, Map<String, Object> data) throws IOException {
         return httpRequest(action, HttpRequestMethod.DELETE, data);
     }
 
@@ -259,7 +259,7 @@ public abstract class AbstractSailthruClient {
      * @return Object
      * @throws IOException
      */
-    protected Object apiDelete(String action, ApiParams data) throws IOException {
+    public Object apiDelete(String action, ApiParams data) throws IOException {
         return httpRequest(action, HttpRequestMethod.DELETE, data);
     }
 
