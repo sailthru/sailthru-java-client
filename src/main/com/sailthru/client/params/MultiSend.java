@@ -1,7 +1,5 @@
 package com.sailthru.client.params;
 
-import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Type;
 import com.sailthru.client.SailthruUtil;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,12 +8,9 @@ import java.util.HashMap;
  *
  * @author Prajwal Tuladhar
  */
-public class MultiSend extends AbstractApiParams implements ApiParams {
-    protected String email;
-    protected String template;
-    protected HashMap<String, Object> vars;
+public class MultiSend extends Send {
+
     protected HashMap<String, Object> evars;
-    protected HashMap<String, Object> options;
 
     public MultiSend() {
         this.options = new HashMap<String, Object>();
@@ -26,33 +21,9 @@ public class MultiSend extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-    public MultiSend setTemplate(String template) {
-        this.template = template;
-        return this;
-    }
-
-    public MultiSend setVars(HashMap<String, Object> vars) {
-        this.vars = vars;
-        return this;
-    }
-
     public MultiSend setEvars(HashMap<String, Object> evars) {
         this.evars = evars;
         return this;
     }
-
-    public MultiSend setReplyTo(String replyTo) {
-        this.options.put("replyTo", replyTo);
-        return this;
-    }
-
-    public MultiSend setIsTest() {
-        this.options.put("test", 1);
-        return this;
-    }
-
-    public Type getType() {
-        Type type = new TypeToken<MultiSend>() {}.getType();
-        return type;
-    }
+    
 }
