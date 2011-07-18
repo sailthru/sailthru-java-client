@@ -4,6 +4,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -44,8 +45,19 @@ public class Email extends AbstractApiParams implements ApiParams {
     }
 
     public Email setLists(ArrayList<String> lists) {
+        this.lists.clear();
         for (String list : lists) {
             this.lists.put(list, 1);
+        }
+        return this;
+    }
+
+    public Email setLists(HashMap<String, Integer> lists) {
+        this.lists.clear();
+        for (Map.Entry<String, Integer> entry : lists.entrySet()) {
+            String list = entry.getKey();
+            int value = entry.getValue() != 0 ? 1 : 0;
+            this.lists.put(list, value);
         }
         return this;
     }
