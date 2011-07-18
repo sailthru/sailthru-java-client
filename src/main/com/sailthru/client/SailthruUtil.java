@@ -33,6 +33,7 @@ public class SailthruUtil {
         StringBuilder csv = new StringBuilder();
         for (String str : list) {
             csv.append(str);
+            csv.append(",");
         }
         int lastIndex = csv.length() - 1;
         char last = csv.charAt(lastIndex);
