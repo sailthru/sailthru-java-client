@@ -54,4 +54,14 @@ public class Send extends AbstractApiParams implements ApiParams {
         Type type = new TypeToken<Send>() {}.getType();
         return type;
     }
+
+    public Send setBehalfEmail(String email) {
+        this.options.put("behalf_email", email);
+        return this;
+    }
+
+    public Send setOptions(HashMap<String, Object> options) {
+        this.options = options;
+        return this;
+    }
 }
