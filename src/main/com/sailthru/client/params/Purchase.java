@@ -16,7 +16,7 @@ public class Purchase extends AbstractApiParams implements ApiParams {
     protected Integer incomplete;
     protected String message_id;
     protected String reminder_template;
-    protected Date reminder_time;
+    protected String reminder_time;
 
     public Purchase setEmail(String email) {
         this.email = email;
@@ -47,6 +47,11 @@ public class Purchase extends AbstractApiParams implements ApiParams {
     }
 
     public Purchase setReminderTime(Date reminderTime) {
+        this.reminder_time = reminderTime.toString();
+        return this;
+    }
+
+    public Purchase setReminderTime(String reminderTime) {
         this.reminder_time = reminderTime;
         return this;
     }

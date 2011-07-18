@@ -13,7 +13,7 @@ public class Send extends AbstractApiParams implements ApiParams {
     protected String template;
     protected String email;
     protected HashMap<String, Object> vars;
-    protected Date schedule_time;
+    protected String schedule_time;
     protected HashMap<String, Object> options;
 
     public Send() {
@@ -46,6 +46,11 @@ public class Send extends AbstractApiParams implements ApiParams {
     }
 
     public Send setScheduleTime(Date scheduleTime) {
+        this.schedule_time = scheduleTime.toString();
+        return this;
+    }
+
+    public Send setScheduleTime(String scheduleTime) {
         this.schedule_time = scheduleTime;
         return this;
     }

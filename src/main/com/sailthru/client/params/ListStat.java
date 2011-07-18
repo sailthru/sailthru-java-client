@@ -10,7 +10,7 @@ import java.util.Date;
  */
 public class ListStat extends Stats {
     protected String list;
-    protected Date date;
+    protected String date;
 
     public ListStat() {
         super(MODE_LIST);
@@ -22,6 +22,11 @@ public class ListStat extends Stats {
     }
 
     public ListStat setDate(Date date) {
+        this.date = date.toString();
+        return this;
+    }
+
+    public ListStat setDate(String date) {
         this.date = date;
         return this;
     }

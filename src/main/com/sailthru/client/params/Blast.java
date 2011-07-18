@@ -13,7 +13,7 @@ import java.util.HashMap;
 public class Blast extends AbstractApiParams implements ApiParams {
     protected String name;
     protected String list;
-    protected Date schedule_time;
+    protected String schedule_time;
     protected String from_name;
     protected String from_email;
     protected String subject;
@@ -36,7 +36,7 @@ public class Blast extends AbstractApiParams implements ApiParams {
     protected Integer test_percent;
     protected String data_feed_url;
 
-    public Blast(String name, String list, Date scheduleTime, String fromName, String fromEmail, String subject, String contentHtml, String contentText) {
+    public Blast(String name, String list, String scheduleTime, String fromName, String fromEmail, String subject, String contentHtml, String contentText) {
         this.name = name;
         this.list = list;
         this.schedule_time = scheduleTime;
@@ -62,6 +62,11 @@ public class Blast extends AbstractApiParams implements ApiParams {
     }
 
     public Blast setScheduleTime(Date schedule_time) {
+        this.schedule_time = schedule_time.toString();
+        return this;
+    }
+
+    public Blast setScheduleTime(String schedule_time) {
         this.schedule_time = schedule_time;
         return this;
     }

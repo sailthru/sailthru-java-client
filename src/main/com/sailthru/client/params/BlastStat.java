@@ -10,8 +10,8 @@ import java.util.Date;
  */
 public class BlastStat extends Stats {
     protected Integer blast_id;
-    protected Date start_date;
-    protected Date end_date;
+    protected String start_date;
+    protected String end_date;
     protected String list;
     protected Integer beacon_times;
     protected Integer click_times;
@@ -32,11 +32,21 @@ public class BlastStat extends Stats {
     }
 
     public BlastStat setStartDate(Date startDate) {
+        this.start_date = startDate.toString();
+        return this;
+    }
+
+    public BlastStat setStartDate(String startDate) {
         this.start_date = startDate;
         return this;
     }
 
     public BlastStat setEndDate(Date endDate) {
+        this.end_date = endDate.toString();
+        return this;
+    }
+
+    public BlastStat setEndDate(String endDate) {
         this.end_date = endDate;
         return this;
     }

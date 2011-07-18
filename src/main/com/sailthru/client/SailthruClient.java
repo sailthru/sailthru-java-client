@@ -273,9 +273,10 @@ public class SailthruClient extends AbstractSailthruClient {
      */
     public HashMap<String, Object> cancelBlast(Integer blastId) throws IOException {
         Blast blast = new Blast();
+        Date d = null;
         blast
             .setBlastId(blastId)
-            .setScheduleTime(null);
+            .setScheduleTime(d);
         return (HashMap<String, Object>)this.apiPost("blast", blast);
     }
 

@@ -13,7 +13,7 @@ public class Content extends AbstractApiParams implements ApiParams {
     protected String title;
     protected String url;
 
-    protected Date date;
+    protected String date;
     protected String tags;
     protected HashMap<String, Object> vars;
 
@@ -30,6 +30,11 @@ public class Content extends AbstractApiParams implements ApiParams {
     }
 
     public Content setDate(Date date) {
+        this.date = date.toString();
+        return this;
+    }
+
+    public Content setDate(String date) {
         this.date = date;
         return this;
     }
