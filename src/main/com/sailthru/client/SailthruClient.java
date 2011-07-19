@@ -28,15 +28,23 @@ public class SailthruClient extends AbstractSailthruClient {
     private static SailthruClient _instance;
 
     /**
-     * Private constructor for Main SailthruClient class
+     * Public constructor for SailthruClient class with custom API URL
      * @param String apiKey
      * @param String apiSecret
      * @param String apiUrl
      */
-    private SailthruClient(String apiKey, String apiSecret, String apiUrl) {
+    public SailthruClient(String apiKey, String apiSecret, String apiUrl) {
         super(apiKey, apiSecret, apiUrl);
     }
 
+    /**
+     * Public constructor for SailthruClient class with default API URL
+     * @param String apiKey
+     * @param String apiSecret
+     */
+    public SailthruClient(String apiKey, String apiSecret) {
+        super(apiKey, apiSecret, DEFAULT_API_URL);
+    }
 
     /**
      * Synchronized singleton instance method using default URL string
