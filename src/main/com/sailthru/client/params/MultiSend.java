@@ -1,6 +1,8 @@
 package com.sailthru.client.params;
 
+import com.google.gson.reflect.TypeToken;
 import com.sailthru.client.SailthruUtil;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -25,5 +27,10 @@ public class MultiSend extends Send {
         this.evars = evars;
         return this;
     }
-    
+
+    @Override
+    public Type getType() {
+         Type type = new TypeToken<MultiSend>() {}.getType();
+        return type;
+    }
 }
