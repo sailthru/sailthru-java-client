@@ -69,6 +69,11 @@ public class Email extends AbstractApiParams implements ApiParams {
         return this;
     }
 
+    public Email setTemplates(HashMap<String, Integer> templates) {
+        this.templates = templates;
+        return this;
+    }
+
     public Email setSend(String template) {
         this.send = template;
         return this;
