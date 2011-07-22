@@ -44,35 +44,37 @@ public class SailthruHandler implements ResponseHandler<Object> {
         int statusCode = statusLine.getStatusCode();
         HttpEntity httpEntity = httpResponse.getEntity();
 
+        String jsonString = null;
+        jsonString = EntityUtils.toString(httpResponse.getEntity());
+        Object parseObject =  handler.parseResponse(jsonString);
+
         switch (statusCode) {
             case STATUS_OK:
                 break;
 
             case STATUS_BAD_REQUEST:
-                throw ApiException.create(httpEntity, statusLine);
+                throw ApiException.create(httpEntity, statusLine, parseObject);
 
             case STATUS_UNAUTHORIZED:
-                throw UnAuthorizedException.create(httpEntity, statusLine);
+                throw UnAuthorizedException.create(httpEntity, statusLine, parseObject);
 
             case STATUS_FORBIDDEN:
-                throw ApiException.create(httpEntity, statusLine);
+                throw ApiException.create(httpEntity, statusLine, parseObject);
 
             case STATUS_NOT_FOUND:
-                throw ResourceNotFoundException.create(httpEntity, statusLine);
+                throw ResourceNotFoundException.create(httpEntity, statusLine, parseObject);
 
             case STATUS_METHOD_NOT_FOUND:
-                throw ApiException.create(httpEntity, statusLine);
+                throw ApiException.create(httpEntity, statusLine, parseObject);
 
             case STATUS_INTERNAL_SERVER_ERROR:
-                throw ApiException.create(httpEntity, statusLine);
+                throw ApiException.create(httpEntity, statusLine, parseObject);
 
             default:
-                throw ApiException.create(httpEntity, statusLine);
+                throw ApiException.create(httpEntity, statusLine, parseObject);
         }
         
-        String jsonString = null;
-        jsonString = EntityUtils.toString(httpResponse.getEntity());
-        return handler.parseResponse(jsonString);
+        return parseObject;
     }
 
 

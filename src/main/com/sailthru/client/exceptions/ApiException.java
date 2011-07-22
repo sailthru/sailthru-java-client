@@ -16,13 +16,25 @@ public class ApiException extends IOException {
 
     private static Logger logger = Logger.getLogger(ApiException.class.getName());
 
-    public ApiException(int statusCode, String reason) {
+    private Object jsonResponse;
+    private int statusCode;
+
+    public ApiException(int statusCode, String reason, Object jsonResponse) {
         super(reason);
         logger.info(String.format("%d: %s", statusCode, reason));
+        this.jsonResponse = jsonResponse;
+        this.statusCode = statusCode;
     }
 
+    public Object getResponse() {
+        return jsonResponse;
+    }
 
-    public static ApiException create(HttpEntity entity, StatusLine statusLine) {
+    public int getStatusCode() {
+        return statusCode;
+    }
+
+    public static ApiException create(HttpEntity entity, StatusLine statusLine, Object jsonResponse) {
         int statusCode = statusLine.getStatusCode();
         String reason = null;
         try {
@@ -36,6 +48,6 @@ public class ApiException extends IOException {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        return new ApiException(statusCode, reason);
+        return new ApiException(statusCode, reason, jsonResponse);
     }
 }
