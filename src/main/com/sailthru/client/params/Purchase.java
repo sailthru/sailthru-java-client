@@ -4,7 +4,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -12,7 +12,7 @@ import java.util.HashMap;
  */
 public class Purchase extends AbstractApiParams implements ApiParams {
     protected String email;
-    protected ArrayList<HashMap<String, String>> items;
+    protected ArrayList<Map<String, String>> items;
     protected Integer incomplete;
     protected String message_id;
     protected String reminder_template;
@@ -24,7 +24,7 @@ public class Purchase extends AbstractApiParams implements ApiParams {
     }
 
     public Purchase setItems(ArrayList<PurchaseItem> items) {
-        this.items = new ArrayList<HashMap<String, String>>();
+        this.items = new ArrayList<Map<String, String>>();
         for (PurchaseItem item : items) {
             this.items.add(item.toHashMap());
         }
