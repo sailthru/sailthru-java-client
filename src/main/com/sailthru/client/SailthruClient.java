@@ -76,7 +76,7 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * Get information about one of your users.
      * @param String email
-     * @return HashMap<String, Object>
+     * @return Map<String, Object>
      * @throws IOException
      * @see http://docs.sailthru.com/api/email
      */
@@ -89,7 +89,7 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * Update information about one of your users, including adding and removing the user from lists.
      * @param Email email
-     * @return HashMap<String, Object>
+     * @return Map<String, Object>
      * @throws IOException
      * @see http://docs.sailthru.com/api/email
      */
@@ -100,7 +100,7 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * Get the status of a transational send
      * @param String sendId
-     * @return HashMap<String, Object>
+     * @return Map<String, Object>
      * @throws IOException
      * @see http://docs.sailthru.com/api/send
      */
@@ -113,7 +113,7 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * send an email template to a single email address.
      * @param Send send
-     * @return HashMap<String, Object>
+     * @return Map<String, Object>
      * @throws IOException
      * @see http://docs.sailthru.com/api/send
      */
@@ -124,7 +124,7 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * send an email template to multiple email addresses
      * @param MultiSend multiSend
-     * @return HashMap<String, Object>
+     * @return Map<String, Object>
      * @throws IOException
      * @see http://docs.sailthru.com/api/send
      */
@@ -135,7 +135,7 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * Cancel a send that was scheduled for a future time.
      * @param String sendId
-     * @return HashMap<String, Object>
+     * @return Map<String, Object>
      * @throws IOException
      * @see http://docs.sailthru.com/api/send
      */
@@ -148,7 +148,7 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * get information about a blast
      * @param Integer blastId
-     * @return HashMap<String, Object>
+     * @return Map<String, Object>
      * @throws IOException
      * @see http://docs.sailthru.com/api/blast
      */
@@ -161,7 +161,7 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * Schedule a mass mail blast
      * @param blast
-     * @return HashMap<String, Object>
+     * @return Map<String, Object>
      * @throws IOException
      * @see http://docs.sailthru.com/api/blast
      */
@@ -175,7 +175,7 @@ public class SailthruClient extends AbstractSailthruClient {
      * @param String list
      * @param Date scheduleTime
      * @param Blast blast
-     * @return HashMap<String, Object>
+     * @return Map<String, Object>
      * @throws IOException
      * @see http://docs.sailthru.com/api/blast
      */
@@ -191,7 +191,7 @@ public class SailthruClient extends AbstractSailthruClient {
      * @param String template
      * @param String list
      * @param Date scheduleTime
-     * @return HashMap<String, Object>
+     * @return Map<String, Object>
      * @throws IOException
      * @see http://docs.sailthru.com/api/blast
      */
@@ -208,7 +208,7 @@ public class SailthruClient extends AbstractSailthruClient {
      * @param Integer blastId
      * @param Date scheduleTime
      * @param Blast blast
-     * @return HashMap<String, Object>
+     * @return Map<String, Object>
      * @throws IOException
      * @see http://docs.sailthru.com/api/blast
      */
@@ -222,7 +222,7 @@ public class SailthruClient extends AbstractSailthruClient {
      * Schedule a mass mail blast from previous blast
      * @param Integer blastId
      * @param Date scheduleTime
-     * @return HashMap<String, Object>
+     * @return Map<String, Object>
      * @throws IOException
      * @see http://docs.sailthru.com/api/blast
      */
@@ -236,7 +236,7 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * Update existing blast
      * @param Integer blastId
-     * @return HashMap<String, Object>
+     * @return Map<String, Object>
      * @throws IOException
      * @see http://docs.sailthru.com/api/blast
      */
@@ -250,7 +250,7 @@ public class SailthruClient extends AbstractSailthruClient {
      * Update existing blast
      * @param Integer blastId
      * @param Blast blast
-     * @return HashMap<String, Object>
+     * @return Map<String, Object>
      * @throws IOException
      * @see http://docs.sailthru.com/api/blast
      */
@@ -262,7 +262,7 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * Delete existing blast
      * @param Integer blastId
-     * @return HashMap<String, Object>
+     * @return Map<String, Object>
      * @throws IOException
      * @see http://docs.sailthru.com/api/blast
      */
@@ -275,7 +275,7 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * Cancel a scheduled Blast
      * @param Integer blastId
-     * @return HashMap<String, Object>
+     * @return Map<String, Object>
      * @throws IOException
      * @see http://docs.sailthru.com/api/blast
      */
@@ -291,7 +291,7 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * Get template information
      * @param String template
-     * @return HashMap<String, Object>
+     * @return Map<String, Object>
      * @throws IOException
      * @see http://docs.sailthru.com/api/template
      */
@@ -304,7 +304,7 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * Save / update a template
      * @param String template
-     * @return HashMap<String, Object>
+     * @return Map<String, Object>
      * @throws IOException
      * @see http://docs.sailthru.com/api/template
      */
@@ -315,7 +315,7 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * Delete existing template
      * @param String template
-     * @return HashMap<String, Object>
+     * @return Map<String, Object>
      * @throws IOException
      * @see http://docs.sailthru.com/api/template
      */
@@ -328,7 +328,7 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * Push a new piece of content to Sailthru, triggering any applicable alerts.
      * @param Content content
-     * @return HashMap<String, Object>
+     * @return Map<String, Object>
      * @throws IOException
      * @see http://docs.sailthru.com/api/content
      */
@@ -339,7 +339,7 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * Retrieve a user's alert settings
      * @param String email
-     * @return HashMap<String, Object>
+     * @return Map<String, Object>
      * @throws IOException
      * @see http://docs.sailthru.com/api/alert
      */
@@ -352,7 +352,7 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * Add a new alert to a user. You can add either a realtime or a summary alert (daily/weekly).
      * @param Alert alert
-     * @return HashMap<String, Object>
+     * @return Map<String, Object>
      * @throws IOException
      * @see http://docs.sailthru.com/api/alert
      */
@@ -364,7 +364,7 @@ public class SailthruClient extends AbstractSailthruClient {
      * Delete existing user alert
      * @param String email
      * @param String alertId
-     * @return HashMap<String, Object>
+     * @return Map<String, Object>
      * @throws IOException
      * @see http://docs.sailthru.com/api/alert
      */
@@ -378,7 +378,7 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * Record that a user has made a purchase, or has added items to their purchase total
      * @param Purchase purchase
-     * @return HashMap<String, Object>
+     * @return Map<String, Object>
      * @throws IOException
      * @see http://docs.sailthru.com/api/purchase
      */
@@ -389,7 +389,7 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * Make stats API request
      * @param Stats stats
-     * @return HashMap<String, Object>
+     * @return Map<String, Object>
      * @throws IOException
      * @see http://docs.sailthru.com/api/stats
      */
@@ -400,7 +400,7 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * get list stats information
      * @param ListStat stat
-     * @return HashMap<String, Object>
+     * @return Map<String, Object>
      * @throws IOException
      * @see http://docs.sailthru.com/api/stats
      */
@@ -411,7 +411,7 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * get blast stats information
      * @param BlastStat stat
-     * @return HashMap<String, Object>
+     * @return Map<String, Object>
      * @throws IOException
      * @see http://docs.sailthru.com/api/stats
      */
