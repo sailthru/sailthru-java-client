@@ -2,7 +2,7 @@ package com.sailthru.client;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * few static utility methods
@@ -29,7 +29,7 @@ public class SailthruUtil {
      * @param ArrayList<String> list
      * @return String
      */
-    public static String ArrayListToCSV(ArrayList<String> list) {
+    public static String ArrayListToCSV(List<String> list) {
         StringBuilder csv = new StringBuilder();
         for (String str : list) {
             csv.append(str);

@@ -3,9 +3,9 @@ package com.sailthru.client.params;
 import com.google.gson.Gson;
 import com.sailthru.client.SailthruUtil;
 import com.sailthru.client.handler.JSONHandler;
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.Map;
+import java.util.List;
 
 /**
  *
@@ -28,12 +28,12 @@ public class PurchaseItem {
         this.url = url;
     }
 
-    public PurchaseItem setTags(ArrayList<String> tags) {
+    public PurchaseItem setTags(List<String> tags) {
         this.tags = SailthruUtil.ArrayListToCSV(tags);
         return this;
     }
 
-    public PurchaseItem setVars(HashMap<String, Object> vars) {
+    public PurchaseItem setVars(Map<String, Object> vars) {
         this.vars = vars;
         return this;
     }
@@ -42,6 +42,6 @@ public class PurchaseItem {
         Gson gson = new Gson();
         String json = gson.toJson(this);
         JSONHandler handler = new JSONHandler();
-        return (HashMap<String, String>)handler.parseResponse(json);
+        return (Map<String, String>)handler.parseResponse(json);
     }
 }
