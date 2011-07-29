@@ -14,6 +14,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
@@ -132,7 +133,7 @@ public abstract class AbstractSailthruClient {
     protected Object httpRequest(String action, HttpRequestMethod method, Map<String, Object> data) throws IOException {
         String url = this.apiUrl + "/" + action;
 
-        Type type = new TypeToken<HashMap<String, Object>>() {}.getType();
+        Type type = new TypeToken<Map<String, Object>>() {}.getType();
         String json = gson.toJson(data, type);
 
         Map<String, String> params = buildPayload(json);
@@ -141,7 +142,7 @@ public abstract class AbstractSailthruClient {
     }
 
     /**
-     * Make HTTP Request to Sailthru API but with Api Params rather than generalized HashMap, this is recommended way to make request if data structure is complex
+     * Make HTTP Request to Sailthru API but with Api Params rather than generalized Map, this is recommended way to make request if data structure is complex
      * @param String action
      * @param HttpRequestMethod method
      * @param ApiParams data
@@ -171,12 +172,12 @@ public abstract class AbstractSailthruClient {
     }
 
     /**
-     * Get Signature Hash from given HashMap
+     * Get Signature Hash from given Map
      * @param Map<String, String> parameters
      * @return String
      */
     protected String getSignatureHash(Map<String, String> parameters) {
-        ArrayList<String> values = new ArrayList<String>();
+        List<String> values = new ArrayList<String>();
 
         StringBuilder data = new StringBuilder();
         data.append(this.apiSecret);
@@ -195,7 +196,7 @@ public abstract class AbstractSailthruClient {
 
 
     /**
-     * HTTP GET Request with HashMap
+     * HTTP GET Request with Map
      * @param String action
      * @param Map<String, Object> data
      * @return Object
@@ -218,7 +219,7 @@ public abstract class AbstractSailthruClient {
 
 
     /**
-     * HTTP POST Request with HashMap
+     * HTTP POST Request with Map
      * @param String action
      * @param Map<String, Object> data
      * @return Object
@@ -242,7 +243,7 @@ public abstract class AbstractSailthruClient {
 
 
     /**
-     * HTTP DELETE Request with HashMap
+     * HTTP DELETE Request with Map
      * @param String action
      * @param Map<String, Object> data
      * @return Object
