@@ -5,12 +5,16 @@ import com.sailthru.client.params.Blast;
 import com.sailthru.client.params.BlastStat;
 import com.sailthru.client.params.Content;
 import com.sailthru.client.params.Email;
+import com.sailthru.client.params.job.ImportJob;
 import com.sailthru.client.params.ListStat;
 import com.sailthru.client.params.MultiSend;
 import com.sailthru.client.params.Purchase;
 import com.sailthru.client.params.Send;
 import com.sailthru.client.params.Stats;
 import com.sailthru.client.params.Template;
+import com.sailthru.client.params.job.BlastQueryJob;
+import com.sailthru.client.params.job.ExportListDataJob;
+import com.sailthru.client.params.job.SnapshotJob;
 
 import java.io.IOException;
 import java.util.Date;
@@ -418,5 +422,67 @@ public class SailthruClient extends AbstractSailthruClient {
      */
     public Map<String, Object> blastStats(BlastStat stat) throws IOException {
         return (Map<String, Object>)this.stats(stat);
+    }
+    
+    
+    /**
+     * Get status of a job
+     * @param String jobId
+     * @return Map<String, Object>
+     * @see http://docs.sailthru.com/api/job
+     * @throws IOException 
+     */
+    public Map<String, Object> getJobStatus(String jobId) throws IOException {
+        HashMap<String, Object> params = new HashMap<String, Object>();
+        params.put("job_id", jobId);
+        return (Map<String, Object>)this.apiGet("job", params);
+    }
+    
+    
+    /**
+     * Process import job from given email string CSV or file path of a CSV or email per line file
+     * @param job
+     * @return Map<String, Object>
+     * @see http://docs.sailthru.com/api/job
+     * @throws IOException 
+     */
+    public Map<String, Object> processImportJob(ImportJob job) throws IOException {
+        return (Map<String, Object>)this.apiPost("job", job);
+    }
+    
+    
+    /**
+     * Query user data set and generate a detailed snapshot of their analytics similar to that shown in the Snapshot Report in the Sailthru interface.
+     * @param job
+     * @return Map<String, Object>
+     * @see http://docs.sailthru.com/api/job
+     * @throws IOException 
+     */
+    public Map<String, Object> processSnapshotJob(SnapshotJob job) throws IOException {
+        return (Map<String, Object>)this.apiPost("job", job);
+    }
+    
+    
+    /**
+     * Export blast data in CSV format
+     * @param job
+     * @return Map<String, Object>
+     * @see http://docs.sailthru.com/api/job
+     * @throws IOException 
+     */
+    public Map<String, Object> processBlastQueryJob(BlastQueryJob job) throws IOException {
+        return (Map<String, Object>)this.apiPost("job", job);
+    }
+    
+    
+    /**
+     * Export user data from a list in CSV format
+     * @param job
+     * @return Map<String, Object>
+     * @see http://docs.sailthru.com/api/job
+     * @throws IOException 
+     */
+    public Map<String, Object> processExportListDataJob(ExportListDataJob job) throws IOException {
+        return (Map<String, Object>)this.apiPost("job", job);
     }
 }
