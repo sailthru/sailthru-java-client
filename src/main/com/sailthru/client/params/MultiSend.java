@@ -19,7 +19,7 @@ public class MultiSend extends Send {
     }
 
     public MultiSend setEmails(ArrayList<String> emails) {
-        this.email = SailthruUtil.ArrayListToCSV(emails);        
+        this.email = SailthruUtil.arrayListToCSV(emails);        
         return this;
     }
 
