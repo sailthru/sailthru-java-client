@@ -1,8 +1,8 @@
 package com.sailthru.client.params;
 
 import com.google.gson.reflect.TypeToken;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -16,10 +16,10 @@ public class Alert extends AbstractApiParams implements ApiParams {
     protected String template;
     protected String when;
 
-    protected HashMap<String, ArrayList<String>> match;
-    protected HashMap<String, Number> min;
-    protected HashMap<String, Number> max;
-    protected ArrayList<String> tags;
+    protected Map<String, List<String>> match;
+    protected Map<String, Number> min;
+    protected Map<String, Number> max;
+    protected List<String> tags;
 
     public Alert setEmail(String email) {
         this.email = email;
@@ -31,22 +31,22 @@ public class Alert extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-    public Alert setMatchQuery(HashMap<String, ArrayList<String>> match) {
+    public Alert setMatchQuery(Map<String, List<String>> match) {
         this.match = match;
         return this;
     }
 
-    public Alert setMinQuery(HashMap<String, Number> min) {
+    public Alert setMinQuery(Map<String, Number> min) {
         this.min = min;
         return this;
     }
 
-    public Alert setMaxQuery(HashMap<String, Number> max) {
+    public Alert setMaxQuery(Map<String, Number> max) {
         this.max = max;
         return this;
     }
 
-    public Alert setTagsQuery(ArrayList<String> tags) {
+    public Alert setTagsQuery(List<String> tags) {
         this.tags = tags;
         return this;
     }
