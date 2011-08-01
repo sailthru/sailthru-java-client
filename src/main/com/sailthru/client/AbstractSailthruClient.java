@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.http.HttpVersion;
 import org.apache.http.conn.scheme.PlainSocketFactory;
@@ -167,7 +168,7 @@ public abstract class AbstractSailthruClient {
         params.put("format", handler.getSailthruResponseHandler().getFormat());
         params.put("json", jsonPayload);
         params.put("sig", getSignatureHash(params));
-        logger.info("Params: " + params.toString());
+        logger.log(Level.INFO, "Params: {0}", params.toString());
         return params;
     }
 
