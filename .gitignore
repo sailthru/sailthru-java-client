@@ -3,3 +3,6 @@ build.xml
 src/main/com/sailthru/client/Ignore.java
 manifest.mf
 build
+.idea
+target
+lib
