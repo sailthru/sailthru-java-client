@@ -29,7 +29,7 @@ public class SailthruUtil {
      * @param ArrayList<String> list
      * @return String
      */
-    public static String ArrayListToCSV(List<String> list) {
+    public static String arrayListToCSV(List<String> list) {
         StringBuilder csv = new StringBuilder();
         for (String str : list) {
             csv.append(str);
