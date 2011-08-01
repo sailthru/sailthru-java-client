@@ -29,7 +29,7 @@ public class PurchaseItem {
     }
 
     public PurchaseItem setTags(List<String> tags) {
-        this.tags = SailthruUtil.ArrayListToCSV(tags);
+        this.tags = SailthruUtil.arrayListToCSV(tags);
         return this;
     }
 
