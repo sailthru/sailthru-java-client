@@ -8,7 +8,7 @@
   <packaging>jar</packaging>
 
   <name>sailthru-java-client</name>
-  <url>http://maven.apache.org</url>
+  <url>http://docs.sailtru.com</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
