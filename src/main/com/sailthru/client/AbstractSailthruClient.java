@@ -6,6 +6,7 @@ import com.sailthru.client.handler.JSONHandler;
 import com.sailthru.client.handler.SailthruResponseHandler;
 import com.sailthru.client.http.SailthruHandler;
 import com.sailthru.client.http.SailthruHttpClient;
+import com.sailthru.client.params.ApiFileParams;
 import com.sailthru.client.params.ApiParams;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -156,6 +157,13 @@ public abstract class AbstractSailthruClient {
         Map<String, String> params = buildPayload(json);
         return this.httpClient.executeHttpRequest(url, method, params, handler);
     }
+    
+    protected Object httpRequest(String action, HttpRequestMethod method, ApiParams data, ApiFileParams fileParams) throws IOException {
+        String url = this.apiUrl + "/" + action;
+        String json = gson.toJson(data, data.getType());
+        Map<String, String> params = buildPayload(json);
+        return this.httpClient.executeHttpRequest(url, method, params, fileParams.getFileParams(), handler);
+    }
 
     /**
      * Build HTTP Request Payload
@@ -241,7 +249,12 @@ public abstract class AbstractSailthruClient {
     public Object apiPost(String action, ApiParams data) throws IOException {
         return httpRequest(action, HttpRequestMethod.POST, data);
     }
-
+    
+    
+    public Object apiPost(String action, ApiParams data, ApiFileParams fileParams) throws IOException {
+        return httpRequest(action, HttpRequestMethod.POST, data, fileParams);
+    }
+    
 
     /**
      * HTTP DELETE Request with Map

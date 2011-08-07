@@ -1,6 +1,7 @@
 package com.sailthru.client.http;
 
 import com.sailthru.client.AbstractSailthruClient.HttpRequestMethod;
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -16,10 +17,16 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.entity.FileEntity;
+import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.HttpParams;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.ContentBody;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
 
 /**
  *
@@ -60,10 +67,52 @@ public class SailthruHttpClient extends DefaultHttpClient {
         }
         return null;
     }
+    
+    private HttpUriRequest buildRequest(String urlString, HttpRequestMethod method, Map<String, String> queryParams, Map<String, File> files) throws UnsupportedEncodingException {
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+        
+        for( Entry<String, String> entry : queryParams.entrySet() ) {
+            nameValuePairs.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+        }
+
+        switch(method) {
+            case GET:
+                logger.info("Making HTTP GET Request");
+                HttpGet httpRequest = new HttpGet(urlString + "?" + extractQueryString(nameValuePairs));
+                return httpRequest;
+
+            case POST:
+                logger.info("Making HTTP POST Request with multipart");
+                HttpPost httpPost = new HttpPost(urlString);
+                MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+                for( Entry<String, String> entry : queryParams.entrySet() ) {
+                    multipartEntity.addPart(entry.getKey(), new StringBody(entry.getValue()));
+                }
+                for ( Entry<String, File> fileEntry : files.entrySet() ) {
+                    ContentBody contentBody = new FileBody(fileEntry.getValue(), "application/octet-stream");
+                    multipartEntity.addPart(fileEntry.getKey(), contentBody);
+                }
+                httpPost.setEntity(multipartEntity);
+                
+                return httpPost;
+
+            case DELETE:
+                logger.info("Making HTTP DELETE Request");
+                HttpDelete httpDelete = new HttpDelete(urlString + "?" + extractQueryString(nameValuePairs));
+                return httpDelete;
+        }
+        return null;
+    }
 
     public Object executeHttpRequest(String urlString, HttpRequestMethod method, Map<String, String> params, ResponseHandler<Object> responseHandler)
             throws IOException {
         HttpUriRequest request = this.buildRequest(urlString, method, params);
+        return super.execute(request, responseHandler);
+    }
+    
+    public Object executeHttpRequest(String urlString, HttpRequestMethod method, Map<String, String> params, Map<String, File> fileParams, ResponseHandler<Object> responseHandler)
+            throws IOException {
+        HttpUriRequest request = this.buildRequest(urlString, method, params, fileParams);
         return super.execute(request, responseHandler);
     }
 

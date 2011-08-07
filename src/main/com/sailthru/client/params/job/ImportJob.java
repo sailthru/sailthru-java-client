@@ -2,20 +2,23 @@ package com.sailthru.client.params.job;
 
 import com.google.gson.reflect.TypeToken;
 import com.sailthru.client.SailthruUtil;
+import com.sailthru.client.params.ApiFileParams;
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 import java.lang.reflect.Type;
+import java.util.HashMap;
 
 /**
  *
  * @author praj
  */
-public class ImportJob extends Job {
+public class ImportJob extends Job implements ApiFileParams {
     
     private static final String JOB = "import";
     
     protected String emails;
-    protected File file;
+    protected transient File file = null;
     protected String list;
 
     public ImportJob() {
@@ -45,5 +48,14 @@ public class ImportJob extends Job {
     @Override
     public Type getType() {
         return new TypeToken<ImportJob>() {}.getType();
+    }
+    
+    
+    public Map<String, File> getFileParams() {
+        Map<String, File> files = new HashMap<String, File>();
+        if (this.file != null) {
+            files.put("file", this.file);
+        }
+        return files;
     }
 }

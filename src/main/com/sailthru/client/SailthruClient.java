@@ -447,7 +447,7 @@ public class SailthruClient extends AbstractSailthruClient {
      * @throws IOException 
      */
     public Map<String, Object> processImportJob(ImportJob job) throws IOException {
-        return (Map<String, Object>)this.apiPost("job", job);
+        return (Map<String, Object>)this.apiPost("job", job, job);
     }
     
     
