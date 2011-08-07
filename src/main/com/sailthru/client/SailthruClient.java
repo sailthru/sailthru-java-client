@@ -492,7 +492,8 @@ public class SailthruClient extends AbstractSailthruClient {
      * Perform a bulk update of any number of user profiles
      * @param job
      * @return Map<String, Object>
-     * @throws IOException 
+     * @throws IOException
+     * @see http://docs.sailthru.com/api/job
      */
     public Map<String, Object> processUpdateJob(UpdateJob job) throws IOException {
         return (Map<String, Object>)this.apiPost("job", job, job);
