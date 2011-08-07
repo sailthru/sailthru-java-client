@@ -1,8 +1,11 @@
 package com.sailthru.client.params.job;
 
 import com.google.gson.reflect.TypeToken;
+
 import com.sailthru.client.SailthruUtil;
+import com.sailthru.client.params.ApiFileParams;
 import com.sailthru.client.params.query.Query;
+
 import java.io.File;
 import java.lang.reflect.Type;
 import java.net.URI;
@@ -14,7 +17,7 @@ import java.util.Map;
  *
  * @author praj
  */
-public class UpdateJob extends Job {
+public class UpdateJob extends Job implements ApiFileParams {
     
     private static final String JOB = "update";
     
@@ -82,5 +85,13 @@ public class UpdateJob extends Job {
     @Override
     public Type getType() {
         return new TypeToken<UpdateJob>() {}.getType();
+    }
+
+    public Map<String, File> getFileParams() {
+        Map<String, File> files = new HashMap<String, File>();
+        if (this.file != null) {
+            files.put("file", this.file);
+        }
+        return files;
     }
 }

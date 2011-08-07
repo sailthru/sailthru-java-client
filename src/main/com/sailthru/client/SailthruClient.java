@@ -15,6 +15,7 @@ import com.sailthru.client.params.Template;
 import com.sailthru.client.params.job.BlastQueryJob;
 import com.sailthru.client.params.job.ExportListDataJob;
 import com.sailthru.client.params.job.SnapshotJob;
+import com.sailthru.client.params.job.UpdateJob;
 
 import java.io.IOException;
 import java.util.Date;
@@ -484,5 +485,16 @@ public class SailthruClient extends AbstractSailthruClient {
      */
     public Map<String, Object> processExportListDataJob(ExportListDataJob job) throws IOException {
         return (Map<String, Object>)this.apiPost("job", job);
+    }
+    
+    
+    /**
+     * Perform a bulk update of any number of user profiles
+     * @param job
+     * @return Map<String, Object>
+     * @throws IOException 
+     */
+    public Map<String, Object> processUpdateJob(UpdateJob job) throws IOException {
+        return (Map<String, Object>)this.apiPost("job", job, job);
     }
 }
