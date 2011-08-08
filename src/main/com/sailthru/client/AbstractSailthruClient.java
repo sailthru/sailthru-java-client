@@ -217,7 +217,6 @@ public abstract class AbstractSailthruClient {
 
     /**
      * HTTP GET Request with Interface implementation of ApiParams
-     * @param String action
      * @param ApiParams data
      * @return Object
      * @throws IOException
@@ -241,7 +240,6 @@ public abstract class AbstractSailthruClient {
 
     /**
      * HTTP POST Request with Interface implementation of ApiParams
-     * @param String action
      * @param ApiParams data
      * @return Object
      * @throws IOException
@@ -269,7 +267,6 @@ public abstract class AbstractSailthruClient {
 
     /**
      * HTTP DELETE Request with Interface implementation of ApiParams
-     * @param String action
      * @param ApiParams data
      * @return Object
      * @throws IOException
