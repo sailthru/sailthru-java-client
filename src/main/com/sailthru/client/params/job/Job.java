@@ -1,6 +1,7 @@
 package com.sailthru.client.params.job;
 
 import com.google.gson.reflect.TypeToken;
+import com.sailthru.client.ApiAction;
 import com.sailthru.client.params.AbstractApiParams;
 import com.sailthru.client.params.ApiParams;
 import java.lang.reflect.Type;
@@ -33,5 +34,10 @@ abstract public class Job extends AbstractApiParams implements ApiParams {
     public Job setJob(String job) {
         this.job = job;
         return this;
+    }
+    
+    @Override
+    public ApiAction getApiCall() {
+        return ApiAction.job;
     }
 }

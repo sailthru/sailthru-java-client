@@ -1,6 +1,7 @@
 package com.sailthru.client.params.job;
 
 import com.google.gson.reflect.TypeToken;
+import com.sailthru.client.ApiAction;
 import java.lang.reflect.Type;
 
 /**
@@ -26,4 +27,5 @@ public class BlastQueryJob extends Job {
     public Type getType() {
         return new TypeToken<BlastQueryJob>() {}.getType();
     }
+
 }

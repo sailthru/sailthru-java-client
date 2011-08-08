@@ -1,8 +1,10 @@
 package com.sailthru.client.params;
 
 import com.google.gson.reflect.TypeToken;
+import com.sailthru.client.ApiAction;
 import java.util.List;
 import java.util.Map;
+import java.lang.reflect.Type;
 
 /**
  *
@@ -61,9 +63,14 @@ public class Alert extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-    public java.lang.reflect.Type getType() {
+    public Type getType() {
         java.lang.reflect.Type _type = new TypeToken<Alert>() {}.getType();
         return _type;
+    }
+    
+    @Override
+    public ApiAction getApiCall() {
+        return ApiAction.alert;
     }
 
 }

@@ -89,7 +89,7 @@ public class SailthruClient extends AbstractSailthruClient {
     public Map<String, Object> getEmail(String email) throws IOException {
         Email emailObj = new Email();
         emailObj.setEmail(email);
-        return (Map<String, Object>)this.apiGet("email", emailObj);
+        return (Map<String, Object>)this.apiGet(emailObj);
     }
 
     /**
@@ -100,7 +100,7 @@ public class SailthruClient extends AbstractSailthruClient {
      * @see http://docs.sailthru.com/api/email
      */
     public Map<String, Object> setEmail(Email email) throws IOException {
-        return (Map<String, Object>)this.apiPost("email", email);
+        return (Map<String, Object>)this.apiPost(email);
     }
 
     /**
@@ -124,7 +124,7 @@ public class SailthruClient extends AbstractSailthruClient {
      * @see http://docs.sailthru.com/api/send
      */
     public Map<String, Object> send(Send send) throws IOException {
-        return (Map<String, Object>)this.apiPost("send", send);
+        return (Map<String, Object>)this.apiPost(send);
     }
 
     /**
@@ -135,7 +135,7 @@ public class SailthruClient extends AbstractSailthruClient {
      * @see http://docs.sailthru.com/api/send
      */
     public Map<String, Object> multiSend(MultiSend multiSend) throws IOException {        
-        return (Map<String, Object>)this.apiPost("send", multiSend);
+        return (Map<String, Object>)this.apiPost(multiSend);
     }
 
     /**
@@ -172,7 +172,7 @@ public class SailthruClient extends AbstractSailthruClient {
      * @see http://docs.sailthru.com/api/blast
      */
     public Map<String, Object> scheduleBlast(Blast blast) throws IOException {
-        return (Map<String, Object>)this.apiPost("blast", blast);
+        return (Map<String, Object>)this.apiPost(blast);
     }
 
     /**
@@ -189,7 +189,7 @@ public class SailthruClient extends AbstractSailthruClient {
         blast.setCopyTemplate(template);
         blast.setList(list);
         blast.setScheduleTime(scheduleTime);
-        return (Map<String, Object>)this.apiPost("blast", blast);
+        return (Map<String, Object>)this.apiPost(blast);
     }
 
     /**
@@ -206,7 +206,7 @@ public class SailthruClient extends AbstractSailthruClient {
         blast.setCopyTemplate(template);
         blast.setList(list);
         blast.setScheduleTime(scheduleTime);
-        return (Map<String, Object>)this.apiPost("blast", blast);
+        return (Map<String, Object>)this.apiPost(blast);
     }
 
     /**
@@ -221,7 +221,7 @@ public class SailthruClient extends AbstractSailthruClient {
     public Map<String, Object> scheduleBlastFromBlast(Integer blastId, Date scheduleTime, Blast blast) throws IOException {
         blast.setCopyBlast(blastId);
         blast.setScheduleTime(scheduleTime);
-        return (Map<String, Object>)this.apiPost("blast", blast);
+        return (Map<String, Object>)this.apiPost(blast);
     }
 
     /**
@@ -236,7 +236,7 @@ public class SailthruClient extends AbstractSailthruClient {
         Blast blast = new Blast();
         blast.setCopyBlast(blastId);
         blast.setScheduleTime(scheduleTime);
-        return (Map<String, Object>)this.apiPost("blast", blast);
+        return (Map<String, Object>)this.apiPost(blast);
     }
 
     /**
@@ -249,7 +249,7 @@ public class SailthruClient extends AbstractSailthruClient {
     public Map<String, Object> updateBlast(Integer blastId) throws IOException {
         Blast blast = new Blast();
         blast.setBlastId(blastId);
-        return (Map<String, Object>)this.apiPost("blast", blast);
+        return (Map<String, Object>)this.apiPost(blast);
     }
 
     /**
@@ -262,7 +262,7 @@ public class SailthruClient extends AbstractSailthruClient {
      */
     public Map<String, Object> updateBlast(Integer blastId, Blast blast) throws IOException {
         blast.setBlastId(blastId);
-        return (Map<String, Object>)this.apiPost("blast", blast);
+        return (Map<String, Object>)this.apiPost(blast);
     }
 
     /**
@@ -291,7 +291,7 @@ public class SailthruClient extends AbstractSailthruClient {
         blast
             .setBlastId(blastId)
             .setScheduleTime(d);
-        return (Map<String, Object>)this.apiPost("blast", blast);
+        return (Map<String, Object>)this.apiPost(blast);
     }
 
     /**
@@ -315,7 +315,7 @@ public class SailthruClient extends AbstractSailthruClient {
      * @see http://docs.sailthru.com/api/template
      */
     public Map<String, Object> saveTemplate(Template template) throws IOException {
-        return (Map<String, Object>)this.apiPost("template", template);
+        return (Map<String, Object>)this.apiPost(template);
     }
 
     /**
@@ -339,7 +339,7 @@ public class SailthruClient extends AbstractSailthruClient {
      * @see http://docs.sailthru.com/api/content
      */
     public Map<String, Object> pushContent(Content content) throws IOException {
-        return (Map<String, Object>)this.apiPost("content", content);
+        return (Map<String, Object>)this.apiPost(content);
     }
 
     /**
@@ -363,7 +363,7 @@ public class SailthruClient extends AbstractSailthruClient {
      * @see http://docs.sailthru.com/api/alert
      */
     public Map<String, Object> saveAlert(Alert alert) throws IOException {
-        return (Map<String, Object>)this.apiPost("alert", alert);
+        return (Map<String, Object>)this.apiPost(alert);
     }
 
     /**
@@ -389,7 +389,7 @@ public class SailthruClient extends AbstractSailthruClient {
      * @see http://docs.sailthru.com/api/purchase
      */
     public Map<String, Object> purchase(Purchase purchase) throws IOException {
-        return (Map<String, Object>)this.apiPost("purchase", purchase);
+        return (Map<String, Object>)this.apiPost(purchase);
     }
 
     /**
@@ -400,7 +400,7 @@ public class SailthruClient extends AbstractSailthruClient {
      * @see http://docs.sailthru.com/api/stats
      */
     protected Map<String, Object> stats(Stats stats) throws IOException {
-        return (Map<String, Object>)this.apiGet("stats", stats);
+        return (Map<String, Object>)this.apiGet(stats);
     }
 
     /**
@@ -448,7 +448,7 @@ public class SailthruClient extends AbstractSailthruClient {
      * @throws IOException 
      */
     public Map<String, Object> processImportJob(ImportJob job) throws IOException {
-        return (Map<String, Object>)this.apiPost("job", job, job);
+        return (Map<String, Object>)this.apiPost(job, job);
     }
     
     
@@ -460,7 +460,7 @@ public class SailthruClient extends AbstractSailthruClient {
      * @throws IOException 
      */
     public Map<String, Object> processSnapshotJob(SnapshotJob job) throws IOException {
-        return (Map<String, Object>)this.apiPost("job", job);
+        return (Map<String, Object>)this.apiPost(job);
     }
     
     
@@ -472,7 +472,7 @@ public class SailthruClient extends AbstractSailthruClient {
      * @throws IOException 
      */
     public Map<String, Object> processBlastQueryJob(BlastQueryJob job) throws IOException {
-        return (Map<String, Object>)this.apiPost("job", job);
+        return (Map<String, Object>)this.apiPost(job);
     }
     
     
@@ -484,7 +484,7 @@ public class SailthruClient extends AbstractSailthruClient {
      * @throws IOException 
      */
     public Map<String, Object> processExportListDataJob(ExportListDataJob job) throws IOException {
-        return (Map<String, Object>)this.apiPost("job", job);
+        return (Map<String, Object>)this.apiPost(job);
     }
     
     
@@ -496,6 +496,6 @@ public class SailthruClient extends AbstractSailthruClient {
      * @see http://docs.sailthru.com/api/job
      */
     public Map<String, Object> processUpdateJob(UpdateJob job) throws IOException {
-        return (Map<String, Object>)this.apiPost("job", job, job);
+        return (Map<String, Object>)this.apiPost(job, job);
     }
 }

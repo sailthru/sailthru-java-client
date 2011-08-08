@@ -1,12 +1,16 @@
 package com.sailthru.client.params;
 
+import com.sailthru.client.ApiAction;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
  *
  * @author Prajwal Tuladhar
  */
-public class List extends AbstractApiParams {
+public class List extends AbstractApiParams implements ApiParams {
     protected String list;
     protected String emails;
     protected Integer primary;
@@ -32,5 +36,13 @@ public class List extends AbstractApiParams {
     public List setPrimary() {
         this.primary = 1;
         return this;
+    }
+
+    public ApiAction getApiCall() {
+        return ApiAction.list;
+    }
+
+    public Type getType() {
+        return new TypeToken<List>() {}.getType();
     }
 }

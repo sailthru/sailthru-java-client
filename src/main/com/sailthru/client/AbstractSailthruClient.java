@@ -151,16 +151,16 @@ public abstract class AbstractSailthruClient {
      * @return Object
      * @throws IOException
      */
-    protected Object httpRequest(String action, HttpRequestMethod method, ApiParams data) throws IOException {
-        String url = this.apiUrl + "/" + action;
-        String json = gson.toJson(data, data.getType());
+    protected Object httpRequest(HttpRequestMethod method, ApiParams apiParams) throws IOException {
+        String url = this.apiUrl + "/" + apiParams.getApiCall().toString();
+        String json = gson.toJson(apiParams, apiParams.getType());
         Map<String, String> params = buildPayload(json);
         return this.httpClient.executeHttpRequest(url, method, params, handler);
     }
     
-    protected Object httpRequest(String action, HttpRequestMethod method, ApiParams data, ApiFileParams fileParams) throws IOException {
-        String url = this.apiUrl + "/" + action;
-        String json = gson.toJson(data, data.getType());
+    protected Object httpRequest(HttpRequestMethod method, ApiParams apiParams, ApiFileParams fileParams) throws IOException {
+        String url = this.apiUrl + "/" + apiParams.getApiCall().toString();
+        String json = gson.toJson(apiParams, apiParams.getType());
         Map<String, String> params = buildPayload(json);
         return this.httpClient.executeHttpRequest(url, method, params, fileParams.getFileParams(), handler);
     }
@@ -222,8 +222,8 @@ public abstract class AbstractSailthruClient {
      * @return Object
      * @throws IOException
      */
-    public Object apiGet(String action, ApiParams data) throws IOException {
-        return httpRequest(action, HttpRequestMethod.GET, data);
+    public Object apiGet(ApiParams data) throws IOException {
+        return httpRequest(HttpRequestMethod.GET, data);
     }
 
 
@@ -246,13 +246,13 @@ public abstract class AbstractSailthruClient {
      * @return Object
      * @throws IOException
      */
-    public Object apiPost(String action, ApiParams data) throws IOException {
-        return httpRequest(action, HttpRequestMethod.POST, data);
+    public Object apiPost(ApiParams data) throws IOException {
+        return httpRequest(HttpRequestMethod.POST, data);
     }
     
     
-    public Object apiPost(String action, ApiParams data, ApiFileParams fileParams) throws IOException {
-        return httpRequest(action, HttpRequestMethod.POST, data, fileParams);
+    public Object apiPost(ApiParams data, ApiFileParams fileParams) throws IOException {
+        return httpRequest(HttpRequestMethod.POST, data, fileParams);
     }
     
 
@@ -274,8 +274,8 @@ public abstract class AbstractSailthruClient {
      * @return Object
      * @throws IOException
      */
-    public Object apiDelete(String action, ApiParams data) throws IOException {
-        return httpRequest(action, HttpRequestMethod.DELETE, data);
+    public Object apiDelete(ApiParams data) throws IOException {
+        return httpRequest(HttpRequestMethod.DELETE, data);
     }
 
     /**

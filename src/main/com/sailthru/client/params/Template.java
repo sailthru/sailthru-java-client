@@ -1,6 +1,7 @@
 package com.sailthru.client.params;
 
 import com.google.gson.reflect.TypeToken;
+import com.sailthru.client.ApiAction;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 
@@ -80,5 +81,10 @@ public class Template extends AbstractApiParams implements ApiParams {
     public Type getType() {
         Type type = new TypeToken<Template>() {}.getType();
         return type;
+    }
+
+    @Override
+    public ApiAction getApiCall() {
+        return ApiAction.template;
     }
 }

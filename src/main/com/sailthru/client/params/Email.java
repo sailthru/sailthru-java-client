@@ -1,6 +1,7 @@
 package com.sailthru.client.params;
 
 import com.google.gson.reflect.TypeToken;
+import com.sailthru.client.ApiAction;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -99,5 +100,10 @@ public class Email extends AbstractApiParams implements ApiParams {
     public Type getType() {
         Type type = new TypeToken<Email>() {}.getType();
         return type;
+    }
+
+    @Override
+    public ApiAction getApiCall() {
+        return ApiAction.email;
     }
 }

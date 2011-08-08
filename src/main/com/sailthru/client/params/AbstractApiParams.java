@@ -15,4 +15,5 @@ public abstract class AbstractApiParams {
         JSONHandler handler = new JSONHandler();
         return (HashMap<String, Object>)handler.parseResponse(json);
     }
+    
 }

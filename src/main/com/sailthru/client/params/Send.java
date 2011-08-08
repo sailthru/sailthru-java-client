@@ -1,6 +1,7 @@
 package com.sailthru.client.params;
 
 import com.google.gson.reflect.TypeToken;
+import com.sailthru.client.ApiAction;
 import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.HashMap;
@@ -68,5 +69,10 @@ public class Send extends AbstractApiParams implements ApiParams {
     public Send setOptions(HashMap<String, Object> options) {
         this.options = options;
         return this;
+    }
+
+    @Override
+    public ApiAction getApiCall() {
+        return ApiAction.send;
     }
 }

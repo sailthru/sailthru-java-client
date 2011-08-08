@@ -1,14 +1,16 @@
 package com.sailthru.client.params.query;
 
-import com.sailthru.client.params.AbstractApiParams;
 import java.util.ArrayList;
+import com.google.gson.Gson;
+import com.sailthru.client.handler.JSONHandler;
+import java.util.HashMap;
 
 /**
  * Map query builder parameters for API calls
  * @see http://docs.sailthru.com/api/query
  * @author praj
  */
-public class Query extends AbstractApiParams {
+public class Query {
     protected String source_list;
     protected QueryMode query_mode;
     protected ArrayList<String> criteria;
@@ -62,5 +64,12 @@ public class Query extends AbstractApiParams {
     public Query addTimeRange(TimeRange timeRange) {
         this.timerange.add(timeRange.toString());
         return this;
+    }
+    
+    public HashMap<String, Object> toHashMap() {
+        Gson gson = new Gson();
+        String json = gson.toJson(this);
+        JSONHandler handler = new JSONHandler();
+        return (HashMap<String, Object>)handler.parseResponse(json);
     }
 }

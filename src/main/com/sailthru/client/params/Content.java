@@ -1,6 +1,7 @@
 package com.sailthru.client.params;
 
 import com.google.gson.reflect.TypeToken;
+import com.sailthru.client.ApiAction;
 import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.HashMap;
@@ -16,6 +17,11 @@ public class Content extends AbstractApiParams implements ApiParams {
     protected String date;
     protected String tags;
     protected HashMap<String, Object> vars;
+
+    @Override
+    public ApiAction getApiCall() {
+        return ApiAction.blast;
+    }
 
     public static enum ContentSepecialVar {PRICE, DESCRIPTION, BRAND};
 

@@ -1,5 +1,7 @@
 package com.sailthru.client.params;
 
+import com.sailthru.client.ApiAction;
+
 /**
  *
  * @author Prajwal Tuladhar
@@ -12,5 +14,9 @@ public abstract class Stats implements ApiParams {
 
     public Stats(String stat) {
         this.stat = stat;
+    }
+    
+    public ApiAction getApiCall() {
+        return ApiAction.blast;
     }
 }
