@@ -11,6 +11,10 @@ import java.lang.reflect.Type;
  * @author Prajwal Tuladhar
  */
 public class Alert extends AbstractApiParams implements ApiParams {
+    
+    public static final String PARAM_EMAIL = "email";
+    public static final String PARAM_ALERT_ID = "alert_id";
+    
     protected String email;
 
     public static enum TypeMode {realtime, daily, weekly};

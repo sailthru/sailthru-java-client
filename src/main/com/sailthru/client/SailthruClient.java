@@ -14,6 +14,7 @@ import com.sailthru.client.params.Stats;
 import com.sailthru.client.params.Template;
 import com.sailthru.client.params.job.BlastQueryJob;
 import com.sailthru.client.params.job.ExportListDataJob;
+import com.sailthru.client.params.job.Job;
 import com.sailthru.client.params.job.SnapshotJob;
 import com.sailthru.client.params.job.UpdateJob;
 
@@ -112,7 +113,7 @@ public class SailthruClient extends AbstractSailthruClient {
      */
     public Map<String, Object> getSend(String sendId) throws IOException {
         Map<String, Object> data = new HashMap<String, Object>();
-        data.put("send_id", sendId);
+        data.put(Send.PARAM_SEND_ID, sendId);
         return (Map<String, Object>)this.apiGet(ApiAction.send, data);
     }
 
@@ -147,7 +148,7 @@ public class SailthruClient extends AbstractSailthruClient {
      */
     public Map<String, Object> cancelSend(String sendId) throws IOException {
         Map<String, Object> data = new HashMap<String, Object>();
-        data.put("send_id", sendId);
+        data.put(Send.PARAM_SEND_ID, sendId);
         return (Map<String, Object>)this.apiDelete(ApiAction.send, data);
     }
 
@@ -159,9 +160,9 @@ public class SailthruClient extends AbstractSailthruClient {
      * @see http://docs.sailthru.com/api/blast
      */
     public Map<String, Object> getBlast(Integer blastId) throws IOException {
-        Map<String, Object> data = new HashMap<String, Object>();
-        data.put("blast_id", blastId);
-        return (Map<String, Object>)this.apiGet(ApiAction.blast, data);
+        Blast blast = new Blast();
+        blast.setBlastId(blastId);
+        return (Map<String, Object>)this.apiGet(blast);
     }
 
     /**
@@ -273,9 +274,9 @@ public class SailthruClient extends AbstractSailthruClient {
      * @see http://docs.sailthru.com/api/blast
      */
     public Map<String, Object> deleteBlast(Integer blastId) throws IOException {
-        Map<String, Object> data = new HashMap<String, Object>();
-        data.put("blast_id", blastId);
-        return (Map<String, Object>)this.apiDelete(ApiAction.blast, data);
+        Blast blast = new Blast();
+        blast.setBlastId(blastId);
+        return (Map<String, Object>)this.apiDelete(blast);
     }
 
     /**
@@ -303,7 +304,7 @@ public class SailthruClient extends AbstractSailthruClient {
      */
     public Map<String, Object> getTemplate(String template) throws IOException {
         Map<String, Object> data = new HashMap<String, Object>();
-        data.put("template", template);
+        data.put(Template.PARAM_TEMPLATE, template);
         return (Map<String, Object>)this.apiGet(ApiAction.template, data);
     }
 
@@ -327,7 +328,7 @@ public class SailthruClient extends AbstractSailthruClient {
      */
     public Map<String, Object> deleteTemplate(String template) throws IOException {
         Map<String, Object> data = new HashMap<String, Object>();
-        data.put("template", template);
+        data.put(Template.PARAM_TEMPLATE, template);
         return (Map<String, Object>)this.apiDelete(ApiAction.template, data);
     }
 
@@ -351,7 +352,7 @@ public class SailthruClient extends AbstractSailthruClient {
      */
     public Map<String, Object> getAlert(String email) throws IOException {
         Map<String, Object> data = new HashMap<String, Object>();
-        data.put("email", email);
+        data.put(Alert.PARAM_EMAIL, email);
         return (Map<String, Object>)this.apiGet(ApiAction.alert, data);
     }
 
@@ -376,8 +377,8 @@ public class SailthruClient extends AbstractSailthruClient {
      */
     public Map<String, Object> deleteAlert(String email, String alertId) throws IOException {
         Map<String, Object> data = new HashMap<String, Object>();
-        data.put("email", email);
-        data.put("alert_id", alertId);
+        data.put(Alert.PARAM_EMAIL, email);
+        data.put(Alert.PARAM_ALERT_ID, alertId);
         return (Map<String, Object>)this.apiDelete(ApiAction.alert, data);
     }
 
@@ -435,7 +436,7 @@ public class SailthruClient extends AbstractSailthruClient {
      */
     public Map<String, Object> getJobStatus(String jobId) throws IOException {
         HashMap<String, Object> params = new HashMap<String, Object>();
-        params.put("job_id", jobId);
+        params.put(Job.JOB_ID, jobId);
         return (Map<String, Object>)this.apiGet(ApiAction.job, params);
     }
     

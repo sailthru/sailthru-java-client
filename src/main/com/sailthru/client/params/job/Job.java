@@ -16,6 +16,8 @@ abstract public class Job extends AbstractApiParams implements ApiParams {
     protected String job;
     protected String report_email;
     protected String postback_url;
+    
+    public static final String JOB_ID = "job_id";
 
     public Type getType() {
         return new TypeToken<Job>() {}.getType();

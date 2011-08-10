@@ -12,6 +12,7 @@ import java.util.HashMap;
  * @author Prajwal Tuladhar
  */
 public class Blast extends AbstractApiParams implements ApiParams {
+    
     protected String name;
     protected String list;
     protected String schedule_time;

@@ -10,6 +10,9 @@ import java.util.HashMap;
  * @author Prajwal Tuladhar
  */
 public class Template extends AbstractApiParams implements ApiParams {
+    
+    public static final String PARAM_TEMPLATE = "template";
+    
     protected String template;
     protected String sample;
     protected String from_name;

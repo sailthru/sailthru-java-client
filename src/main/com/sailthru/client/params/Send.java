@@ -11,6 +11,9 @@ import java.util.HashMap;
  * @author Prajwal Tuladhar
  */
 public class Send extends AbstractApiParams implements ApiParams {
+    
+    public static final String PARAM_SEND_ID = "send_id";
+    
     protected String template;
     protected String email;
     protected HashMap<String, Object> vars;
