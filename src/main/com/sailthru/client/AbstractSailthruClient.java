@@ -36,7 +36,7 @@ import org.apache.http.params.HttpProtocolParams;
  */
 public abstract class AbstractSailthruClient {
 
-    protected static Logger logger = Logger.getLogger(AbstractSailthruClient.class.getName());
+    protected static final Logger logger = Logger.getLogger(AbstractSailthruClient.class.getName());
 
     public static final String DEFAULT_API_URL = "https://api.sailthru.com";
     public static final int DEFAULT_HTTP_PORT = 80;
@@ -79,7 +79,7 @@ public abstract class AbstractSailthruClient {
      * Create  SailthruHttpClient
      * @return SailthruHttpClient
      */
-    protected SailthruHttpClient create() {
+    private SailthruHttpClient create() {
         HttpParams params = new BasicHttpParams();
         HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
         HttpProtocolParams.setContentCharset(params, DEFAULT_ENCODING);
