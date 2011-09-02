@@ -1,9 +1,11 @@
 package com.sailthru.client.http;
 
 import com.sailthru.client.AbstractSailthruClient.HttpRequestMethod;
+import com.sailthru.client.SailthruClient;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +58,7 @@ public class SailthruHttpClient extends DefaultHttpClient {
             case POST:
                 logger.info("Making HTTP POST Request");
                 HttpPost httpPost = new HttpPost(urlString);
-                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs, SailthruClient.DEFAULT_ENCODING));
                 return httpPost;
 
             case DELETE:
@@ -83,7 +85,7 @@ public class SailthruHttpClient extends DefaultHttpClient {
             case POST:
                 logger.info("Making HTTP POST Request with multipart");
                 HttpPost httpPost = new HttpPost(urlString);
-                MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+                MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE, null, Charset.forName(SailthruClient.DEFAULT_ENCODING));
                 for( Entry<String, String> entry : queryParams.entrySet() ) {
                     multipartEntity.addPart(entry.getKey(), new StringBody(entry.getValue()));
                 }
@@ -116,6 +118,6 @@ public class SailthruHttpClient extends DefaultHttpClient {
     }
 
     private String extractQueryString(List<NameValuePair> params) {
-        return URLEncodedUtils.format(params, "UTF-8");
+        return URLEncodedUtils.format(params, SailthruClient.DEFAULT_ENCODING);
     }
 }
