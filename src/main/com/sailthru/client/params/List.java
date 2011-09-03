@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Prajwal Tuladhar
+ * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public class List extends AbstractApiParams implements ApiParams {
     protected String list;

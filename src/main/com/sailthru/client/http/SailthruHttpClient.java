@@ -31,7 +31,7 @@ import org.apache.http.entity.mime.content.StringBody;
 
 /**
  *
- * @author Prajwal Tuladhar
+ * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public class SailthruHttpClient extends DefaultHttpClient {
 

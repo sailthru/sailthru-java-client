@@ -2,7 +2,7 @@ package com.sailthru.client.exceptions;
 
 /**
  *
- * @author Prajwal Tuladhar
+ * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public class UnAuthorizedException extends ApiException {
     public UnAuthorizedException(int statusCode, String reason, Object jsonResponse) {

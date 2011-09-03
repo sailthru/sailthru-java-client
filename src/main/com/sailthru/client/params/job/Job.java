@@ -8,7 +8,7 @@ import java.lang.reflect.Type;
 
 /**
  *
- * @author praj
+ * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 abstract public class Job extends AbstractApiParams implements ApiParams {
     

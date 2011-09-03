@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 /**
  *
- * @author Prajwal Tuladhar
+ * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public abstract class AbstractApiParams {
     public HashMap<String, Object> toHashMap() {

@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 /**
  *
- * @author Prajwal Tuladhar
+ * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public class Blast extends AbstractApiParams implements ApiParams {
     

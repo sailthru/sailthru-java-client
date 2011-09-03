@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 /**
  *
- * @author Prajwal Tuladhar
+ * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public class Template extends AbstractApiParams implements ApiParams {
     

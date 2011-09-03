@@ -5,7 +5,7 @@ import com.sailthru.client.ApiAction;
 
 /**
  *
- * @author Prajwal Tuladhar
+ * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public interface ApiParams {
     public Type getType();

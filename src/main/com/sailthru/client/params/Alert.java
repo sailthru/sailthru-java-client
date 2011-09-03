@@ -8,7 +8,7 @@ import java.lang.reflect.Type;
 
 /**
  *
- * @author Prajwal Tuladhar
+ * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public class Alert extends AbstractApiParams implements ApiParams {
     

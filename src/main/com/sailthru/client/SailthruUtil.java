@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * few static utility methods
- * @author Prajwal Tuladhar
+ * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public class SailthruUtil {
 

@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 /**
  *
- * @author Prajwal Tuladhar
+ * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public class MultiSend extends Send {
 

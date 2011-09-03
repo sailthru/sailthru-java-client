@@ -25,7 +25,7 @@ import java.util.Map;
 
 /**
  *
- * @author Prajwal Tuladhar
+ * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public class SailthruClient extends AbstractSailthruClient {
 

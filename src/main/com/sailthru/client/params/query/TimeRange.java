@@ -2,7 +2,7 @@ package com.sailthru.client.params.query;
 
 /**
  *
- * @author praj
+ * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public enum TimeRange {
     ever,

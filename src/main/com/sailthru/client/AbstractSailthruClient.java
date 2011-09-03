@@ -32,7 +32,7 @@ import org.apache.http.params.HttpProtocolParams;
 
 /**
  *
- * @author Prajwal Tuladhar
+ * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public abstract class AbstractSailthruClient {
 

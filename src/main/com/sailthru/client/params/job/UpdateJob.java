@@ -15,7 +15,7 @@ import java.util.Map;
 
 /**
  *
- * @author praj
+ * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public class UpdateJob extends Job implements ApiFileParams {
     

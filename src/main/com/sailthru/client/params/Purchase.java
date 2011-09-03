@@ -9,7 +9,7 @@ import java.util.Map;
 
 /**
  *
- * @author Prajwal Tuladhar
+ * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public class Purchase extends AbstractApiParams implements ApiParams {
     protected String email;

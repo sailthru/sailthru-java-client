@@ -4,7 +4,7 @@ import com.sailthru.client.ApiAction;
 
 /**
  *
- * @author Prajwal Tuladhar
+ * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public abstract class Stats implements ApiParams {
     protected String stat;

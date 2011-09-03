@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
  *
- * @author Prajwal Tuladhar
+ * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public class ListStat extends Stats {
     protected String list;

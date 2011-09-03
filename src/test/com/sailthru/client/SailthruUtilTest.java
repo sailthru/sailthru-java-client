@@ -5,7 +5,7 @@ import junit.framework.TestCase;
 
 /**
  *
- * @author praj
+ * @author Prajwal Tuladhar <praj@sailthru.com> <praj@sailthru.com>
  */
 public class SailthruUtilTest extends TestCase {
     public void testMd5() {

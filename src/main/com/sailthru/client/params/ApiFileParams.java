@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  *
- * @author praj
+* @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public interface ApiFileParams {
     public Map<String, File> getFileParams();

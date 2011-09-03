@@ -15,7 +15,7 @@ import org.apache.http.util.EntityUtils;
 
 /**
  *
- * @author Prajwal Tuladhar
+ * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public class SailthruHandler implements ResponseHandler<Object> {
 

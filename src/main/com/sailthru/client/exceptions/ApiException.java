@@ -11,7 +11,7 @@ import org.apache.http.StatusLine;
 
 /**
  * Handle API related Exceptions
- * @author Prajwal Tuladhar
+ * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public class ApiException extends IOException {
 

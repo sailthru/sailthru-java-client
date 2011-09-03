@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  *
- * @author Prajwal Tuladhar
+ * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public class PurchaseItem {
     protected String qty;
