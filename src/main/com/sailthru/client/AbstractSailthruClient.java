@@ -2,8 +2,10 @@ package com.sailthru.client;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.sailthru.client.handler.JSONHandler;
+import com.sailthru.client.handler.JsonHandler;
 import com.sailthru.client.handler.SailthruResponseHandler;
+import com.sailthru.client.handler.response.JsonResponse;
+import com.sailthru.client.handler.response.Response;
 import com.sailthru.client.http.SailthruHandler;
 import com.sailthru.client.http.SailthruHttpClient;
 import com.sailthru.client.params.ApiFileParams;
@@ -69,7 +71,7 @@ public abstract class AbstractSailthruClient {
         this.apiKey = apiKey;
         this.apiSecret = apiSecret;
         this.apiUrl = apiUrl;
-        this.handler = new SailthruHandler(new JSONHandler());
+        this.handler = new SailthruHandler(new JsonHandler());
         this.httpClient = create();
         this.gson = new Gson();
     }
@@ -169,6 +171,19 @@ public abstract class AbstractSailthruClient {
         Map<String, String> params = buildPayload(json);
         return this.httpClient.executeHttpRequest(url, method, params, fileParams.getFileParams(), handler);
     }
+    
+    
+    protected JsonResponse httpRequestJson(HttpRequestMethod method, ApiParams apiParams) throws IOException {
+        return new JsonResponse(httpRequest(method, apiParams));
+    }
+    
+    protected JsonResponse httpRequestJson(HttpRequestMethod method, ApiParams apiParams, ApiFileParams fileParams) throws IOException {
+        return new JsonResponse(httpRequest(method, apiParams, fileParams));
+    }
+    
+    protected JsonResponse httpRequestJson(ApiAction action, HttpRequestMethod method, Map<String, Object> data) throws IOException {
+        return new JsonResponse(httpRequest(action, method, data));
+    }
 
     /**
      * Build HTTP Request Payload
@@ -211,71 +226,69 @@ public abstract class AbstractSailthruClient {
      * HTTP GET Request with Map
      * @param action API action
      * @param data Parameter data
-     * @return Object
      * @throws IOException
      */
-    public Object apiGet(ApiAction action, Map<String, Object> data) throws IOException {
-        return httpRequest(action, HttpRequestMethod.GET, data);
+    public JsonResponse apiGet(ApiAction action, Map<String, Object> data) throws IOException {
+        return httpRequestJson(action, HttpRequestMethod.GET, data);
     }
 
     /**
      * HTTP GET Request with Interface implementation of ApiParams
      * @param data
-     * @return Object
      * @throws IOException
      */
-    public Object apiGet(ApiParams data) throws IOException {
-        return httpRequest(HttpRequestMethod.GET, data);
+    public JsonResponse apiGet(ApiParams data) throws IOException {
+        return httpRequestJson(HttpRequestMethod.GET, data);
     }
-
 
     /**
      * HTTP POST Request with Map
      * @param action
      * @param data
-     * @return Object
      * @throws IOException
      */
-    public Object apiPost(ApiAction action, Map<String, Object> data) throws IOException {
-        return httpRequest(action, HttpRequestMethod.POST, data);
+    public JsonResponse apiPost(ApiAction action, Map<String, Object> data) throws IOException {
+        return httpRequestJson(action, HttpRequestMethod.POST, data);
     }
-
 
     /**
      * HTTP POST Request with Interface implementation of ApiParams
      * @param data
-     * @return Object
      * @throws IOException
      */
-    public Object apiPost(ApiParams data) throws IOException {
-        return httpRequest(HttpRequestMethod.POST, data);
+    public JsonResponse apiPost(ApiParams data) throws IOException {
+        return httpRequestJson(HttpRequestMethod.POST, data);
     }
     
     
-    public Object apiPost(ApiParams data, ApiFileParams fileParams) throws IOException {
-        return httpRequest(HttpRequestMethod.POST, data, fileParams);
+    /**
+     * HTTP POST Request with Interface implementation of ApiParams and ApiFileParams
+     * @param data
+     * @param fileParams
+     * @throws IOException 
+     */
+    public JsonResponse apiPost(ApiParams data, ApiFileParams fileParams) throws IOException {
+        return httpRequestJson(HttpRequestMethod.POST, data, fileParams);
     }
     
 
     /**
-     * HTTP DELETE Request with Map
+     * HTTP DELETE Request
      * @param action
      * @param data
-     * @return Object
      * @throws IOException
      */
-    public Object apiDelete(ApiAction action, Map<String, Object> data) throws IOException {
-        return httpRequest(action, HttpRequestMethod.DELETE, data);
+    public JsonResponse apiDelete(ApiAction action, Map<String, Object> data) throws IOException {
+        return httpRequestJson(action, HttpRequestMethod.DELETE, data);
     }
 
     /**
      * HTTP DELETE Request with Interface implementation of ApiParams
      * @param data
-     * @return Object
      * @throws IOException
      */
-    public Object apiDelete(ApiParams data) throws IOException {
-        return httpRequest(HttpRequestMethod.DELETE, data);
+    public JsonResponse apiDelete(ApiParams data) throws IOException {
+        return httpRequestJson(HttpRequestMethod.DELETE, data);
     }
 
     /**

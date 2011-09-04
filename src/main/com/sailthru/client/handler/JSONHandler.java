@@ -16,9 +16,9 @@ import java.util.Map;
 /**
  * handles JSON response from server
  *
- * @author Prajwal Tuladhar <praj@sailthru.com> <praj@sailthru.com>
+ * @author Prajwal Tuladhar <praj@sailthru.com>
  */
-public class JSONHandler implements SailthruResponseHandler {
+public class JsonHandler implements SailthruResponseHandler {
 
     public static final String format = "json";
 

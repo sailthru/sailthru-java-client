@@ -1,5 +1,6 @@
 package com.sailthru.client;
 
+import com.sailthru.client.handler.response.JsonResponse;
 import com.sailthru.client.params.Alert;
 import com.sailthru.client.params.Blast;
 import com.sailthru.client.params.BlastStat;
@@ -83,85 +84,80 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * Get information about one of your users.
      * @param email
-     * @return Map Object
      * @throws IOException
      */
-    public Map<String, Object> getEmail(String email) throws IOException {
+    public JsonResponse getEmail(String email) throws IOException {
         Email emailObj = new Email();
         emailObj.setEmail(email);
-        return (Map<String, Object>)this.apiGet(emailObj);
+        return apiGet(emailObj);
     }
 
     /**
      * Update information about one of your users, including adding and removing the user from lists.
      * @param email
-     * @return Map Object
      * @throws IOException
      */
-    public Map<String, Object> setEmail(Email email) throws IOException {
-        return (Map<String, Object>)this.apiPost(email);
+    public JsonResponse setEmail(Email email) throws IOException {
+        return apiPost(email);
     }
 
     /**
      * Get the status of a transational send
      * @param sendId Unique send id
-     * @return Map Object
      * @throws IOException
      */
-    public Map<String, Object> getSend(String sendId) throws IOException {
+    public JsonResponse getSend(String sendId) throws IOException {
         Map<String, Object> data = new HashMap<String, Object>();
         data.put(Send.PARAM_SEND_ID, sendId);
-        return (Map<String, Object>)this.apiGet(ApiAction.send, data);
+        return apiGet(ApiAction.send, data);
     }
 
     /**
      * send an email template to a single email address.
      * @param send Send Object
-     * @return Map Object
      * @throws IOException
      */
-    public Map<String, Object> send(Send send) throws IOException {
-        return (Map<String, Object>)this.apiPost(send);
+    public JsonResponse send(Send send) throws IOException {
+        return apiPost(send);
     }
 
     /**
      * send an email template to multiple email addresses
      * @param multiSend
-     * @return Map Object
      * @throws IOException
      */
-    public Map<String, Object> multiSend(MultiSend multiSend) throws IOException {        
-        return (Map<String, Object>)this.apiPost(multiSend);
+    public JsonResponse multiSend(MultiSend multiSend) throws IOException {        
+        return apiPost(multiSend);
     }
 
     /**
      * Cancel a send that was scheduled for a future time.
      * @param sendId
-     * @return Map Object
+     * @return JsonResponse
      * @throws IOException
      */
-    public Map<String, Object> cancelSend(String sendId) throws IOException {
+    public JsonResponse cancelSend(String sendId) throws IOException {
         Map<String, Object> data = new HashMap<String, Object>();
         data.put(Send.PARAM_SEND_ID, sendId);
-        return (Map<String, Object>)this.apiDelete(ApiAction.send, data);
+        return apiDelete(ApiAction.send, data);
     }
 
     /**
      * get information about a blast
      * @param blastId
-     * @return Map Object
+     * @return JsonResponse
      * @throws IOException
      */
-    public Map<String, Object> getBlast(Integer blastId) throws IOException {
+    public JsonResponse getBlast(Integer blastId) throws IOException {
         Blast blast = new Blast();
         blast.setBlastId(blastId);
-        return (Map<String, Object>)this.apiGet(blast);
+        return apiGet(blast);
     }
 
     /**
      * Schedule a mass mail blast
      * @param blast
-     * @return Map Object
+     * @return JsonResponse
      * @throws IOException
      */
     public Map<String, Object> scheduleBlast(Blast blast) throws IOException {
@@ -174,14 +170,13 @@ public class SailthruClient extends AbstractSailthruClient {
      * @param list list name
      * @param scheduleTime schedule time for the blast
      * @param blast Blast Object
-     * @return Map Object
      * @throws IOException
      */
-    public Map<String, Object> scheduleBlastFromTemplate(String template, String list, Date scheduleTime, Blast blast) throws IOException {
+    public JsonResponse scheduleBlastFromTemplate(String template, String list, Date scheduleTime, Blast blast) throws IOException {
         blast.setCopyTemplate(template);
         blast.setList(list);
         blast.setScheduleTime(scheduleTime);
-        return (Map<String, Object>)this.apiPost(blast);
+        return apiPost(blast);
     }
 
     /**
@@ -189,15 +184,15 @@ public class SailthruClient extends AbstractSailthruClient {
      * @param template template name
      * @param list list name
      * @param scheduleTime schedule time for the blast
-     * @return Map Object
+     * @return JsonResponse
      * @throws IOException
      */
-    public Map<String, Object> scheduleBlastFromTemplate(String template, String list, Date scheduleTime) throws IOException {
+    public JsonResponse scheduleBlastFromTemplate(String template, String list, Date scheduleTime) throws IOException {
         Blast blast = new Blast();
         blast.setCopyTemplate(template);
         blast.setList(list);
         blast.setScheduleTime(scheduleTime);
-        return (Map<String, Object>)this.apiPost(blast);
+        return apiPost(blast);
     }
 
     /**
@@ -205,184 +200,172 @@ public class SailthruClient extends AbstractSailthruClient {
      * @param blastId blast ID
      * @param scheduleTime schedule time for the blast
      * @param blast Blast object
-     * @return Map Object
+     * @return JsonResponse
      * @throws IOException
      */
-    public Map<String, Object> scheduleBlastFromBlast(Integer blastId, Date scheduleTime, Blast blast) throws IOException {
+    public JsonResponse scheduleBlastFromBlast(Integer blastId, Date scheduleTime, Blast blast) throws IOException {
         blast.setCopyBlast(blastId);
         blast.setScheduleTime(scheduleTime);
-        return (Map<String, Object>)this.apiPost(blast);
+        return apiPost(blast);
     }
 
     /**
      * Schedule a mass mail blast from previous blast
      * @param blastId blast ID
      * @param scheduleTime schedule time for the blast
-     * @return Map Object
      * @throws IOException
      */
-    public Map<String, Object> scheduleBlastFromBlast(Integer blastId, Date scheduleTime) throws IOException {
+    public JsonResponse scheduleBlastFromBlast(Integer blastId, Date scheduleTime) throws IOException {
         Blast blast = new Blast();
         blast.setCopyBlast(blastId);
         blast.setScheduleTime(scheduleTime);
-        return (Map<String, Object>)this.apiPost(blast);
+        return apiPost(blast);
     }
 
     /**
      * Update existing blast
      * @param blastId
-     * @return Map Object
      * @throws IOException
      */
-    public Map<String, Object> updateBlast(Integer blastId) throws IOException {
+    public JsonResponse updateBlast(Integer blastId) throws IOException {
         Blast blast = new Blast();
         blast.setBlastId(blastId);
-        return (Map<String, Object>)this.apiPost(blast);
+        return apiPost(blast);
     }
 
     /**
      * Update existing blast
      * @param blastId
      * @param blast
-     * @return Map Object
      * @throws IOException
      */
-    public Map<String, Object> updateBlast(Integer blastId, Blast blast) throws IOException {
+    public JsonResponse updateBlast(Integer blastId, Blast blast) throws IOException {
         blast.setBlastId(blastId);
-        return (Map<String, Object>)this.apiPost(blast);
+        return apiPost(blast);
     }
 
     /**
      * Delete existing blast
      * @param blastId
-     * @return Map Object
      * @throws IOException
      */
-    public Map<String, Object> deleteBlast(Integer blastId) throws IOException {
+    public JsonResponse deleteBlast(Integer blastId) throws IOException {
         Blast blast = new Blast();
         blast.setBlastId(blastId);
-        return (Map<String, Object>)this.apiDelete(blast);
+        return apiDelete(blast);
     }
 
     /**
      * Cancel a scheduled Blast
      * @param blastId Unique Blast ID
-     * @return Map Object
      * @throws IOException
      */
-    public Map<String, Object> cancelBlast(Integer blastId) throws IOException {
+    public JsonResponse cancelBlast(Integer blastId) throws IOException {
         Blast blast = new Blast();
         Date d = null;
         blast
             .setBlastId(blastId)
             .setScheduleTime(d);
-        return (Map<String, Object>)this.apiPost(blast);
+        return apiPost(blast);
     }
 
     /**
      * Get template information
      * @param template template name
-     * @return Map Object
      * @throws IOException
      */
-    public Map<String, Object> getTemplate(String template) throws IOException {
+    public JsonResponse getTemplate(String template) throws IOException {
         Map<String, Object> data = new HashMap<String, Object>();
         data.put(Template.PARAM_TEMPLATE, template);
-        return (Map<String, Object>)this.apiGet(ApiAction.template, data);
+        return apiGet(ApiAction.template, data);
     }
 
     /**
      * Save / update a template
      * @param template template name
-     * @return Map Object
      * @throws IOException
      */
-    public Map<String, Object> saveTemplate(Template template) throws IOException {
-        return (Map<String, Object>)this.apiPost(template);
+    public JsonResponse saveTemplate(Template template) throws IOException {
+        return apiPost(template);
     }
 
     /**
      * Delete existing template
      * @param template template name
-     * @return Map Object
      * @throws IOException
      */
-    public Map<String, Object> deleteTemplate(String template) throws IOException {
+    public JsonResponse deleteTemplate(String template) throws IOException {
         Map<String, Object> data = new HashMap<String, Object>();
         data.put(Template.PARAM_TEMPLATE, template);
-        return (Map<String, Object>)this.apiDelete(ApiAction.template, data);
+        return apiDelete(ApiAction.template, data);
     }
 
     /**
      * Push a new piece of content to Sailthru, triggering any applicable alerts.
      * @param content
-     * @return Map Object
      * @throws IOException
      */
-    public Map<String, Object> pushContent(Content content) throws IOException {
-        return (Map<String, Object>)this.apiPost(content);
+    public JsonResponse pushContent(Content content) throws IOException {
+        return apiPost(content);
     }
 
     /**
      * Retrieve a user's alert settings
      * @param email
-     * @return Map Object
+     * @return JsonResponse
      * @throws IOException
      */
-    public Map<String, Object> getAlert(String email) throws IOException {
+    public JsonResponse getAlert(String email) throws IOException {
         Map<String, Object> data = new HashMap<String, Object>();
         data.put(Alert.PARAM_EMAIL, email);
-        return (Map<String, Object>)this.apiGet(ApiAction.alert, data);
+        return apiGet(ApiAction.alert, data);
     }
 
     /**
      * Add a new alert to a user. You can add either a realtime or a summary alert (daily/weekly).
      * @param alert
-     * @return Map Object
+     * @return JsonResponse
      * @throws IOException
      */
-    public Map<String, Object> saveAlert(Alert alert) throws IOException {
-        return (Map<String, Object>)this.apiPost(alert);
+    public JsonResponse saveAlert(Alert alert) throws IOException {
+        return apiPost(alert);
     }
 
     /**
      * Delete existing user alert
      * @param email User Email
      * @param alertId Alert ID
-     * @return Map Object
      * @throws IOException
      */
-    public Map<String, Object> deleteAlert(String email, String alertId) throws IOException {
+    public JsonResponse deleteAlert(String email, String alertId) throws IOException {
         Map<String, Object> data = new HashMap<String, Object>();
         data.put(Alert.PARAM_EMAIL, email);
         data.put(Alert.PARAM_ALERT_ID, alertId);
-        return (Map<String, Object>)this.apiDelete(ApiAction.alert, data);
+        return apiDelete(ApiAction.alert, data);
     }
 
     /**
      * Record that a user has made a purchase, or has added items to their purchase total
      * @param purchase
-     * @return Map Object
      * @throws IOException
      */
-    public Map<String, Object> purchase(Purchase purchase) throws IOException {
-        return (Map<String, Object>)this.apiPost(purchase);
+    public JsonResponse purchase(Purchase purchase) throws IOException {
+        return apiPost(purchase);
     }
 
     /**
      * Make stats API request
      * @param stats
-     * @return Map Object
      * @throws IOException
      */
-    protected Map<String, Object> stats(Stats stats) throws IOException {
-        return (Map<String, Object>)this.apiGet(stats);
+    protected JsonResponse stats(Stats stats) throws IOException {
+        return apiGet(stats);
     }
 
     /**
      * get list stats information
      * @param stat
-     * @return Map Object
+     * @return JsonResponse
      * @throws IOException
      */
     public Map<String, Object> listStats(ListStat stat) throws IOException {
@@ -392,7 +375,7 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * get blast stats information
      * @param stat
-     * @return Map Object
+     * @return JsonResponse
      * @throws IOException
      */
     public Map<String, Object> blastStats(BlastStat stat) throws IOException {
@@ -403,68 +386,62 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * Get status of a job
      * @param jobId
-     * @return Map Object
+     * @return JsonResponse
      * @throws IOException 
      */
-    public Map<String, Object> getJobStatus(String jobId) throws IOException {
+    public JsonResponse getJobStatus(String jobId) throws IOException {
         HashMap<String, Object> params = new HashMap<String, Object>();
         params.put(Job.JOB_ID, jobId);
-        return (Map<String, Object>)this.apiGet(ApiAction.job, params);
+        return apiGet(ApiAction.job, params);
     }
     
     
     /**
      * Process import job from given email string CSV or file path of a CSV or email per line file
      * @param job
-     * @return Map Object
      * @throws IOException 
      */
-    public Map<String, Object> processImportJob(ImportJob job) throws IOException {
-        return (Map<String, Object>)this.apiPost(job, job);
+    public JsonResponse processImportJob(ImportJob job) throws IOException {
+        return apiPost(job, job);
     }
     
     
     /**
      * Query user data set and generate a detailed snapshot of their analytics similar to that shown in the Snapshot Report in the Sailthru interface.
      * @param job SnapshotJob
-     * @return Map Object
      * @throws IOException 
      */
-    public Map<String, Object> processSnapshotJob(SnapshotJob job) throws IOException {
-        return (Map<String, Object>)this.apiPost(job);
+    public JsonResponse processSnapshotJob(SnapshotJob job) throws IOException {
+        return apiPost(job);
     }
     
     
     /**
      * Export blast data in CSV format
      * @param job BlastQueryJob
-     * @return Map Object
      * @throws IOException 
      */
-    public Map<String, Object> processBlastQueryJob(BlastQueryJob job) throws IOException {
-        return (Map<String, Object>)this.apiPost(job);
+    public JsonResponse processBlastQueryJob(BlastQueryJob job) throws IOException {
+        return apiPost(job);
     }
     
     
     /**
      * Export user data from a list in CSV format
      * @param job ExportListDataJob
-     * @return Map Object
      * @throws IOException 
      */
-    public Map<String, Object> processExportListDataJob(ExportListDataJob job) throws IOException {
-        return (Map<String, Object>)this.apiPost(job);
+    public JsonResponse processExportListDataJob(ExportListDataJob job) throws IOException {
+        return apiPost(job);
     }
     
     
     /**
      * Perform a bulk update of any number of user profiles
-     * For more information please visit http://docs.sailthru.com/api/job
      * @param job UpdateJob
-     * @return Map Object
      * @throws IOException
      */
-    public Map<String, Object> processUpdateJob(UpdateJob job) throws IOException {
-        return (Map<String, Object>)this.apiPost(job, job);
+    public JsonResponse processUpdateJob(UpdateJob job) throws IOException {
+        return apiPost(job, job);
     }
 }
