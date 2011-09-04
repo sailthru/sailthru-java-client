@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.logging.Logger;
-import org.apache.http.HttpEntity;
 import org.apache.http.StatusLine;
 
 /**
@@ -35,20 +34,9 @@ public class ApiException extends IOException {
         return statusCode;
     }
 
-    public static ApiException create(HttpEntity entity, StatusLine statusLine, Object jsonResponse) {
+    public static ApiException create(StatusLine statusLine, Object jsonResponse) {
         int statusCode = statusLine.getStatusCode();
-        String reason = null;
-        try {
-            InputStream inputStream = entity.getContent();
-            DataInputStream dis = new DataInputStream(inputStream);
-            reason = dis.readUTF();
-        } catch (EOFException ex) {
-            ;
-        } catch (IllegalStateException ex) {
-            ex.printStackTrace();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        return new ApiException(statusCode, reason, jsonResponse);
+        HashMap<String, Object> response = (HashMap<String, Object>)jsonResponse;
+        return new ApiException(statusCode, response.get("errormsg").toString(), jsonResponse);
     }
 }
