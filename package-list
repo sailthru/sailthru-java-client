@@ -1,0 +1,8 @@
+com.sailthru.client
+com.sailthru.client.exceptions
+com.sailthru.client.handler
+com.sailthru.client.handler.json
+com.sailthru.client.http
+com.sailthru.client.params
+com.sailthru.client.params.job
+com.sailthru.client.params.query
