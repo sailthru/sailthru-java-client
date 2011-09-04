@@ -6,3 +6,4 @@ build
 .idea
 target
 lib
+.DS_Store
