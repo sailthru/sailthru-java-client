@@ -2,6 +2,7 @@ com.sailthru.client
 com.sailthru.client.exceptions
 com.sailthru.client.handler
 com.sailthru.client.handler.json
+com.sailthru.client.handler.response
 com.sailthru.client.http
 com.sailthru.client.params
 com.sailthru.client.params.job
