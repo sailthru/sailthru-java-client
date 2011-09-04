@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cp -R target/site/apidocs/ .
+git push origin gh-pages
