@@ -12,8 +12,8 @@ public class SailthruUtil {
 
     /**
      * generates MD5 Hash
-     * @param String data
-     * @return String 
+     * @param data parameter data
+     * @return MD5 hashed string 
      */
     public static String md5(String data) {
         try {
@@ -25,9 +25,9 @@ public class SailthruUtil {
     }
 
     /**
-     * Converts String ArrayList to CSV String
-     * @param ArrayList<String> list
-     * @return String
+     * Converts String ArrayList to CSV string
+     * @param list List of String to create a CSV string
+     * @return CSV string
      */
     public static String arrayListToCSV(List<String> list) {
         StringBuilder csv = new StringBuilder();

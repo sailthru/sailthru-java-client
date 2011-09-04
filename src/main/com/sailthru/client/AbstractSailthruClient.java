@@ -31,7 +31,7 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
 
 /**
- *
+ * Abstract class exposing genric API calls for Sailthru API as per http://docs.sailthru.com/api
  * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public abstract class AbstractSailthruClient {
@@ -61,9 +61,9 @@ public abstract class AbstractSailthruClient {
 
     /**
      * Main constructor class for setting up the client
-     * @param String apiKey
-     * @param String apiSecret
-     * @param String apiUrl
+     * @param apiKey
+     * @param apiSecret
+     * @param apiUrl
      */
     public AbstractSailthruClient(String apiKey, String apiSecret, String apiUrl) {
         this.apiKey = apiKey;
@@ -76,8 +76,7 @@ public abstract class AbstractSailthruClient {
 
 
     /**
-     * Create  SailthruHttpClient
-     * @return SailthruHttpClient
+     * Create SailthruHttpClient
      */
     private SailthruHttpClient create() {
         HttpParams params = new BasicHttpParams();
@@ -95,7 +94,6 @@ public abstract class AbstractSailthruClient {
 
     /**
      * Getter for SailthruHttpClient
-     * @return SailthruHttpClient
      */
     public SailthruHttpClient getSailthruHttpClient() {
         return httpClient;
@@ -104,7 +102,6 @@ public abstract class AbstractSailthruClient {
 
     /**
      * Get Scheme Object
-     * @return Scheme
      */
     protected Scheme getScheme() {
         String scheme = null;
@@ -126,9 +123,9 @@ public abstract class AbstractSailthruClient {
 
     /**
      * Make Http request to Sailthru API for given resource with given method and data
-     * @param String action
-     * @param HttpRequestMethod method
-     * @param Map<String, Object> data
+     * @param action
+     * @param method
+     * @param data parameter data
      * @return Object
      * @throws IOException
      */
@@ -145,9 +142,8 @@ public abstract class AbstractSailthruClient {
 
     /**
      * Make HTTP Request to Sailthru API but with Api Params rather than generalized Map, this is recommended way to make request if data structure is complex
-     * @param String action
-     * @param HttpRequestMethod method
-     * @param ApiParams data
+     * @param method HTTP method
+     * @param apiParams 
      * @return Object
      * @throws IOException
      */
@@ -158,6 +154,15 @@ public abstract class AbstractSailthruClient {
         return this.httpClient.executeHttpRequest(url, method, params, handler);
     }
     
+    
+    /**
+     * Make HTTP Request to Sailthru API involving multi-part uploads but with Api Params rather than generalized Map, this is recommended way to make request if data structure is complex
+     * @param method
+     * @param apiParams
+     * @param fileParams
+     * @return Object
+     * @throws IOException 
+     */
     protected Object httpRequest(HttpRequestMethod method, ApiParams apiParams, ApiFileParams fileParams) throws IOException {
         String url = this.apiUrl + "/" + apiParams.getApiCall().toString();
         String json = gson.toJson(apiParams, apiParams.getType());
@@ -167,8 +172,8 @@ public abstract class AbstractSailthruClient {
 
     /**
      * Build HTTP Request Payload
-     * @param ApiParams data
-     * @return Map<String, String>
+     * @param jsonPayload JSON payload
+     * @return Map Object
      */
     private Map<String, String> buildPayload(String jsonPayload) {
         Map<String, String> params = new HashMap<String, String>();
@@ -182,8 +187,6 @@ public abstract class AbstractSailthruClient {
 
     /**
      * Get Signature Hash from given Map
-     * @param Map<String, String> parameters
-     * @return String
      */
     protected String getSignatureHash(Map<String, String> parameters) {
         List<String> values = new ArrayList<String>();
@@ -206,8 +209,8 @@ public abstract class AbstractSailthruClient {
 
     /**
      * HTTP GET Request with Map
-     * @param String action
-     * @param Map<String, Object> data
+     * @param action API action
+     * @param data Parameter data
      * @return Object
      * @throws IOException
      */
@@ -217,7 +220,7 @@ public abstract class AbstractSailthruClient {
 
     /**
      * HTTP GET Request with Interface implementation of ApiParams
-     * @param ApiParams data
+     * @param data
      * @return Object
      * @throws IOException
      */
@@ -228,8 +231,8 @@ public abstract class AbstractSailthruClient {
 
     /**
      * HTTP POST Request with Map
-     * @param String action
-     * @param Map<String, Object> data
+     * @param action
+     * @param data
      * @return Object
      * @throws IOException
      */
@@ -240,7 +243,7 @@ public abstract class AbstractSailthruClient {
 
     /**
      * HTTP POST Request with Interface implementation of ApiParams
-     * @param ApiParams data
+     * @param data
      * @return Object
      * @throws IOException
      */
@@ -256,8 +259,8 @@ public abstract class AbstractSailthruClient {
 
     /**
      * HTTP DELETE Request with Map
-     * @param String action
-     * @param Map<String, Object> data
+     * @param action
+     * @param data
      * @return Object
      * @throws IOException
      */
@@ -267,7 +270,7 @@ public abstract class AbstractSailthruClient {
 
     /**
      * HTTP DELETE Request with Interface implementation of ApiParams
-     * @param ApiParams data
+     * @param data
      * @return Object
      * @throws IOException
      */
@@ -276,8 +279,8 @@ public abstract class AbstractSailthruClient {
     }
 
     /**
-     * Set response Handler, currently only JSON is suported but XML can also be suported
-     * @param SailthruResponseHandler responseHandler
+     * Set response Handler, currently only JSON is supported but XML can also be supported later on
+     * @param responseHandler
      */
     public void setResponseHandler(SailthruResponseHandler responseHandler) {
         this.handler.setSailthruResponseHandler(responseHandler);

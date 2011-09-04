@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
+ * Main class exposing API calls for Sailthru API as per http://docs.sailthru.com/api
  * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public class SailthruClient extends AbstractSailthruClient {
@@ -36,9 +36,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Public constructor for SailthruClient class with custom API URL
-     * @param String apiKey
-     * @param String apiSecret
-     * @param String apiUrl
+     * @param apiKey Sailthru API key string
+     * @param apiSecret Sailthru API secret string
+     * @param apiUrl Sailthru API URL
      */
     public SailthruClient(String apiKey, String apiSecret, String apiUrl) {
         super(apiKey, apiSecret, apiUrl);
@@ -46,8 +46,8 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Public constructor for SailthruClient class with default API URL
-     * @param String apiKey
-     * @param String apiSecret
+     * @param apiKey Sailthru API key string
+     * @param apiSecret Sailthru API secret string
      */
     public SailthruClient(String apiKey, String apiSecret) {
         super(apiKey, apiSecret, DEFAULT_API_URL);
@@ -55,9 +55,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Synchronized singleton instance method using default URL string
-     * @param String apiKey
-     * @param String apiSecret
-     * @return SailthruClient _instance
+     * @param apiKey Sailthru API key string
+     * @param apiSecret Sailthru API secret string
+     * @return singleton instance of SailthruClient
      */
     public static synchronized SailthruClient getInstance(String apiKey, String apiSecret) {
         if (_instance == null) {
@@ -68,10 +68,10 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Synchronized singleton instance method using default URL string
-     * @param String apiKey
-     * @param String apiSecret
-     * @param String apiUrl
-     * @return SailthruClient _instance
+     * @param apiKey Sailthru API key string
+     * @param apiSecret Sailthru API secret string
+     * @param apiUrl Sailthru API URL
+     * @return singleton instance of SailthruClient
      */
     public static synchronized SailthruClient getInstance(String apiKey, String apiSecret, String apiUrl) {
         if (_instance == null) {
@@ -82,10 +82,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Get information about one of your users.
-     * @param String email
-     * @return Map<String, Object>
+     * @param email
+     * @return Map Object
      * @throws IOException
-     * @see http://docs.sailthru.com/api/email
      */
     public Map<String, Object> getEmail(String email) throws IOException {
         Email emailObj = new Email();
@@ -95,10 +94,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Update information about one of your users, including adding and removing the user from lists.
-     * @param Email email
-     * @return Map<String, Object>
+     * @param email
+     * @return Map Object
      * @throws IOException
-     * @see http://docs.sailthru.com/api/email
      */
     public Map<String, Object> setEmail(Email email) throws IOException {
         return (Map<String, Object>)this.apiPost(email);
@@ -106,10 +104,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Get the status of a transational send
-     * @param String sendId
-     * @return Map<String, Object>
+     * @param sendId Unique send id
+     * @return Map Object
      * @throws IOException
-     * @see http://docs.sailthru.com/api/send
      */
     public Map<String, Object> getSend(String sendId) throws IOException {
         Map<String, Object> data = new HashMap<String, Object>();
@@ -119,10 +116,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * send an email template to a single email address.
-     * @param Send send
-     * @return Map<String, Object>
+     * @param send Send Object
+     * @return Map Object
      * @throws IOException
-     * @see http://docs.sailthru.com/api/send
      */
     public Map<String, Object> send(Send send) throws IOException {
         return (Map<String, Object>)this.apiPost(send);
@@ -130,10 +126,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * send an email template to multiple email addresses
-     * @param MultiSend multiSend
-     * @return Map<String, Object>
+     * @param multiSend
+     * @return Map Object
      * @throws IOException
-     * @see http://docs.sailthru.com/api/send
      */
     public Map<String, Object> multiSend(MultiSend multiSend) throws IOException {        
         return (Map<String, Object>)this.apiPost(multiSend);
@@ -141,10 +136,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Cancel a send that was scheduled for a future time.
-     * @param String sendId
-     * @return Map<String, Object>
+     * @param sendId
+     * @return Map Object
      * @throws IOException
-     * @see http://docs.sailthru.com/api/send
      */
     public Map<String, Object> cancelSend(String sendId) throws IOException {
         Map<String, Object> data = new HashMap<String, Object>();
@@ -154,10 +148,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * get information about a blast
-     * @param Integer blastId
-     * @return Map<String, Object>
+     * @param blastId
+     * @return Map Object
      * @throws IOException
-     * @see http://docs.sailthru.com/api/blast
      */
     public Map<String, Object> getBlast(Integer blastId) throws IOException {
         Blast blast = new Blast();
@@ -168,9 +161,8 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * Schedule a mass mail blast
      * @param blast
-     * @return Map<String, Object>
+     * @return Map Object
      * @throws IOException
-     * @see http://docs.sailthru.com/api/blast
      */
     public Map<String, Object> scheduleBlast(Blast blast) throws IOException {
         return (Map<String, Object>)this.apiPost(blast);
@@ -178,13 +170,12 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Schedule a mass mail from a template
-     * @param String template
-     * @param String list
-     * @param Date scheduleTime
-     * @param Blast blast
-     * @return Map<String, Object>
+     * @param template template name
+     * @param list list name
+     * @param scheduleTime schedule time for the blast
+     * @param blast Blast Object
+     * @return Map Object
      * @throws IOException
-     * @see http://docs.sailthru.com/api/blast
      */
     public Map<String, Object> scheduleBlastFromTemplate(String template, String list, Date scheduleTime, Blast blast) throws IOException {
         blast.setCopyTemplate(template);
@@ -195,12 +186,11 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Schedule a mass mail from a template
-     * @param String template
-     * @param String list
-     * @param Date scheduleTime
-     * @return Map<String, Object>
+     * @param template template name
+     * @param list list name
+     * @param scheduleTime schedule time for the blast
+     * @return Map Object
      * @throws IOException
-     * @see http://docs.sailthru.com/api/blast
      */
     public Map<String, Object> scheduleBlastFromTemplate(String template, String list, Date scheduleTime) throws IOException {
         Blast blast = new Blast();
@@ -212,12 +202,11 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Schedule a mass mail blast from previous blast
-     * @param Integer blastId
-     * @param Date scheduleTime
-     * @param Blast blast
-     * @return Map<String, Object>
+     * @param blastId blast ID
+     * @param scheduleTime schedule time for the blast
+     * @param blast Blast object
+     * @return Map Object
      * @throws IOException
-     * @see http://docs.sailthru.com/api/blast
      */
     public Map<String, Object> scheduleBlastFromBlast(Integer blastId, Date scheduleTime, Blast blast) throws IOException {
         blast.setCopyBlast(blastId);
@@ -227,11 +216,10 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Schedule a mass mail blast from previous blast
-     * @param Integer blastId
-     * @param Date scheduleTime
-     * @return Map<String, Object>
+     * @param blastId blast ID
+     * @param scheduleTime schedule time for the blast
+     * @return Map Object
      * @throws IOException
-     * @see http://docs.sailthru.com/api/blast
      */
     public Map<String, Object> scheduleBlastFromBlast(Integer blastId, Date scheduleTime) throws IOException {
         Blast blast = new Blast();
@@ -242,10 +230,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Update existing blast
-     * @param Integer blastId
-     * @return Map<String, Object>
+     * @param blastId
+     * @return Map Object
      * @throws IOException
-     * @see http://docs.sailthru.com/api/blast
      */
     public Map<String, Object> updateBlast(Integer blastId) throws IOException {
         Blast blast = new Blast();
@@ -255,11 +242,10 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Update existing blast
-     * @param Integer blastId
-     * @param Blast blast
-     * @return Map<String, Object>
+     * @param blastId
+     * @param blast
+     * @return Map Object
      * @throws IOException
-     * @see http://docs.sailthru.com/api/blast
      */
     public Map<String, Object> updateBlast(Integer blastId, Blast blast) throws IOException {
         blast.setBlastId(blastId);
@@ -268,10 +254,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Delete existing blast
-     * @param Integer blastId
-     * @return Map<String, Object>
+     * @param blastId
+     * @return Map Object
      * @throws IOException
-     * @see http://docs.sailthru.com/api/blast
      */
     public Map<String, Object> deleteBlast(Integer blastId) throws IOException {
         Blast blast = new Blast();
@@ -281,10 +266,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Cancel a scheduled Blast
-     * @param Integer blastId
-     * @return Map<String, Object>
+     * @param blastId Unique Blast ID
+     * @return Map Object
      * @throws IOException
-     * @see http://docs.sailthru.com/api/blast
      */
     public Map<String, Object> cancelBlast(Integer blastId) throws IOException {
         Blast blast = new Blast();
@@ -297,10 +281,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Get template information
-     * @param String template
-     * @return Map<String, Object>
+     * @param template template name
+     * @return Map Object
      * @throws IOException
-     * @see http://docs.sailthru.com/api/template
      */
     public Map<String, Object> getTemplate(String template) throws IOException {
         Map<String, Object> data = new HashMap<String, Object>();
@@ -310,10 +293,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Save / update a template
-     * @param String template
-     * @return Map<String, Object>
+     * @param template template name
+     * @return Map Object
      * @throws IOException
-     * @see http://docs.sailthru.com/api/template
      */
     public Map<String, Object> saveTemplate(Template template) throws IOException {
         return (Map<String, Object>)this.apiPost(template);
@@ -321,10 +303,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Delete existing template
-     * @param String template
-     * @return Map<String, Object>
+     * @param template template name
+     * @return Map Object
      * @throws IOException
-     * @see http://docs.sailthru.com/api/template
      */
     public Map<String, Object> deleteTemplate(String template) throws IOException {
         Map<String, Object> data = new HashMap<String, Object>();
@@ -334,10 +315,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Push a new piece of content to Sailthru, triggering any applicable alerts.
-     * @param Content content
-     * @return Map<String, Object>
+     * @param content
+     * @return Map Object
      * @throws IOException
-     * @see http://docs.sailthru.com/api/content
      */
     public Map<String, Object> pushContent(Content content) throws IOException {
         return (Map<String, Object>)this.apiPost(content);
@@ -345,10 +325,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Retrieve a user's alert settings
-     * @param String email
-     * @return Map<String, Object>
+     * @param email
+     * @return Map Object
      * @throws IOException
-     * @see http://docs.sailthru.com/api/alert
      */
     public Map<String, Object> getAlert(String email) throws IOException {
         Map<String, Object> data = new HashMap<String, Object>();
@@ -358,10 +337,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Add a new alert to a user. You can add either a realtime or a summary alert (daily/weekly).
-     * @param Alert alert
-     * @return Map<String, Object>
+     * @param alert
+     * @return Map Object
      * @throws IOException
-     * @see http://docs.sailthru.com/api/alert
      */
     public Map<String, Object> saveAlert(Alert alert) throws IOException {
         return (Map<String, Object>)this.apiPost(alert);
@@ -369,11 +347,10 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Delete existing user alert
-     * @param String email
-     * @param String alertId
-     * @return Map<String, Object>
+     * @param email User Email
+     * @param alertId Alert ID
+     * @return Map Object
      * @throws IOException
-     * @see http://docs.sailthru.com/api/alert
      */
     public Map<String, Object> deleteAlert(String email, String alertId) throws IOException {
         Map<String, Object> data = new HashMap<String, Object>();
@@ -384,10 +361,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Record that a user has made a purchase, or has added items to their purchase total
-     * @param Purchase purchase
-     * @return Map<String, Object>
+     * @param purchase
+     * @return Map Object
      * @throws IOException
-     * @see http://docs.sailthru.com/api/purchase
      */
     public Map<String, Object> purchase(Purchase purchase) throws IOException {
         return (Map<String, Object>)this.apiPost(purchase);
@@ -395,10 +371,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Make stats API request
-     * @param Stats stats
-     * @return Map<String, Object>
+     * @param stats
+     * @return Map Object
      * @throws IOException
-     * @see http://docs.sailthru.com/api/stats
      */
     protected Map<String, Object> stats(Stats stats) throws IOException {
         return (Map<String, Object>)this.apiGet(stats);
@@ -406,10 +381,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * get list stats information
-     * @param ListStat stat
-     * @return Map<String, Object>
+     * @param stat
+     * @return Map Object
      * @throws IOException
-     * @see http://docs.sailthru.com/api/stats
      */
     public Map<String, Object> listStats(ListStat stat) throws IOException {
         return (Map<String, Object>)this.stats(stat);
@@ -417,10 +391,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * get blast stats information
-     * @param BlastStat stat
-     * @return Map<String, Object>
+     * @param stat
+     * @return Map Object
      * @throws IOException
-     * @see http://docs.sailthru.com/api/stats
      */
     public Map<String, Object> blastStats(BlastStat stat) throws IOException {
         return (Map<String, Object>)this.stats(stat);
@@ -429,9 +402,8 @@ public class SailthruClient extends AbstractSailthruClient {
     
     /**
      * Get status of a job
-     * @param String jobId
-     * @return Map<String, Object>
-     * @see http://docs.sailthru.com/api/job
+     * @param jobId
+     * @return Map Object
      * @throws IOException 
      */
     public Map<String, Object> getJobStatus(String jobId) throws IOException {
@@ -444,8 +416,7 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * Process import job from given email string CSV or file path of a CSV or email per line file
      * @param job
-     * @return Map<String, Object>
-     * @see http://docs.sailthru.com/api/job
+     * @return Map Object
      * @throws IOException 
      */
     public Map<String, Object> processImportJob(ImportJob job) throws IOException {
@@ -455,9 +426,8 @@ public class SailthruClient extends AbstractSailthruClient {
     
     /**
      * Query user data set and generate a detailed snapshot of their analytics similar to that shown in the Snapshot Report in the Sailthru interface.
-     * @param job
-     * @return Map<String, Object>
-     * @see http://docs.sailthru.com/api/job
+     * @param job SnapshotJob
+     * @return Map Object
      * @throws IOException 
      */
     public Map<String, Object> processSnapshotJob(SnapshotJob job) throws IOException {
@@ -467,9 +437,8 @@ public class SailthruClient extends AbstractSailthruClient {
     
     /**
      * Export blast data in CSV format
-     * @param job
-     * @return Map<String, Object>
-     * @see http://docs.sailthru.com/api/job
+     * @param job BlastQueryJob
+     * @return Map Object
      * @throws IOException 
      */
     public Map<String, Object> processBlastQueryJob(BlastQueryJob job) throws IOException {
@@ -479,9 +448,8 @@ public class SailthruClient extends AbstractSailthruClient {
     
     /**
      * Export user data from a list in CSV format
-     * @param job
-     * @return Map<String, Object>
-     * @see http://docs.sailthru.com/api/job
+     * @param job ExportListDataJob
+     * @return Map Object
      * @throws IOException 
      */
     public Map<String, Object> processExportListDataJob(ExportListDataJob job) throws IOException {
@@ -491,10 +459,10 @@ public class SailthruClient extends AbstractSailthruClient {
     
     /**
      * Perform a bulk update of any number of user profiles
-     * @param job
-     * @return Map<String, Object>
+     * For more information please visit http://docs.sailthru.com/api/job
+     * @param job UpdateJob
+     * @return Map Object
      * @throws IOException
-     * @see http://docs.sailthru.com/api/job
      */
     public Map<String, Object> processUpdateJob(UpdateJob job) throws IOException {
         return (Map<String, Object>)this.apiPost(job, job);

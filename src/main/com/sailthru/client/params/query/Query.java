@@ -7,7 +7,6 @@ import java.util.HashMap;
 
 /**
  * Map query builder parameters for API calls
- * @see http://docs.sailthru.com/api/query
  * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public class Query {
