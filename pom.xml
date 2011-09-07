@@ -45,8 +45,8 @@
   
   <scm>
     <url>git@github.com:sailthru/sailthru-java-client.git</url>
-    <connection>scm:git@github.com:sailthru/sailthru-java-client.git</connection>
-    <developerConnection>scm:git@github.com:sailthru/sailthru-java-client.git</developerConnection>
+    <connection>scm:gitgit:@github.com:sailthru/sailthru-java-client.git</connection>
+    <developerConnection>scm:git:git@github.com:sailthru/sailthru-java-client.git</developerConnection>
   </scm>
 
   <properties>
