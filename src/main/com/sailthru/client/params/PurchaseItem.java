@@ -38,10 +38,10 @@ public class PurchaseItem {
         return this;
     }
 
-    public Map<String, String> toHashMap() {
-        Gson gson = new Gson();
+    public Map<String, Object> toHashMap() {
+        Gson gson = SailthruUtil.createGson();
         String json = gson.toJson(this);
         JsonHandler handler = new JsonHandler();
-        return (Map<String, String>)handler.parseResponse(json);
+        return (Map<String, Object>)handler.parseResponse(json);
     }
 }

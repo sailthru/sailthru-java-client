@@ -6,6 +6,7 @@ import java.lang.reflect.Type;
 import java.net.URI;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -32,7 +33,7 @@ public class Blast extends AbstractApiParams implements ApiParams {
     protected Integer is_google_tracking;
     protected Integer is_public;
     protected String suppress_list;
-    protected HashMap<String, Object> test_vars;
+    protected Map<String, Object> test_vars;
     protected Integer email_hour_range;
     protected Integer abtest;
     protected Integer test_percent;
@@ -149,7 +150,7 @@ public class Blast extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-    public Blast setTestVars(HashMap<String, Object> testVars) {
+    public Blast setTestVars(Map<String, Object> testVars) {
         this.test_vars = testVars;
         return this;
     }

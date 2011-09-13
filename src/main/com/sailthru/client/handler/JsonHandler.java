@@ -8,6 +8,8 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import com.sailthru.client.SailthruUtil;
+
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -25,6 +27,7 @@ public class JsonHandler implements SailthruResponseHandler {
     @Override
     public Object parseResponse(String response) {
         GsonBuilder builder = new GsonBuilder();
+        builder.setDateFormat(SailthruUtil.SAILTHRU_API_DATE_FORMAT);
         builder.registerTypeAdapter(Object.class, new NaturalDeserializer());
         Gson gson = builder.create();
         return gson.fromJson(response, Object.class);

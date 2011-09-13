@@ -4,6 +4,7 @@ import com.google.gson.reflect.TypeToken;
 import com.sailthru.client.params.query.Query;
 import java.lang.reflect.Type;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -13,7 +14,7 @@ public class SnapshotJob extends Job {
     
     private static final String JOB = "snapshot";
     
-    protected HashMap<String, Object> query;
+    protected Map<String, Object> query;
     
     public SnapshotJob() {
         this.job = JOB;

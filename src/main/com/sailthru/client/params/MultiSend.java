@@ -5,6 +5,7 @@ import com.sailthru.client.SailthruUtil;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -12,18 +13,18 @@ import java.util.HashMap;
  */
 public class MultiSend extends Send {
 
-    protected HashMap<String, Object> evars;
+    protected Map<String, Object> evars;
 
     public MultiSend() {
         this.options = new HashMap<String, Object>();
     }
 
-    public MultiSend setEmails(ArrayList<String> emails) {
+    public MultiSend setEmails(java.util.List<String> emails) {
         this.email = SailthruUtil.arrayListToCSV(emails);        
         return this;
     }
 
-    public MultiSend setEvars(HashMap<String, Object> evars) {
+    public MultiSend setEvars(Map<String, Object> evars) {
         this.evars = evars;
         return this;
     }

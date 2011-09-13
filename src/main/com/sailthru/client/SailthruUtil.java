@@ -1,5 +1,7 @@
 package com.sailthru.client;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.apache.commons.codec.digest.DigestUtils;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -9,6 +11,8 @@ import java.util.List;
  * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public class SailthruUtil {
+
+    public static final String SAILTHRU_API_DATE_FORMAT = "EEE, d MMM yyyy HH:mm:ss Z";
 
     /**
      * generates MD5 Hash
@@ -41,5 +45,9 @@ public class SailthruUtil {
             return csv.substring(0, lastIndex);
         }
         return csv.toString();
+    }
+
+    public static Gson createGson() {
+        return new GsonBuilder().setDateFormat(SAILTHRU_API_DATE_FORMAT).create();
     }
 }

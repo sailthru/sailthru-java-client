@@ -5,6 +5,7 @@ import com.sailthru.client.ApiAction;
 import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -16,9 +17,9 @@ public class Send extends AbstractApiParams implements ApiParams {
     
     protected String template;
     protected String email;
-    protected HashMap<String, Object> vars;
+    protected Map<String, Object> vars;
     protected String schedule_time;
-    protected HashMap<String, Object> options;
+    protected Map<String, Object> options;
 
     public Send() {
         this.options = new HashMap<String, Object>();
@@ -44,7 +45,7 @@ public class Send extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-    public Send setVars(HashMap<String, Object> vars) {
+    public Send setVars(Map<String, Object> vars) {
         this.vars = vars;
         return this;
     }
@@ -69,7 +70,7 @@ public class Send extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-    public Send setOptions(HashMap<String, Object> options) {
+    public Send setOptions(Map<String, Object> options) {
         this.options = options;
         return this;
     }

@@ -20,7 +20,7 @@ public class List extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-    public List setEmails(ArrayList<String> emails) {
+    public List setEmails(java.util.List<String> emails) {
         this.emails = "";
         for (String email : emails) {
             this.emails += email + ",";

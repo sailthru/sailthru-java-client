@@ -5,6 +5,7 @@ import com.sailthru.client.ApiAction;
 import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -16,7 +17,7 @@ public class Content extends AbstractApiParams implements ApiParams {
 
     protected String date;
     protected String tags;
-    protected HashMap<String, Object> vars;
+    protected Map<String, Object> vars;
 
     @Override
     public ApiAction getApiCall() {
@@ -45,7 +46,7 @@ public class Content extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-    public Content setVars(HashMap<String, Object> vars) {
+    public Content setVars(Map<String, Object> vars) {
         this.vars = vars;
         return this;
     }

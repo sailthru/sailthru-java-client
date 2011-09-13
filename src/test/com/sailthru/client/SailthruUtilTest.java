@@ -16,14 +16,14 @@ public class SailthruUtilTest extends TestCase {
     }
     
     public void testArrayListToCSV() {
-        ArrayList<String> list1 = new ArrayList<String>();
+        java.util.List<String> list1 = new ArrayList<String>();
         list1.add("windows");
         list1.add("linux");
         list1.add("BSD");
         String expectedList1 = "windows,linux,BSD";
         assertEquals(expectedList1, SailthruUtil.arrayListToCSV(list1));
         
-        ArrayList<String> list2 = new ArrayList<String>();
+        java.util.List<String> list2 = new ArrayList<String>();
         list2.add("one_item");
         String expectedList2 = "one_item";
         assertEquals(expectedList2, SailthruUtil.arrayListToCSV(list2));

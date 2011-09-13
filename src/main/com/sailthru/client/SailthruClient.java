@@ -390,7 +390,7 @@ public class SailthruClient extends AbstractSailthruClient {
      * @throws IOException 
      */
     public JsonResponse getJobStatus(String jobId) throws IOException {
-        HashMap<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<String, Object>();
         params.put(Job.JOB_ID, jobId);
         return apiGet(ApiAction.job, params);
     }

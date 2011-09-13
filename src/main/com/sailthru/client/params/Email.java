@@ -16,12 +16,12 @@ public class Email extends AbstractApiParams implements ApiParams {
     protected Integer verified;
     protected String optout;
     
-    protected HashMap<String, Integer> lists;
-    protected HashMap<String, Integer> templates;
+    protected Map<String, Integer> lists;
+    protected Map<String, Integer> templates;
 
     protected String send;
-    protected HashMap<String, Object> send_vars;
-    protected HashMap<String, Object> vars;
+    protected Map<String, Object> send_vars;
+    protected Map<String, Object> vars;
 
     public Email() {
         this.vars = new HashMap<String, Object>();
@@ -45,7 +45,7 @@ public class Email extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-    public Email setLists(ArrayList<String> lists) {
+    public Email setLists(java.util.List<String> lists) {
         this.lists.clear();
         for (String list : lists) {
             this.lists.put(list, 1);
@@ -53,7 +53,7 @@ public class Email extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-    public Email setLists(HashMap<String, Integer> lists) {
+    public Email setLists(Map<String, Integer> lists) {
         this.lists.clear();
         for (Map.Entry<String, Integer> entry : lists.entrySet()) {
             String list = entry.getKey();
@@ -63,14 +63,14 @@ public class Email extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-    public Email setTemplates(ArrayList<String> templates) {
+    public Email setTemplates(java.util.List<String> templates) {
         for (String template : templates) {
             this.templates.put(template, 1);
         }
         return this;
     }
 
-    public Email setTemplates(HashMap<String, Integer> templates) {
+    public Email setTemplates(Map<String, Integer> templates) {
         this.templates = templates;
         return this;
     }
@@ -80,13 +80,13 @@ public class Email extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-    public Email setSendVars(HashMap<String, Object> sendVars) {
+    public Email setSendVars(Map<String, Object> sendVars) {
         this.send_vars = sendVars;
         return this;
     }
 
     @SuppressWarnings("unchecked")
-    public Email setVars(HashMap<String, Object> vars) {
+    public Email setVars(Map<String, Object> vars) {
         this.vars = vars;
         return this;
     }

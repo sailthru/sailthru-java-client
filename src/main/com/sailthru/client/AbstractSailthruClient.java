@@ -73,7 +73,7 @@ public abstract class AbstractSailthruClient {
         this.apiUrl = apiUrl;
         this.handler = new SailthruHandler(new JsonHandler());
         this.httpClient = create();
-        this.gson = new Gson();
+        this.gson = SailthruUtil.createGson();
     }
 
 

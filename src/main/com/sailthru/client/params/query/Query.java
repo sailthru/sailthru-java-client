@@ -2,8 +2,10 @@ package com.sailthru.client.params.query;
 
 import java.util.ArrayList;
 import com.google.gson.Gson;
+import com.sailthru.client.SailthruUtil;
 import com.sailthru.client.handler.JsonHandler;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Map query builder parameters for API calls
@@ -12,13 +14,13 @@ import java.util.HashMap;
 public class Query {
     protected String source_list;
     protected QueryMode query_mode;
-    protected ArrayList<String> criteria;
-    protected ArrayList<String> value;
-    protected ArrayList<Integer> engagement;
-    protected ArrayList<Integer> geo_frequency;
-    protected ArrayList<Integer> threshold;
-    protected ArrayList<String> timerange;
-    protected ArrayList<String> field;
+    protected java.util.List<String> criteria;
+    protected java.util.List<String> value;
+    protected java.util.List<Integer> engagement;
+    protected java.util.List<Integer> geo_frequency;
+    protected java.util.List<Integer> threshold;
+    protected java.util.List<String> timerange;
+    protected java.util.List<String> field;
     
     public Query() {
         this.criteria = new ArrayList<String>();
@@ -65,10 +67,10 @@ public class Query {
         return this;
     }
     
-    public HashMap<String, Object> toHashMap() {
-        Gson gson = new Gson();
+    public Map<String, Object> toHashMap() {
+        Gson gson = SailthruUtil.createGson();
         String json = gson.toJson(this);
         JsonHandler handler = new JsonHandler();
-        return (HashMap<String, Object>)handler.parseResponse(json);
+        return (Map<String, Object>)handler.parseResponse(json);
     }
 }

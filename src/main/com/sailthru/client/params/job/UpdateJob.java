@@ -24,8 +24,8 @@ public class UpdateJob extends Job implements ApiFileParams {
     protected String emails;
     protected String url;
     protected File file;
-    protected HashMap<String, Object> update;
-    protected HashMap<String, Object> query;
+    protected Map<String, Object> update;
+    protected Map<String, Object> query;
     
     public UpdateJob() {
         this.job = JOB;
@@ -58,7 +58,7 @@ public class UpdateJob extends Job implements ApiFileParams {
     }
     
     public UpdateJob setUpdate(Map<String, Object> update) {
-        this.update = (HashMap<String, Object>)update;
+        this.update = update;
         return this;
     }
     

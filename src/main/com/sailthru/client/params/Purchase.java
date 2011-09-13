@@ -2,6 +2,7 @@ package com.sailthru.client.params;
 
 import com.google.gson.reflect.TypeToken;
 import com.sailthru.client.ApiAction;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,7 +14,7 @@ import java.util.Map;
  */
 public class Purchase extends AbstractApiParams implements ApiParams {
     protected String email;
-    protected ArrayList<Map<String, String>> items;
+    protected java.util.List<Map<String, Object>> items;
     protected Integer incomplete;
     protected String message_id;
     protected String reminder_template;
@@ -24,8 +25,8 @@ public class Purchase extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-    public Purchase setItems(ArrayList<PurchaseItem> items) {
-        this.items = new ArrayList<Map<String, String>>();
+    public Purchase setItems(java.util.List<PurchaseItem> items) {
+        this.items = new ArrayList<Map<String, Object>>();
         for (PurchaseItem item : items) {
             this.items.add(item.toHashMap());
         }
