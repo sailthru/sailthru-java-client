@@ -3,7 +3,7 @@
 
   <groupId>com.sailthru.client</groupId>
   <artifactId>sailthru-java-client</artifactId>
-  <version>1.0</version>
+  <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>sailthru-java-client</name>
@@ -43,8 +43,8 @@
   </organization>
   
   <scm>
-    <url>git@github.com:sailthru/sailthru-java-client.git</url>
-    <connection>scm:gitgit:@github.com:sailthru/sailthru-java-client.git</connection>
+    <url>http://github.com/sailthru/sailthru-java-client.git</url>
+    <connection>scm:git:git@github.com:sailthru/sailthru-java-client.git</connection>
     <developerConnection>scm:git:git@github.com:sailthru/sailthru-java-client.git</developerConnection>
   </scm>
 
@@ -67,6 +67,7 @@
             <configuration>
                 <source>1.5</source>
                 <source>1.5</source>
+                <encoding>UTF-8</encoding>
             </configuration>
         </plugin>
         <plugin>
