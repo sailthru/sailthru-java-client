@@ -17,5 +17,6 @@ public enum ApiAction {
     horizon,
     job,
     trigger,
-    inbox
+    inbox,
+    user
 }
