@@ -19,7 +19,6 @@ import com.sailthru.client.params.job.Job;
 import com.sailthru.client.params.job.SnapshotJob;
 import com.sailthru.client.params.job.UpdateJob;
 import com.sailthru.client.params.User;
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 
 import java.io.IOException;
 import java.util.Date;
