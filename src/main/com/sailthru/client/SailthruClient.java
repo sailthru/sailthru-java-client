@@ -18,6 +18,8 @@ import com.sailthru.client.params.job.ExportListDataJob;
 import com.sailthru.client.params.job.Job;
 import com.sailthru.client.params.job.SnapshotJob;
 import com.sailthru.client.params.job.UpdateJob;
+import com.sailthru.client.params.User;
+import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 
 import java.io.IOException;
 import java.util.Date;
@@ -333,7 +335,7 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Delete existing user alert
-     * @param email User Email
+     * @param email User.java Email
      * @param alertId Alert ID
      * @throws IOException
      */
@@ -443,5 +445,13 @@ public class SailthruClient extends AbstractSailthruClient {
      */
     public JsonResponse processUpdateJob(UpdateJob job) throws IOException {
         return apiPost(job, job);
+    }
+
+    public JsonResponse getUser(User user) throws IOException {
+        return apiGet(user);
+    }
+
+    public JsonResponse saveUser(User user) throws IOException {
+        return apiPost(user);
     }
 }
