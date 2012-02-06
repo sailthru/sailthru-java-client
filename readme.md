@@ -7,6 +7,8 @@ By default, it will make request in `JSON` format.
 
 Javadocs: http://sailthru.github.com/sailthru-java-client/
 
+Examples: https://github.com/sailthru/sailthru-java-client/tree/master/examples
+
 Examples
 --------
 ``` java
