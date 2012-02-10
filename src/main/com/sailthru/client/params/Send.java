@@ -36,7 +36,7 @@ public class Send extends AbstractApiParams implements ApiParams {
     }
 
     public Send setReplyTo(String replyTo) {
-        this.options.put("replyTo", replyTo);
+        this.options.put("replyto", replyTo);
         return this;
     }
 

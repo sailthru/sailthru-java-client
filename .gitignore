@@ -11,3 +11,4 @@ lib
 .project
 .classpath
 .settings/
+*.swp

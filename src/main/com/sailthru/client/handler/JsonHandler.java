@@ -24,7 +24,7 @@ public class JsonHandler implements SailthruResponseHandler {
 
     public static final String format = "json";
 
-    @Override
+    
     public Object parseResponse(String response) {
         GsonBuilder builder = new GsonBuilder();
         builder.setDateFormat(SailthruUtil.SAILTHRU_API_DATE_FORMAT);
@@ -33,16 +33,15 @@ public class JsonHandler implements SailthruResponseHandler {
         return gson.fromJson(response, Object.class);
     }
 
-    @Override
+    
     public String getFormat() {
         return format;
     }
 
     // http://stackoverflow.com/questions/2779251/convert-json-to-hashmap-using-gson-in-java/4799594#4799594
     //Will get rid of this at some point
-    private class NaturalDeserializer implements JsonDeserializer<Object>  {
+    class NaturalDeserializer implements JsonDeserializer<Object>  {
 
-        @Override
         public Object deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) {
             if (json.isJsonNull()) {
                 return null;

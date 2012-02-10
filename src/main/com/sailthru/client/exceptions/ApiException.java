@@ -1,10 +1,6 @@
 package com.sailthru.client.exceptions;
 
-import java.io.DataInputStream;
-import java.io.EOFException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashMap;
 import java.util.Map;
 import org.apache.http.StatusLine;
 import org.slf4j.Logger;
@@ -17,14 +13,14 @@ import org.slf4j.LoggerFactory;
  */
 public class ApiException extends IOException {
 
-    private static Logger logger = LoggerFactory.getLogger(ApiException.class);
+    private static final Logger logger = LoggerFactory.getLogger(ApiException.class);
 
     private Map<String, Object> jsonResponse;
     private int statusCode;
 
     public ApiException(int statusCode, String reason, Object jsonResponse) {
         super(reason);
-        logger.info("{}: {}", statusCode, reason);
+        logger.warn("{}: {}", statusCode, reason);r
         this.jsonResponse = (Map<String, Object>)jsonResponse;
         this.statusCode = statusCode;
     }
