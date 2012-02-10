@@ -20,7 +20,7 @@ public class ApiException extends IOException {
 
     public ApiException(int statusCode, String reason, Object jsonResponse) {
         super(reason);
-        logger.warn("{}: {}", statusCode, reason);r
+        logger.warn("{}: {}", statusCode, reason);
         this.jsonResponse = (Map<String, Object>)jsonResponse;
         this.statusCode = statusCode;
     }
