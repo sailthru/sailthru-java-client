@@ -130,6 +130,12 @@
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>httpclient</artifactId>
         <version>4.1.1</version>
+        <exclusions>
+        	<exclusion>
+        		<artifactId>commons-logging</artifactId>
+        		<groupId>commons-logging</groupId>
+        	</exclusion>
+        </exclusions>
     </dependency>
 	
     <dependency>
@@ -142,12 +148,34 @@
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>httpmime</artifactId>
         <version>4.1</version>
+        <exclusions>
+        	<exclusion>
+        		<artifactId>commons-logging</artifactId>
+        		<groupId>commons-logging</groupId>
+        	</exclusion>
+        </exclusions>
     </dependency>
 
     <dependency>
-        <groupId>commons-logging</groupId>
-        <artifactId>commons-logging</artifactId>
-        <version>1.1.1</version>
+    	<groupId>org.slf4j</groupId>
+    	<artifactId>slf4j-api</artifactId>
+    	<version>1.6.4</version>
+    	<type>jar</type>
+    	<scope>compile</scope>
+    </dependency>
+    <dependency>
+    	<groupId>org.slf4j</groupId>
+    	<artifactId>jcl-over-slf4j</artifactId>
+    	<version>1.6.4</version>
+    	<type>jar</type>
+    	<scope>compile</scope>
+    </dependency>
+    <dependency>
+    	<groupId>org.slf4j</groupId>
+    	<artifactId>slf4j-simple</artifactId>
+    	<version>1.6.4</version>
+    	<type>jar</type>
+    	<scope>test</scope>
     </dependency>
   </dependencies>
   

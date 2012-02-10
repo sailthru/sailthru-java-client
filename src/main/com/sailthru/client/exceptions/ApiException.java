@@ -6,8 +6,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
 import org.apache.http.StatusLine;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
  * Handle API related Exceptions
@@ -15,14 +17,14 @@ import org.apache.http.StatusLine;
  */
 public class ApiException extends IOException {
 
-    private static Logger logger = Logger.getLogger(ApiException.class.getName());
+    private static Logger logger = LoggerFactory.getLogger(ApiException.class);
 
     private Map<String, Object> jsonResponse;
     private int statusCode;
 
     public ApiException(int statusCode, String reason, Object jsonResponse) {
         super(reason);
-        logger.info(String.format("%d: %s", statusCode, reason));
+        logger.info("{}: {}", statusCode, reason);
         this.jsonResponse = (Map<String, Object>)jsonResponse;
         this.statusCode = statusCode;
     }
