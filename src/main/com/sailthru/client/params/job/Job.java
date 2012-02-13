@@ -37,8 +37,7 @@ abstract public class Job extends AbstractApiParams implements ApiParams {
         this.job = job;
         return this;
     }
-    
-    @Override
+
     public ApiAction getApiCall() {
         return ApiAction.job;
     }
