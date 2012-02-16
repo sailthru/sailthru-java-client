@@ -16,6 +16,7 @@ public class User extends AbstractApiParams implements ApiParams {
     protected String key;
     protected Map<String, Object> fields;
     protected Map<String, String> keys;
+	protected String keysconflict;
     protected Map<String, Object> vars;
     protected Map<String, Integer> lists;
     protected String optout_email;
@@ -39,6 +40,11 @@ public class User extends AbstractApiParams implements ApiParams {
         this.keys = keys;
         return this;
     }
+
+	public User setKeysConflict(String keysConflict) {
+		this.keysconflict = keysConflict;
+		return this;
+	}
     
     public User setVars(Map<String, Object> vars) {
         this.vars = vars;
