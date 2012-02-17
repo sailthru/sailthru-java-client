@@ -59,6 +59,8 @@ public abstract class AbstractSailthruClient {
     private SailthruHandler handler;
 
     protected Gson gson;
+    
+    private Map<String, String> customHeaders = null;
 
 
     /**
@@ -91,7 +93,9 @@ public abstract class AbstractSailthruClient {
         schemeRegistry.register(getScheme());
 
         ThreadSafeClientConnManager connManager = new ThreadSafeClientConnManager(schemeRegistry);
-        return new SailthruHttpClient(connManager, params);
+        SailthruHttpClient sailthruHttpClient = new SailthruHttpClient(connManager, params);
+        //sailthruHttpClient.getParams().setParameter("http.protocol.X-Sailthru-Authorization", "xxx");
+        return sailthruHttpClient;
     }
 
     /**
@@ -139,7 +143,7 @@ public abstract class AbstractSailthruClient {
 
         Map<String, String> params = buildPayload(json);
 
-        return this.httpClient.executeHttpRequest(url, method, params, handler);
+        return this.httpClient.executeHttpRequest(url, method, params, handler, customHeaders);
     }
 
     /**
@@ -153,7 +157,7 @@ public abstract class AbstractSailthruClient {
         String url = this.apiUrl + "/" + apiParams.getApiCall().toString();
         String json = gson.toJson(apiParams, apiParams.getType());
         Map<String, String> params = buildPayload(json);
-        return this.httpClient.executeHttpRequest(url, method, params, handler);
+        return this.httpClient.executeHttpRequest(url, method, params, handler, customHeaders);
     }
     
     
@@ -169,7 +173,7 @@ public abstract class AbstractSailthruClient {
         String url = this.apiUrl + "/" + apiParams.getApiCall().toString();
         String json = gson.toJson(apiParams, apiParams.getType());
         Map<String, String> params = buildPayload(json);
-        return this.httpClient.executeHttpRequest(url, method, params, fileParams.getFileParams(), handler);
+        return this.httpClient.executeHttpRequest(url, method, params, fileParams.getFileParams(), handler, customHeaders);
     }
     
     
@@ -297,5 +301,9 @@ public abstract class AbstractSailthruClient {
      */
     public void setResponseHandler(SailthruResponseHandler responseHandler) {
         this.handler.setSailthruResponseHandler(responseHandler);
+    }
+    
+    public void setCustomHeaders(Map<String, String> headers) {
+        customHeaders = headers;
     }
 }

@@ -105,15 +105,30 @@ public class SailthruHttpClient extends DefaultHttpClient {
         return null;
     }
 
-    public Object executeHttpRequest(String urlString, HttpRequestMethod method, Map<String, String> params, ResponseHandler<Object> responseHandler)
+    public Object executeHttpRequest(String urlString, HttpRequestMethod method, Map<String, String> params, ResponseHandler<Object> responseHandler, Map<String, String> customHeaders)
             throws IOException {
         HttpUriRequest request = this.buildRequest(urlString, method, params);
+        if (customHeaders != null && customHeaders.size() > 0) {
+            for (Map.Entry<String, String> entry : customHeaders.entrySet()) {
+                final String key = entry.getKey();
+                final String value = entry.getValue();
+                request.setHeader(key, value);
+            }
+        }
+        
         return super.execute(request, responseHandler);
     }
     
-    public Object executeHttpRequest(String urlString, HttpRequestMethod method, Map<String, String> params, Map<String, File> fileParams, ResponseHandler<Object> responseHandler)
+    public Object executeHttpRequest(String urlString, HttpRequestMethod method, Map<String, String> params, Map<String, File> fileParams, ResponseHandler<Object> responseHandler, Map<String, String> customHeaders)
             throws IOException {
         HttpUriRequest request = this.buildRequest(urlString, method, params, fileParams);
+        if (customHeaders != null && customHeaders.size() > 0) {
+            for (Map.Entry<String, String> entry : customHeaders.entrySet()) {
+                final String key = entry.getKey();
+                final String value = entry.getValue();
+                request.setHeader(key, value);
+            }
+        }
         return super.execute(request, responseHandler);
     }
 
