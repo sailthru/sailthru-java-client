@@ -25,6 +25,10 @@ public class User extends AbstractApiParams implements ApiParams {
     public User(String id) {
         this.id = id;
     }
+
+    public User() {
+        // this will be used when new user_id is to be created
+    }
     
     public User setKey(String key) {
         this.key = key;
