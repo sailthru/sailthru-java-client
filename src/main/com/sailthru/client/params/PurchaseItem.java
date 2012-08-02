@@ -1,11 +1,13 @@
 package com.sailthru.client.params;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.sailthru.client.SailthruUtil;
 import com.sailthru.client.handler.JsonHandler;
-
-import java.util.Map;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -18,6 +20,7 @@ public class PurchaseItem {
     protected String id;
     protected String url;
     protected String tags;
+    protected List<Map<String, Object>> discounts;
     protected Map<String, Object> vars;
 
     public PurchaseItem(Integer qty, String title, Integer price, String id, String url) {
@@ -38,10 +41,20 @@ public class PurchaseItem {
         return this;
     }
 
+    public PurchaseItem setDiscounts(java.util.List<Discount> discounts) {
+        this.discounts = new ArrayList<Map<String, Object>>();
+        for (Discount discount : discounts) {
+            this.discounts.add(discount.toHashMap());
+        }
+        return this;
+    }
+
     public Map<String, Object> toHashMap() {
+        Type type = new TypeToken<PurchaseItem>() {}.getType();
         Gson gson = SailthruUtil.createGson();
-        String json = gson.toJson(this);
+        String json = gson.toJson(this, type);
         JsonHandler handler = new JsonHandler();
         return (Map<String, Object>)handler.parseResponse(json);
     }
+    
 }
