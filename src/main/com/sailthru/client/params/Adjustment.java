@@ -13,20 +13,10 @@ import java.util.Map;
  */
 public class Adjustment {
     protected String key;
-    protected String text;
     protected String amount;
 
-    public Adjustment(String key, String text, Integer amount) {
+    public Adjustment(String key, Integer amount) {
         this.key = key;
-        this.text = text;
         this.amount = amount.toString();
-    }
-
-    public Map<String, Object> toHashMap() {
-        Type type = new TypeToken<Adjustment>() {}.getType();
-        Gson gson = SailthruUtil.createGson();
-        String json = gson.toJson(this, type);
-        JsonHandler handler = new JsonHandler();
-        return (Map<String, Object>)handler.parseResponse(json);
     }
 }

@@ -6,6 +6,7 @@ import com.sailthru.client.SailthruUtil;
 import com.sailthru.client.handler.JsonHandler;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public class PurchaseItem {
     protected String id;
     protected String url;
     protected String tags;
-    protected List<Map<String, Object>> adjustments;
+    protected Map<String, Object> adjustments;
     protected Map<String, Object> vars;
 
     public PurchaseItem(Integer qty, String title, Integer price, String id, String url) {
@@ -42,9 +43,9 @@ public class PurchaseItem {
     }
 
     public PurchaseItem setAdjustments(java.util.List<Adjustment> adjustments) {
-        this.adjustments = new ArrayList<Map<String, Object>>();
+        this.adjustments = new HashMap<String, Object>();
         for (Adjustment adjustment : adjustments) {
-            this.adjustments.add(adjustment.toHashMap());
+            this.adjustments.put(adjustment.key, adjustment.amount);
         }
         return this;
     }

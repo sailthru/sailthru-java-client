@@ -5,6 +5,7 @@ import com.sailthru.client.ApiAction;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -14,8 +15,8 @@ import java.util.Map;
 public class Purchase extends AbstractApiParams implements ApiParams {
     protected String email;
     protected java.util.List<PurchaseItem> items;
-    protected java.util.List<Map<String, Object>> adjustments;
-    protected java.util.List<Map<String, Object>> tenders;
+    protected Map<String, Object> adjustments;
+    protected Map<String, Object> tenders;
     protected Integer incomplete;
     protected String message_id;
     protected String reminder_template;
@@ -34,17 +35,17 @@ public class Purchase extends AbstractApiParams implements ApiParams {
     }
 
     public Purchase setAdjustments(java.util.List<Adjustment> adjustments) {
-        this.adjustments = new ArrayList<Map<String, Object>>();
+        this.adjustments = new HashMap<String, Object>();
         for (Adjustment adjustment : adjustments) {
-            this.adjustments.add(adjustment.toHashMap());
+            this.adjustments.put(adjustment.key, adjustment.amount);
         }
         return this;
     }
 
     public Purchase setTenders(java.util.List<Tender> tenders) {
-        this.tenders = new ArrayList<Map<String, Object>>();
+        this.tenders = new HashMap<String, Object>();
         for (Tender tender : tenders) {
-            this.tenders.add(tender.toHashMap());
+            this.tenders.put(tender.key, tender.amount);
         }
         return this;
     }
