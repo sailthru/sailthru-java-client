@@ -20,7 +20,7 @@ public class PurchaseItem {
     protected String id;
     protected String url;
     protected String tags;
-    protected List<Map<String, Object>> discounts;
+    protected List<Map<String, Object>> adjustments;
     protected Map<String, Object> vars;
 
     public PurchaseItem(Integer qty, String title, Integer price, String id, String url) {
@@ -41,10 +41,10 @@ public class PurchaseItem {
         return this;
     }
 
-    public PurchaseItem setDiscounts(java.util.List<Discount> discounts) {
-        this.discounts = new ArrayList<Map<String, Object>>();
-        for (Discount discount : discounts) {
-            this.discounts.add(discount.toHashMap());
+    public PurchaseItem setAdjustments(java.util.List<Adjustment> adjustments) {
+        this.adjustments = new ArrayList<Map<String, Object>>();
+        for (Adjustment adjustment : adjustments) {
+            this.adjustments.add(adjustment.toHashMap());
         }
         return this;
     }

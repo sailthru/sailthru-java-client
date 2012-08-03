@@ -11,19 +11,19 @@ import java.util.Map;
  *
  * @author George Liao <gliao@sailthru.com>
  */
-public class Discount {
+public class Adjustment {
     protected String key;
     protected String text;
     protected String amount;
 
-    public Discount(String key, String text, Integer amount) {
+    public Adjustment(String key, String text, Integer amount) {
         this.key = key;
         this.text = text;
         this.amount = amount.toString();
     }
 
     public Map<String, Object> toHashMap() {
-        Type type = new TypeToken<Discount>() {}.getType();
+        Type type = new TypeToken<Adjustment>() {}.getType();
         Gson gson = SailthruUtil.createGson();
         String json = gson.toJson(this, type);
         JsonHandler handler = new JsonHandler();

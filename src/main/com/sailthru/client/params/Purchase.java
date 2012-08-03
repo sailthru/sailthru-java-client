@@ -14,7 +14,7 @@ import java.util.Map;
 public class Purchase extends AbstractApiParams implements ApiParams {
     protected String email;
     protected java.util.List<PurchaseItem> items;
-    protected java.util.List<Map<String, Object>> discounts;
+    protected java.util.List<Map<String, Object>> adjustments;
     protected java.util.List<Map<String, Object>> tenders;
     protected Integer incomplete;
     protected String message_id;
@@ -33,10 +33,10 @@ public class Purchase extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-    public Purchase setDiscounts(java.util.List<Discount> discounts) {
-        this.discounts = new ArrayList<Map<String, Object>>();
-        for (Discount discount : discounts) {
-            this.discounts.add(discount.toHashMap());
+    public Purchase setAdjustments(java.util.List<Adjustment> adjustments) {
+        this.adjustments = new ArrayList<Map<String, Object>>();
+        for (Adjustment adjustment : adjustments) {
+            this.adjustments.add(adjustment.toHashMap());
         }
         return this;
     }
