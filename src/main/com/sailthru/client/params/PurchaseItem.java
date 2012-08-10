@@ -21,7 +21,7 @@ public class PurchaseItem {
     protected String id;
     protected String url;
     protected String tags;
-    protected Map<String, Object> adjustments;
+    protected java.util.List<Adjustment> adjustments;
     protected Map<String, Object> vars;
 
     public PurchaseItem(Integer qty, String title, Integer price, String id, String url) {
@@ -43,10 +43,7 @@ public class PurchaseItem {
     }
 
     public PurchaseItem setAdjustments(java.util.List<Adjustment> adjustments) {
-        this.adjustments = new HashMap<String, Object>();
-        for (Adjustment adjustment : adjustments) {
-            this.adjustments.put(adjustment.key, adjustment.amount);
-        }
+        this.adjustments = adjustments;
         return this;
     }
 

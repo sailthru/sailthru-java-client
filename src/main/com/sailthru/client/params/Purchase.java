@@ -12,8 +12,8 @@ import java.util.*;
 public class Purchase extends AbstractApiParams implements ApiParams {
     protected String email;
     protected java.util.List<PurchaseItem> items;
-    protected Map<String, Object> adjustments;
-    protected Map<String, Object> tenders;
+    protected java.util.List<Adjustment> adjustments;
+    protected java.util.List<Tender> tenders;
     protected Integer incomplete;
     protected String message_id;
     protected String reminder_template;
@@ -33,18 +33,12 @@ public class Purchase extends AbstractApiParams implements ApiParams {
     }
 
     public Purchase setAdjustments(java.util.List<Adjustment> adjustments) {
-        this.adjustments = new HashMap<String, Object>();
-        for (Adjustment adjustment : adjustments) {
-            this.adjustments.put(adjustment.key, adjustment.amount);
-        }
+        this.adjustments = adjustments;
         return this;
     }
 
     public Purchase setTenders(java.util.List<Tender> tenders) {
-        this.tenders = new HashMap<String, Object>();
-        for (Tender tender : tenders) {
-            this.tenders.put(tender.key, tender.amount);
-        }
+        this.tenders = tenders;
         return this;
     }
 

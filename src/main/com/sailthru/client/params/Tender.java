@@ -1,8 +1,10 @@
 package com.sailthru.client.params;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.sailthru.client.SailthruUtil;
 import com.sailthru.client.handler.JsonHandler;
+import java.lang.reflect.Type;
 import java.util.Map;
 
 /**
@@ -10,11 +12,19 @@ import java.util.Map;
  * @author George Liao <gliao@sailthru.com>
  */
 public class Tender {
-    protected String key;
-    protected String amount;
+    protected String title;
+    protected String price;
 
-    public Tender(String key, Integer amount) {
-        this.key = key;
-        this.amount = amount.toString();
+    public Tender(String title, Integer price) {
+        this.title = title;
+        this.price = price.toString();
+    }
+
+    public Map<String, Object> toHashMap() {
+        Type type = new TypeToken<Tender>() {}.getType();
+        Gson gson = SailthruUtil.createGson();
+        String json = gson.toJson(this, type);
+        JsonHandler handler = new JsonHandler();
+        return (Map<String, Object>)handler.parseResponse(json);
     }
 }
