@@ -19,5 +19,5 @@ public enum ApiAction {
     trigger,
     inbox,
     user,
-    global_var
+    globalvars
 }

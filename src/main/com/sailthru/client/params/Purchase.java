@@ -87,6 +87,10 @@ public class Purchase extends AbstractApiParams implements ApiParams {
         return type;
     }
 
+    public java.util.List<PurchaseItem> getItems() {
+        return items;
+    }
+
     @Override
     public ApiAction getApiCall() {
         return ApiAction.purchase;

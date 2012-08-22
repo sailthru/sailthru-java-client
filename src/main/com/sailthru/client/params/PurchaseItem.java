@@ -15,7 +15,7 @@ import java.util.Map;
  * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public class PurchaseItem {
-    protected String qty;
+    protected Integer qty;
     protected String title;
     protected String price;
     protected String id;
@@ -25,7 +25,7 @@ public class PurchaseItem {
     protected Map<String, Object> vars;
 
     public PurchaseItem(Integer qty, String title, Integer price, String id, String url) {
-        this.qty = qty.toString();
+        this.qty = qty;
         this.title = title;
         this.price = price.toString();
         this.id = id;
@@ -53,6 +53,10 @@ public class PurchaseItem {
         String json = gson.toJson(this, type);
         JsonHandler handler = new JsonHandler();
         return (Map<String, Object>)handler.parseResponse(json);
+    }
+
+    public Integer getQty() {
+        return qty;
     }
     
 }
