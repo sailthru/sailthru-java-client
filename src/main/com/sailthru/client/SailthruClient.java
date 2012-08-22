@@ -161,8 +161,8 @@ public class SailthruClient extends AbstractSailthruClient {
      * @return JsonResponse
      * @throws IOException
      */
-    public Map<String, Object> scheduleBlast(Blast blast) throws IOException {
-        return (Map<String, Object>)this.apiPost(blast);
+    public JsonResponse scheduleBlast(Blast blast) throws IOException {
+        return apiPost(blast);
     }
 
     /**
