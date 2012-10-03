@@ -13,7 +13,7 @@ import java.util.Map;
  * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public class Blast extends AbstractApiParams implements ApiParams {
-    
+
     protected String name;
     protected String list;
     protected String schedule_time;
@@ -35,9 +35,10 @@ public class Blast extends AbstractApiParams implements ApiParams {
     protected String suppress_list;
     protected Map<String, Object> test_vars;
     protected Integer email_hour_range;
-    protected Integer abtest;
+    protected String abtest;
     protected Integer test_percent;
     protected String data_feed_url;
+    protected String abtest_winner_metric;
 
     public Blast(String name, String list, String scheduleTime, String fromName, String fromEmail, String subject, String contentHtml, String contentText) {
         this.name = name;
@@ -51,7 +52,7 @@ public class Blast extends AbstractApiParams implements ApiParams {
     }
 
     public Blast() {
-        
+
     }
 
     public Blast setName(String name) {
@@ -99,7 +100,7 @@ public class Blast extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-    
+
     public Blast setBlastId(Integer blastId) {
         this.blast_id = blastId;
         return this;
@@ -160,8 +161,8 @@ public class Blast extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-    public Blast enableABTest() {
-        this.abtest = 1;
+    public Blast setAbTest(String abTest) {
+        this.abtest = abTest;
         return this;
     }
 
@@ -184,9 +185,14 @@ public class Blast extends AbstractApiParams implements ApiParams {
         Type type = new TypeToken<Blast>() {}.getType();
         return type;
     }
-    
+
+    public Blast setAbtestWinnerMetric(String abtestWinnerMetric) {
+        this.abtest_winner_metric = abtestWinnerMetric;
+        return this;
+    }
+
     @Override
     public ApiAction getApiCall() {
-        return ApiAction.alert;
+        return ApiAction.blast;
     }
 }
