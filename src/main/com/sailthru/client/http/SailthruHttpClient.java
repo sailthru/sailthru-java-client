@@ -85,7 +85,7 @@ public class SailthruHttpClient extends DefaultHttpClient {
             case POST:
                 logger.info("Making HTTP POST Request with multipart");
                 HttpPost httpPost = new HttpPost(urlString);
-                MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE));
+                MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
                 for( Entry<String, String> entry : queryParams.entrySet() ) {
                     multipartEntity.addPart(entry.getKey(), new StringBody(entry.getValue()));
                 }
