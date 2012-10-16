@@ -23,7 +23,7 @@ public class UpdateJob extends Job implements ApiFileParams {
     
     protected String emails;
     protected String url;
-    protected File file;
+    protected transient File file;
     protected Map<String, Object> update;
     protected Map<String, Object> query;
     
