@@ -6,8 +6,8 @@ import java.lang.reflect.Type;
 import java.util.Map;
 
 /**
- * User params
- * @author Prajwal Tuladhar <praj@sailthru.com>
+ * Event params
+ * @author Ben Bartholomew <bbartholomew@sailthru.com>
  */
 public class Event extends AbstractApiParams implements ApiParams {
     protected String id;

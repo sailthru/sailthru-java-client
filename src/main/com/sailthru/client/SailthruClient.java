@@ -1,26 +1,8 @@
 package com.sailthru.client;
 
 import com.sailthru.client.handler.response.JsonResponse;
-import com.sailthru.client.params.Alert;
-import com.sailthru.client.params.Blast;
-import com.sailthru.client.params.BlastStat;
-import com.sailthru.client.params.Content;
-import com.sailthru.client.params.Email;
-import com.sailthru.client.params.Event;
-import com.sailthru.client.params.job.ImportJob;
-import com.sailthru.client.params.ListStat;
-import com.sailthru.client.params.MultiSend;
-import com.sailthru.client.params.Purchase;
-import com.sailthru.client.params.Send;
-import com.sailthru.client.params.Stats;
-import com.sailthru.client.params.Template;
-import com.sailthru.client.params.job.BlastQueryJob;
-import com.sailthru.client.params.job.ExportListDataJob;
-import com.sailthru.client.params.job.Job;
-import com.sailthru.client.params.job.SnapshotJob;
-import com.sailthru.client.params.job.UpdateJob;
-import com.sailthru.client.params.User;
-
+import com.sailthru.client.params.*;
+import com.sailthru.client.params.job.*;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
@@ -143,7 +125,13 @@ public class SailthruClient extends AbstractSailthruClient {
         data.put(Send.PARAM_SEND_ID, sendId);
         return apiDelete(ApiAction.send, data);
     }
-
+    
+    /**
+     * Cancel a send that was scheduled for a future time.
+     * @param data
+     * @return JsonResponse
+     * @throws IOException
+     */
     public JsonResponse cancelSend(Map<String, Object> data) throws IOException {
         return apiDelete(ApiAction.send, data);
     }
@@ -314,7 +302,12 @@ public class SailthruClient extends AbstractSailthruClient {
     public JsonResponse pushContent(Content content) throws IOException {
         return apiPost(content);
     }
-
+    
+    /**
+     * Push an event to Sailthru, triggering any applicable triggers.
+     * @param event
+     * @throws IOException
+     */
     public JsonResponse pushEvent(Event event) throws IOException {
         return apiPost(event);
     }
