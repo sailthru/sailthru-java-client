@@ -13,7 +13,7 @@ public class Event extends AbstractApiParams implements ApiParams {
     protected String id;
     protected String key;
     protected Map<String, Object> vars;
-    protected String name;
+    protected String event;
     
     public Event(String id) {
         this.id = id;
@@ -28,8 +28,8 @@ public class Event extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-    public Event setName(String name) {
-        this.name = name;
+    public Event setEvent(String eventName) {
+        this.event = eventName;
         return this;
     }
 
@@ -39,7 +39,7 @@ public class Event extends AbstractApiParams implements ApiParams {
     }
 
     public Type getType() {
-        java.lang.reflect.Type _type = new TypeToken<User>() {}.getType();
+        java.lang.reflect.Type _type = new TypeToken<Event>() {}.getType();
         return _type;
     }
 
