@@ -14,7 +14,8 @@ import java.util.Map;
 public class Send extends AbstractApiParams implements ApiParams {
     
     public static final String PARAM_SEND_ID = "send_id";
-    
+
+    protected String send_id; 
     protected String template;
     protected String email;
     protected Map<String, Object> vars;
@@ -24,6 +25,11 @@ public class Send extends AbstractApiParams implements ApiParams {
 
     public Send() {
         this.options = new HashMap<String, Object>();
+    }
+
+    public Send setSendId(String sendId) {
+        this.send_id = sendId;
+        return this;
     }
 
     public Send setEmail(String email) {
@@ -66,6 +72,10 @@ public class Send extends AbstractApiParams implements ApiParams {
         this.limit.put("name",name);
         this.limit.put("within_time",within_time);
         this.limit.put("conflict",conflict);
+        return this;
+    }
+    public Send setLimit(Map<String, Object> limit) {
+        this.limit = limit;
         return this;
     }
 
