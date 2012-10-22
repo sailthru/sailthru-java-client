@@ -30,6 +30,7 @@ public class Event extends AbstractApiParams implements ApiParams {
 
     public Event setName(String name) {
         this.name = name;
+        return this;
     }
 
     public Event setVars(Map<String, Object> vars) {
