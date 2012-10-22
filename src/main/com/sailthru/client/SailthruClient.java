@@ -128,12 +128,12 @@ public class SailthruClient extends AbstractSailthruClient {
     
     /**
      * Cancel a send that was scheduled for a future time.
-     * @param data
+     * @param send
      * @return JsonResponse
      * @throws IOException
      */
-    public JsonResponse cancelSend(Map<String, Object> data) throws IOException {
-        return apiDelete(ApiAction.send, data);
+    public JsonResponse cancelSend(Send send) throws IOException {
+        return apiDelete(send);
     }
 
     /**
