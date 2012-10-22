@@ -143,6 +143,10 @@ public class SailthruClient extends AbstractSailthruClient {
         return apiDelete(ApiAction.send, data);
     }
 
+    public JsonResponse cancelSend(Map<String, Object> data) throws IOException {
+        return apiDelete(ApiAction.send, data);
+    }
+
     /**
      * get information about a blast
      * @param blastId
@@ -308,6 +312,10 @@ public class SailthruClient extends AbstractSailthruClient {
      */
     public JsonResponse pushContent(Content content) throws IOException {
         return apiPost(content);
+    }
+
+    public JsonResponse pushEvent(Event event) throws IOException {
+        return apiPost(event);
     }
 
     /**
