@@ -6,6 +6,7 @@ import com.sailthru.client.params.Blast;
 import com.sailthru.client.params.BlastStat;
 import com.sailthru.client.params.Content;
 import com.sailthru.client.params.Email;
+import com.sailthru.client.params.Event;
 import com.sailthru.client.params.job.ImportJob;
 import com.sailthru.client.params.ListStat;
 import com.sailthru.client.params.MultiSend;
