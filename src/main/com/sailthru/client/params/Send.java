@@ -58,17 +58,20 @@ public class Send extends AbstractApiParams implements ApiParams {
     }
 
     public Send setLimit(String name) {
+        this.limit = new HashMap<String, Object>();
         this.limit.put("name",name);
         return this;
     }
 
     public Send setLimit(String name, String within_time) {
+        this.limit = new HashMap<String, Object>();
         this.limit.put("name",name);
         this.limit.put("within_time",within_time);
         return this;
     }
 
     public Send setLimit(String name, String within_time, String conflict) {
+        this.limit = new HashMap<String, Object>();
         this.limit.put("name",name);
         this.limit.put("within_time",within_time);
         this.limit.put("conflict",conflict);
