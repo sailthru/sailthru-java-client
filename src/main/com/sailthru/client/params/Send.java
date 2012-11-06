@@ -19,7 +19,7 @@ public class Send extends AbstractApiParams implements ApiParams {
     protected String template;
     protected String email;
     protected Map<String, Object> vars;
-    protected String schedule_time;
+    protected Object schedule_time;
     protected Map<String, Object> options;
     protected Map<String, Object> limit;
 
@@ -89,6 +89,36 @@ public class Send extends AbstractApiParams implements ApiParams {
 
     public Send setScheduleTime(String scheduleTime) {
         this.schedule_time = scheduleTime;
+        return this;
+    }
+
+    public Send setScheduleTime(Map<String, Object> scheduleTime) {
+        this.schedule_time = (Object) scheduleTime;
+        return this;
+    }
+
+    public Send setScheduleTime(Object startTime, Object endTime, String method) {
+        Map<String, Object> scheduleTime = new HashMap<String, Object>();
+        if (startTime instanceof String || startTime instanceof Number) {
+            scheduleTime.put("start_time", startTime);
+        }
+        if (endTime instanceof String || endTime instanceof Number) {
+            scheduleTime.put("end_time", endTime);
+        }
+        scheduleTime.put("method", method);
+        this.schedule_time = (Object) scheduleTime;
+        return this;
+    }
+
+    public Send setScheduleTime(Object startTime, Object endTime) {
+        Map<String, Object> scheduleTime = new HashMap<String, Object>();
+        if (startTime instanceof String || startTime instanceof Number) {
+            scheduleTime.put("start_time", startTime);
+        }
+        if (endTime instanceof String || endTime instanceof Number) {
+            scheduleTime.put("end_time", endTime);
+        }
+        this.schedule_time = (Object) scheduleTime;
         return this;
     }
 
