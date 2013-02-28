@@ -38,6 +38,7 @@ public class Blast extends AbstractApiParams implements ApiParams {
     protected Integer abtest;
     protected Integer test_percent;
     protected String data_feed_url;
+    protected String setup;
 
     public Blast(String name, String list, String scheduleTime, String fromName, String fromEmail, String subject, String contentHtml, String contentText) {
         this.name = name;
@@ -180,6 +181,11 @@ public class Blast extends AbstractApiParams implements ApiParams {
         return this;
     }
 
+    public Blast assignSetup(String setup) {
+      this.setup = setup;
+      return this;
+    }
+
     public Type getType() {
         Type type = new TypeToken<Blast>() {}.getType();
         return type;
@@ -187,6 +193,6 @@ public class Blast extends AbstractApiParams implements ApiParams {
     
     @Override
     public ApiAction getApiCall() {
-        return ApiAction.alert;
+        return ApiAction.blast;
     }
 }
