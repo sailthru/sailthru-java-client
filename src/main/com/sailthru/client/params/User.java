@@ -65,7 +65,7 @@ public class User extends AbstractApiParams implements ApiParams {
         return this;
     }
     
-    public User setLogin(Map login) {
+    public User setLogin(Map<String, Object> login) {
         this.login = login;
         return this;
     }
