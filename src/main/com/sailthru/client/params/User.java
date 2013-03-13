@@ -16,11 +16,11 @@ public class User extends AbstractApiParams implements ApiParams {
     protected String key;
     protected Map<String, Object> fields;
     protected Map<String, String> keys;
-	protected String keysconflict;
+    protected String keysconflict;
     protected Map<String, Object> vars;
     protected Map<String, Integer> lists;
     protected String optout_email;
-    protected Integer login;
+    protected Map<String, Object> login;
     
     public User(String id) {
         this.id = id;
@@ -45,10 +45,10 @@ public class User extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-	public User setKeysConflict(String keysConflict) {
-		this.keysconflict = keysConflict;
-		return this;
-	}
+    public User setKeysConflict(String keysConflict) {
+        this.keysconflict = keysConflict;
+        return this;
+    }
     
     public User setVars(Map<String, Object> vars) {
         this.vars = vars;
@@ -65,7 +65,7 @@ public class User extends AbstractApiParams implements ApiParams {
         return this;
     }
     
-    public User setLogin(Integer login) {
+    public User setLogin(Map login) {
         this.login = login;
         return this;
     }
