@@ -187,6 +187,6 @@ public class Blast extends AbstractApiParams implements ApiParams {
     
     @Override
     public ApiAction getApiCall() {
-        return ApiAction.alert;
+        return ApiAction.blast;
     }
 }
