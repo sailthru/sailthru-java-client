@@ -38,6 +38,7 @@ public class Blast extends AbstractApiParams implements ApiParams {
     protected Integer abtest;
     protected Integer test_percent;
     protected String data_feed_url;
+    protected String setup;
 
     public Blast(String name, String list, String scheduleTime, String fromName, String fromEmail, String subject, String contentHtml, String contentText) {
         this.name = name;
@@ -177,6 +178,11 @@ public class Blast extends AbstractApiParams implements ApiParams {
 
     public Blast setDataFeedUrl(URI dataFeedUrl) {
         this.data_feed_url = dataFeedUrl.toString();
+        return this;
+    }
+
+    public Blast setSetup(String setup) {
+        this.setup = setup;
         return this;
     }
 
