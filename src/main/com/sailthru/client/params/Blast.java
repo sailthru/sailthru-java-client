@@ -39,7 +39,10 @@ public class Blast extends AbstractApiParams implements ApiParams {
     protected Integer test_percent;
     protected String data_feed_url;
     protected String setup;
+<<<<<<< HEAD
     protected Map<String, Object> vars;
+=======
+>>>>>>> b52c11f90ce0732b17d63f3f682450ef27851bdd
 
     public Blast(String name, String list, String scheduleTime, String fromName, String fromEmail, String subject, String contentHtml, String contentText) {
         this.name = name;
@@ -187,11 +190,14 @@ public class Blast extends AbstractApiParams implements ApiParams {
         return this;
     }
 
+<<<<<<< HEAD
     public Blast setVars(Map<String, Object> vars){
         this.vars = vars;
         return this;
     }
 
+=======
+>>>>>>> b52c11f90ce0732b17d63f3f682450ef27851bdd
     public Type getType() {
         Type type = new TypeToken<Blast>() {}.getType();
         return type;
