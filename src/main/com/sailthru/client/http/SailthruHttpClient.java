@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.logging.Logger;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpDelete;
@@ -28,6 +27,8 @@ import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.ContentBody;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -35,7 +36,7 @@ import org.apache.http.entity.mime.content.StringBody;
  */
 public class SailthruHttpClient extends DefaultHttpClient {
 
-    protected static Logger logger = Logger.getLogger(SailthruHttpClient.class.getName());
+    protected static Logger logger = LoggerFactory.getLogger(SailthruHttpClient.class);
 
     public SailthruHttpClient(ThreadSafeClientConnManager connManager,
 			HttpParams params) {

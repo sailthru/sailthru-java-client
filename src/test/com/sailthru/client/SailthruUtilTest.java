@@ -2,15 +2,19 @@ package com.sailthru.client;
 
 import java.util.ArrayList;
 import junit.framework.TestCase;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author Prajwal Tuladhar <praj@sailthru.com> <praj@sailthru.com>
  */
 public class SailthruUtilTest extends TestCase {
+    protected static Logger log = LoggerFactory.getLogger(SailthruUtilTest.class);
     public void testMd5() {
         String plainText1 = "hello_world";
         String hash1 = SailthruUtil.md5(plainText1);
+        log.debug(hash1);
         String expectedHash1 = "99b1ff8f11781541f7f89f9bd41c4a17";
         assertEquals(hash1, expectedHash1);
     }

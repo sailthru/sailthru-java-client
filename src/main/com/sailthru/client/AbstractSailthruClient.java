@@ -20,8 +20,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.http.HttpVersion;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
@@ -31,14 +29,15 @@ import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * Abstract class exposing genric API calls for Sailthru API as per http://docs.sailthru.com/api
  * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public abstract class AbstractSailthruClient {
 
-    protected static final Logger logger = Logger.getLogger(AbstractSailthruClient.class.getName());
+    protected static final Logger logger = LoggerFactory.getLogger(AbstractSailthruClient.class);
 
     public static final String DEFAULT_API_URL = "https://api.sailthru.com";
     public static final int DEFAULT_HTTP_PORT = 80;
@@ -200,7 +199,7 @@ public abstract class AbstractSailthruClient {
         params.put("format", handler.getSailthruResponseHandler().getFormat());
         params.put("json", jsonPayload);
         params.put("sig", getSignatureHash(params));
-        logger.log(Level.INFO, "Params: {0}", params.toString());
+        logger.info("Params: {}", params.toString());
         return params;
     }
 
