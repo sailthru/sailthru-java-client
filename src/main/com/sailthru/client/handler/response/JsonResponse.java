@@ -1,7 +1,8 @@
 package com.sailthru.client.handler.response;
 
 import java.util.Map;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -12,13 +13,13 @@ public class JsonResponse implements Response {
     
     protected Map<String, Object> response = null;
     
-    private static final Logger logger = Logger.getLogger(JsonResponse.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(JsonResponse.class);
     
     public JsonResponse(Object response) {
         try {
             this.response = (Map<String, Object>) response;
         } catch (ClassCastException e) {
-            logger.severe(e.getMessage());
+            logger.error(e.getMessage());
         }
     }
 

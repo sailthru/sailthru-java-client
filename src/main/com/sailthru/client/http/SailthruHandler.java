@@ -5,13 +5,13 @@ import com.sailthru.client.exceptions.ResourceNotFoundException;
 import com.sailthru.client.exceptions.UnAuthorizedException;
 import com.sailthru.client.handler.SailthruResponseHandler;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -21,7 +21,7 @@ public class SailthruHandler implements ResponseHandler<Object> {
 
     private SailthruResponseHandler handler;
 
-    private static final Logger logger = Logger.getLogger(SailthruHandler.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(SailthruHandler.class);
 
     /* Supported HTTP Status codes */
     public static final int STATUS_OK = 200;
@@ -38,7 +38,7 @@ public class SailthruHandler implements ResponseHandler<Object> {
     }
 
     public Object handleResponse(HttpResponse httpResponse) throws ClientProtocolException, IOException {
-        logger.log(Level.INFO, "Received Response: {0}", httpResponse.toString());
+        logger.debug("Received Response: {}", httpResponse.toString());
 
         StatusLine statusLine = httpResponse.getStatusLine();
         int statusCode = statusLine.getStatusCode();
