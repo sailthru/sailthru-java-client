@@ -199,7 +199,7 @@ public abstract class AbstractSailthruClient {
         params.put("format", handler.getSailthruResponseHandler().getFormat());
         params.put("json", jsonPayload);
         params.put("sig", getSignatureHash(params));
-        logger.info("Params: {}", params.toString());
+        logger.debug("Params: {}", params.toString());
         return params;
     }
 
