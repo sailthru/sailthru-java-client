@@ -38,7 +38,7 @@ public class SailthruHandler implements ResponseHandler<Object> {
     }
 
     public Object handleResponse(HttpResponse httpResponse) throws ClientProtocolException, IOException {
-        logger.info("Received Response: {}", httpResponse.toString());
+        logger.debug("Received Response: {}", httpResponse.toString());
 
         StatusLine statusLine = httpResponse.getStatusLine();
         int statusCode = statusLine.getStatusCode();
