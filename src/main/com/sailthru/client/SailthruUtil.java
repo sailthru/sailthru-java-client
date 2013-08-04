@@ -48,6 +48,6 @@ public class SailthruUtil {
     }
 
     public static Gson createGson() {
-        return new GsonBuilder().setDateFormat(SAILTHRU_API_DATE_FORMAT).create();
+        return new GsonBuilder().setDateFormat(SAILTHRU_API_DATE_FORMAT).serializeNulls().create();
     }
 }
