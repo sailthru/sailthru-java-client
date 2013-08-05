@@ -11,11 +11,11 @@ import java.util.Map;
  * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public abstract class AbstractApiParams {
-    public Map<String, Object> toHashMap() {
-        Gson gson = SailthruUtil.createGson();
-        String json = gson.toJson(this);
-        JsonHandler handler = new JsonHandler();
-        return (Map<String, Object>)handler.parseResponse(json);
-    }
+//    public Map<String, Object> toHashMap() {
+//        Gson gson = SailthruUtil.createGson();
+//        String json = gson.toJson(this);
+//        JsonHandler handler = new JsonHandler();
+//        return (Map<String, Object>)handler.parseResponse(json);
+//    }
     
 }

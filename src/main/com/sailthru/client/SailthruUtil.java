@@ -2,9 +2,17 @@ package com.sailthru.client;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSerializer;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import com.google.gson.stream.JsonToken;
+import com.sailthru.client.params.ApiParams;
 import org.apache.commons.codec.digest.DigestUtils;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.io.IOException;
+import java.util.Map;
 
 /**
  * few static utility methods
@@ -48,6 +56,7 @@ public class SailthruUtil {
     }
 
     public static Gson createGson() {
-        return new GsonBuilder().setDateFormat(SAILTHRU_API_DATE_FORMAT).serializeNulls().create();
+        //return new GsonBuilder().setDateFormat(SAILTHRU_API_DATE_FORMAT).s.create();
+        return new GsonBuilder().setDateFormat(SAILTHRU_API_DATE_FORMAT).registerTypeAdapter(Map.class, new NullSerializingMapSerializer()).create();
     }
 }
