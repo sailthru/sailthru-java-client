@@ -11,13 +11,6 @@ import java.lang.reflect.Type;
 import java.util.Map;
 
 
-/**
- * Created with IntelliJ IDEA.
- * User: dennisyu
- * Date: 8/5/13
- * Time: 4:41 PM
- * To change this template use File | Settings | File Templates.
- */
 public class NullSerializingMapSerializer implements JsonSerializer<Map> {
     private static final Gson gson = (new GsonBuilder()).serializeNulls().create();
     public JsonElement serialize(Map map, Type typeOfSrc, JsonSerializationContext context) {
