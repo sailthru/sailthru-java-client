@@ -56,7 +56,6 @@ public class SailthruUtil {
     }
 
     public static Gson createGson() {
-        //return new GsonBuilder().setDateFormat(SAILTHRU_API_DATE_FORMAT).s.create();
         return new GsonBuilder().setDateFormat(SAILTHRU_API_DATE_FORMAT).registerTypeAdapter(Map.class, new NullSerializingMapSerializer()).create();
     }
 }
