@@ -17,6 +17,6 @@ public class NullSerializingMapSerializer implements JsonSerializer<Map> {
         if(map == null) {
             return JsonNull.INSTANCE;
         }
-        return new JsonPrimitive(gson.toJson(map));
+        return gson.toJsonTree(map);
     }
 }
