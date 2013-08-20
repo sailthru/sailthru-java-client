@@ -35,10 +35,10 @@ import java.util.Map;
  *
  * @author ianwhite
  */
-public class NullSerializingMapTypeAdapter extends TypeAdapter<Map> {
+public class NullSerializingMapTypeAdapter extends TypeAdapter<Map<String, ?>> {
     final Gson gson = new GsonBuilder().serializeNulls().create();
     
-    public void write(JsonWriter writer, Map map) throws IOException {
+    public void write(JsonWriter writer, Map<String, ?> map) throws IOException {
         if (map == null) {
             writer.nullValue();
         } else {
@@ -47,7 +47,7 @@ public class NullSerializingMapTypeAdapter extends TypeAdapter<Map> {
     }
 
     @Override
-    public Map read(JsonReader reader) throws IOException {
+    public Map<String, ?> read(JsonReader reader) throws IOException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }
