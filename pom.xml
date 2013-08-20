@@ -3,7 +3,7 @@
 
   <groupId>com.sailthru.client</groupId>
   <artifactId>sailthru-java-client</artifactId>
-  <version>1.3-SNAPSHOT</version>
+  <version>1.3.0</version>
   <packaging>jar</packaging>
 
   <name>sailthru-java-client</name>
