@@ -6,6 +6,8 @@ import junit.framework.TestCase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.util.Map;
 
 /**
  *
@@ -51,7 +53,7 @@ public class SailthruUtilTest extends TestCase {
         java.util.Map<String, Object> map3 = new HashMap<String, Object>();
         map3.put("var1",null);
         map3.put("var2","value2");
-        String expectedmap3 = "{\"var2\":\"value2\"}";
+        String expectedmap3 = "{\"var1\":null,\"var2\":\"value2\"}";
         assertEquals(expectedmap3, gson.toJson(map3));
 
         java.util.Map<String, Object> map4 = new HashMap<String, Object>();
@@ -61,7 +63,18 @@ public class SailthruUtilTest extends TestCase {
         java.util.Map<String, Object> map6 = new HashMap<String, Object>();
         map6.put("var2","value2");
         map4.put("var2",map6);
-        String expectedmap4 = "{\"var1\":{},\"var2\":{\"var2\":\"value2\"}}";
+        String expectedmap4 = "{\"var1\":{\"var1\":null},\"var2\":{\"var2\":\"value2\"}}";
         assertEquals(expectedmap4, gson.toJson(map4));
+    }
+    
+    public void testGsonNull() {
+        gson = SailthruUtil.createGson();
+        Map map = new HashMap();
+        map.put("baz", null);
+        
+        String expected = "{\"baz\":null}";
+        String result = gson.toJson(map);
+        
+        assertEquals(expected, result);
     }
 }
