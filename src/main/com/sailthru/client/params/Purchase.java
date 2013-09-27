@@ -7,6 +7,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
+import java.util.List;
 
 /**
  *
@@ -19,7 +20,7 @@ public class Purchase extends AbstractApiParams implements ApiParams {
     protected String message_id;
     protected String reminder_template;
     protected String reminder_time;
-    protected String send_template;
+    protected String sendTemplate;
     protected java.util.List<Map<String, Object>> tenders;
     protected java.util.List<Map<String, Object>> adjustments;
     protected Map<String, Object> vars;
@@ -37,12 +38,12 @@ public class Purchase extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-    public Purchase setTenders(java.util.List<Map<String, Object>> tenders) {
+    public Purchase setTenders(List<Map<String, Object>> tenders) {
         this.tenders = tenders;
         return this;
     }
 
-    public Purchase setAdjustments(java.util.List<Map<String, Object>> adjustments) {
+    public Purchase setAdjustments(List<Map<String, Object>> adjustments) {
         this.adjustments = adjustments;
         return this;
     }
@@ -73,7 +74,7 @@ public class Purchase extends AbstractApiParams implements ApiParams {
     }
 
     public Purchase setSendTemplate(String sendTemplate) {
-        this.send_template = sendTemplate;
+        this.sendTemplate = sendTemplate;
         return this;
     }
 
