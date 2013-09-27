@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+
 public class PurchaseTest extends TestCase {
     Gson gson = SailthruUtil.createGson();
 
@@ -28,7 +29,7 @@ public class PurchaseTest extends TestCase {
         Map<String, Object> adjustmentItem = new HashMap<String, Object>();
         adjustmentItem.put("title", "bar");
         adjustmentItem.put("price", 1000);
-        java.util.ArrayList adjustments = new ArrayList();
+        ArrayList adjustments = new ArrayList();
         adjustments.add(adjustmentItem);
 
         Purchase purchase = new Purchase();
@@ -43,7 +44,7 @@ public class PurchaseTest extends TestCase {
         Map<String, Object> TenderItem = new HashMap<String, Object>();
         TenderItem.put("title", "bar");
         TenderItem.put("price", 1000);
-        java.util.ArrayList tenders = new ArrayList();
+        ArrayList tenders = new ArrayList();
         tenders.add(TenderItem);
 
         Purchase purchase = new Purchase();

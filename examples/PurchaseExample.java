@@ -5,8 +5,10 @@ import com.sailthru.client.handler.response.JsonResponse;
 import com.sailthru.client.params.Purchase;
 import com.sailthru.client.params.PurchaseItem;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import.java.util.List;
 
 public class SendExample {
     public static void main(String[] args) {
@@ -17,21 +19,21 @@ public class SendExample {
             try {
                 Purchase purchase = new Purchase();
                 PurchaseItem firstpurchaseitem = new PurchaseItem(1, "example purchase item", 1999, "example id", "http://www.sailthru.com/example/purchase/url");
-                java.util.List<PurchaseItem> items = new ArrayList<PurchaseItem>();
+                List<PurchaseItem> items = new ArrayList<PurchaseItem>();
                 items.add(firstpurchaseitem);
                 purchase.setItems(items);
 
                 Map<String, Object> adjustmentItem = new HashMap<String, Object>();
                 adjustmentItem.put("title", "bar");
                 adjustmentItem.put("price", 1000);
-                java.util.ArrayList adjustments = new ArrayList();
+                ArrayList adjustments = new ArrayList();
                 adjustments.add(adjustmentItem);
                 purchase.setAdjustments(adjustments);
 
                 Map<String, Object> TenderItem = new HashMap<String, Object>();
                 TenderItem.put("title", "bar");
                 TenderItem.put("price", 1000);
-                java.util.ArrayList tenders = new ArrayList();
+                ArrayList tenders = new ArrayList();
                 tenders.add(TenderItem);
                 purchase.setTenders(tenders);
 
