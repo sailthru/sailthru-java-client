@@ -20,7 +20,7 @@ public class Purchase extends AbstractApiParams implements ApiParams {
     protected String message_id;
     protected String reminder_template;
     protected String reminder_time;
-    protected String sendTemplate;
+    protected String send_template;
     protected java.util.List<Map<String, Object>> tenders;
     protected java.util.List<Map<String, Object>> adjustments;
     protected Map<String, Object> vars;
@@ -73,8 +73,8 @@ public class Purchase extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-    public Purchase setSendTemplate(String sendTemplate) {
-        this.sendTemplate = sendTemplate;
+    public Purchase setSendTemplate(String send_template) {
+        this.send_template = sendTemplate;
         return this;
     }
 
