@@ -9,13 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-/**
- * Created with IntelliJ IDEA.
- * User: dennisyu
- * Date: 9/27/13
- * Time: 2:33 PM
- * To change this template use File | Settings | File Templates.
- */
 public class PurchaseTest extends TestCase {
     Gson gson = SailthruUtil.createGson();
 
