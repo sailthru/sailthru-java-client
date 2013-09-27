@@ -73,7 +73,7 @@ public class Purchase extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-    public Purchase setSendTemplate(String send_template) {
+    public Purchase setSendTemplate(String sendTemplate) {
         this.send_template = sendTemplate;
         return this;
     }
