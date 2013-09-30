@@ -18,14 +18,19 @@ public class Purchase extends AbstractApiParams implements ApiParams {
     protected String email;
     protected List<Map<String, Object>> items;
     protected Integer incomplete;
+
     @SerializedName("message_id")
     protected String messageId;
+
     @SerializedName("reminder_template")
     protected String reminderTemplate;
+
     @SerializedName("reminder_time")
     protected String reminderTime;
+
     @SerializedName("send_template")
     protected String sendTemplate;
+
     protected List<Map<String, Object>> tenders;
     protected List<Map<String, Object>> adjustments;
     protected Map<String, Object> vars;
