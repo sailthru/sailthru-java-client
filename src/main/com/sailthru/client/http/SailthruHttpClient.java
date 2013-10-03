@@ -36,8 +36,6 @@ import org.slf4j.LoggerFactory;
  */
 public class SailthruHttpClient extends DefaultHttpClient {
 
-    protected static Logger logger = LoggerFactory.getLogger(SailthruHttpClient.class);
-
     public SailthruHttpClient(ThreadSafeClientConnManager connManager,
 			HttpParams params) {
         super(connManager, params);
@@ -52,18 +50,15 @@ public class SailthruHttpClient extends DefaultHttpClient {
 
         switch(method) {
             case GET:
-                logger.info("Making HTTP GET Request");
                 HttpGet httpRequest = new HttpGet(urlString + "?" + extractQueryString(nameValuePairs));
                 return httpRequest;
 
             case POST:
-                logger.info("Making HTTP POST Request");
                 HttpPost httpPost = new HttpPost(urlString);
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs, SailthruClient.DEFAULT_ENCODING));
                 return httpPost;
 
             case DELETE:
-                logger.info("Making HTTP DELETE Request");
                 HttpDelete httpDelete = new HttpDelete(urlString + "?" + extractQueryString(nameValuePairs));
                 return httpDelete;
         }
@@ -79,12 +74,10 @@ public class SailthruHttpClient extends DefaultHttpClient {
 
         switch(method) {
             case GET:
-                logger.info("Making HTTP GET Request");
                 HttpGet httpRequest = new HttpGet(urlString + "?" + extractQueryString(nameValuePairs));
                 return httpRequest;
 
             case POST:
-                logger.info("Making HTTP POST Request with multipart");
                 HttpPost httpPost = new HttpPost(urlString);
                 MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
                 for( Entry<String, String> entry : queryParams.entrySet() ) {
@@ -99,7 +92,6 @@ public class SailthruHttpClient extends DefaultHttpClient {
                 return httpPost;
 
             case DELETE:
-                logger.info("Making HTTP DELETE Request");
                 HttpDelete httpDelete = new HttpDelete(urlString + "?" + extractQueryString(nameValuePairs));
                 return httpDelete;
         }
