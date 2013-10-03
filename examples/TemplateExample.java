@@ -7,15 +7,19 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SendExample {
+public class TemplateExample {
     public static void main(String[] args) {
         String apiKey = "****";
         String apiSecret = "****";
         SailthruClient client = new SailthruClient(apiKey, apiSecret);
         try {
-            Send send = new Send();
-            send.setTemplate("my-template");
-            send.setEmail("praj@sailthru.com");
+            Template template = new Template();
+            template.setTemplate("my-template");
+            template.setFromEmail("no-reply@example.com");
+            template.setFromName("Example Example");
+            template.setSubject("Hello {name}!");
+            template.setContentHtml("HTML content goes here");
+            template.setContentText("Text content goes here");
 
             Map<String, Object> vars = new HashMap<String, Object>();
             vars.put("name", "Prajwal Tuladhar");
@@ -24,22 +28,17 @@ public class SendExample {
             addressVars.put("city", "Jackson Heights");
             addressVars.put("zip", "11372");
             vars.put("address", addressVars);
-            
-            send.setVars(vars);
 
-            send.setScheduleTime("+10 hours");
-            Map<String, Object> options = new HashMap<String, Object>();
-            options.put("behalf_email", "user@example.com");
-            options.put("test", 1);
-            
-            send.setOptions(options);
-            
-            JsonResponse response = client.send(send);
+            template.setVars(vars);
+
+            JsonResponse response = client.saveTemplate(template);
+
             if (response.isOK()) {
                 System.out.println(response.getResponse());
             } else {
                 System.out.println(response.getResponse().get("error").toString());
             }
+
         } catch (ApiException e) {
             // handle exception
         } catch (IOException e) {
