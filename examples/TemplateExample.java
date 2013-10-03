@@ -21,15 +21,6 @@ public class TemplateExample {
             template.setContentHtml("HTML content goes here");
             template.setContentText("Text content goes here");
 
-            Map<String, Object> vars = new HashMap<String, Object>();
-            vars.put("name", "Prajwal Tuladhar");
-            Map<String, String> addressVars = new HashMap<String, String>();
-            addressVars.put("state", "NY");
-            addressVars.put("city", "Jackson Heights");
-            addressVars.put("zip", "11372");
-            vars.put("address", addressVars);
-
-            template.setVars(vars);
 
             JsonResponse response = client.saveTemplate(template);
 
