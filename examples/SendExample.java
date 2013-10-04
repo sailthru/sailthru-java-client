@@ -13,14 +13,10 @@ public class SendExample {
         String apiSecret = "****";
         SailthruClient client = new SailthruClient(apiKey, apiSecret);
         try {
-            Template template = new Template();
-            template.setTemplate("my-template");
-            template.setFromEmail("no-reply@example.com");
-            template.setFromName("Example Example");
-            template.setSubject("Hello {name}!");
-            template.setContentHtml("HTML content goes here");
-            template.setContentText("Text content goes here");
-            
+            Send send = new Send();
+            send.setTemplate("my-template");
+            send.setEmail("praj@sailthru.com");
+
             Map<String, Object> vars = new HashMap<String, Object>();
             vars.put("name", "Prajwal Tuladhar");
             Map<String, String> addressVars = new HashMap<String, String>();
@@ -29,10 +25,16 @@ public class SendExample {
             addressVars.put("zip", "11372");
             vars.put("address", addressVars);
 
-            template.setVars(vars);
+            send.setVars(vars);
 
-            JsonResponse response = client.saveTemplate(template);
-            
+            send.setScheduleTime("+10 hours");
+            Map<String, Object> options = new HashMap<String, Object>();
+            options.put("behalf_email", "user@example.com");
+            options.put("test", 1);
+
+            send.setOptions(options);
+
+            JsonResponse response = client.send(send);
             if (response.isOK()) {
                 System.out.println(response.getResponse());
             } else {
