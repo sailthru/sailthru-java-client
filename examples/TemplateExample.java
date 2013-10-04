@@ -21,7 +21,6 @@ public class TemplateExample {
             template.setContentHtml("HTML content goes here");
             template.setContentText("Text content goes here");
 
-
             JsonResponse response = client.saveTemplate(template);
 
             if (response.isOK()) {
@@ -29,7 +28,6 @@ public class TemplateExample {
             } else {
                 System.out.println(response.getResponse().get("error").toString());
             }
-
         } catch (ApiException e) {
             // handle exception
         } catch (IOException e) {
