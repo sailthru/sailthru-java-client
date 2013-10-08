@@ -34,16 +34,88 @@ import junit.framework.TestCase;
  * @author ianwhite
  */
 public class UserTest extends TestCase {
+    public Gson gson = SailthruUtil.createGson();
+    public User user = new User();
+
     public void testSerializationNull() {
         Map<String, Object> vars = new HashMap<String, Object>();
         vars.put("baz", null);
-        
-        User user = new User();
+
         user.setVars(vars);
         
-        Gson gson = SailthruUtil.createGson();
-        
         String expected = "{\"vars\":{\"baz\":null}}";
+        String result = gson.toJson(user);
+        assertEquals(expected, result);
+    }
+
+    public void testSetId() {
+        User user = new User("foo@bar.com");
+
+        String expected = "{\"id\":\"foo@bar.com\"}";
+        String result = gson.toJson(user);
+        assertEquals(expected, result);
+    }
+
+    public void testSetKey() {
+        user.setKey("email");
+
+        String expected = "{\"key\":\"email\"}";
+        String result = gson.toJson(user);
+        assertEquals(expected, result);
+    }
+
+    public void testSetFields() {
+        Map<String, Object> fields = new HashMap<String, Object>();
+        fields.put("keys", 1);
+        user.setFields(fields);
+
+        String expected = "{\"fields\":{\"keys\":1}}";
+        String result = gson.toJson(user);
+        assertEquals(expected, result);
+    }
+
+    public void testSetKeys() {
+        Map<String, String> keys = new HashMap<String, String>();
+        keys.put("email", "foo@bar.com");
+        user.setKeys(keys);
+
+        String expected = "{\"keys\":{\"email\":\"foo@bar.com\"}}";
+        String result = gson.toJson(user);
+        assertEquals(expected, result);
+    }
+
+    public void testSetKeysConflict() {
+        user.setKeysConflict("error");
+
+        String expected = "{\"keysconflict\":\"error\"}";
+        String result = gson.toJson(user);
+        assertEquals(expected, result);
+    }
+
+    public void testSetLists() {
+        Map<String, Integer> lists = new HashMap<String, Integer>();
+        lists.put("test list", 1);
+        user.setLists(lists);
+
+        String expected = "{\"lists\":{\"test list\":1}}";
+        String result = gson.toJson(user);
+        assertEquals(expected, result);
+    }
+
+    public void testSetOptoutEmail() {
+        user.setOptoutEmail("none");
+
+        String expected = "{\"optout_email\":\"none\"}";
+        String result = gson.toJson(user);
+        assertEquals(expected, result);
+    }
+
+    public void testSetLogin() {
+        Map<String, Object> login = new HashMap<String, Object>();
+        login.put("ip", "123.456.789.0");
+        user.setLogin(login);
+
+        String expected = "{\"login\":{\"ip\":\"123.456.789.0\"}}";
         String result = gson.toJson(user);
         assertEquals(expected, result);
     }
