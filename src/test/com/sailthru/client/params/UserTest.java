@@ -34,8 +34,8 @@ import junit.framework.TestCase;
  * @author ianwhite
  */
 public class UserTest extends TestCase {
-    public Gson gson = SailthruUtil.createGson();
-    public User user = new User();
+    private Gson gson = SailthruUtil.createGson();
+    private User user = new User();
 
     public void testSerializationNull() {
         Map<String, Object> vars = new HashMap<String, Object>();
