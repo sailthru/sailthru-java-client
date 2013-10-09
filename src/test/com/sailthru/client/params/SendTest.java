@@ -31,14 +31,6 @@ import java.util.HashMap;
 import java.util.Map;
 import junit.framework.TestCase;
 
-
-/**
- * Created with IntelliJ IDEA.
- * User: dennisyu
- * Date: 10/9/13
- * Time: 3:43 PM
- * To change this template use File | Settings | File Templates.
- */
 public class SendTest extends TestCase {
     private Gson gson = SailthruUtil.createGson();
     private Send send = new Send();
