@@ -34,7 +34,7 @@ import junit.framework.TestCase;
 public class SendTest extends TestCase {
     private Gson gson = SailthruUtil.createGson();
     private Send send = new Send();
-    private static final Date date = new Date(1380831494000L);
+    private static final Date THURSDAY_OCT_3 = new Date(1380831494000L);
 
     public void testSetSendID(){
         send.setSendId("abcdefghijkl");
@@ -126,7 +126,7 @@ public class SendTest extends TestCase {
     }
 
     public void testSetScheduleTimeDate(){
-        send.setScheduleTime(date);
+        send.setScheduleTime(THURSDAY_OCT_3);
 
         String expected = "{\"schedule_time\":\"Thu Oct 03 16:18:14 EDT 2013\",\"options\":{}}";
         String result = gson.toJson(send);
