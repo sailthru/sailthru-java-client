@@ -13,12 +13,6 @@ import java.util.Map;
  * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public class SailthruClient extends AbstractSailthruClient {
-
-    /**
-     * Singleton instance variable
-     */
-    private static SailthruClient _instance;
-
     /**
      * Public constructor for SailthruClient class with custom API URL
      * @param apiKey Sailthru API key string
@@ -36,33 +30,6 @@ public class SailthruClient extends AbstractSailthruClient {
      */
     public SailthruClient(String apiKey, String apiSecret) {
         super(apiKey, apiSecret, DEFAULT_API_URL);
-    }
-
-    /**
-     * Synchronized singleton instance method using default URL string
-     * @param apiKey Sailthru API key string
-     * @param apiSecret Sailthru API secret string
-     * @return singleton instance of SailthruClient
-     */
-    public static synchronized SailthruClient getInstance(String apiKey, String apiSecret) {
-        if (_instance == null) {
-            _instance = new SailthruClient(apiKey, apiSecret, DEFAULT_API_URL);
-        }
-        return _instance;
-    }
-
-    /**
-     * Synchronized singleton instance method using default URL string
-     * @param apiKey Sailthru API key string
-     * @param apiSecret Sailthru API secret string
-     * @param apiUrl Sailthru API URL
-     * @return singleton instance of SailthruClient
-     */
-    public static synchronized SailthruClient getInstance(String apiKey, String apiSecret, String apiUrl) {
-        if (_instance == null) {
-            _instance = new SailthruClient(apiKey, apiSecret, apiUrl);
-        }
-        return _instance;
     }
 
     /**
