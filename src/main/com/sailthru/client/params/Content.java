@@ -21,7 +21,7 @@ public class Content extends AbstractApiParams implements ApiParams {
 
     @Override
     public ApiAction getApiCall() {
-        return ApiAction.blast;
+        return ApiAction.content;
     }
 
     public static enum ContentSepecialVar {PRICE, DESCRIPTION, BRAND};
