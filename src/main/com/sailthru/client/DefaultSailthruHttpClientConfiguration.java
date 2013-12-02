@@ -20,7 +20,7 @@ public class DefaultSailthruHttpClientConfiguration implements SailthruHttpClien
     }
 
     public boolean getSoReuseaddr() {
-        return true;
+        return false;
     }
 
     public boolean getTcpNoDelay() {
