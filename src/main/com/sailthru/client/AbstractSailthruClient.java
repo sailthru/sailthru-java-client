@@ -43,11 +43,14 @@ public abstract class AbstractSailthruClient {
     public static final int DEFAULT_HTTP_PORT = 80;
     public static final int DEFAULT_HTTPS_PORT = 443;
     public static final String DEFAULT_USER_AGENT = "Sailthru Java Client";
-    public static final String VERSION = "1.0";
     public static final String DEFAULT_ENCODING = "UTF-8";
 
-    protected static enum HandlerType { JSON };    //we can also add XML but not now!
-    public static enum HttpRequestMethod {GET, POST, DELETE}; //HTTP methods supported by Sailthru API
+    //HTTP methods supported by Sailthru API
+    public static enum HttpRequestMethod {
+        GET,
+        POST,
+        DELETE
+    }
 
     protected String apiKey;
     protected String apiSecret;
@@ -93,7 +96,6 @@ public abstract class AbstractSailthruClient {
 
         ThreadSafeClientConnManager connManager = new ThreadSafeClientConnManager(schemeRegistry);
         SailthruHttpClient sailthruHttpClient = new SailthruHttpClient(connManager, params);
-        //sailthruHttpClient.getParams().setParameter("http.protocol.X-Sailthru-Authorization", "xxx");
         return sailthruHttpClient;
     }
 
