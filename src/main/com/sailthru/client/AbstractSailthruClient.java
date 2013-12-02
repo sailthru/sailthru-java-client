@@ -39,6 +39,8 @@ public abstract class AbstractSailthruClient {
 
     protected static final Logger logger = LoggerFactory.getLogger(AbstractSailthruClient.class);
 
+    private static final Gson GSON = SailthruUtil.createGson();
+
     public static final String DEFAULT_API_URL = "https://api.sailthru.com";
     public static final int DEFAULT_HTTP_PORT = 80;
     public static final int DEFAULT_HTTPS_PORT = 443;
@@ -60,10 +62,7 @@ public abstract class AbstractSailthruClient {
 
     private SailthruHandler handler;
 
-    protected Gson gson;
-    
     private Map<String, String> customHeaders = null;
-
 
     /**
      * Main constructor class for setting up the client
@@ -77,7 +76,6 @@ public abstract class AbstractSailthruClient {
         this.apiUrl = apiUrl;
         this.handler = new SailthruHandler(new JsonHandler());
         this.httpClient = create();
-        this.gson = SailthruUtil.createGson();
     }
 
 
@@ -140,7 +138,7 @@ public abstract class AbstractSailthruClient {
         String url = this.apiUrl + "/" + action.toString();
 
         Type type = new TypeToken<Map<String, Object>>() {}.getType();
-        String json = gson.toJson(data, type);
+        String json = GSON.toJson(data, type);
 
         Map<String, String> params = buildPayload(json);
 
@@ -156,7 +154,7 @@ public abstract class AbstractSailthruClient {
      */
     protected Object httpRequest(HttpRequestMethod method, ApiParams apiParams) throws IOException {
         String url = this.apiUrl + "/" + apiParams.getApiCall().toString();
-        String json = gson.toJson(apiParams, apiParams.getType());
+        String json = GSON.toJson(apiParams, apiParams.getType());
         Map<String, String> params = buildPayload(json);
         return this.httpClient.executeHttpRequest(url, method, params, handler, customHeaders);
     }
@@ -172,7 +170,7 @@ public abstract class AbstractSailthruClient {
      */
     protected Object httpRequest(HttpRequestMethod method, ApiParams apiParams, ApiFileParams fileParams) throws IOException {
         String url = this.apiUrl + "/" + apiParams.getApiCall().toString();
-        String json = gson.toJson(apiParams, apiParams.getType());
+        String json = GSON.toJson(apiParams, apiParams.getType());
         Map<String, String> params = buildPayload(json);
         return this.httpClient.executeHttpRequest(url, method, params, fileParams.getFileParams(), handler, customHeaders);
     }
