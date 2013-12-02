@@ -24,6 +24,18 @@ public class SailthruClient extends AbstractSailthruClient {
      * @param apiKey Sailthru API key string
      * @param apiSecret Sailthru API secret string
      * @param apiUrl Sailthru API URL
+     * @param connectionTimeout HTTP Connection timeout (in milliseconds)
+     * @param socketTimeout HTTP Socket timeout (in milliseconds)
+     */
+    public SailthruClient(String apiKey, String apiSecret, String apiUrl, int connectionTimeout, int socketTimeout) {
+        super(apiKey, apiSecret, apiUrl, connectionTimeout, socketTimeout);
+    }
+
+    /**
+     * Public constructor for SailthruClient class with custom API URL
+     * @param apiKey Sailthru API key string
+     * @param apiSecret Sailthru API secret string
+     * @param apiUrl Sailthru API URL
      */
     public SailthruClient(String apiKey, String apiSecret, String apiUrl) {
         super(apiKey, apiSecret, apiUrl);
