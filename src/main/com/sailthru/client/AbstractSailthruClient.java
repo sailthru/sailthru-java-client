@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import com.sailthru.client.handler.JsonHandler;
 import com.sailthru.client.handler.SailthruResponseHandler;
 import com.sailthru.client.handler.response.JsonResponse;
-import com.sailthru.client.handler.response.Response;
 import com.sailthru.client.http.SailthruHandler;
 import com.sailthru.client.http.SailthruHttpClient;
 import com.sailthru.client.params.ApiFileParams;
@@ -27,17 +26,15 @@ import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 /**
  * Abstract class exposing genric API calls for Sailthru API as per http://docs.sailthru.com/api
  * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public abstract class AbstractSailthruClient {
-
-    protected static final Logger logger = LoggerFactory.getLogger(AbstractSailthruClient.class);
 
     private static final Gson GSON = SailthruUtil.createGson();
 
@@ -64,6 +61,8 @@ public abstract class AbstractSailthruClient {
 
     private Map<String, String> customHeaders = null;
 
+    private final SailthruHttpClientConfiguration sailthruHttpClientConfiguration;
+
     /**
      * Main constructor class for setting up the client
      * @param apiKey
@@ -71,11 +70,23 @@ public abstract class AbstractSailthruClient {
      * @param apiUrl
      */
     public AbstractSailthruClient(String apiKey, String apiSecret, String apiUrl) {
+        this(apiKey, apiSecret, apiUrl, new DefaultSailthruHttpClientConfiguration());
+    }
+
+    /**
+     *
+     * @param apiKey
+     * @param apiSecret
+     * @param apiUrl
+     * @param sailthruHttpClientConfiguration
+     */
+    public AbstractSailthruClient(String apiKey, String apiSecret, String apiUrl, SailthruHttpClientConfiguration sailthruHttpClientConfiguration) {
         this.apiKey = apiKey;
         this.apiSecret = apiSecret;
         this.apiUrl = apiUrl;
-        this.handler = new SailthruHandler(new JsonHandler());
-        this.httpClient = create();
+        handler = new SailthruHandler(new JsonHandler());
+        httpClient = create();
+        this.sailthruHttpClientConfiguration = sailthruHttpClientConfiguration;
     }
 
 
@@ -89,12 +100,16 @@ public abstract class AbstractSailthruClient {
         HttpProtocolParams.setUserAgent(params, DEFAULT_USER_AGENT);
         HttpProtocolParams.setUseExpectContinue(params, true);
 
+        HttpConnectionParams.setConnectionTimeout(params, sailthruHttpClientConfiguration.getConnectionTimeout());
+        HttpConnectionParams.setSoTimeout(params, sailthruHttpClientConfiguration.getSoTimeout());
+        HttpConnectionParams.setSoReuseaddr(params, sailthruHttpClientConfiguration.getSoReuseaddr());
+        HttpConnectionParams.setTcpNoDelay(params, sailthruHttpClientConfiguration.getTcpNoDelay());
+
         SchemeRegistry schemeRegistry = new SchemeRegistry();
         schemeRegistry.register(getScheme());
 
         ThreadSafeClientConnManager connManager = new ThreadSafeClientConnManager(schemeRegistry);
-        SailthruHttpClient sailthruHttpClient = new SailthruHttpClient(connManager, params);
-        return sailthruHttpClient;
+        return new SailthruHttpClient(connManager, params);
     }
 
     /**
@@ -109,18 +124,16 @@ public abstract class AbstractSailthruClient {
      * Get Scheme Object
      */
     protected Scheme getScheme() {
-        String scheme = null;
+        String scheme;
         try {
             URI uri = new URI(this.apiUrl);
             scheme = uri.getScheme();
-        }
-        catch (URISyntaxException e) {
+        } catch (URISyntaxException e) {
             scheme = "http";
         }
         if (scheme.equals("https")) {
             return new Scheme(scheme, DEFAULT_HTTPS_PORT, SSLSocketFactory.getSocketFactory());
-        }
-        else {
+        } else {
             return new Scheme(scheme, DEFAULT_HTTP_PORT, PlainSocketFactory.getSocketFactory());
         }
     }
@@ -136,13 +149,10 @@ public abstract class AbstractSailthruClient {
      */
     protected Object httpRequest(ApiAction action, HttpRequestMethod method, Map<String, Object> data) throws IOException {
         String url = this.apiUrl + "/" + action.toString();
-
         Type type = new TypeToken<Map<String, Object>>() {}.getType();
         String json = GSON.toJson(data, type);
-
         Map<String, String> params = buildPayload(json);
-
-        return this.httpClient.executeHttpRequest(url, method, params, handler, customHeaders);
+        return httpClient.executeHttpRequest(url, method, params, handler, customHeaders);
     }
 
     /**
@@ -153,13 +163,12 @@ public abstract class AbstractSailthruClient {
      * @throws IOException
      */
     protected Object httpRequest(HttpRequestMethod method, ApiParams apiParams) throws IOException {
-        String url = this.apiUrl + "/" + apiParams.getApiCall().toString();
+        String url = apiUrl + "/" + apiParams.getApiCall().toString();
         String json = GSON.toJson(apiParams, apiParams.getType());
         Map<String, String> params = buildPayload(json);
-        return this.httpClient.executeHttpRequest(url, method, params, handler, customHeaders);
+        return httpClient.executeHttpRequest(url, method, params, handler, customHeaders);
     }
-    
-    
+
     /**
      * Make HTTP Request to Sailthru API involving multi-part uploads but with Api Params rather than generalized Map, this is recommended way to make request if data structure is complex
      * @param method
@@ -169,13 +178,12 @@ public abstract class AbstractSailthruClient {
      * @throws IOException 
      */
     protected Object httpRequest(HttpRequestMethod method, ApiParams apiParams, ApiFileParams fileParams) throws IOException {
-        String url = this.apiUrl + "/" + apiParams.getApiCall().toString();
+        String url = apiUrl + "/" + apiParams.getApiCall().toString();
         String json = GSON.toJson(apiParams, apiParams.getType());
         Map<String, String> params = buildPayload(json);
-        return this.httpClient.executeHttpRequest(url, method, params, fileParams.getFileParams(), handler, customHeaders);
+        return httpClient.executeHttpRequest(url, method, params, fileParams.getFileParams(), handler, customHeaders);
     }
-    
-    
+
     protected JsonResponse httpRequestJson(HttpRequestMethod method, ApiParams apiParams) throws IOException {
         return new JsonResponse(httpRequest(method, apiParams));
     }
@@ -199,7 +207,6 @@ public abstract class AbstractSailthruClient {
         params.put("format", handler.getSailthruResponseHandler().getFormat());
         params.put("json", jsonPayload);
         params.put("sig", getSignatureHash(params));
-        logger.debug("Params: {}", params.toString());
         return params;
     }
 

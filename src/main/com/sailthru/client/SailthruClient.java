@@ -38,6 +38,14 @@ public class SailthruClient extends AbstractSailthruClient {
         super(apiKey, apiSecret, DEFAULT_API_URL);
     }
 
+    public SailthruClient(String apiKey, String apiSecret, String apiUrl, SailthruHttpClientConfiguration sailthruHttpClientConfiguration) {
+        super(apiKey, apiSecret, apiUrl, sailthruHttpClientConfiguration);
+    }
+
+    public SailthruClient(String apiKey, String apiSecret, SailthruHttpClientConfiguration sailthruHttpClientConfiguration) {
+        super(apiKey, apiSecret, DEFAULT_API_URL, sailthruHttpClientConfiguration);
+    }
+
     /**
      * Synchronized singleton instance method using default URL string
      * @param apiKey Sailthru API key string
