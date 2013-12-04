@@ -2,20 +2,24 @@ package com.sailthru.client;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import junit.framework.TestCase;
+
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import java.util.Map;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  *
  * @author Prajwal Tuladhar <praj@sailthru.com> <praj@sailthru.com>
  */
-public class SailthruUtilTest extends TestCase {
+public class SailthruUtilTest {
     protected static Logger log = LoggerFactory.getLogger(SailthruUtilTest.class);
     protected Gson gson;
+
+    @Test
     public void testMd5() {
         String plainText1 = "hello_world";
         String hash1 = SailthruUtil.md5(plainText1);
@@ -24,6 +28,7 @@ public class SailthruUtilTest extends TestCase {
         assertEquals(hash1, expectedHash1);
     }
     
+    @Test
     public void testArrayListToCSV() {
         java.util.List<String> list1 = new ArrayList<String>();
         list1.add("windows");
@@ -38,6 +43,7 @@ public class SailthruUtilTest extends TestCase {
         assertEquals(expectedList2, SailthruUtil.arrayListToCSV(list2));
     }
 
+    @Test
     public void testGson() {
         gson = SailthruUtil.createGson();
         java.util.Map<String, Object> map1 = new HashMap<String, Object>();
@@ -67,6 +73,7 @@ public class SailthruUtilTest extends TestCase {
         assertEquals(expectedmap4, gson.toJson(map4));
     }
     
+    @Test
     public void testGsonNull() {
         gson = SailthruUtil.createGson();
         Map map = new HashMap();
