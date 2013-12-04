@@ -85,8 +85,8 @@ public abstract class AbstractSailthruClient {
         this.apiSecret = apiSecret;
         this.apiUrl = apiUrl;
         handler = new SailthruHandler(new JsonHandler());
-        httpClient = create();
         this.sailthruHttpClientConfiguration = sailthruHttpClientConfiguration;
+        httpClient = create();
     }
 
 
