@@ -5,7 +5,6 @@ import com.sailthru.client.SailthruClient;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -27,8 +26,6 @@ import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.ContentBody;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -44,14 +41,13 @@ public class SailthruHttpClient extends DefaultHttpClient {
     private HttpUriRequest buildRequest(String urlString, HttpRequestMethod method, Map<String, String> queryParams) throws UnsupportedEncodingException {
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         
-        for( Entry<String, String> entry : queryParams.entrySet() ) {
+        for (Entry<String, String> entry : queryParams.entrySet()) {
             nameValuePairs.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
         }
 
         switch(method) {
             case GET:
-                HttpGet httpRequest = new HttpGet(urlString + "?" + extractQueryString(nameValuePairs));
-                return httpRequest;
+                return new HttpGet(urlString + "?" + extractQueryString(nameValuePairs));
 
             case POST:
                 HttpPost httpPost = new HttpPost(urlString);
@@ -59,8 +55,7 @@ public class SailthruHttpClient extends DefaultHttpClient {
                 return httpPost;
 
             case DELETE:
-                HttpDelete httpDelete = new HttpDelete(urlString + "?" + extractQueryString(nameValuePairs));
-                return httpDelete;
+                return new HttpDelete(urlString + "?" + extractQueryString(nameValuePairs));
         }
         return null;
     }
@@ -74,8 +69,7 @@ public class SailthruHttpClient extends DefaultHttpClient {
 
         switch(method) {
             case GET:
-                HttpGet httpRequest = new HttpGet(urlString + "?" + extractQueryString(nameValuePairs));
-                return httpRequest;
+                return new HttpGet(urlString + "?" + extractQueryString(nameValuePairs));
 
             case POST:
                 HttpPost httpPost = new HttpPost(urlString);
@@ -83,7 +77,7 @@ public class SailthruHttpClient extends DefaultHttpClient {
                 for( Entry<String, String> entry : queryParams.entrySet() ) {
                     multipartEntity.addPart(entry.getKey(), new StringBody(entry.getValue()));
                 }
-                for ( Entry<String, File> fileEntry : files.entrySet() ) {
+                for (Entry<String, File> fileEntry : files.entrySet()) {
                     ContentBody contentBody = new FileBody(fileEntry.getValue(), "application/octet-stream");
                     multipartEntity.addPart(fileEntry.getKey(), contentBody);
                 }
@@ -92,8 +86,7 @@ public class SailthruHttpClient extends DefaultHttpClient {
                 return httpPost;
 
             case DELETE:
-                HttpDelete httpDelete = new HttpDelete(urlString + "?" + extractQueryString(nameValuePairs));
-                return httpDelete;
+                return new HttpDelete(urlString + "?" + extractQueryString(nameValuePairs));
         }
         return null;
     }

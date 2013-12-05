@@ -38,11 +38,20 @@ public class SailthruClient extends AbstractSailthruClient {
         super(apiKey, apiSecret, DEFAULT_API_URL);
     }
 
+    public SailthruClient(String apiKey, String apiSecret, String apiUrl, SailthruHttpClientConfiguration sailthruHttpClientConfiguration) {
+        super(apiKey, apiSecret, apiUrl, sailthruHttpClientConfiguration);
+    }
+
+    public SailthruClient(String apiKey, String apiSecret, SailthruHttpClientConfiguration sailthruHttpClientConfiguration) {
+        super(apiKey, apiSecret, DEFAULT_API_URL, sailthruHttpClientConfiguration);
+    }
+
     /**
      * Synchronized singleton instance method using default URL string
      * @param apiKey Sailthru API key string
      * @param apiSecret Sailthru API secret string
      * @return singleton instance of SailthruClient
+     * @deprecated
      */
     public static synchronized SailthruClient getInstance(String apiKey, String apiSecret) {
         if (_instance == null) {
@@ -57,6 +66,7 @@ public class SailthruClient extends AbstractSailthruClient {
      * @param apiSecret Sailthru API secret string
      * @param apiUrl Sailthru API URL
      * @return singleton instance of SailthruClient
+     * @deprecated
      */
     public static synchronized SailthruClient getInstance(String apiKey, String apiSecret, String apiUrl) {
         if (_instance == null) {
