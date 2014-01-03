@@ -24,7 +24,7 @@ public class JsonResponse implements Response {
     }
 
     public boolean isOK() {
-        return (this.response == null) || !this.response.containsKey("error");
+        return (this.response != null) && !this.response.containsKey("error");
     }
 
     public Map<String, Object> getResponse() {
