@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SendExample {
+public class UserExample {
     public static void main(String[] args) {
         String apiKey = "****";
         String apiSecret = "****";
