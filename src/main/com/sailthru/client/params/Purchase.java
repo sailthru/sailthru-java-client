@@ -31,6 +31,8 @@ public class Purchase extends AbstractApiParams implements ApiParams {
     @SerializedName("send_template")
     protected String sendTemplate;
 
+    protected String date;
+
     protected List<Map<String, Object>> tenders;
     protected List<Map<String, Object>> adjustments;
     protected Map<String, Object> vars;
@@ -80,6 +82,16 @@ public class Purchase extends AbstractApiParams implements ApiParams {
 
     public Purchase setReminderTime(String reminderTime) {
         this.reminderTime = reminderTime;
+        return this;
+    }
+
+    public Purchase setDate(Date date) {
+        this.date = date.toString();
+        return this;
+    }
+
+    public Purchase setDate(String date) {
+        this.date = date;
         return this;
     }
 

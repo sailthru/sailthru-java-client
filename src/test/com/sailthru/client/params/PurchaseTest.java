@@ -111,6 +111,23 @@ public class PurchaseTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    public void testSetDateString() {
+        Purchase purchase = new Purchase();
+        purchase.setDate("+10 days");
+        String expected = "{\"date\":\"+10 days\"}";
+        String result = gson.toJson(purchase);
+        assertEquals(expected, result);
+    }
+
+    public void testSetDateDate() {
+        Purchase purchase = new Purchase();
+        Date date = new Date(1380831494000L);
+        purchase.setDate(date);
+        String expected = "{\"date\":\"Thu Oct 03 16:18:14 EDT 2013\"}";
+        String result = gson.toJson(purchase);
+        assertEquals(expected, result);
+    }
+
     public void testSendTemplate() {
         String sendTemplate = "template name";
         Purchase purchase = new Purchase();
