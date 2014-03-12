@@ -7,19 +7,24 @@ import junit.framework.TestCase;
 import java.util.*;
 import java.util.List;
 
+import java.text.*;
+
 public class ContentTest extends TestCase {
     Gson gson = SailthruUtil.createGson();
+
+    DateFormat format = new SimpleDateFormat("E MMM dd HH:mm:ss zzz yyyy");
 
     public void testGetContent() {
         Content content = new Content();
         Date date = new Date(1380831494000L);
-        content.setDate(date);
+        format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
+        content.setDate(format.format(date));
         content.setTitle("testGetContent Title");
         content.setUrl("http://sailthru.com");
         Map<String, Object> vars = new HashMap<String, Object>();
         vars.put("baz", "foo");
         content.setVars(vars);
-        String expected = "{\"title\":\"testGetContent Title\",\"url\":\"http://sailthru.com\",\"date\":\"Thu Oct 03 16:18:14 EDT 2013\",\"vars\":{\"baz\":\"foo\"}}";
+        String expected = "{\"title\":\"testGetContent Title\",\"url\":\"http://sailthru.com\",\"date\":\"Thu Oct 03 20:18:14 UTC 2013\",\"vars\":{\"baz\":\"foo\"}}";
         String result = gson.toJson(content);
         assertEquals(expected, result);
     }
@@ -46,8 +51,9 @@ public class ContentTest extends TestCase {
     public void testSetDateFormat(){
         Content content = new Content();
         Date date = new Date(1380831494000L);
-        content.setDate(date);
-        String expected = "{\"date\":\"Thu Oct 03 16:18:14 EDT 2013\"}";
+        format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
+        content.setDate(format.format(date));
+        String expected = "{\"date\":\"Thu Oct 03 20:18:14 UTC 2013\"}";
         String result = gson.toJson(content);
         assertEquals(expected,result);
     }

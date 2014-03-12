@@ -9,9 +9,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 import java.util.Date;
+import java.util.TimeZone;
+
+import java.text.*;
 
 public class PurchaseTest extends TestCase {
     Gson gson = SailthruUtil.createGson();
+
+    DateFormat format = new SimpleDateFormat("E MMM dd HH:mm:ss zzz yyyy");
 
     public void testSetEmail() {
         Purchase purchase = new Purchase();
@@ -105,8 +110,9 @@ public class PurchaseTest extends TestCase {
     public void testSetReminderTimeDate() {
         Purchase purchase = new Purchase();
         Date date = new Date(1380831494000L);
-        purchase.setReminderTime(date);
-        String expected = "{\"reminder_time\":\"Thu Oct 03 16:18:14 EDT 2013\"}";
+        format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
+        purchase.setReminderTime(format.format(date));
+        String expected = "{\"reminder_time\":\"Thu Oct 03 20:18:14 UTC 2013\"}";
         String result = gson.toJson(purchase);
         assertEquals(expected, result);
     }
@@ -122,8 +128,9 @@ public class PurchaseTest extends TestCase {
     public void testSetDateDate() {
         Purchase purchase = new Purchase();
         Date date = new Date(1380831494000L);
-        purchase.setDate(date);
-        String expected = "{\"date\":\"Thu Oct 03 16:18:14 EDT 2013\"}";
+        format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
+        purchase.setDate(format.format(date));
+        String expected = "{\"date\":\"Thu Oct 03 20:18:14 UTC 2013\"}";
         String result = gson.toJson(purchase);
         assertEquals(expected, result);
     }

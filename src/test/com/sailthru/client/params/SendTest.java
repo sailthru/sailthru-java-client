@@ -29,12 +29,17 @@ import com.sailthru.client.SailthruUtil;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 import junit.framework.TestCase;
+
+import java.text.*;
 
 public class SendTest extends TestCase {
     private Gson gson = SailthruUtil.createGson();
     private Send send = new Send();
     private static final Date THURSDAY_OCT_3 = new Date(1380831494000L);
+
+    DateFormat format = new SimpleDateFormat("E MMM dd HH:mm:ss zzz yyyy");
 
     public void testSetSendID(){
         send.setSendId("abcdefghijkl");
@@ -126,9 +131,11 @@ public class SendTest extends TestCase {
     }
 
     public void testSetScheduleTimeDate(){
-        send.setScheduleTime(THURSDAY_OCT_3);
+        Date date = new Date(1380831494000L);
+        format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
+        send.setScheduleTime(format.format(date));
 
-        String expected = "{\"schedule_time\":\"Thu Oct 03 16:18:14 EDT 2013\",\"options\":{}}";
+        String expected = "{\"schedule_time\":\"Thu Oct 03 20:18:14 UTC 2013\",\"options\":{}}";
         String result = gson.toJson(send);
         assertEquals(expected, result);
     }
