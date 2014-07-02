@@ -2,6 +2,22 @@ package com.sailthru.client.http;
 
 import com.sailthru.client.AbstractSailthruClient.HttpRequestMethod;
 import com.sailthru.client.SailthruClient;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.HttpParams;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -9,23 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.params.HttpParams;
-import org.apache.http.entity.mime.MultipartEntity;
-import org.apache.http.entity.mime.content.ContentBody;
-import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.entity.mime.content.StringBody;
 
 /**
  *
@@ -73,16 +72,19 @@ public class SailthruHttpClient extends DefaultHttpClient {
 
             case POST:
                 HttpPost httpPost = new HttpPost(urlString);
-                MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
-                for( Entry<String, String> entry : queryParams.entrySet() ) {
-                    multipartEntity.addPart(entry.getKey(), new StringBody(entry.getValue()));
+                MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+                builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+                for (Entry<String, String> entry : queryParams.entrySet()) {
+                    builder.addTextBody(entry.getKey(), entry.getValue());
                 }
                 for (Entry<String, File> fileEntry : files.entrySet()) {
-                    ContentBody contentBody = new FileBody(fileEntry.getValue(), "application/octet-stream");
-                    multipartEntity.addPart(fileEntry.getKey(), contentBody);
+                    final String fileKey = fileEntry.getKey();
+                    final File file = fileEntry.getValue();
+                    final String filename = file.getName();
+                    builder.addBinaryBody(fileKey, file, ContentType.APPLICATION_OCTET_STREAM, filename);
                 }
-                httpPost.setEntity(multipartEntity);
-                
+                httpPost.setEntity(builder.build());
+
                 return httpPost;
 
             case DELETE:
