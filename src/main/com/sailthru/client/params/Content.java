@@ -36,6 +36,11 @@ public class Content extends AbstractApiParams implements ApiParams {
         return this;
     }
 
+    public Content setTags(List<String> tags) {
+        this.tags = SailthruUtil.arrayListToCSV(tags);
+        return this;
+    }
+    
     public Content setDate(Date date) {
         this.date = date.toString();
         return this;
