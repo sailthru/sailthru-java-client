@@ -16,7 +16,7 @@ public class Content extends AbstractApiParams implements ApiParams {
     protected String url;
 
     protected String date;
-    protected String tags;
+    protected List<String> tags;
     protected Map<String, Object> vars;
 
     @Override
@@ -36,6 +36,11 @@ public class Content extends AbstractApiParams implements ApiParams {
         return this;
     }
 
+    public Content setTags(List<String> tags) {
+        this.tags = tags;
+        return this;
+    }
+    
     public Content setDate(Date date) {
         this.date = date.toString();
         return this;
