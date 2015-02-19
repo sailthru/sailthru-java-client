@@ -16,7 +16,7 @@ public class Content extends AbstractApiParams implements ApiParams {
     protected String url;
 
     protected String date;
-    protected String tags;
+    protected List<String> tags;
     protected Map<String, Object> vars;
 
     @Override
@@ -37,7 +37,7 @@ public class Content extends AbstractApiParams implements ApiParams {
     }
 
     public Content setTags(List<String> tags) {
-        this.tags = SailthruUtil.arrayListToCSV(tags);
+        this.tags = tags;
         return this;
     }
     
