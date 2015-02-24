@@ -28,7 +28,7 @@ public class PurchaseItem {
         this.url = url;
     }
 
-    public PurchaseItem setTags(List tags) {
+    public PurchaseItem setTags(List<String> tags) {
         this.tags = tags;
         return this;
     }
