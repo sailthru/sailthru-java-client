@@ -37,7 +37,7 @@ public class Content extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-    public Content setTags(List tags) {
+    public Content setTags(List<String> tags) {
         this.tags = tags;
         return this;
     }
