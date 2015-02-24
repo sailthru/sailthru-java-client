@@ -17,7 +17,7 @@ public class PurchaseItem {
     protected String price;
     protected String id;
     protected String url;
-    protected List<String> tags;
+    protected List tags;
     protected Map<String, Object> vars;
 
     public PurchaseItem(Integer qty, String title, Integer price, String id, String url) {
@@ -28,7 +28,7 @@ public class PurchaseItem {
         this.url = url;
     }
 
-    public PurchaseItem setTags(List<String> tags) {
+    public PurchaseItem setTags(List tags) {
         this.tags = tags;
         return this;
     }
