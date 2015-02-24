@@ -58,6 +58,17 @@ public class ContentTest extends TestCase {
         assertEquals(expected,result);
     }
 
+    public void testSetTags(){
+        Content content = new Content();
+        List tags = new ArrayList<String>();
+        tags.add("foo");
+        tags.add("bar");
+        content.setTags(tags);
+        String expected = "{\"tags\":[\"foo\",\"bar\"]}";
+        String result = gson.toJson(content);
+        assertEquals(expected,result);
+    }
+
     public void testSetDateString(){
         Content content = new Content();
         String date = "1380831494000L";
