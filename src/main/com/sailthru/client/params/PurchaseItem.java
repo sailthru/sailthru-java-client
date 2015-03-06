@@ -17,7 +17,7 @@ public class PurchaseItem {
     protected String price;
     protected String id;
     protected String url;
-    protected String tags;
+    protected List tags;
     protected Map<String, Object> vars;
 
     public PurchaseItem(Integer qty, String title, Integer price, String id, String url) {
@@ -29,7 +29,7 @@ public class PurchaseItem {
     }
 
     public PurchaseItem setTags(List<String> tags) {
-        this.tags = SailthruUtil.arrayListToCSV(tags);
+        this.tags = tags;
         return this;
     }
 
