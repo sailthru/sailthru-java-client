@@ -24,12 +24,12 @@ public class Content extends AbstractApiParams implements ApiParams {
     protected List tags;
     protected Map<String, Object> vars;
     protected Map<String, Map<String, String>> images;
-    protected List location;
-    protected String price;
+    protected List<Double> location;
+    protected Long price;
     protected String description;
     protected String site_name;
     protected String author;
-    protected String spider;
+    protected Integer spider;
 
     @Override
     public ApiAction getApiCall() {
@@ -138,18 +138,7 @@ public class Content extends AbstractApiParams implements ApiParams {
     }
 
     public Content setPrice(long price) {
-        Long p = new Long(price);
-        this.price = p.toString();
-        return this;
-    }
-
-    public Content setPrice(Long price) {
-        this.price = price.toString();
-        return this;
-    }
-
-    public Content setPrice(String price) {
-        this.price = price;
+        this.price = new Long(price);
         return this;
     }
 
@@ -169,7 +158,7 @@ public class Content extends AbstractApiParams implements ApiParams {
     }
 
     public Content enableSpider() {
-        this.spider = "1";
+        this.spider = new Integer(1);
         return this;
     }
 }

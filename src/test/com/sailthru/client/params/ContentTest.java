@@ -159,18 +159,10 @@ public class ContentTest extends TestCase {
         assertEquals(expected, result);
     }
 
-    public void testSetPriceString() {
+    public void testSetPrice() {
         Content content = new Content();
-        content.setPrice("1200");
-        String expected = "{\"price\":\"1200\"}";
-        String result = gson.toJson(content);
-        assertEquals(expected, result);
-    }
-
-    public void testSetPriceLong() {
-        Content content = new Content();
-        content.setPrice(new Long(1200));
-        String expected = "{\"price\":\"1200\"}";
+        content.setPrice(1200);
+        String expected = "{\"price\":1200}";
         String result = gson.toJson(content);
         assertEquals(expected, result);
     }
@@ -202,7 +194,7 @@ public class ContentTest extends TestCase {
     public void testEnableSpider() {
         Content content = new Content();
         content.enableSpider();
-        String expected = "{\"spider\":\"1\"}";
+        String expected = "{\"spider\":1}";
         String result = gson.toJson(content);
         assertEquals(expected, result);
     }
