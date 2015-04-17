@@ -100,6 +100,12 @@ public class Content extends AbstractApiParams implements ApiParams {
         return this;
     }
 
+    /*
+     * A map of image names to { “url” : <url> } image maps.
+     * Use the name “full” to denote the full-sized image, and “thumb” to denote
+     * the thumbnail-sized image. Other image names are not reserved.
+     * Or use setFullImage and setThumbImage to set them separately.
+     */
     public Content setImages(Map<String, Map<String, String>> images) {
         this.images = images;
         return this;
@@ -125,6 +131,10 @@ public class Content extends AbstractApiParams implements ApiParams {
         return this;
     }
 
+    /*
+     * specify location of the content.
+     * List should be in order of [latitude, longitude]
+     */
     public Content setLocation(List<Double> location) {
         this.location = location;
         return this;
@@ -137,6 +147,11 @@ public class Content extends AbstractApiParams implements ApiParams {
         return this;
     }
 
+    /*
+     * For pieces of content with a purchase value, this param should be used
+     * for the local price of the product, measured in cents. For example, a
+     * product that costs $172.99 should have price = 17299
+     */
     public Content setPrice(long price) {
         this.price = new Long(price);
         return this;
@@ -157,6 +172,9 @@ public class Content extends AbstractApiParams implements ApiParams {
         return this;
     }
 
+    /*
+     * enable spider will force a respidering of the content within a few minutes
+     */
     public Content enableSpider() {
         this.spider = 1;
         return this;
