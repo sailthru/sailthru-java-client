@@ -9,7 +9,7 @@
 
   <name>sailthru-java-client</name>
   <description>Java client library for Sailthru API</description>
-  <url>http://docs.sailtru.com</url>
+  <url>http://getstarted.sailthru.com/</url>
 
   <parent>
     <groupId>org.sonatype.oss</groupId>

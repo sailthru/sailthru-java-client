@@ -36,7 +36,7 @@ public class Content extends AbstractApiParams implements ApiParams {
         return ApiAction.content;
     }
 
-    public static enum ContentSepecialVar {PRICE, DESCRIPTION, BRAND};
+    public static enum ContentSpecialVar {PRICE, DESCRIPTION, BRAND};
 
     public Type getType() {
         Type type = new TypeToken<Content>() {}.getType();
@@ -83,7 +83,7 @@ public class Content extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-    public Content setSpecialVars(ContentSepecialVar var, String value) {
+    public Content setSpecialVars(ContentSpecialVar var, String value) {
         switch (var) {
             case PRICE:
                 this.vars.put("price", value);
@@ -158,7 +158,7 @@ public class Content extends AbstractApiParams implements ApiParams {
     }
 
     public Content enableSpider() {
-        this.spider = new Integer(1);
+        this.spider = 1;
         return this;
     }
 }
