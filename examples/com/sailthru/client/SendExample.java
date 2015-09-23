@@ -2,19 +2,21 @@ package com.sailthru.client;
 
 import com.sailthru.client.exceptions.ApiException;
 import com.sailthru.client.handler.response.JsonResponse;
+import com.sailthru.client.params.Send;
 import com.sailthru.client.params.User;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserExample {
+public class SendExample {
     public static void main(String[] args) {
         String apiKey = "****";
         String apiSecret = "****";
         SailthruClient client = new SailthruClient(apiKey, apiSecret);
         try {
-            String sailthruId = "4d371896cc0c1adbb079b8d0";
-            User user = new User(sailthruId);
+            Send send = new Send();
+            send.setTemplate("my-template");
+            send.setEmail("praj@sailthru.com");
 
             Map<String, Object> vars = new HashMap<String, Object>();
             vars.put("name", "Prajwal Tuladhar");
@@ -23,12 +25,17 @@ public class UserExample {
             addressVars.put("city", "Jackson Heights");
             addressVars.put("zip", "11372");
             vars.put("address", addressVars);
-            user.setVars(vars);
 
-            JsonResponse response = client.getUser(user); // GET
+            send.setVars(vars);
 
-            JsonResponse response = client.saveUser(user);
+            send.setScheduleTime("+10 hours");
+            Map<String, Object> options = new HashMap<String, Object>();
+            options.put("behalf_email", "user@example.com");
+            options.put("test", 1);
 
+            send.setOptions(options);
+
+            JsonResponse response = client.send(send);
             if (response.isOK()) {
                 System.out.println(response.getResponse());
             } else {
