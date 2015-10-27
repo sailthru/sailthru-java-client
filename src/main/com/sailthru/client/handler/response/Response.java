@@ -4,7 +4,7 @@ import java.util.Map;
 
 /**
  *
- * @author Prajwal Tuladhar <praj@infynyxx.com>
+ * @author Prajwal Tuladhar <a href="mailto:praj@sailthru.com">praj@sailthru.com</a>
  */
 public interface Response {
     public boolean isOK();

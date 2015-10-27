@@ -8,16 +8,17 @@ import java.lang.reflect.Type;
 
 /**
  *
- * @author Prajwal Tuladhar <praj@sailthru.com>
+ * @author Prajwal Tuladhar <a href="mailto:praj@sailthru.com">praj@sailthru.com</a>
  */
 public class Alert extends AbstractApiParams implements ApiParams {
     
     public static final String PARAM_EMAIL = "email";
     public static final String PARAM_ALERT_ID = "alert_id";
+    protected static final Type _type = new TypeToken<Alert>() {}.getType();
     
     protected String email;
 
-    public static enum TypeMode {realtime, daily, weekly};
+    public enum TypeMode {realtime, daily, weekly};
     protected String type;
     protected String template;
     protected String when;
@@ -68,8 +69,7 @@ public class Alert extends AbstractApiParams implements ApiParams {
     }
 
     public Type getType() {
-        java.lang.reflect.Type _type = new TypeToken<Alert>() {}.getType();
-        return _type;
+        return Alert._type;
     }
     
     @Override

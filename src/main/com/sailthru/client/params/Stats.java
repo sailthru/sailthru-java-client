@@ -4,7 +4,7 @@ import com.sailthru.client.ApiAction;
 
 /**
  *
- * @author Prajwal Tuladhar <praj@sailthru.com>
+ * @author Prajwal Tuladhar <a href="mailto:praj@sailthru.com">praj@sailthru.com</a>
  */
 public abstract class Stats implements ApiParams {
     protected String stat;
@@ -16,7 +16,5 @@ public abstract class Stats implements ApiParams {
         this.stat = stat;
     }
     
-    public ApiAction getApiCall() {
-        return ApiAction.blast;
-    }
+    public abstract ApiAction getApiCall();
 }

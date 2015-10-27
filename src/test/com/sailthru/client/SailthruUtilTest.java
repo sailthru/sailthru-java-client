@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 
 /**
  *
- * @author Prajwal Tuladhar <praj@sailthru.com> <praj@sailthru.com>
+ * @author Prajwal Tuladhar <a href="mailto:praj@sailthru.com">praj@sailthru.com</a>
  */
 public class SailthruUtilTest {
     protected static Logger log = LoggerFactory.getLogger(SailthruUtilTest.class);

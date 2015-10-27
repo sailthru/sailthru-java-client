@@ -2,15 +2,15 @@ package com.sailthru.client.params;
 
 import com.google.gson.reflect.TypeToken;
 import com.sailthru.client.ApiAction;
+
 import java.lang.reflect.Type;
 import java.net.URI;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
  *
- * @author Prajwal Tuladhar <praj@sailthru.com>
+ * @author Prajwal Tuladhar <a href="mailto:praj@sailthru.com">praj@sailthru.com</a>
  */
 public class Blast extends AbstractApiParams implements ApiParams {
     
@@ -40,6 +40,8 @@ public class Blast extends AbstractApiParams implements ApiParams {
     protected String data_feed_url;
     protected String setup;
     protected Map<String, Object> vars;
+
+    protected static final Type type = new TypeToken<Blast>() {}.getType();
 
     public Blast(String name, String list, String scheduleTime, String fromName, String fromEmail, String subject, String contentHtml, String contentText) {
         this.name = name;
@@ -192,9 +194,9 @@ public class Blast extends AbstractApiParams implements ApiParams {
         return this;
     }
 
+    @Override
     public Type getType() {
-        Type type = new TypeToken<Blast>() {}.getType();
-        return type;
+        return Blast.type;
     }
     
     @Override

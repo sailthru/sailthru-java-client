@@ -12,12 +12,13 @@ import java.util.List;
 
 /**
  *
- * @author Prajwal Tuladhar <praj@sailthru.com>
+ * @author Prajwal Tuladhar <a href="mailto:praj@sailthru.com">praj@sailthru.com</a>
  */
 public class Purchase extends AbstractApiParams implements ApiParams {
     protected String email;
     protected List<Map<String, Object>> items;
     protected Integer incomplete;
+    protected static final Type type = new TypeToken<Purchase>() {}.getType();
 
     @SerializedName("message_id")
     protected String messageId;
@@ -105,13 +106,14 @@ public class Purchase extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-    public Type getType() {
-        Type type = new TypeToken<Purchase>() {}.getType();
-        return type;
-    }
-
     @Override
     public ApiAction getApiCall() {
         return ApiAction.purchase;
     }
+
+    @Override
+    public Type getType() {
+        return Purchase.type;
+    }
+
 }

@@ -7,7 +7,7 @@ import java.util.Map;
 
 /**
  * User params
- * @author Prajwal Tuladhar <praj@sailthru.com>
+ * @author Prajwal Tuladhar <a href="mailto:praj@sailthru.com">praj@sailthru.com</a>
  */
 public class User extends AbstractApiParams implements ApiParams {
     public static final String PARAM_TEMPLATE = "user";
@@ -21,6 +21,8 @@ public class User extends AbstractApiParams implements ApiParams {
     protected Map<String, Integer> lists;
     protected String optout_email;
     protected Map<String, Object> login;
+
+    protected static final Type _type = new TypeToken<User>() {}.getType();
     
     public User(String id) {
         this.id = id;
@@ -70,12 +72,14 @@ public class User extends AbstractApiParams implements ApiParams {
         return this;
     }
 
+    @Override
     public Type getType() {
-        java.lang.reflect.Type _type = new TypeToken<User>() {}.getType();
-        return _type;
+        return User._type;
     }
 
+    @Override
     public ApiAction getApiCall() {
         return ApiAction.user;
     }
+
 }

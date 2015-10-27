@@ -1,11 +1,12 @@
 package com.sailthru.client.params;
 
-import java.lang.reflect.Type;
 import com.sailthru.client.ApiAction;
+
+import java.lang.reflect.Type;
 
 /**
  *
- * @author Prajwal Tuladhar <praj@sailthru.com>
+ * @author Prajwal Tuladhar <a href="mailto:praj@sailthru.com">praj@sailthru.com</a>
  */
 public interface ApiParams {
     public Type getType();

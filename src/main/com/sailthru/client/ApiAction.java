@@ -2,7 +2,7 @@ package com.sailthru.client;
 
 /**
  * API calls
- * @author Prajwal Tuladhar <praj@sailthru.com>
+ * @author Prajwal Tuladhar <a href="mailto:praj@sailthru.com">praj@sailthru.com</a>
  */
 public enum ApiAction {
     event,

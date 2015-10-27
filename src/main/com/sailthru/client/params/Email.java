@@ -2,14 +2,14 @@ package com.sailthru.client.params;
 
 import com.google.gson.reflect.TypeToken;
 import com.sailthru.client.ApiAction;
+
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  *
- * @author Prajwal Tuladhar <praj@sailthru.com>
+ * @author Prajwal Tuladhar <a href="mailto:praj@sailthru.com">praj@sailthru.com</a>
  */
 public class Email extends AbstractApiParams implements ApiParams {
     protected String email;
@@ -22,6 +22,8 @@ public class Email extends AbstractApiParams implements ApiParams {
     protected String send;
     protected Map<String, Object> send_vars;
     protected Map<String, Object> vars;
+
+    protected static final Type type = new TypeToken<Email>() {}.getType();
 
     public Email() {
         this.vars = new HashMap<String, Object>();
@@ -97,13 +99,14 @@ public class Email extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-    public Type getType() {
-        Type type = new TypeToken<Email>() {}.getType();
-        return type;
-    }
-
     @Override
     public ApiAction getApiCall() {
         return ApiAction.email;
     }
+
+    @Override
+    public Type getType() {
+        return Email.type;
+    }
+
 }

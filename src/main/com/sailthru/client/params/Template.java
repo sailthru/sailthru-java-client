@@ -2,13 +2,13 @@ package com.sailthru.client.params;
 
 import com.google.gson.reflect.TypeToken;
 import com.sailthru.client.ApiAction;
+
 import java.lang.reflect.Type;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
  *
- * @author Prajwal Tuladhar <praj@sailthru.com>
+ * @author Prajwal Tuladhar <a href="mailto:praj@sailthru.com">praj@sailthru.com</a>
  */
 public class Template extends AbstractApiParams implements ApiParams {
     
@@ -26,6 +26,8 @@ public class Template extends AbstractApiParams implements ApiParams {
     protected Integer is_google_analytics;
     protected String verify_post_url;
     protected Map<String, String> link_params;
+
+    protected static final Type type = new TypeToken<Template>() {}.getType();
 
     public Template setTemplate(String template) {
         this.template = template;
@@ -82,9 +84,9 @@ public class Template extends AbstractApiParams implements ApiParams {
         return this;
     }
 
+    @Override
     public Type getType() {
-        Type type = new TypeToken<Template>() {}.getType();
-        return type;
+        return Template.type;
     }
 
     @Override

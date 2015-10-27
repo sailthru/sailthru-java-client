@@ -9,7 +9,7 @@ import java.util.Map;
 
 /**
  *
- * @author Prajwal Tuladhar <praj@sailthru.com>
+ * @author Prajwal Tuladhar <a href="mailto:praj@sailthru.com">praj@sailthru.com</a>
  */
 public class Send extends AbstractApiParams implements ApiParams {
     
@@ -22,6 +22,8 @@ public class Send extends AbstractApiParams implements ApiParams {
     protected Object schedule_time;
     protected Map<String, Object> options;
     protected Map<String, Object> limit;
+
+    protected static final Type type = new TypeToken<Send>() {}.getType();
 
     public Send() {
         this.options = new HashMap<String, Object>();
@@ -122,12 +124,7 @@ public class Send extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-    public Type getType() {
-        Type type = new TypeToken<Send>() {}.getType();
-        return type;
-    }
-
-    public Send setBehalfEmail(String email) {
+     public Send setBehalfEmail(String email) {
         this.options.put("behalf_email", email);
         return this;
     }
@@ -135,6 +132,11 @@ public class Send extends AbstractApiParams implements ApiParams {
     public Send setOptions(Map<String, Object> options) {
         this.options = options;
         return this;
+    }
+
+    @Override
+    public Type getType() {
+        return Send.type;
     }
 
     @Override

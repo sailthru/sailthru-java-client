@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 /**
  *
- * @author Prajwal Tuladhar <praj@sailthru.com>
+ * @author Prajwal Tuladhar <a href="mailto:praj@sailthru.com">praj@sailthru.com</a>
  */
 public class ImportJob extends Job implements ApiFileParams {
     

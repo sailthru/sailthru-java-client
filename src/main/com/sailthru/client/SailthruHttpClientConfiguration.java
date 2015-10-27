@@ -6,25 +6,25 @@ package com.sailthru.client;
 public interface SailthruHttpClientConfiguration {
     /**
      * get connection timeout in milli seconds
-     * @return
+     * @return int
      */
     int getConnectionTimeout();
 
     /**
      * get socket timeout in milli seconds
-     * @return
+     * @return int
      */
     int getSoTimeout();
 
     /**
      * get socket reuse address boolean flag
-     * @return
+     * @return boolean
      */
     boolean getSoReuseaddr();
 
     /**
      * get tcp no delay boolean flag
-     * @return
+     * @return boolean
      */
     boolean getTcpNoDelay();
 }

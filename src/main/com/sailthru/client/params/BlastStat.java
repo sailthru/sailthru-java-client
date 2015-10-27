@@ -1,12 +1,14 @@
 package com.sailthru.client.params;
 
 import com.google.gson.reflect.TypeToken;
+import com.sailthru.client.ApiAction;
+
 import java.lang.reflect.Type;
 import java.util.Date;
 
 /**
  *
- * @author Prajwal Tuladhar <praj@sailthru.com>
+ * @author Prajwal Tuladhar <a href="mailto:praj@sailthru.com">praj@sailthru.com</a>
  */
 public class BlastStat extends Stats {
     protected Integer blast_id;
@@ -21,6 +23,8 @@ public class BlastStat extends Stats {
     protected Integer signup;
     protected Integer subject;
     protected Integer urls;
+
+    protected static final Type type = new TypeToken<BlastStat>() {}.getType();
 
     public BlastStat() {
         super(MODE_BLAST);
@@ -96,8 +100,13 @@ public class BlastStat extends Stats {
         return this;
     }
 
+    @Override
+    public ApiAction getApiCall() {
+        return ApiAction.blast;
+    }
+
+    @Override
     public Type getType() {
-        Type type = new TypeToken<BlastStat>() {}.getType();
-        return type;
+        return BlastStat.type;
     }
 }

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Prajwal Tuladhar <praj@sailthru.com>
+ * @author Prajwal Tuladhar <a href="mailto:praj@sailthru.com">praj@sailthru.com</a>
  */
 public class Content extends AbstractApiParams implements ApiParams {
     // required
@@ -31,17 +31,9 @@ public class Content extends AbstractApiParams implements ApiParams {
     protected String author;
     protected Integer spider;
 
-    @Override
-    public ApiAction getApiCall() {
-        return ApiAction.content;
-    }
+    protected static final Type type = new TypeToken<Content>() {}.getType();
 
-    public static enum ContentSpecialVar {PRICE, DESCRIPTION, BRAND};
-
-    public Type getType() {
-        Type type = new TypeToken<Content>() {}.getType();
-        return type;
-    }
+    public enum ContentSpecialVar {PRICE, DESCRIPTION, BRAND}
 
     public Content setTitle(String title) {
         this.title = title;
@@ -178,5 +170,15 @@ public class Content extends AbstractApiParams implements ApiParams {
     public Content enableSpider() {
         this.spider = 1;
         return this;
+    }
+
+    @Override
+    public ApiAction getApiCall() {
+        return ApiAction.content;
+    }
+
+    @Override
+    public Type getType() {
+        return Content.type;
     }
 }
