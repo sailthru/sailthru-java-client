@@ -4,8 +4,9 @@ package com.sailthru.client.params;
 import com.google.gson.Gson;
 import com.sailthru.client.SailthruUtil;
 import junit.framework.TestCase;
+
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.HashMap;
 
 public class TemplateTest extends TestCase {
     private Gson gson = SailthruUtil.createGson();
@@ -92,10 +93,10 @@ public class TemplateTest extends TestCase {
     }
 
     public void testSetLinkParams(){
-        Map<String, String> linkParams = new HashMap<String, String>();
-        linkParams.put("utm_campaign", "Sailthru");
+        Map<String, String> linkParams = new LinkedHashMap<String, String>();
         linkParams.put("utm_template", "Example Template");
         linkParams.put("utm_date", "{date('MMddYYYY')}");
+        linkParams.put("utm_campaign", "Sailthru");
         template.setLinkParams(linkParams);
 
         String expected = "{\"link_params\":{\"utm_template\":\"Example Template\",\"utm_date\":\"{date(\\u0027MMddYYYY\\u0027)}\",\"utm_campaign\":\"Sailthru\"}}";
