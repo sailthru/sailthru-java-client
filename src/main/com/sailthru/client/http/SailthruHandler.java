@@ -1,10 +1,15 @@
 package com.sailthru.client.http;
 
+import com.sailthru.client.LastRateLimitInfo;
 import com.sailthru.client.exceptions.ApiException;
 import com.sailthru.client.exceptions.ResourceNotFoundException;
 import com.sailthru.client.exceptions.UnAuthorizedException;
 import com.sailthru.client.handler.SailthruResponseHandler;
 import java.io.IOException;
+import java.util.Date;
+import java.util.Map;
+
+import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
@@ -22,6 +27,9 @@ public class SailthruHandler implements ResponseHandler<Object> {
     private SailthruResponseHandler handler;
 
     private static final Logger logger = LoggerFactory.getLogger(SailthruHandler.class);
+
+    // key used to store rate limit info, for use and removal by the parent SailthruClient
+    public static final String RATE_LIMIT_INFO_KEY = "x_rate_limit_info";
 
     /* Supported HTTP Status codes */
     public static final int STATUS_OK = 200;
@@ -46,6 +54,8 @@ public class SailthruHandler implements ResponseHandler<Object> {
         String jsonString = null;
         jsonString = EntityUtils.toString(httpResponse.getEntity());
         Object parseObject =  handler.parseResponse(jsonString);
+
+        addRateLimitInfoToResponseObject(httpResponse, parseObject);
 
         switch (statusCode) {
             case STATUS_OK:
@@ -83,5 +93,37 @@ public class SailthruHandler implements ResponseHandler<Object> {
 
     public SailthruResponseHandler getSailthruResponseHandler() {
         return handler;
+    }
+
+    private void addRateLimitInfoToResponseObject(HttpResponse httpResponse, Object parsedResponse) {
+        Header limitHeader = httpResponse.getFirstHeader("X-Rate-Limit-Limit");
+        Header remainingHeader = httpResponse.getFirstHeader("X-Rate-Limit-Remaining");
+        Header resetHeader = httpResponse.getFirstHeader("X-Rate-Limit-Reset");
+        int limit = -1;
+        int remaining = -1;
+        Date reset = null;
+        if (limitHeader != null) {
+            try {
+                limit = Integer.parseInt(limitHeader.getValue());
+            } catch (NumberFormatException ignored) {}
+        }
+        if (remainingHeader != null) {
+            try {
+                remaining = Integer.parseInt(remainingHeader.getValue());
+            } catch (NumberFormatException ignored) {}
+        }
+        if (resetHeader != null) {
+            try {
+                long resetTimestamp = Long.parseLong(resetHeader.getValue());
+                reset = new Date(resetTimestamp * 1000);
+            } catch (NumberFormatException ignored) {}
+        }
+
+        if (limit < 0 || remaining < 0 || reset == null) {
+            return;
+        }
+
+        Map<String,Object> parseObjectMap = (Map<String,Object>) parsedResponse;
+        parseObjectMap.put(RATE_LIMIT_INFO_KEY, new LastRateLimitInfo(limit, remaining, reset));
     }
 }

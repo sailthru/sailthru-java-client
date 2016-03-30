@@ -1,5 +1,6 @@
 package com.sailthru.client;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.sailthru.client.handler.JsonHandler;
@@ -62,6 +63,8 @@ public abstract class AbstractSailthruClient {
     private Map<String, String> customHeaders = null;
 
     private final SailthruHttpClientConfiguration sailthruHttpClientConfiguration;
+
+    private final Map<ApiActionHttpMethod, LastRateLimitInfo> lastRateLimitInfoMap = new HashMap<ApiActionHttpMethod, LastRateLimitInfo>();
 
     /**
      * Main constructor class for setting up the client
@@ -152,7 +155,9 @@ public abstract class AbstractSailthruClient {
         Type type = new TypeToken<Map<String, Object>>() {}.getType();
         String json = GSON.toJson(data, type);
         Map<String, String> params = buildPayload(json);
-        return httpClient.executeHttpRequest(url, method, params, handler, customHeaders);
+        Object response = httpClient.executeHttpRequest(url, method, params, handler, customHeaders);
+        recordRateLimitInfo(action, method, response);
+        return response;
     }
 
     /**
@@ -163,10 +168,13 @@ public abstract class AbstractSailthruClient {
      * @throws IOException
      */
     protected Object httpRequest(HttpRequestMethod method, ApiParams apiParams) throws IOException {
-        String url = apiUrl + "/" + apiParams.getApiCall().toString();
+        ApiAction action = apiParams.getApiCall();
+        String url = apiUrl + "/" + action.toString();
         String json = GSON.toJson(apiParams, apiParams.getType());
         Map<String, String> params = buildPayload(json);
-        return httpClient.executeHttpRequest(url, method, params, handler, customHeaders);
+        Object response = httpClient.executeHttpRequest(url, method, params, handler, customHeaders);
+        recordRateLimitInfo(action, method, response);
+        return response;
     }
 
     /**
@@ -178,10 +186,13 @@ public abstract class AbstractSailthruClient {
      * @throws IOException 
      */
     protected Object httpRequest(HttpRequestMethod method, ApiParams apiParams, ApiFileParams fileParams) throws IOException {
-        String url = apiUrl + "/" + apiParams.getApiCall().toString();
+        ApiAction action = apiParams.getApiCall();
+        String url = apiUrl + "/" + action.toString();
         String json = GSON.toJson(apiParams, apiParams.getType());
         Map<String, String> params = buildPayload(json);
-        return httpClient.executeHttpRequest(url, method, params, fileParams.getFileParams(), handler, customHeaders);
+        Object response = httpClient.executeHttpRequest(url, method, params, fileParams.getFileParams(), handler, customHeaders);
+        recordRateLimitInfo(action, method, response);
+        return response;
     }
 
     protected JsonResponse httpRequestJson(HttpRequestMethod method, ApiParams apiParams) throws IOException {
@@ -301,6 +312,10 @@ public abstract class AbstractSailthruClient {
         return httpRequestJson(HttpRequestMethod.DELETE, data);
     }
 
+    public LastRateLimitInfo getLastRateLimitInfo(ApiAction action, HttpRequestMethod method) {
+        return lastRateLimitInfoMap.get(new ApiActionHttpMethod(action, method));
+    }
+
     /**
      * Set response Handler, currently only JSON is supported but XML can also be supported later on
      * @param responseHandler
@@ -311,5 +326,54 @@ public abstract class AbstractSailthruClient {
     
     public void setCustomHeaders(Map<String, String> headers) {
         customHeaders = headers;
+    }
+
+    @VisibleForTesting
+    void setSailthruHttpClient(SailthruHttpClient httpClient) {
+        this.httpClient = httpClient;
+    }
+
+
+    private void recordRateLimitInfo(ApiAction action, HttpRequestMethod method, Object response) {
+        Map<String,Object> responseMap = (Map<String,Object>) response;
+        Object lastRateLimitInfo = responseMap.get(SailthruHandler.RATE_LIMIT_INFO_KEY);
+        responseMap.remove(SailthruHandler.RATE_LIMIT_INFO_KEY);
+        if (lastRateLimitInfo instanceof LastRateLimitInfo) {
+            ApiActionHttpMethod key = new ApiActionHttpMethod(action, method);
+            lastRateLimitInfoMap.put(key, (LastRateLimitInfo) lastRateLimitInfo);
+        }
+    }
+
+    private class ApiActionHttpMethod {
+        private final ApiAction action;
+        private final HttpRequestMethod method;
+
+        private ApiActionHttpMethod(ApiAction action, HttpRequestMethod method) {
+            this.action = action;
+            this.method = method;
+        }
+
+        @Override public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+
+            ApiActionHttpMethod that = (ApiActionHttpMethod) o;
+
+            if (action != that.action) {
+                return false;
+            }
+            return method == that.method;
+
+        }
+
+        @Override public int hashCode() {
+            int result = action.hashCode();
+            result = 31 * result + method.hashCode();
+            return result;
+        }
     }
 }
