@@ -2,10 +2,9 @@ package com.sailthru.client;
 
 import com.sailthru.client.exceptions.ApiException;
 import com.sailthru.client.handler.response.JsonResponse;
-import com.sailthru.client.params.User;
+import com.sailthru.client.params.Template;
+
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class TemplateExample {
     public static void main(String[] args) {
