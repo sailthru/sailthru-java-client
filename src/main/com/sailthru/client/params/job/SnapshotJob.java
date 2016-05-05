@@ -2,13 +2,13 @@ package com.sailthru.client.params.job;
 
 import com.google.gson.reflect.TypeToken;
 import com.sailthru.client.params.query.Query;
+
 import java.lang.reflect.Type;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
  *
- * @author Prajwal Tuladhar <praj@sailthru.com>
+ * @author Prajwal Tuladhar <a href="mailto:praj@sailthru.com">praj@sailthru.com</a>
  */
 public class SnapshotJob extends Job {
     

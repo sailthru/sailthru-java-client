@@ -1,15 +1,15 @@
 package com.sailthru.client.params.query;
 
-import java.util.ArrayList;
 import com.google.gson.Gson;
 import com.sailthru.client.SailthruUtil;
 import com.sailthru.client.handler.JsonHandler;
-import java.util.HashMap;
+
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
  * Map query builder parameters for API calls
- * @author Prajwal Tuladhar <praj@sailthru.com>
+ * @author Prajwal Tuladhar <a href="mailto:praj@sailthru.com">praj@sailthru.com</a>
  */
 public class Query {
     protected String source_list;

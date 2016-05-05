@@ -1,21 +1,22 @@
 package com.sailthru.client.params;
 
-import com.sailthru.client.ApiAction;
 import com.google.gson.reflect.TypeToken;
+import com.sailthru.client.ApiAction;
 import com.sailthru.client.params.query.Query;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 
 /**
  *
- * @author Prajwal Tuladhar <praj@sailthru.com>
+ * @author Prajwal Tuladhar <a href="mailto:praj@sailthru.com">praj@sailthru.com</a>
  */
 public class List extends AbstractApiParams implements ApiParams {
     protected String list;
     protected Integer primary;
     protected ListType type;
     protected Query query;
+
+    protected static final Type _type = new TypeToken<List>() {}.getType();
     
     public List setQuery(Query query) {
         this.query = query;
@@ -37,12 +38,14 @@ public class List extends AbstractApiParams implements ApiParams {
         return this;
     }
 
+    @Override
     public ApiAction getApiCall() {
         return ApiAction.list;
     }
 
+    @Override
     public Type getType() {
-        return new TypeToken<List>() {}.getType();
+        return List._type;
     }
 
     public enum ListType {

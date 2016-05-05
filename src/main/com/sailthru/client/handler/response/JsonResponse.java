@@ -1,13 +1,14 @@
 package com.sailthru.client.handler.response;
 
-import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Map;
 
 
 /**
  *
- * @author Prajwal Tuladhar <praj@infynyxx.com>
+ * @author Prajwal Tuladhar <a href="mailto:praj@sailthru.com">praj@sailthru.com</a>
  */
 public class JsonResponse implements Response {
     

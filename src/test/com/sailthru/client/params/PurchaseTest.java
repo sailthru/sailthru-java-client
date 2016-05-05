@@ -4,14 +4,10 @@ import com.google.gson.Gson;
 import com.sailthru.client.SailthruUtil;
 import junit.framework.TestCase;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.List;
-import java.util.Date;
-import java.util.TimeZone;
-
-import java.text.*;
 
 public class PurchaseTest extends TestCase {
     Gson gson = SailthruUtil.createGson();
@@ -40,7 +36,7 @@ public class PurchaseTest extends TestCase {
     }
 
     public void testSetPurchaseLevelVars() {
-        Map<String, Object> vars = new HashMap<String, Object>();
+        Map<String, Object> vars = new LinkedHashMap<String, Object>();
         vars.put("baz", "foo");
         Purchase purchase = new Purchase();
         purchase.setPurchaseLevelVars(vars);
@@ -50,7 +46,7 @@ public class PurchaseTest extends TestCase {
     }
 
     public void testAdjustments() {
-        Map<String, Object> adjustmentItem = new HashMap<String, Object>();
+        Map<String, Object> adjustmentItem = new LinkedHashMap<String, Object>();
         adjustmentItem.put("title", "bar");
         adjustmentItem.put("price", 1000);
         ArrayList adjustments = new ArrayList();
@@ -63,7 +59,7 @@ public class PurchaseTest extends TestCase {
     }
 
     public void testTenders() {
-        Map<String, Object> TenderItem = new HashMap<String, Object>();
+        Map<String, Object> TenderItem = new LinkedHashMap<String, Object>();
         TenderItem.put("title", "bar");
         TenderItem.put("price", 1000);
         ArrayList tenders = new ArrayList();

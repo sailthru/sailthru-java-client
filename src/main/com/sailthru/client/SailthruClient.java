@@ -9,8 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Main class exposing API calls for Sailthru API as per http://docs.sailthru.com/api
- * @author Prajwal Tuladhar <praj@sailthru.com>
+ * Main class exposing API calls for Sailthru API
+ * @author Prajwal Tuladhar <a href="mailto:praj@sailthru.com">praj@sailthru.com</a>
+ * @see <a href="http://docs.sailthru.com/api">http://docs.sailthru.com/api</a>
  */
 public class SailthruClient extends AbstractSailthruClient {
 
@@ -77,8 +78,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Get information about one of your users.
-     * @param email
-     * @throws IOException
+     * @param email description // TODO add description
+     * @return JsonResponse
+     * @throws IOException description // TODO add description
      */
     public JsonResponse getEmail(String email) throws IOException {
         Email emailObj = new Email();
@@ -88,8 +90,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Update information about one of your users, including adding and removing the user from lists.
-     * @param email
-     * @throws IOException
+     * @param email description // TODO add description
+     * @return JsonResponse
+     * @throws IOException description // TODO add description
      */
     public JsonResponse setEmail(Email email) throws IOException {
         return apiPost(email);
@@ -98,7 +101,8 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * Get the status of a transational send
      * @param sendId Unique send id
-     * @throws IOException
+     * @return JsonResponse
+     * @throws IOException description // TODO add description
      */
     public JsonResponse getSend(String sendId) throws IOException {
         Map<String, Object> data = new HashMap<String, Object>();
@@ -109,7 +113,8 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * send an email template to a single email address.
      * @param send Send Object
-     * @throws IOException
+     * @return JsonResponse
+     * @throws IOException description // TODO add description
      */
     public JsonResponse send(Send send) throws IOException {
         return apiPost(send);
@@ -117,8 +122,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * send an email template to multiple email addresses
-     * @param multiSend
-     * @throws IOException
+     * @param multiSend description // TODO add description
+     * @return JsonResponse
+     * @throws IOException description // TODO add description
      */
     public JsonResponse multiSend(MultiSend multiSend) throws IOException {        
         return apiPost(multiSend);
@@ -126,9 +132,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Cancel a send that was scheduled for a future time.
-     * @param sendId
+     * @param sendId description // TODO add description
      * @return JsonResponse
-     * @throws IOException
+     * @throws IOException description // TODO add description
      */
     public JsonResponse cancelSend(String sendId) throws IOException {
         Map<String, Object> data = new HashMap<String, Object>();
@@ -138,9 +144,9 @@ public class SailthruClient extends AbstractSailthruClient {
     
     /**
      * Cancel a send that was scheduled for a future time.
-     * @param send
+     * @param send description // TODO add description
      * @return JsonResponse
-     * @throws IOException
+     * @throws IOException description // TODO add description
      */
     public JsonResponse cancelSend(Send send) throws IOException {
         return apiDelete(send);
@@ -148,9 +154,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * get information about a blast
-     * @param blastId
+     * @param blastId description // TODO add description
      * @return JsonResponse
-     * @throws IOException
+     * @throws IOException description // TODO add description
      */
     public JsonResponse getBlast(Integer blastId) throws IOException {
         Blast blast = new Blast();
@@ -160,9 +166,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Schedule a mass mail blast
-     * @param blast
+     * @param blast description // TODO add description
      * @return JsonResponse
-     * @throws IOException
+     * @throws IOException description // TODO add description
      */
     public JsonResponse scheduleBlast(Blast blast) throws IOException {
         return apiPost(blast);
@@ -174,7 +180,8 @@ public class SailthruClient extends AbstractSailthruClient {
      * @param list list name
      * @param scheduleTime schedule time for the blast
      * @param blast Blast Object
-     * @throws IOException
+     * @return JsonResponse
+     * @throws IOException description // TODO add description
      */
     public JsonResponse scheduleBlastFromTemplate(String template, String list, Date scheduleTime, Blast blast) throws IOException {
         blast.setCopyTemplate(template);
@@ -189,7 +196,7 @@ public class SailthruClient extends AbstractSailthruClient {
      * @param list list name
      * @param scheduleTime schedule time for the blast
      * @return JsonResponse
-     * @throws IOException
+     * @throws IOException description // TODO add description
      */
     public JsonResponse scheduleBlastFromTemplate(String template, String list, Date scheduleTime) throws IOException {
         Blast blast = new Blast();
@@ -205,7 +212,7 @@ public class SailthruClient extends AbstractSailthruClient {
      * @param scheduleTime schedule time for the blast
      * @param blast Blast object
      * @return JsonResponse
-     * @throws IOException
+     * @throws IOException description // TODO add description
      */
     public JsonResponse scheduleBlastFromBlast(Integer blastId, Date scheduleTime, Blast blast) throws IOException {
         blast.setCopyBlast(blastId);
@@ -217,7 +224,8 @@ public class SailthruClient extends AbstractSailthruClient {
      * Schedule a mass mail blast from previous blast
      * @param blastId blast ID
      * @param scheduleTime schedule time for the blast
-     * @throws IOException
+     * @return JsonResponse
+     * @throws IOException description // TODO add description
      */
     public JsonResponse scheduleBlastFromBlast(Integer blastId, Date scheduleTime) throws IOException {
         Blast blast = new Blast();
@@ -228,8 +236,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Update existing blast
-     * @param blastId
-     * @throws IOException
+     * @param blastId description // TODO add description
+     * @return JsonResponse
+     * @throws IOException description // TODO add description
      */
     public JsonResponse updateBlast(Integer blastId) throws IOException {
         Blast blast = new Blast();
@@ -239,9 +248,10 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Update existing blast
-     * @param blastId
-     * @param blast
-     * @throws IOException
+     * @param blastId description // TODO add description
+     * @param blast description // TODO add description
+     * @return JsonResponse
+     * @throws IOException description // TODO add description
      */
     public JsonResponse updateBlast(Integer blastId, Blast blast) throws IOException {
         blast.setBlastId(blastId);
@@ -250,8 +260,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Delete existing blast
-     * @param blastId
-     * @throws IOException
+     * @param blastId description // TODO add description
+     * @return JsonResponse
+     * @throws IOException description // TODO add description
      */
     public JsonResponse deleteBlast(Integer blastId) throws IOException {
         Blast blast = new Blast();
@@ -262,7 +273,8 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * Cancel a scheduled Blast
      * @param blastId Unique Blast ID
-     * @throws IOException
+     * @return JsonResponse
+     * @throws IOException description // TODO add description
      */
     public JsonResponse cancelBlast(Integer blastId) throws IOException {
         Blast blast = new Blast();
@@ -276,7 +288,8 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * Get template information
      * @param template template name
-     * @throws IOException
+     * @return JsonResponse
+     * @throws IOException description // TODO add description
      */
     public JsonResponse getTemplate(String template) throws IOException {
         Map<String, Object> data = new HashMap<String, Object>();
@@ -287,7 +300,8 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * Save / update a template
      * @param template template name
-     * @throws IOException
+     * @return JsonResponse
+     * @throws IOException description // TODO add description
      */
     public JsonResponse saveTemplate(Template template) throws IOException {
         return apiPost(template);
@@ -296,7 +310,8 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * Delete existing template
      * @param template template name
-     * @throws IOException
+     * @return JsonResponse
+     * @throws IOException description // TODO add description
      */
     public JsonResponse deleteTemplate(String template) throws IOException {
         Map<String, Object> data = new HashMap<String, Object>();
@@ -306,8 +321,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Push a new piece of content to Sailthru, triggering any applicable alerts.
-     * @param content
-     * @throws IOException
+     * @param content description // TODO add description
+     * @return JsonResponse
+     * @throws IOException description // TODO add description
      */
     public JsonResponse pushContent(Content content) throws IOException {
         return apiPost(content);
@@ -315,8 +331,9 @@ public class SailthruClient extends AbstractSailthruClient {
     
     /**
      * Push an event to Sailthru, triggering any applicable triggers.
-     * @param event
-     * @throws IOException
+     * @param event description // TODO add description
+     * @return JsonResponse
+     * @throws IOException description // TODO add description
      */
     public JsonResponse pushEvent(Event event) throws IOException {
         return apiPost(event);
@@ -324,9 +341,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Retrieve a user's alert settings
-     * @param email
+     * @param email description // TODO add description
      * @return JsonResponse
-     * @throws IOException
+     * @throws IOException description // TODO add description
      */
     public JsonResponse getAlert(String email) throws IOException {
         Map<String, Object> data = new HashMap<String, Object>();
@@ -336,9 +353,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Add a new alert to a user. You can add either a realtime or a summary alert (daily/weekly).
-     * @param alert
+     * @param alert description // TODO add description
      * @return JsonResponse
-     * @throws IOException
+     * @throws IOException description // TODO add description
      */
     public JsonResponse saveAlert(Alert alert) throws IOException {
         return apiPost(alert);
@@ -348,7 +365,8 @@ public class SailthruClient extends AbstractSailthruClient {
      * Delete existing user alert
      * @param email User.java Email
      * @param alertId Alert ID
-     * @throws IOException
+     * @return JsonResponse
+     * @throws IOException description // TODO add description
      */
     public JsonResponse deleteAlert(String email, String alertId) throws IOException {
         Map<String, Object> data = new HashMap<String, Object>();
@@ -359,8 +377,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Record that a user has made a purchase, or has added items to their purchase total
-     * @param purchase
-     * @throws IOException
+     * @param purchase description // TODO add description
+     * @return JsonResponse
+     * @throws IOException description // TODO add description
      */
     public JsonResponse purchase(Purchase purchase) throws IOException {
         return apiPost(purchase);
@@ -368,8 +387,9 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * Make stats API request
-     * @param stats
-     * @throws IOException
+     * @param stats description // TODO add description
+     * @return JsonResponse
+     * @throws IOException description // TODO add description
      */
     protected JsonResponse stats(Stats stats) throws IOException {
         return apiGet(stats);
@@ -377,30 +397,30 @@ public class SailthruClient extends AbstractSailthruClient {
 
     /**
      * get list stats information
-     * @param stat
+     * @param stat description // TODO add description
      * @return JsonResponse
-     * @throws IOException
+     * @throws IOException description // TODO add description
      */
-    public Map<String, Object> listStats(ListStat stat) throws IOException {
-        return (Map<String, Object>)this.stats(stat);
+    public JsonResponse listStats(ListStat stat) throws IOException {
+        return this.stats(stat);
     }
 
     /**
      * get blast stats information
-     * @param stat
+     * @param stat description // TODO add description
      * @return JsonResponse
-     * @throws IOException
+     * @throws IOException description // TODO add description
      */
-    public Map<String, Object> blastStats(BlastStat stat) throws IOException {
-        return (Map<String, Object>)this.stats(stat);
+    public JsonResponse blastStats(BlastStat stat) throws IOException {
+        return this.stats(stat);
     }
     
     
     /**
      * Get status of a job
-     * @param jobId
+     * @param jobId description // TODO add description
      * @return JsonResponse
-     * @throws IOException 
+     * @throws IOException  description // TODO add description
      */
     public JsonResponse getJobStatus(String jobId) throws IOException {
         Map<String, Object> params = new HashMap<String, Object>();
@@ -411,8 +431,9 @@ public class SailthruClient extends AbstractSailthruClient {
     
     /**
      * Process import job from given email string CSV or file path of a CSV or email per line file
-     * @param job
-     * @throws IOException 
+     * @param job description // TODO add description
+     * @return JsonResponse
+     * @throws IOException  description // TODO add description
      */
     public JsonResponse processImportJob(ImportJob job) throws IOException {
         return apiPost(job, job);
@@ -422,7 +443,8 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * Query user data set and generate a detailed snapshot of their analytics similar to that shown in the Snapshot Report in the Sailthru interface.
      * @param job SnapshotJob
-     * @throws IOException 
+     * @return JsonResponse
+     * @throws IOException description // TODO add description
      */
     public JsonResponse processSnapshotJob(SnapshotJob job) throws IOException {
         return apiPost(job);
@@ -432,7 +454,8 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * Export blast data in CSV format
      * @param job BlastQueryJob
-     * @throws IOException 
+     * @return JsonResponse
+     * @throws IOException description // TODO add description
      */
     public JsonResponse processBlastQueryJob(BlastQueryJob job) throws IOException {
         return apiPost(job);
@@ -442,7 +465,8 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * Export user data from a list in CSV format
      * @param job ExportListDataJob
-     * @throws IOException 
+     * @return JsonResponse
+     * @throws IOException description // TODO add description
      */
     public JsonResponse processExportListDataJob(ExportListDataJob job) throws IOException {
         return apiPost(job);
@@ -452,16 +476,27 @@ public class SailthruClient extends AbstractSailthruClient {
     /**
      * Perform a bulk update of any number of user profiles
      * @param job UpdateJob
-     * @throws IOException
+     * @return JsonResponse
+     * @throws IOException description // TODO add description
      */
     public JsonResponse processUpdateJob(UpdateJob job) throws IOException {
         return apiPost(job, job);
     }
 
+    /**
+     * @param user User
+     * @return JsonResponse
+     * @throws IOException description // TODO add description
+     */
     public JsonResponse getUser(User user) throws IOException {
         return apiGet(user);
     }
 
+    /**
+     * @param user User
+     * @return JsonResponse
+     * @throws IOException description // TODO add description
+     */
     public JsonResponse saveUser(User user) throws IOException {
         return apiPost(user);
     }

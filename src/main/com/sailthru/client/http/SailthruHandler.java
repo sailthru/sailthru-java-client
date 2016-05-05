@@ -4,7 +4,6 @@ import com.sailthru.client.exceptions.ApiException;
 import com.sailthru.client.exceptions.ResourceNotFoundException;
 import com.sailthru.client.exceptions.UnAuthorizedException;
 import com.sailthru.client.handler.SailthruResponseHandler;
-import java.io.IOException;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
@@ -13,9 +12,11 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+
 /**
  *
- * @author Prajwal Tuladhar <praj@sailthru.com>
+ * @author Prajwal Tuladhar <a href="mailto:praj@sailthru.com">praj@sailthru.com</a>
  */
 public class SailthruHandler implements ResponseHandler<Object> {
 

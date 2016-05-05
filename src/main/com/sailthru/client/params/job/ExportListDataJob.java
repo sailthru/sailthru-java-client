@@ -5,7 +5,7 @@ import java.lang.reflect.Type;
 
 /**
  *
- * @author Prajwal Tuladhar <praj@sailthru.com>
+ * @author Prajwal Tuladhar <a href="mailto:praj@sailthru.com">praj@sailthru.com</a>
  */
 public class ExportListDataJob extends Job {
     

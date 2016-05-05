@@ -80,7 +80,7 @@ public class ContentTest extends TestCase {
 
     public void testSetVars(){
         Content content = new Content();
-        Map<String, Object> vars = new HashMap<String, Object>();
+        Map<String, Object> vars = new LinkedHashMap<String, Object>();
         vars.put("test","result");
         vars.put("test2","result2");
         vars.put("test3","result3");
@@ -111,7 +111,7 @@ public class ContentTest extends TestCase {
 
     public void testSetImages() {
         Content content = new Content();
-        Map<String, Map<String, String>> images = new HashMap<String, Map<String, String>>();
+        Map<String, Map<String, String>> images = new LinkedHashMap<String, Map<String, String>>();
         Map<String, String> fullUrl = new HashMap<String, String>();
         fullUrl.put("url", "https://images.google.com/abc");
         Map<String, String> thumbUrl = new HashMap<String, String>();

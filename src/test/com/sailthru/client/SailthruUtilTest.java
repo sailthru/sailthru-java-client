@@ -1,19 +1,20 @@
 package com.sailthru.client;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
+import com.google.gson.Gson;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
 /**
  *
- * @author Prajwal Tuladhar <praj@sailthru.com> <praj@sailthru.com>
+ * @author Prajwal Tuladhar <a href="mailto:praj@sailthru.com">praj@sailthru.com</a>
  */
 public class SailthruUtilTest {
     protected static Logger log = LoggerFactory.getLogger(SailthruUtilTest.class);
@@ -46,27 +47,27 @@ public class SailthruUtilTest {
     @Test
     public void testGson() {
         gson = SailthruUtil.createGson();
-        java.util.Map<String, Object> map1 = new HashMap<String, Object>();
+        java.util.Map<String, Object> map1 = new LinkedHashMap<String, Object>();
         map1.put("var1","value1");
         map1.put("var2","value2");
         String expectedmap1 = "{\"var1\":\"value1\",\"var2\":\"value2\"}";
         assertEquals(expectedmap1, gson.toJson(map1));
 
-        java.util.Map<String, Object> map2 = new HashMap<String, Object>();
+        java.util.Map<String, Object> map2 = new LinkedHashMap<String, Object>();
         String expectedmap2 = "{}";
         assertEquals(expectedmap2, gson.toJson(map2));
 
-        java.util.Map<String, Object> map3 = new HashMap<String, Object>();
+        java.util.Map<String, Object> map3 = new LinkedHashMap<String, Object>();
         map3.put("var1",null);
         map3.put("var2","value2");
         String expectedmap3 = "{\"var1\":null,\"var2\":\"value2\"}";
         assertEquals(expectedmap3, gson.toJson(map3));
 
-        java.util.Map<String, Object> map4 = new HashMap<String, Object>();
-        java.util.Map<String, Object> map5 = new HashMap<String, Object>();
+        java.util.Map<String, Object> map4 = new LinkedHashMap<String, Object>();
+        java.util.Map<String, Object> map5 = new LinkedHashMap<String, Object>();
         map5.put("var1",null);
         map4.put("var1",map5);
-        java.util.Map<String, Object> map6 = new HashMap<String, Object>();
+        java.util.Map<String, Object> map6 = new LinkedHashMap<String, Object>();
         map6.put("var2","value2");
         map4.put("var2",map6);
         String expectedmap4 = "{\"var1\":{\"var1\":null},\"var2\":{\"var2\":\"value2\"}}";

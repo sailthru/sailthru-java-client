@@ -7,7 +7,7 @@ import java.util.Map;
 
 /**
  * Event params
- * @author Ben Bartholomew <bbartholomew@sailthru.com>
+ * @author Ben Bartholomew <a href="bbartholomew@sailthru.com">bbartholomew@sailthru.com</a>
  */
 public class Event extends AbstractApiParams implements ApiParams {
     protected String id;
@@ -15,6 +15,8 @@ public class Event extends AbstractApiParams implements ApiParams {
     protected Map<String, Object> vars;
     protected String event;
     protected String schedule_time;
+
+    protected static final Type type = new TypeToken<Event>() {}.getType();
     
     public Event(String id) {
         this.id = id;
@@ -44,12 +46,14 @@ public class Event extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-    public Type getType() {
-        java.lang.reflect.Type _type = new TypeToken<Event>() {}.getType();
-        return _type;
-    }
-
+    @Override
     public ApiAction getApiCall() {
         return ApiAction.event;
     }
+
+    @Override
+    public Type getType() {
+        return Event.type;
+    }
+
 }
