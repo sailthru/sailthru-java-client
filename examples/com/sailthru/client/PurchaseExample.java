@@ -6,6 +6,7 @@ import com.sailthru.client.params.Purchase;
 import com.sailthru.client.params.PurchaseItem;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
@@ -58,6 +59,16 @@ public class PurchaseExample {
                 System.out.println(response.getResponse());
             } else {
                 System.out.println(response.getResponse().get("error").toString());
+            }
+
+            // optionally get the rate limit information for the corresponding API endpoint/method
+            LastRateLimitInfo lastRateLimitInfo = client.getLastRateLimitInfo(ApiAction.purchase, AbstractSailthruClient.HttpRequestMethod.POST);
+            if (lastRateLimitInfo != null) {
+                // examine rate limit information
+                int limit = lastRateLimitInfo.getLimit();
+                int remaining = lastRateLimitInfo.getRemaining();
+                Date reset = lastRateLimitInfo.getReset();
+                // ...
             }
         } catch (ApiException e) {
             // handle exception

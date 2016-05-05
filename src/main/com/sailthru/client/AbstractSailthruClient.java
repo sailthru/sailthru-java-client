@@ -312,6 +312,12 @@ public abstract class AbstractSailthruClient {
         return httpRequestJson(HttpRequestMethod.DELETE, data);
     }
 
+    /**
+     * Gets the X-Rate-Limit-* headers from the last response for the given action / method, stored as a POJO.
+     * @param action
+     * @param method
+     * @return POJO storing X-Rate-Limit-* headers from last invocation. Returns null if this object has never invoked the given action / method.
+     */
     public LastRateLimitInfo getLastRateLimitInfo(ApiAction action, HttpRequestMethod method) {
         return lastRateLimitInfoMap.get(new ApiActionHttpMethod(action, method));
     }

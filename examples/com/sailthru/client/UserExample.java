@@ -5,6 +5,7 @@ import com.sailthru.client.handler.response.JsonResponse;
 import com.sailthru.client.params.User;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,6 +35,16 @@ public class UserExample {
                 System.out.println(response1.getResponse());
             } else {
                 System.out.println(response1.getResponse().get("error").toString());
+            }
+
+            // optionally get the rate limit information for the corresponding API endpoint/method
+            LastRateLimitInfo lastRateLimitInfo = client.getLastRateLimitInfo(ApiAction.user, AbstractSailthruClient.HttpRequestMethod.POST);
+            if (lastRateLimitInfo != null) {
+                // examine rate limit information
+                int limit = lastRateLimitInfo.getLimit();
+                int remaining = lastRateLimitInfo.getRemaining();
+                Date reset = lastRateLimitInfo.getReset();
+                // ...
             }
         } catch (ApiException e) {
             // handle exception
