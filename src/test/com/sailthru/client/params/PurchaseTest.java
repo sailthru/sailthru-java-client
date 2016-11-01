@@ -37,7 +37,7 @@ public class PurchaseTest extends TestCase {
         Purchase purchase = new Purchase();
         purchase.setItems(items);
         String expected =
-            "{\"items\":[{\"qty\":\"1\",\"title\":\"example purchase item\",\"price\":\"1999\",\"id\":\"example id\",\"url\":\"http://www.sailthru.com/example/purchase/url\"},{\"qty\":\"2\",\"title\":\"second purchase item\",\"price\":\"2050\",\"id\":\"example id2\",\"url\":\"http://www.sailthru.com/2/example/purchase/url\"}]}";
+            "{\"items\":[{\"qty\":\"1\",\"title\":\"example purchase item\",\"price\":\"1999\",\"id\":\"example id\",\"image\":\"\",\"url\":\"http://www.sailthru.com/example/purchase/url\"},{\"qty\":\"2\",\"title\":\"second purchase item\",\"price\":\"2050\",\"id\":\"example id2\",\"image\":\"\",\"url\":\"http://www.sailthru.com/2/example/purchase/url\"}]}";
         String result = gson.toJson(purchase);
         assertEquals(expected, result);
     }
