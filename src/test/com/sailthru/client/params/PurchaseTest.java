@@ -4,14 +4,14 @@ import com.google.gson.Gson;
 import com.sailthru.client.SailthruUtil;
 import junit.framework.TestCase;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.TimeZone;
-
-import java.text.*;
 
 public class PurchaseTest extends TestCase {
     Gson gson = SailthruUtil.createGson();
@@ -28,13 +28,16 @@ public class PurchaseTest extends TestCase {
 
     public void testSetItems() {
         List<PurchaseItem> items = new ArrayList<PurchaseItem>();
-        PurchaseItem firstpurchaseitem = new PurchaseItem(1, "example purchase item", 1999, "example id", "http://www.sailthru.com/example/purchase/url");
-        PurchaseItem secondpurchaseitem = new PurchaseItem(2, "second purchase item", 2050, "example id2", "http://www.sailthru.com/2/example/purchase/url");
+        PurchaseItem firstpurchaseitem =
+            new PurchaseItem(1, "example purchase item", 1999, "example id", "http://www.sailthru.com/example/purchase/url", "");
+        PurchaseItem secondpurchaseitem =
+            new PurchaseItem(2, "second purchase item", 2050, "example id2", "http://www.sailthru.com/2/example/purchase/url", "");
         items.add(firstpurchaseitem);
         items.add(secondpurchaseitem);
         Purchase purchase = new Purchase();
         purchase.setItems(items);
-        String expected = "{\"items\":[{\"qty\":\"1\",\"title\":\"example purchase item\",\"price\":\"1999\",\"id\":\"example id\",\"url\":\"http://www.sailthru.com/example/purchase/url\"},{\"qty\":\"2\",\"title\":\"second purchase item\",\"price\":\"2050\",\"id\":\"example id2\",\"url\":\"http://www.sailthru.com/2/example/purchase/url\"}]}";
+        String expected =
+            "{\"items\":[{\"qty\":\"1\",\"title\":\"example purchase item\",\"price\":\"1999\",\"id\":\"example id\",\"url\":\"http://www.sailthru.com/example/purchase/url\"},{\"qty\":\"2\",\"title\":\"second purchase item\",\"price\":\"2050\",\"id\":\"example id2\",\"url\":\"http://www.sailthru.com/2/example/purchase/url\"}]}";
         String result = gson.toJson(purchase);
         assertEquals(expected, result);
     }

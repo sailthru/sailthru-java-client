@@ -4,11 +4,10 @@ import com.google.gson.Gson;
 import com.sailthru.client.SailthruUtil;
 import com.sailthru.client.handler.JsonHandler;
 
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 /**
- *
  * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public class PurchaseItem {
@@ -16,16 +15,18 @@ public class PurchaseItem {
     protected String title;
     protected String price;
     protected String id;
-    protected String url;
+    protected String image;
     protected List tags;
+    protected String url;
     protected Map<String, Object> vars;
 
-    public PurchaseItem(Integer qty, String title, Integer price, String id, String url) {
+    public PurchaseItem(Integer qty, String title, Integer price, String id, String url, String image) {
         this.qty = qty.toString();
         this.title = title;
         this.price = price.toString();
         this.id = id;
         this.url = url;
+        this.image = image;
     }
 
     public PurchaseItem setTags(List<String> tags) {
@@ -42,6 +43,6 @@ public class PurchaseItem {
         Gson gson = SailthruUtil.createGson();
         String json = gson.toJson(this);
         JsonHandler handler = new JsonHandler();
-        return (Map<String, Object>)handler.parseResponse(json);
+        return (Map<String, Object>) handler.parseResponse(json);
     }
 }
