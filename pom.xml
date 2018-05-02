@@ -4,7 +4,7 @@
 
   <groupId>com.sailthru.client</groupId>
   <artifactId>sailthru-java-client</artifactId>
-  <version>1.4.0</version>
+  <version>1.5.0</version>
   <packaging>jar</packaging>
 
   <name>sailthru-java-client</name>
@@ -24,19 +24,6 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
-
-  <developers>
-    <developer>
-      <id>infynyxx</id>
-      <email>praj@sailthru.com</email>
-      <name>Prajwal Tuladhar</name>
-      <organization>Sailthru, Inc</organization>
-      <organizationUrl>https://www.sailthru.com</organizationUrl>
-      <roles>
-        <role>developer</role>
-      </roles>
-    </developer>
-  </developers>
 
   <organization>
     <name>Sailthru, Inc.</name>

@@ -67,7 +67,7 @@ public class PurchaseTest extends TestCase {
         adjustments.add(adjustmentItem);
         Purchase purchase = new Purchase();
         purchase.setAdjustments(adjustments);
-        String expected = "{\"adjustments\":[{\"title\":\"bar\",\"price\":1000}]}";
+        String expected = "{\"adjustments\":[{\"price\":1000,\"title\":\"bar\"}]}";
         String result = gson.toJson(purchase);
         assertEquals(expected, result);
     }
@@ -80,7 +80,7 @@ public class PurchaseTest extends TestCase {
         tenders.add(TenderItem);
         Purchase purchase = new Purchase();
         purchase.setTenders(tenders);
-        String expected = "{\"tenders\":[{\"title\":\"bar\",\"price\":1000}]}";
+        String expected = "{\"tenders\":[{\"price\":1000,\"title\":\"bar\"}]}";
         String result = gson.toJson(purchase);
         assertEquals(expected, result);
     }
