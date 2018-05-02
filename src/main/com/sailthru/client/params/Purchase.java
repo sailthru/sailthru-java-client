@@ -37,6 +37,9 @@ public class Purchase extends AbstractApiParams implements ApiParams {
     protected List<Map<String, Object>> adjustments;
     protected Map<String, Object> vars;
 
+    @SerializedName("purchase_keys")
+    protected Map<String, String> purchaseKeys;
+
     public Purchase setEmail(String email) {
         this.email = email;
         return this;
@@ -108,6 +111,11 @@ public class Purchase extends AbstractApiParams implements ApiParams {
     public Type getType() {
         Type type = new TypeToken<Purchase>() {}.getType();
         return type;
+    }
+
+    public Purchase setPurchaseKeys(Map<String, String> purchaseKeys) {
+        this.purchaseKeys = purchaseKeys;
+        return this;
     }
 
     @Override

@@ -49,6 +49,16 @@ public class PurchaseTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    public void testSetPurchaseKeys() {
+        Map<String, String> purchaseKeys = new HashMap<String, String>();
+        purchaseKeys.put("extid", "123");
+        Purchase purchase = new Purchase();
+        purchase.setPurchaseKeys(purchaseKeys);
+        String expected = "{\"purchase_keys\":{\"extid\":\"123\"}}";
+        String result = gson.toJson(purchase);
+        assertEquals(expected, result);
+    }
+
     public void testAdjustments() {
         Map<String, Object> adjustmentItem = new HashMap<String, Object>();
         adjustmentItem.put("title", "bar");
