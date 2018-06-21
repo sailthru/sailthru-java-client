@@ -1,6 +1,7 @@
 package com.sailthru.client.params;
 
 import com.google.gson.reflect.TypeToken;
+
 import java.lang.reflect.Type;
 import java.util.Date;
 

@@ -5,10 +5,6 @@ import com.sailthru.client.exceptions.ApiException;
 import com.sailthru.client.exceptions.ResourceNotFoundException;
 import com.sailthru.client.exceptions.UnAuthorizedException;
 import com.sailthru.client.handler.SailthruResponseHandler;
-import java.io.IOException;
-import java.util.Date;
-import java.util.Map;
-
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -17,6 +13,10 @@ import org.apache.http.client.ResponseHandler;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.util.Date;
+import java.util.Map;
 
 /**
  *

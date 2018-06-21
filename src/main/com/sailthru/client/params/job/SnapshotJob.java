@@ -2,8 +2,8 @@ package com.sailthru.client.params.job;
 
 import com.google.gson.reflect.TypeToken;
 import com.sailthru.client.params.query.Query;
+
 import java.lang.reflect.Type;
-import java.util.HashMap;
 import java.util.Map;
 
 /**

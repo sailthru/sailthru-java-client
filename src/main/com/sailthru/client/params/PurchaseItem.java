@@ -4,8 +4,8 @@ import com.google.gson.Gson;
 import com.sailthru.client.SailthruUtil;
 import com.sailthru.client.handler.JsonHandler;
 
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 /**
  *

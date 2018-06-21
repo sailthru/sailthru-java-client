@@ -4,14 +4,14 @@ import com.google.gson.Gson;
 import com.sailthru.client.SailthruUtil;
 import junit.framework.TestCase;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.TimeZone;
-
-import java.text.*;
 
 public class PurchaseTest extends TestCase {
     Gson gson = SailthruUtil.createGson();

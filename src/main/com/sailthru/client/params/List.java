@@ -1,11 +1,10 @@
 package com.sailthru.client.params;
 
-import com.sailthru.client.ApiAction;
 import com.google.gson.reflect.TypeToken;
+import com.sailthru.client.ApiAction;
 import com.sailthru.client.params.query.Query;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 
 /**
  *

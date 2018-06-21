@@ -1,8 +1,26 @@
 package com.sailthru.client;
 
 import com.sailthru.client.handler.response.JsonResponse;
-import com.sailthru.client.params.*;
-import com.sailthru.client.params.job.*;
+import com.sailthru.client.params.Alert;
+import com.sailthru.client.params.Blast;
+import com.sailthru.client.params.BlastStat;
+import com.sailthru.client.params.Content;
+import com.sailthru.client.params.Email;
+import com.sailthru.client.params.Event;
+import com.sailthru.client.params.ListStat;
+import com.sailthru.client.params.MultiSend;
+import com.sailthru.client.params.Purchase;
+import com.sailthru.client.params.Send;
+import com.sailthru.client.params.Stats;
+import com.sailthru.client.params.Template;
+import com.sailthru.client.params.User;
+import com.sailthru.client.params.job.BlastQueryJob;
+import com.sailthru.client.params.job.ExportListDataJob;
+import com.sailthru.client.params.job.ImportJob;
+import com.sailthru.client.params.job.Job;
+import com.sailthru.client.params.job.SnapshotJob;
+import com.sailthru.client.params.job.UpdateJob;
+
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;

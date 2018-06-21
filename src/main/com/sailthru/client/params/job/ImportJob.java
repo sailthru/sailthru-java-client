@@ -3,11 +3,12 @@ package com.sailthru.client.params.job;
 import com.google.gson.reflect.TypeToken;
 import com.sailthru.client.SailthruUtil;
 import com.sailthru.client.params.ApiFileParams;
+
 import java.io.File;
-import java.util.List;
-import java.util.Map;
 import java.lang.reflect.Type;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *

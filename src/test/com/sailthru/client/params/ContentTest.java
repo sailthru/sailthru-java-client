@@ -4,10 +4,15 @@ import com.google.gson.Gson;
 import com.sailthru.client.SailthruUtil;
 import junit.framework.TestCase;
 
-import java.util.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
-
-import java.text.*;
+import java.util.Map;
+import java.util.TimeZone;
 
 public class ContentTest extends TestCase {
     Gson gson = SailthruUtil.createGson();
@@ -80,7 +85,7 @@ public class ContentTest extends TestCase {
 
     public void testSetVars(){
         Content content = new Content();
-        Map<String, Object> vars = new HashMap<String, Object>();
+        Map<String, Object> vars = new LinkedHashMap<String, Object>();
         vars.put("test","result");
         vars.put("test2","result2");
         vars.put("test3","result3");
@@ -111,10 +116,10 @@ public class ContentTest extends TestCase {
 
     public void testSetImages() {
         Content content = new Content();
-        Map<String, Map<String, String>> images = new HashMap<String, Map<String, String>>();
-        Map<String, String> fullUrl = new HashMap<String, String>();
+        Map<String, Map<String, String>> images = new LinkedHashMap<String, Map<String, String>>();
+        Map<String, String> fullUrl = new LinkedHashMap<String, String>();
         fullUrl.put("url", "https://images.google.com/abc");
-        Map<String, String> thumbUrl = new HashMap<String, String>();
+        Map<String, String> thumbUrl = new LinkedHashMap<String, String>();
         thumbUrl.put("url", "https://images.google.com/def");
         images.put("full", fullUrl);
         images.put("thumb", thumbUrl);

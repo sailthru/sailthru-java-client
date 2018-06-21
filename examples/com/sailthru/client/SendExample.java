@@ -3,7 +3,7 @@ package com.sailthru.client;
 import com.sailthru.client.exceptions.ApiException;
 import com.sailthru.client.handler.response.JsonResponse;
 import com.sailthru.client.params.Send;
-import com.sailthru.client.params.User;
+
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;

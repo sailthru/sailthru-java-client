@@ -2,9 +2,11 @@ package com.sailthru.client.params;
 
 import com.google.gson.reflect.TypeToken;
 import com.sailthru.client.ApiAction;
+
 import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -24,7 +26,7 @@ public class Send extends AbstractApiParams implements ApiParams {
     protected Map<String, Object> limit;
 
     public Send() {
-        this.options = new HashMap<String, Object>();
+        this.options = new LinkedHashMap<String, Object>();
     }
 
     public Send setSendId(String sendId) {
@@ -111,7 +113,7 @@ public class Send extends AbstractApiParams implements ApiParams {
     }
 
     public Send setScheduleTime(Object startTime, Object endTime) {
-        Map<String, Object> scheduleTime = new HashMap<String, Object>();
+        Map<String, Object> scheduleTime = new LinkedHashMap<String, Object>();
         if (startTime instanceof String || startTime instanceof Number) {
             scheduleTime.put("start_time", startTime);
         }

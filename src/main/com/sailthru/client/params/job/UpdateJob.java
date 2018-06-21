@@ -1,7 +1,6 @@
 package com.sailthru.client.params.job;
 
 import com.google.gson.reflect.TypeToken;
-
 import com.sailthru.client.SailthruUtil;
 import com.sailthru.client.params.ApiFileParams;
 import com.sailthru.client.params.query.Query;

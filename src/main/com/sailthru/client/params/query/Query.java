@@ -1,10 +1,10 @@
 package com.sailthru.client.params.query;
 
-import java.util.ArrayList;
 import com.google.gson.Gson;
 import com.sailthru.client.SailthruUtil;
 import com.sailthru.client.handler.JsonHandler;
-import java.util.HashMap;
+
+import java.util.ArrayList;
 import java.util.Map;
 
 /**

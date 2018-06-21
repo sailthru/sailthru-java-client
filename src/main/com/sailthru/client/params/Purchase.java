@@ -1,14 +1,14 @@
 package com.sailthru.client.params;
 
-import com.google.gson.reflect.TypeToken;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
 import com.sailthru.client.ApiAction;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 /**
  *

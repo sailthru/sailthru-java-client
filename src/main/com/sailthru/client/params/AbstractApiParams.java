@@ -3,7 +3,7 @@ package com.sailthru.client.params;
 import com.google.gson.Gson;
 import com.sailthru.client.SailthruUtil;
 import com.sailthru.client.handler.JsonHandler;
-import java.util.HashMap;
+
 import java.util.Map;
 
 /**

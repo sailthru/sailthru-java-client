@@ -2,12 +2,13 @@ package com.sailthru.client.params;
 
 import com.google.gson.reflect.TypeToken;
 import com.sailthru.client.ApiAction;
+
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
-import java.util.ArrayList;
+import java.util.Map;
 
 /**
  *

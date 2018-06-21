@@ -4,12 +4,13 @@ import com.sailthru.client.exceptions.ApiException;
 import com.sailthru.client.handler.response.JsonResponse;
 import com.sailthru.client.params.Purchase;
 import com.sailthru.client.params.PurchaseItem;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 public class PurchaseExample {
 

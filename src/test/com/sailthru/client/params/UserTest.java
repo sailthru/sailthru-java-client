@@ -25,9 +25,10 @@ package com.sailthru.client.params;
 
 import com.google.gson.Gson;
 import com.sailthru.client.SailthruUtil;
+import junit.framework.TestCase;
+
 import java.util.HashMap;
 import java.util.Map;
-import junit.framework.TestCase;
 
 /**
  *
