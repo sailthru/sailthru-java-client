@@ -2,9 +2,10 @@ package com.sailthru.client.params;
 
 import com.google.gson.reflect.TypeToken;
 import com.sailthru.client.ApiAction;
+
 import java.lang.reflect.Type;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -24,7 +25,7 @@ public class Send extends AbstractApiParams implements ApiParams {
     protected Map<String, Object> limit;
 
     public Send() {
-        this.options = new HashMap<String, Object>();
+        this.options = new LinkedHashMap<String, Object>();
     }
 
     public Send setSendId(String sendId) {
@@ -58,20 +59,20 @@ public class Send extends AbstractApiParams implements ApiParams {
     }
 
     public Send setLimit(String name) {
-        this.limit = new HashMap<String, Object>();
+        this.limit = new LinkedHashMap<String, Object>();
         this.limit.put("name",name);
         return this;
     }
 
     public Send setLimit(String name, String within_time) {
-        this.limit = new HashMap<String, Object>();
+        this.limit = new LinkedHashMap<String, Object>();
         this.limit.put("name",name);
         this.limit.put("within_time",within_time);
         return this;
     }
 
     public Send setLimit(String name, String within_time, String conflict) {
-        this.limit = new HashMap<String, Object>();
+        this.limit = new LinkedHashMap<String, Object>();
         this.limit.put("name",name);
         this.limit.put("within_time",within_time);
         this.limit.put("conflict",conflict);
@@ -93,12 +94,12 @@ public class Send extends AbstractApiParams implements ApiParams {
     }
 
     public Send setScheduleTime(Map<String, Object> scheduleTime) {
-        this.schedule_time = (Object) scheduleTime;
+        this.schedule_time = scheduleTime;
         return this;
     }
 
     public Send setScheduleTime(Object startTime, Object endTime, String method) {
-        Map<String, Object> scheduleTime = new HashMap<String, Object>();
+        Map<String, Object> scheduleTime = new LinkedHashMap<String, Object>();
         if (startTime instanceof String || startTime instanceof Number) {
             scheduleTime.put("start_time", startTime);
         }
@@ -106,19 +107,19 @@ public class Send extends AbstractApiParams implements ApiParams {
             scheduleTime.put("end_time", endTime);
         }
         scheduleTime.put("method", method);
-        this.schedule_time = (Object) scheduleTime;
+        this.schedule_time = scheduleTime;
         return this;
     }
 
     public Send setScheduleTime(Object startTime, Object endTime) {
-        Map<String, Object> scheduleTime = new HashMap<String, Object>();
+        Map<String, Object> scheduleTime = new LinkedHashMap<String, Object>();
         if (startTime instanceof String || startTime instanceof Number) {
             scheduleTime.put("start_time", startTime);
         }
         if (endTime instanceof String || endTime instanceof Number) {
             scheduleTime.put("end_time", endTime);
         }
-        this.schedule_time = (Object) scheduleTime;
+        this.schedule_time = scheduleTime;
         return this;
     }
 
