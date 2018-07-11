@@ -1,11 +1,13 @@
 package com.sailthru.client;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
 import com.sailthru.client.http.SailthruHttpClient;
 import com.sailthru.client.params.Send;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpRequest;
 import org.apache.http.ProtocolVersion;
+import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.entity.BasicHttpEntity;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
@@ -20,13 +22,17 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Date;
+import java.util.Map;
 
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -41,7 +47,7 @@ public class AbstractSailthruClientTest {
 
         httpClient = new SailthruHttpClient(mockConnManager, mockHttpParams);
         httpClient = spy(httpClient);
-        sailthruClient = new DummySailthruClient("api_key", "secret", "http://api.sailthru.com");
+        sailthruClient = new DummySailthruClient("api_key", "secret", "https://api.sailthru.com");
         sailthruClient.setSailthruHttpClient(httpClient);
     }
 
@@ -79,10 +85,21 @@ public class AbstractSailthruClientTest {
         Date listResetDate = new Date(listResetTs);
         CloseableHttpResponse listHttpResponse = getMockHttpResponseWithRateLimitHeaders(listLimit, listRemaining, listResetDate);
 
-        doReturn(sendHttpResponse).doReturn(listHttpResponse).when(httpClient).execute(any(HttpHost.class), any(HttpRequest.class), any(HttpContext.class));
+        // return is interesting to test because the enum name is upper case
+        int returnLimit = 10;
+        int returnRemaining = 1;
+        long returnResetTs = ((new Date().getTime() / 1000) * 1000) + 40000; // for testing sake, pretend for this call the top of the next minute is 40 seconds from now
+        Date returnResetDate = new Date(returnResetTs);
+        CloseableHttpResponse returnHttpResponse = getMockHttpResponseWithRateLimitHeaders(returnLimit, returnRemaining, returnResetDate);
+
+        doReturn(sendHttpResponse).doReturn(listHttpResponse)
+                                  .doReturn(returnHttpResponse)
+                                  .when(httpClient)
+                                  .execute(any(HttpHost.class), any(HttpRequest.class), any(HttpContext.class));
 
         sailthruClient.apiGet(ApiAction.send, ImmutableMap.<String,Object>of(Send.PARAM_SEND_ID, "some valid send id"));
         sailthruClient.apiGet(ApiAction.list, ImmutableMap.<String,Object>of("list", "some list"));
+        sailthruClient.apiPost(ApiAction.RETURN, ImmutableMap.of("email", "foo@bar.com", "items", Collections.emptyList()));
 
         LastRateLimitInfo sendRateLimitInfo = sailthruClient.getLastRateLimitInfo(ApiAction.send, AbstractSailthruClient.HttpRequestMethod.GET);
         assertEquals(sendLimit, sendRateLimitInfo.getLimit());
@@ -93,6 +110,11 @@ public class AbstractSailthruClientTest {
         assertEquals(listLimit, listRateLimitInfo.getLimit());
         assertEquals(listRemaining, listRateLimitInfo.getRemaining());
         assertEquals(listResetDate, listRateLimitInfo.getReset());
+
+        LastRateLimitInfo returnRateLimitInfo = sailthruClient.getLastRateLimitInfo(ApiAction.RETURN, AbstractSailthruClient.HttpRequestMethod.POST);
+        assertEquals(returnLimit, returnRateLimitInfo.getLimit());
+        assertEquals(returnRemaining, returnRateLimitInfo.getRemaining());
+        assertEquals(returnResetDate, returnRateLimitInfo.getReset());
     }
 
     @Test
@@ -125,6 +147,15 @@ public class AbstractSailthruClientTest {
         assertEquals(postLimit, postRateLimitInfo.getLimit());
         assertEquals(postRemaining, postRateLimitInfo.getRemaining());
         assertEquals(postResetDate, postRateLimitInfo.getReset());
+    }
+
+    @Test
+    public void testReturnUrl() throws IOException {
+        CloseableHttpResponse response = getMockHttpResponseWithRateLimitHeaders(1, 1, new Date());
+        doReturn(response).when(httpClient).execute(any(HttpHost.class), any(HttpRequest.class), any(HttpContext.class));
+        sailthruClient.apiPost(ApiAction.RETURN, Collections.<String, Object>emptyMap());
+        verify(httpClient).executeHttpRequest(eq("https://api.sailthru.com/return"), eq(AbstractSailthruClient.HttpRequestMethod.POST),
+            any(Map.class), any(ResponseHandler.class), any(Map.class));
     }
 
     private CloseableHttpResponse getMockHttpResponseWithRateLimitHeaders(int limit, int remaining, Date reset) {

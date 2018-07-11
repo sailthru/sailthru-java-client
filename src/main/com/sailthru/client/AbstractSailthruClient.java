@@ -151,7 +151,7 @@ public abstract class AbstractSailthruClient {
      * @throws IOException
      */
     protected Object httpRequest(ApiAction action, HttpRequestMethod method, Map<String, Object> data) throws IOException {
-        String url = this.apiUrl + "/" + action.toString();
+        String url = this.apiUrl + "/" + action.toString().toLowerCase();
         Type type = new TypeToken<Map<String, Object>>() {}.getType();
         String json = GSON.toJson(data, type);
         Map<String, String> params = buildPayload(json);
@@ -169,7 +169,7 @@ public abstract class AbstractSailthruClient {
      */
     protected Object httpRequest(HttpRequestMethod method, ApiParams apiParams) throws IOException {
         ApiAction action = apiParams.getApiCall();
-        String url = apiUrl + "/" + action.toString();
+        String url = apiUrl + "/" + action.toString().toLowerCase();
         String json = GSON.toJson(apiParams, apiParams.getType());
         Map<String, String> params = buildPayload(json);
         Object response = httpClient.executeHttpRequest(url, method, params, handler, customHeaders);
@@ -187,7 +187,7 @@ public abstract class AbstractSailthruClient {
      */
     protected Object httpRequest(HttpRequestMethod method, ApiParams apiParams, ApiFileParams fileParams) throws IOException {
         ApiAction action = apiParams.getApiCall();
-        String url = apiUrl + "/" + action.toString();
+        String url = apiUrl + "/" + action.toString().toLowerCase();
         String json = GSON.toJson(apiParams, apiParams.getType());
         Map<String, String> params = buildPayload(json);
         Object response = httpClient.executeHttpRequest(url, method, params, fileParams.getFileParams(), handler, customHeaders);
