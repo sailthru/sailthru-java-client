@@ -28,6 +28,7 @@ import com.sailthru.client.SailthruUtil;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TimeZone;
 import junit.framework.TestCase;
@@ -82,14 +83,14 @@ public class SendTest extends TestCase {
     }
 
     public void testSetVars(){
-        Map<String, Object> vars = new HashMap<String, Object>();
+        Map<String, Object> vars = new LinkedHashMap<String, Object>();
         vars.put("foo", "bar");
-        Map<String, Object> examplemap = new HashMap<String, Object>();
+        Map<String, Object> examplemap = new LinkedHashMap<String, Object>();
         examplemap.put("nullvalue", null);
         vars.put("example map", examplemap);
         send.setVars(vars);
 
-        String expected = "{\"vars\":{\"example map\":{\"nullvalue\":null},\"foo\":\"bar\"},\"options\":{}}";
+        String expected = "{\"vars\":{\"foo\":\"bar\",\"example map\":{\"nullvalue\":null}},\"options\":{}}";
         String result = gson.toJson(send);
         assertEquals(expected, result);
     }
@@ -114,15 +115,15 @@ public class SendTest extends TestCase {
         send.setLimit("limit name", "within time", "update");
 
         String result = gson.toJson(send);
-        String expected = "{\"options\":{},\"limit\":{\"name\":\"limit name\",\"conflict\":\"update\",\"within_time\":\"within time\"}}";
+        String expected = "{\"options\":{},\"limit\":{\"name\":\"limit name\",\"within_time\":\"within time\",\"conflict\":\"update\"}}";
         assertEquals(expected, result);
     }
 
     public void testSetLimitMap(){
-        Map<String, Object> limit = new HashMap<String, Object>();
+        Map<String, Object> limit = new LinkedHashMap<String, Object>();
         limit.put("name", "limit name");
-        limit.put("within_time", "some amount of time");
         limit.put("conflict", "update");
+        limit.put("within_time", "some amount of time");
         send.setLimit(limit);
 
         String expected = "{\"options\":{},\"limit\":{\"name\":\"limit name\",\"conflict\":\"update\",\"within_time\":\"some amount of time\"}}";
@@ -150,13 +151,13 @@ public class SendTest extends TestCase {
     }
 
     public void testSetScheduleTimeMap(){
-        Map<String, Object> date = new HashMap<String, Object>();
+        Map<String, Object> date = new LinkedHashMap<String, Object>();
         date.put("start_time", "+1 hour");
         date.put("end_time", "+10 hours");
         date.put("method","email");
         send.setScheduleTime(date);
 
-        String expected = "{\"schedule_time\":{\"end_time\":\"+10 hours\",\"start_time\":\"+1 hour\",\"method\":\"email\"},\"options\":{}}";
+        String expected = "{\"schedule_time\":{\"start_time\":\"+1 hour\",\"end_time\":\"+10 hours\",\"method\":\"email\"},\"options\":{}}";
         String result = gson.toJson(send);
         assertEquals(expected, result);
     }
@@ -164,7 +165,7 @@ public class SendTest extends TestCase {
     public void testSetScheduleTimeObjectObjectString(){
         send.setScheduleTime("+1 hour","+ 5 hours", "email");
 
-        String expected = "{\"schedule_time\":{\"end_time\":\"+ 5 hours\",\"start_time\":\"+1 hour\",\"method\":\"email\"},\"options\":{}}";
+        String expected = "{\"schedule_time\":{\"start_time\":\"+1 hour\",\"end_time\":\"+ 5 hours\",\"method\":\"email\"},\"options\":{}}";
         String result = gson.toJson(send);
         assertEquals(expected, result);
     }
@@ -172,7 +173,7 @@ public class SendTest extends TestCase {
     public void testSetScheduleTimeObjectObject(){
         send.setScheduleTime("+1 hour", "+5 hours");
 
-        String expected = "{\"schedule_time\":{\"end_time\":\"+5 hours\",\"start_time\":\"+1 hour\"},\"options\":{}}";
+        String expected = "{\"schedule_time\":{\"start_time\":\"+1 hour\",\"end_time\":\"+5 hours\"},\"options\":{}}";
         String result = gson.toJson(send);
         assertEquals(expected, result);
     }

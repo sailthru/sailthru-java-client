@@ -22,5 +22,6 @@ public enum ApiAction {
     job,
     trigger,
     inbox,
-    user
+    user,
+    RETURN // the case is inconsistent, but "return" is a reserved keyword
 }
