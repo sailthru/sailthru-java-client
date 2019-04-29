@@ -154,4 +154,22 @@ public class PurchaseTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    public void testSetChannel() {
+        Purchase purchase = new Purchase();
+        purchase.setChannel(Purchase.Channel.online);
+        String expected = "{\"channel\":\"online\"}";
+        String result = gson.toJson(purchase);
+        assertEquals(expected, result);
+    }
+
+    public void testSetChannelApp() {
+        Purchase purchase = new Purchase();
+        purchase.setChannel(Purchase.Channel.app);
+        purchase.setAppId("applesfghidodkdjfhikodie");
+        purchase.setDeviceId("deviceid");
+        String expected = "{\"channel\":\"app\",\"app_id\":\"applesfghidodkdjfhikodie\",\"device_id\":\"deviceid\"}";
+        String result = gson.toJson(purchase);
+        assertEquals(expected, result);
+    }
+
 }
