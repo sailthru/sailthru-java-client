@@ -1,20 +1,19 @@
 package com.sailthru.client.params;
 
-import com.google.gson.reflect.TypeToken;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
 import com.sailthru.client.ApiAction;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
-/**
- *
- * @author Prajwal Tuladhar <praj@sailthru.com>
- */
 public class Purchase extends AbstractApiParams implements ApiParams {
+
+    public enum Channel {app, offline, online}
+
     protected String email;
     protected List<Map<String, Object>> items;
     protected Integer incomplete;
@@ -39,6 +38,15 @@ public class Purchase extends AbstractApiParams implements ApiParams {
 
     @SerializedName("purchase_keys")
     protected Map<String, String> purchaseKeys;
+
+    @SerializedName("channel")
+    protected Channel channel;
+
+    @SerializedName("app_id")
+    protected String appId;
+
+    @SerializedName("device_id")
+    protected String deviceId;
 
     public Purchase setEmail(String email) {
         this.email = email;
@@ -118,8 +126,36 @@ public class Purchase extends AbstractApiParams implements ApiParams {
         return this;
     }
 
+    public Channel getChannel() {
+        return channel;
+    }
+
+    public Purchase setChannel(Channel channel) {
+        this.channel = channel;
+        return this;
+    }
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public Purchase setAppId(String appId) {
+        this.appId = appId;
+        return this;
+    }
+
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    public Purchase setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
+        return this;
+    }
+
     @Override
     public ApiAction getApiCall() {
         return ApiAction.purchase;
     }
+
 }
