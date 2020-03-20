@@ -1,5 +1,6 @@
 package com.sailthru.client;
 
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.junit.Test;
@@ -17,6 +18,10 @@ public class SailthruHttpClientConfigurationTest {
         HttpParams params = client.httpClient.getParams();
         assertEquals("connection timeout", httpClientConfiguration.getConnectionTimeout(), HttpConnectionParams.getConnectionTimeout(params));
         assertEquals("socket timeout", httpClientConfiguration.getSoTimeout(), HttpConnectionParams.getSoTimeout(params));
+
+        ThreadSafeClientConnManager connManager = (ThreadSafeClientConnManager) client.httpClient.getConnectionManager();
+        assertEquals("max total connections", httpClientConfiguration.getMaxTotalConnections(), connManager.getMaxTotal());
+        assertEquals("default max connections per route", httpClientConfiguration.getDefaultMaxConnectionsPerRoute(), connManager.getDefaultMaxPerRoute());
     }
 
     private static class CustomSailthruHttpClientConfiguration implements SailthruHttpClientConfiguration {
@@ -35,6 +40,16 @@ public class SailthruHttpClientConfigurationTest {
 
         public boolean getTcpNoDelay() {
             return false;
+        }
+
+        @Override
+        public int getMaxTotalConnections() {
+            return 100;
+        }
+
+        @Override
+        public int getDefaultMaxConnectionsPerRoute() {
+            return 20;
         }
     }
 }
