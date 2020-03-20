@@ -1,30 +1,40 @@
 package com.sailthru.client;
 
 /**
- * Interface for providing different options to customize HTTP specific flags
+ * Interface for customizing some HTTP client settings.
+ *
+ * {@link DefaultSailthruHttpClientConfiguration} provides default values but
+ * users may want to override those defaults by extending it or implementing
+ * this interface.
  */
 public interface SailthruHttpClientConfiguration {
     /**
-     * get connection timeout in milli seconds
-     * @return
+     * @return connection timeout in milliseconds
      */
     int getConnectionTimeout();
 
     /**
-     * get socket timeout in milli seconds
-     * @return
+     * @return socket timeout in milliseconds
      */
     int getSoTimeout();
 
     /**
-     * get socket reuse address boolean flag
-     * @return
+     * @return socket reuse address boolean flag
      */
     boolean getSoReuseaddr();
 
     /**
-     * get tcp no delay boolean flag
-     * @return
+     * @return TCP_NODELAY boolean setting
      */
     boolean getTcpNoDelay();
+
+    /**
+     * @return connection pool max total
+     */
+    int getMaxTotalConnections();
+
+    /**
+     * @return connection pool max per route
+     */
+    int getDefaultMaxConnectionsPerRoute();
 }

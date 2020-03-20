@@ -32,7 +32,7 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
 
 /**
- * Abstract class exposing genric API calls for Sailthru API as per http://docs.sailthru.com/api
+ * Abstract class exposing generic API calls for Sailthru API as per http://docs.sailthru.com/api
  * @author Prajwal Tuladhar <praj@sailthru.com>
  */
 public abstract class AbstractSailthruClient {
@@ -112,6 +112,8 @@ public abstract class AbstractSailthruClient {
         schemeRegistry.register(getScheme());
 
         ThreadSafeClientConnManager connManager = new ThreadSafeClientConnManager(schemeRegistry);
+        connManager.setMaxTotal(sailthruHttpClientConfiguration.getMaxTotalConnections());
+        connManager.setDefaultMaxPerRoute(sailthruHttpClientConfiguration.getDefaultMaxConnectionsPerRoute());
         return new SailthruHttpClient(connManager, params);
     }
 
