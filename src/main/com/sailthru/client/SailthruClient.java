@@ -458,6 +458,10 @@ public class SailthruClient extends AbstractSailthruClient {
         return apiPost(job, job);
     }
 
+    public JsonResponse processPurchaseImportJob(PurchaseImportJob job) throws IOException {
+        return apiPost(job, job);
+    }
+
     public JsonResponse getUser(User user) throws IOException {
         return apiGet(user);
     }
