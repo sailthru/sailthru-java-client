@@ -11,12 +11,6 @@
   <description>Java client library for Sailthru API</description>
   <url>http://getstarted.sailthru.com/</url>
 
-  <parent>
-    <groupId>org.sonatype.oss</groupId>
-    <artifactId>oss-parent</artifactId>
-    <version>7</version>
-  </parent>
-
   <organization>
     <name>Sailthru, Inc.</name>
     <url>https://www.sailthru.com</url>
