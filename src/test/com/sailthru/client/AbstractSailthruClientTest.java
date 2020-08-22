@@ -1,7 +1,6 @@
 package com.sailthru.client;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Lists;
 import com.sailthru.client.http.SailthruHttpClient;
 import com.sailthru.client.params.Send;
 import org.apache.http.HttpHost;
@@ -18,7 +17,7 @@ import org.apache.http.protocol.HttpContext;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -26,9 +25,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
 
-import static junit.framework.Assert.assertEquals;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -59,7 +58,7 @@ public class AbstractSailthruClientTest {
         long resetTs = ((new Date().getTime() / 1000) * 1000) + 18000; // pretend the top of the next minute is 18 seconds from now
         Date resetDate = new Date(resetTs);
         CloseableHttpResponse httpResponse = getMockHttpResponseWithRateLimitHeaders(limit, remaining, resetDate);
-        doReturn(httpResponse).when(httpClient).execute(any(HttpHost.class), any(HttpRequest.class), any(HttpContext.class));
+        doReturn(httpResponse).when(httpClient).execute(any(HttpHost.class), any(HttpRequest.class), (HttpContext)any());
 
         sailthruClient.apiGet(ApiAction.send, ImmutableMap.<String,Object>of(Send.PARAM_SEND_ID, "some valid send id"));
 
@@ -95,7 +94,7 @@ public class AbstractSailthruClientTest {
         doReturn(sendHttpResponse).doReturn(listHttpResponse)
                                   .doReturn(returnHttpResponse)
                                   .when(httpClient)
-                                  .execute(any(HttpHost.class), any(HttpRequest.class), any(HttpContext.class));
+                                  .execute(any(HttpHost.class), any(HttpRequest.class), (HttpContext)any());
 
         sailthruClient.apiGet(ApiAction.send, ImmutableMap.<String,Object>of(Send.PARAM_SEND_ID, "some valid send id"));
         sailthruClient.apiGet(ApiAction.list, ImmutableMap.<String,Object>of("list", "some list"));
@@ -133,7 +132,7 @@ public class AbstractSailthruClientTest {
         Date postResetDate = new Date(postResetTs);
         CloseableHttpResponse postHttpResponse = getMockHttpResponseWithRateLimitHeaders(postLimit, postRemaining, postResetDate);
 
-        doReturn(getHttpResponse).doReturn(postHttpResponse).when(httpClient).execute(any(HttpHost.class), any(HttpRequest.class), any(HttpContext.class));
+        doReturn(getHttpResponse).doReturn(postHttpResponse).when(httpClient).execute(any(HttpHost.class), any(HttpRequest.class), (HttpContext)any());
 
         sailthruClient.apiGet(ApiAction.list, ImmutableMap.<String,Object>of("list", "some list"));
         sailthruClient.apiPost(ApiAction.list, ImmutableMap.<String,Object>of("list", "some new list"));
@@ -152,10 +151,10 @@ public class AbstractSailthruClientTest {
     @Test
     public void testReturnUrl() throws IOException {
         CloseableHttpResponse response = getMockHttpResponseWithRateLimitHeaders(1, 1, new Date());
-        doReturn(response).when(httpClient).execute(any(HttpHost.class), any(HttpRequest.class), any(HttpContext.class));
+        doReturn(response).when(httpClient).execute(any(HttpHost.class), any(HttpRequest.class), (HttpContext)any());
         sailthruClient.apiPost(ApiAction.RETURN, Collections.<String, Object>emptyMap());
         verify(httpClient).executeHttpRequest(eq("https://api.sailthru.com/return"), eq(AbstractSailthruClient.HttpRequestMethod.POST),
-            any(Map.class), any(ResponseHandler.class), any(Map.class));
+            any(Map.class), any(ResponseHandler.class), (Map)any());
     }
 
     private CloseableHttpResponse getMockHttpResponseWithRateLimitHeaders(int limit, int remaining, Date reset) {

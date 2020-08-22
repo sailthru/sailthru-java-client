@@ -2,9 +2,10 @@ package com.sailthru.client.params;
 
 import com.google.gson.reflect.TypeToken;
 import com.sailthru.client.ApiAction;
+import com.sailthru.client.SailthruUtil;
+
 import java.lang.reflect.Type;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class Content extends AbstractApiParams implements ApiParams {
     protected String title;
     protected String date;
     protected String expire_date;
-    protected List tags;
+    protected List<String> tags;
     protected Map<String, Object> vars;
     protected Map<String, Map<String, String>> images;
     protected List<Double> location;
@@ -112,22 +113,12 @@ public class Content extends AbstractApiParams implements ApiParams {
     }
 
     public Content setFullImage(String url) {
-        if (images == null) {
-            images = new HashMap<String, Map<String, String>>();
-        }
-        Map<String, String> urlMap = new HashMap<String, String>();
-        urlMap.put("url", url);
-        images.put("full", urlMap);
+        this.images = SailthruUtil.putImage(this.images, "full", url);
         return this;
     }
 
     public Content setThumbImage(String url) {
-        if (images == null) {
-            images = new HashMap<String, Map<String, String>>();
-        }
-        Map<String, String> urlMap = new HashMap<String, String>();
-        urlMap.put("url", url);
-        images.put("thumb", urlMap);
+        this.images = SailthruUtil.putImage(this.images, "thumb", url);
         return this;
     }
 
