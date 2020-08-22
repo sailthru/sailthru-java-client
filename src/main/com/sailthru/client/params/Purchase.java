@@ -48,6 +48,9 @@ public class Purchase extends AbstractApiParams implements ApiParams {
     @SerializedName("device_id")
     protected String deviceId;
 
+    @SerializedName("user_agent")
+    protected String userAgent;
+
     public Purchase setEmail(String email) {
         this.email = email;
         return this;
@@ -150,6 +153,15 @@ public class Purchase extends AbstractApiParams implements ApiParams {
 
     public Purchase setDeviceId(String deviceId) {
         this.deviceId = deviceId;
+        return this;
+    }
+
+    public String getUserAgent() {
+        return userAgent;
+    }
+
+    public Purchase setUserAgent(String userAgent) {
+        this.userAgent = userAgent;
         return this;
     }
 

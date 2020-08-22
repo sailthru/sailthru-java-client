@@ -54,4 +54,23 @@ public class SailthruUtil {
                 .registerTypeHierarchyAdapter(Map.class, new NullSerializingMapTypeAdapter())
                 .create();
     }
+
+    /**
+     * Add a new image entry to the images map.
+     *
+     * @param images map containing the references of images. Can be null, in that case the returned map will be a new instance with the entry
+     * @param key key for the map, either "full" or "thumb"
+     * @param url url for the image to use
+     * @return a new map instance of the images parameter was null otherwise the updated map.
+     */
+    public static Map<String, Map<String, String>> putImage(Map<String, Map<String, String>> images, String key, String url) {
+        if (images == null) {
+            images = new HashMap<String, Map<String, String>>();
+        }
+        Map<String, String> urlMap = new HashMap<String, String>();
+        urlMap.put("url", url);
+        images.put(key, urlMap);
+        return images;
+    }
+
 }
