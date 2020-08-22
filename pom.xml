@@ -15,6 +15,15 @@
     <name>Sailthru, Inc.</name>
     <url>https://www.sailthru.com</url>
   </organization>
+  <developers>
+    <developer>
+      <id>sailthru</id>
+      <name>Sailthru Engineering</name>
+      <email>support@sailthru.com</email>
+      <organization>Sailthru, Inc.</organization>
+      <organizationUrl>https://www.sailthru.com</organizationUrl>
+    </developer>
+  </developers>
   <licenses>
     <license>
       <name>MIT License</name>
