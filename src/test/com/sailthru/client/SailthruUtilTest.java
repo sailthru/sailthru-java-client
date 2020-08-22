@@ -77,12 +77,31 @@ public class SailthruUtilTest {
     @Test
     public void testGsonNull() {
         gson = SailthruUtil.createGson();
-        Map map = new HashMap();
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("baz", null);
         
         String expected = "{\"baz\":null}";
         String result = gson.toJson(map);
         
         assertEquals(expected, result);
+    }
+
+    @Test
+    public void imagesMapIsUpdated() {
+        Map<String, Map<String, String>> map = SailthruUtil.putImage(null, "full", "https://something/full.jpg");
+        assertEquals(1, map.size());
+        assertEquals("https://something/full.jpg", map.get("full").get("url"));
+
+        map = SailthruUtil.putImage(map, "thumb", "https://something/thumb.jpg");
+        assertEquals(2, map.size());
+        assertEquals("https://something/thumb.jpg", map.get("thumb").get("url"));
+
+        map = SailthruUtil.putImage(map, "custom", "https://something/custom.jpg");
+        assertEquals(3, map.size());
+        assertEquals("https://something/custom.jpg", map.get("custom").get("url"));
+
+        map = SailthruUtil.putImage(map, "thumb", "https://something/anotherthumb.jpg");
+        assertEquals(3, map.size());
+        assertEquals("https://something/anotherthumb.jpg", map.get("thumb").get("url"));
     }
 }
