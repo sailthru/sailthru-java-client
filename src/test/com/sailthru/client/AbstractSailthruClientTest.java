@@ -1,6 +1,5 @@
 package com.sailthru.client;
 
-import com.google.common.collect.ImmutableMap;
 import com.sailthru.client.http.SailthruHttpClient;
 import com.sailthru.client.params.Send;
 import org.apache.http.HttpHost;
@@ -23,6 +22,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
@@ -60,7 +60,7 @@ public class AbstractSailthruClientTest {
         CloseableHttpResponse httpResponse = getMockHttpResponseWithRateLimitHeaders(limit, remaining, resetDate);
         doReturn(httpResponse).when(httpClient).execute(any(HttpHost.class), any(HttpRequest.class), (HttpContext)any());
 
-        sailthruClient.apiGet(ApiAction.send, ImmutableMap.<String,Object>of(Send.PARAM_SEND_ID, "some valid send id"));
+        sailthruClient.apiGet(ApiAction.send, Collections.<String, Object>singletonMap(Send.PARAM_SEND_ID, "some valid send id"));
 
         LastRateLimitInfo rateLimitInfo = sailthruClient.getLastRateLimitInfo(ApiAction.send, AbstractSailthruClient.HttpRequestMethod.GET);
         assertEquals(limit, rateLimitInfo.getLimit());
@@ -96,9 +96,12 @@ public class AbstractSailthruClientTest {
                                   .when(httpClient)
                                   .execute(any(HttpHost.class), any(HttpRequest.class), (HttpContext)any());
 
-        sailthruClient.apiGet(ApiAction.send, ImmutableMap.<String,Object>of(Send.PARAM_SEND_ID, "some valid send id"));
-        sailthruClient.apiGet(ApiAction.list, ImmutableMap.<String,Object>of("list", "some list"));
-        sailthruClient.apiPost(ApiAction.RETURN, ImmutableMap.of("email", "foo@bar.com", "items", Collections.emptyList()));
+        sailthruClient.apiGet(ApiAction.send, Collections.<String, Object>singletonMap(Send.PARAM_SEND_ID, "some valid send id"));
+        sailthruClient.apiGet(ApiAction.list, Collections.<String, Object>singletonMap("list", "some list"));
+        Map<String, Object> returnParams = new HashMap<String, Object>();
+        returnParams.put("email", "foo@bar.com");
+        returnParams.put("items", Collections.emptyList());
+        sailthruClient.apiPost(ApiAction.RETURN, returnParams);
 
         LastRateLimitInfo sendRateLimitInfo = sailthruClient.getLastRateLimitInfo(ApiAction.send, AbstractSailthruClient.HttpRequestMethod.GET);
         assertEquals(sendLimit, sendRateLimitInfo.getLimit());
@@ -134,8 +137,8 @@ public class AbstractSailthruClientTest {
 
         doReturn(getHttpResponse).doReturn(postHttpResponse).when(httpClient).execute(any(HttpHost.class), any(HttpRequest.class), (HttpContext)any());
 
-        sailthruClient.apiGet(ApiAction.list, ImmutableMap.<String,Object>of("list", "some list"));
-        sailthruClient.apiPost(ApiAction.list, ImmutableMap.<String,Object>of("list", "some new list"));
+        sailthruClient.apiGet(ApiAction.list, Collections.<String, Object>singletonMap("list", "some list"));
+        sailthruClient.apiPost(ApiAction.list, Collections.<String, Object>singletonMap("list", "some new list"));
 
         LastRateLimitInfo getLastRateLimitInfo = sailthruClient.getLastRateLimitInfo(ApiAction.list, AbstractSailthruClient.HttpRequestMethod.GET);
         assertEquals(getLimit, getLastRateLimitInfo.getLimit());

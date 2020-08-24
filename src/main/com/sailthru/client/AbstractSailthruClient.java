@@ -1,6 +1,5 @@
 package com.sailthru.client;
 
-import com.google.common.annotations.VisibleForTesting;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.sailthru.client.handler.JsonHandler;
@@ -336,11 +335,9 @@ public abstract class AbstractSailthruClient {
         customHeaders = headers;
     }
 
-    @VisibleForTesting
     void setSailthruHttpClient(SailthruHttpClient httpClient) {
         this.httpClient = httpClient;
     }
-
 
     private void recordRateLimitInfo(ApiAction action, HttpRequestMethod method, Object response) {
         Map<String,Object> responseMap = (Map<String,Object>) response;
