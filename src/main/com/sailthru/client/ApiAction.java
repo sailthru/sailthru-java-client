@@ -23,5 +23,7 @@ public enum ApiAction {
     trigger,
     inbox,
     user,
-    RETURN // the case is inconsistent, but "return" is a reserved keyword
+    RETURN, // the case is inconsistent, but "return" is a reserved keyword
+    content_watch { public String toString() { return "content/watch"; } },
+    content_watch_profile { public String toString() { return "content/watch/profile"; } },
 }
