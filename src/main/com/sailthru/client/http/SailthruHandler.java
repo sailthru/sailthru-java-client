@@ -26,6 +26,16 @@ public class SailthruHandler implements ResponseHandler<Object> {
     // key used to store rate limit info, for use and removal by the parent SailthruClient
     public static final String RATE_LIMIT_INFO_KEY = "x_rate_limit_info";
 
+    /* Supported HTTP Status codes */
+    // These constants are no longer used in this library. Left only for backwards compatibility.
+    public static final int STATUS_OK = 200;
+    public static final int STATUS_BAD_REQUEST = 400;
+    public static final int STATUS_UNAUTHORIZED = 401;
+    public static final int STATUS_FORBIDDEN = 403;
+    public static final int STATUS_NOT_FOUND = 404;
+    public static final int STATUS_METHOD_NOT_FOUND = 405;
+    public static final int STATUS_INTERNAL_SERVER_ERROR = 500;
+
     public SailthruHandler(SailthruResponseHandler handler) {
         super();
         this.handler = handler;
