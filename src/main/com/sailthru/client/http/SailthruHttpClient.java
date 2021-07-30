@@ -20,6 +20,7 @@ import org.apache.http.params.HttpParams;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +60,7 @@ public class SailthruHttpClient extends DefaultHttpClient {
         return null;
     }
     
-    private HttpUriRequest buildRequest(String urlString, HttpRequestMethod method, Map<String, String> queryParams, Map<String, File> files) throws UnsupportedEncodingException {
+    private HttpUriRequest buildRequest(String urlString, HttpRequestMethod method, Map<String, String> queryParams, Map<String, FileOrInputStream> filesOrInputStreams) throws UnsupportedEncodingException {
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         
         for( Entry<String, String> entry : queryParams.entrySet() ) {
@@ -77,11 +78,18 @@ public class SailthruHttpClient extends DefaultHttpClient {
                 for (Entry<String, String> entry : queryParams.entrySet()) {
                     builder.addTextBody(entry.getKey(), entry.getValue());
                 }
-                for (Entry<String, File> fileEntry : files.entrySet()) {
-                    final String fileKey = fileEntry.getKey();
-                    final File file = fileEntry.getValue();
-                    final String filename = file.getName();
-                    builder.addBinaryBody(fileKey, file, ContentType.APPLICATION_OCTET_STREAM, filename);
+                for (Entry<String, FileOrInputStream> fileOrInputStreamEntry : filesOrInputStreams.entrySet()) {
+                    final String fileKey = fileOrInputStreamEntry.getKey();
+
+                    if (fileOrInputStreamEntry.getValue().isAFile()) {
+                        final File file = fileOrInputStreamEntry.getValue().file;
+                        final String filename = file.getName();
+                        builder.addBinaryBody(fileKey, file, ContentType.APPLICATION_OCTET_STREAM, filename);
+                    } else {
+                        final InputStream is = fileOrInputStreamEntry.getValue().inputStream;
+                        final String inMemoryFilename = fileOrInputStreamEntry.getValue().inputStreamName;
+                        builder.addBinaryBody(fileKey, is, ContentType.APPLICATION_OCTET_STREAM, inMemoryFilename);
+                    }
                 }
                 httpPost.setEntity(builder.build());
 
@@ -107,9 +115,9 @@ public class SailthruHttpClient extends DefaultHttpClient {
         return super.execute(request, responseHandler);
     }
     
-    public Object executeHttpRequest(String urlString, HttpRequestMethod method, Map<String, String> params, Map<String, File> fileParams, ResponseHandler<Object> responseHandler, Map<String, String> customHeaders)
+    public Object executeHttpRequest(String urlString, HttpRequestMethod method, Map<String, String> params, Map<String, FileOrInputStream> fileOrInputStreamParams, ResponseHandler<Object> responseHandler, Map<String, String> customHeaders)
             throws IOException {
-        HttpUriRequest request = this.buildRequest(urlString, method, params, fileParams);
+        HttpUriRequest request = this.buildRequest(urlString, method, params, fileOrInputStreamParams);
         if (customHeaders != null && customHeaders.size() > 0) {
             for (Map.Entry<String, String> entry : customHeaders.entrySet()) {
                 final String key = entry.getKey();

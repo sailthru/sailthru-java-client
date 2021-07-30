@@ -8,6 +8,7 @@ import com.sailthru.client.handler.SailthruResponseHandler;
 import com.sailthru.client.handler.response.JsonResponse;
 import com.sailthru.client.http.SailthruHandler;
 import com.sailthru.client.http.SailthruHttpClient;
+import com.sailthru.client.params.ApiFileOrInputStreamParams;
 import com.sailthru.client.params.ApiFileParams;
 import com.sailthru.client.params.ApiParams;
 import java.io.IOException;
@@ -183,16 +184,16 @@ public abstract class AbstractSailthruClient {
      * Make HTTP Request to Sailthru API involving multi-part uploads but with Api Params rather than generalized Map, this is recommended way to make request if data structure is complex
      * @param method
      * @param apiParams
-     * @param fileParams
+     * @param fileOrInputStreamParams
      * @return Object
      * @throws IOException 
      */
-    protected Object httpRequest(HttpRequestMethod method, ApiParams apiParams, ApiFileParams fileParams) throws IOException {
+    protected Object httpRequest(HttpRequestMethod method, ApiParams apiParams, ApiFileOrInputStreamParams fileOrInputStreamParams) throws IOException {
         ApiAction action = apiParams.getApiCall();
         String url = apiUrl + "/" + action.toString().toLowerCase();
         String json = GSON.toJson(apiParams, apiParams.getType());
         Map<String, String> params = buildPayload(json);
-        Object response = httpClient.executeHttpRequest(url, method, params, fileParams.getFileParams(), handler, customHeaders);
+        Object response = httpClient.executeHttpRequest(url, method, params, fileOrInputStreamParams.getFileOrInputStreamParams(), handler, customHeaders);
         recordRateLimitInfo(action, method, response);
         return response;
     }
@@ -201,8 +202,8 @@ public abstract class AbstractSailthruClient {
         return new JsonResponse(httpRequest(method, apiParams));
     }
     
-    protected JsonResponse httpRequestJson(HttpRequestMethod method, ApiParams apiParams, ApiFileParams fileParams) throws IOException {
-        return new JsonResponse(httpRequest(method, apiParams, fileParams));
+    protected JsonResponse httpRequestJson(HttpRequestMethod method, ApiParams apiParams, ApiFileOrInputStreamParams fileOrInputStreamParams) throws IOException {
+        return new JsonResponse(httpRequest(method, apiParams, fileOrInputStreamParams));
     }
     
     protected JsonResponse httpRequestJson(ApiAction action, HttpRequestMethod method, Map<String, Object> data) throws IOException {
@@ -287,11 +288,11 @@ public abstract class AbstractSailthruClient {
     /**
      * HTTP POST Request with Interface implementation of ApiParams and ApiFileParams
      * @param data
-     * @param fileParams
+     * @param fileOrInputStreamParams
      * @throws IOException 
      */
-    public JsonResponse apiPost(ApiParams data, ApiFileParams fileParams) throws IOException {
-        return httpRequestJson(HttpRequestMethod.POST, data, fileParams);
+    public JsonResponse apiPost(ApiParams data, ApiFileOrInputStreamParams fileOrInputStreamParams) throws IOException {
+        return httpRequestJson(HttpRequestMethod.POST, data, fileOrInputStreamParams);
     }
     
 

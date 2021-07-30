@@ -2,8 +2,13 @@ package com.sailthru.client.params.job;
 
 import com.google.gson.reflect.TypeToken;
 import com.sailthru.client.SailthruUtil;
+import com.sailthru.client.http.FileOrInputStream;
+import com.sailthru.client.params.ApiFileOrInputStreamParams;
 import com.sailthru.client.params.ApiFileParams;
+
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 import java.lang.reflect.Type;
@@ -13,12 +18,13 @@ import java.util.HashMap;
  *
  * @author Prajwal Tuladhar <praj@sailthru.com>
  */
-public class ImportJob extends Job implements ApiFileParams {
+public class ImportJob extends Job implements ApiFileOrInputStreamParams {
     
     private static final String JOB = "import";
     
     protected String emails;
-    protected transient File file = null;
+    protected transient FileOrInputStream fileOrInputStream = new FileOrInputStream();
+
     protected String list;
 
     public ImportJob() {
@@ -31,15 +37,20 @@ public class ImportJob extends Job implements ApiFileParams {
     }
     
     public ImportJob setFile(String filePath) {
-        this.file = new File(filePath);
+        this.fileOrInputStream.file = new File(filePath);
         return this;
     }
     
     public ImportJob setFile(File file) {
-        this.file = file;
+        this.fileOrInputStream.file = file;
         return this;
     }
-    
+
+    public ImportJob setInputStreamData(String data) {
+        this.fileOrInputStream.inputStream = new ByteArrayInputStream(data.getBytes());
+        return this;
+    }
+
     public ImportJob setList(String list) {
         this.list = list;
         return this;
@@ -50,12 +61,14 @@ public class ImportJob extends Job implements ApiFileParams {
         return new TypeToken<ImportJob>() {}.getType();
     }
     
-    
-    public Map<String, File> getFileParams() {
-        Map<String, File> files = new HashMap<String, File>();
-        if (this.file != null) {
-            files.put("file", this.file);
+    public Map<String, FileOrInputStream> getFileOrInputStreamParams() {
+        Map<String, FileOrInputStream> filesOrInputStreams = new HashMap<String, FileOrInputStream>();
+        if (this.fileOrInputStream.file != null) {
+            filesOrInputStreams.put("file", this.fileOrInputStream);
         }
-        return files;
+        if (this.fileOrInputStream.inputStream != null) {
+            filesOrInputStreams.put("file", this.fileOrInputStream);
+        }
+        return filesOrInputStreams;
     }
 }
