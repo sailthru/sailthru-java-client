@@ -110,6 +110,14 @@ public class UserTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    public void testSetOptoutSmsStatus() {
+        user.setOptoutSmsStatus("opt-in");
+
+        String expected = "{\"optout_sms_status\":\"opt-in\"}";
+        String result = gson.toJson(user);
+        assertEquals(expected, result);
+    }
+
     public void testSetLogin() {
         Map<String, Object> login = new HashMap<String, Object>();
         login.put("ip", "123.456.789.0");

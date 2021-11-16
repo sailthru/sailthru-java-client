@@ -20,6 +20,7 @@ public class User extends AbstractApiParams implements ApiParams {
     protected Map<String, Object> vars;
     protected Map<String, Integer> lists;
     protected String optout_email;
+    protected String optout_sms_status;
     protected Map<String, Object> login;
     
     public User(String id) {
@@ -64,7 +65,12 @@ public class User extends AbstractApiParams implements ApiParams {
         this.optout_email = optoutEmail;
         return this;
     }
-    
+
+    public User setOptoutSmsStatus(String optoutSmsStatus) {
+        this.optout_sms_status = optoutSmsStatus;
+        return this;
+    }
+
     public User setLogin(Map<String, Object> login) {
         this.login = login;
         return this;
