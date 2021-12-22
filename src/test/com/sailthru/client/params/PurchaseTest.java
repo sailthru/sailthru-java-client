@@ -72,6 +72,16 @@ public class PurchaseTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    public void testCookies() {
+        Map<String, String> cookies = new HashMap<String, String>();
+        cookies.put("sailthru_pc", "003f54695cfdcf42189a6");
+        Purchase purchase = new Purchase();
+        purchase.setCookies(cookies);
+        String expected = "{\"cookies\":{\"sailthru_pc\":\"003f54695cfdcf42189a6\"}}";
+        String result = gson.toJson(purchase);
+        assertEquals(expected, result);
+    }
+
     public void testTenders() {
         Map<String, Object> TenderItem = new HashMap<String, Object>();
         TenderItem.put("title", "bar");
