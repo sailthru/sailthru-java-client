@@ -41,7 +41,7 @@ public class ContentTest extends TestCase {
     public void testSetKeys() {
         Content content = new Content();
         Map<String, String> keys = new HashMap<String, String>();
-        keys.put("sky", "123abc");
+        keys.put("sku", "123abc");
         content.setKeys(keys);
 
         String expected = "{\"keys\":{\"sku\":\"123abc\"}}";
