@@ -6,6 +6,7 @@ import com.sailthru.client.SailthruUtil;
 
 import java.lang.reflect.Type;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
@@ -24,6 +25,8 @@ public class Content extends AbstractApiParams implements ApiParams {
     protected String expire_date;
     protected List<String> tags;
     protected Map<String, Object> vars;
+    protected String key;
+    protected Map<String, String> keys;
     protected Map<String, Map<String, String>> images;
     protected List<Double> location;
     protected Long price;
@@ -42,6 +45,11 @@ public class Content extends AbstractApiParams implements ApiParams {
     public Type getType() {
         Type type = new TypeToken<Content>() {}.getType();
         return type;
+    }
+
+    public Content setKeys(Map<String, String> keys) {
+        this.keys = keys;
+        return this;
     }
 
     public Content setTitle(String title) {

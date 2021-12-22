@@ -38,6 +38,16 @@ public class ContentTest extends TestCase {
         assertEquals(expected,result);
     }
 
+    public void testSetKeys() {
+        Content content = new Content();
+        Map<String, String> keys = new HashMap<String, String>();
+        keys.put("sky", "123abc");
+        content.setKeys(keys);
+
+        String expected = "{\"keys\":{\"sky\":\"123abc\"}}";
+        String result = gson.toJson(content);
+        assertEquals(expected, result);
+    }
 
     public void testSetUrl(){
         Content content = new Content();
