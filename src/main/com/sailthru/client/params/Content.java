@@ -6,7 +6,6 @@ import com.sailthru.client.SailthruUtil;
 
 import java.lang.reflect.Type;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
