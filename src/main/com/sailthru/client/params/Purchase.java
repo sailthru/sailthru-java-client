@@ -21,6 +21,9 @@ public class Purchase extends AbstractApiParams implements ApiParams {
     @SerializedName("message_id")
     protected String messageId;
 
+    @SerializedName("cookies")
+    protected Map<String, String> cookies;
+
     @SerializedName("reminder_template")
     protected String reminderTemplate;
 
@@ -61,6 +64,11 @@ public class Purchase extends AbstractApiParams implements ApiParams {
         for (PurchaseItem item : items) {
             this.items.add(item.toHashMap());
         }
+        return this;
+    }
+
+    public Purchase setCookies(Map<String, String> cookies) {
+        this.cookies = cookies;
         return this;
     }
 
