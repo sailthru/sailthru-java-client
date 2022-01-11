@@ -8,13 +8,14 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
 public class PurchaseImportJob extends Job implements ApiFileParams {
     protected static Logger logger = LoggerFactory.getLogger(PurchaseImportJob.class);
-    protected transient FileInputStream file = null;
+    protected transient InputStream file = null;
 
     public PurchaseImportJob() {
         this.job = "purchase_import";
@@ -43,8 +44,8 @@ public class PurchaseImportJob extends Job implements ApiFileParams {
         return new TypeToken<PurchaseImportJob>() {}.getType();
     }
 
-    public Map<String, FileInputStream> getFileParams() {
-        Map<String, FileInputStream> files = new HashMap<String, FileInputStream>();
+    public Map<String, InputStream> getFileParams() {
+        Map<String, InputStream> files = new HashMap<String, InputStream>();
         if (this.file != null) {
             files.put("file", this.file);
         }

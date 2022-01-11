@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.net.URI;
 import java.util.HashMap;
@@ -23,7 +24,7 @@ public class UpdateJob extends Job implements ApiFileParams {
 
     protected String emails;
     protected String url;
-    protected transient FileInputStream file;
+    protected transient InputStream file;
     protected Map<String, Object> update;
     protected Map<String, Object> query;
 
@@ -95,8 +96,8 @@ public class UpdateJob extends Job implements ApiFileParams {
         return new TypeToken<UpdateJob>() {}.getType();
     }
 
-    public Map<String, FileInputStream> getFileParams() {
-        Map<String, FileInputStream> files = new HashMap<String, FileInputStream>();
+    public Map<String, InputStream> getFileParams() {
+        Map<String, InputStream> files = new HashMap<String, InputStream>();
         if (this.file != null) {
             files.put("file", this.file);
         }

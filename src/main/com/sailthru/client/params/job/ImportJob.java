@@ -6,9 +6,11 @@ import com.sailthru.client.params.ApiFileParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 import java.lang.reflect.Type;
@@ -18,7 +20,7 @@ public class ImportJob extends Job implements ApiFileParams {
     private static final String JOB = "import";
     protected static Logger logger = LoggerFactory.getLogger(ImportJob.class);
     protected String emails;
-    protected transient FileInputStream file = null;
+    protected transient InputStream file = null;
     protected String list;
 
     public ImportJob() {
@@ -49,11 +51,7 @@ public class ImportJob extends Job implements ApiFileParams {
     }
 
     public ImportJob setFileInputStream(String data) {
-        try {
-            this.file = new FileInputStream(data);
-        } catch (FileNotFoundException e) {
-            logger.error(e.getMessage());
-        }
+        this.file = new ByteArrayInputStream(data.getBytes());
         return this;
     }
     
@@ -67,8 +65,8 @@ public class ImportJob extends Job implements ApiFileParams {
         return new TypeToken<ImportJob>() {}.getType();
     }
 
-    public Map<String, FileInputStream> getFileParams() {
-        Map<String, FileInputStream> files = new HashMap<String, FileInputStream>();
+    public Map<String, InputStream> getFileParams() {
+        Map<String, InputStream> files = new HashMap<String, InputStream>();
         if (this.file != null) {
             files.put("file", this.file);
         }

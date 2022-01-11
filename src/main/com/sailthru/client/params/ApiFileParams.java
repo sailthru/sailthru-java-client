@@ -7,5 +7,5 @@ import java.io.InputStream;
 import java.util.Map;
 
 public interface ApiFileParams {
-    public Map<String, FileInputStream> getFileParams();
+    public Map<String, InputStream> getFileParams();
 }

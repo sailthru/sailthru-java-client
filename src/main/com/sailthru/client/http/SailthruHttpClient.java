@@ -20,6 +20,7 @@ import org.apache.http.params.HttpParams;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +55,7 @@ public class SailthruHttpClient extends DefaultHttpClient {
         return null;
     }
 
-    private HttpUriRequest buildRequest(String urlString, HttpRequestMethod method, Map<String, String> queryParams, Map<String, FileInputStream> files) throws UnsupportedEncodingException {
+    private HttpUriRequest buildRequest(String urlString, HttpRequestMethod method, Map<String, String> queryParams, Map<String, InputStream> files) throws UnsupportedEncodingException {
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
         for( Entry<String, String> entry : queryParams.entrySet() ) {
@@ -72,9 +73,9 @@ public class SailthruHttpClient extends DefaultHttpClient {
                 for (Entry<String, String> entry : queryParams.entrySet()) {
                     builder.addTextBody(entry.getKey(), entry.getValue());
                 }
-                for (Entry<String, FileInputStream> fileEntry : files.entrySet()) {
+                for (Entry<String, InputStream> fileEntry : files.entrySet()) {
                     final String fileKey = fileEntry.getKey();
-                    final FileInputStream file = fileEntry.getValue();
+                    final InputStream file = fileEntry.getValue();
                     final String filename = "import_job_data.csv";
                     builder.addBinaryBody(fileKey, file, ContentType.APPLICATION_OCTET_STREAM, filename);
                 }
@@ -102,7 +103,7 @@ public class SailthruHttpClient extends DefaultHttpClient {
         return super.execute(request, responseHandler);
     }
     
-    public Object executeHttpRequest(String urlString, HttpRequestMethod method, Map<String, String> params, Map<String, FileInputStream> fileParams, ResponseHandler<Object> responseHandler, Map<String, String> customHeaders)
+    public Object executeHttpRequest(String urlString, HttpRequestMethod method, Map<String, String> params, Map<String, InputStream> fileParams, ResponseHandler<Object> responseHandler, Map<String, String> customHeaders)
             throws IOException {
         HttpUriRequest request = this.buildRequest(urlString, method, params, fileParams);
         if (customHeaders != null && customHeaders.size() > 0) {
