@@ -2,27 +2,39 @@ package com.sailthru.client.params.job;
 
 import com.google.gson.reflect.TypeToken;
 import com.sailthru.client.params.ApiFileParams;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
 public class PurchaseImportJob extends Job implements ApiFileParams {
-
-    protected transient File file = null;
+    protected static Logger logger = LoggerFactory.getLogger(PurchaseImportJob.class);
+    protected transient FileInputStream file = null;
 
     public PurchaseImportJob() {
         this.job = "purchase_import";
     }
 
     public PurchaseImportJob setFile(String filePath) {
-        this.file = new File(filePath);
+        try {
+            this.file = new FileInputStream(filePath);
+        } catch (FileNotFoundException e) {
+            logger.error(e.getMessage());
+        }
         return this;
     }
 
     public PurchaseImportJob setFile(File file) {
-        this.file = file;
+        try {
+            this.file = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            logger.error(e.getMessage());
+        }
         return this;
     }
 
@@ -31,8 +43,8 @@ public class PurchaseImportJob extends Job implements ApiFileParams {
         return new TypeToken<PurchaseImportJob>() {}.getType();
     }
 
-    public Map<String, File> getFileParams() {
-        Map<String, File> files = new HashMap<String, File>();
+    public Map<String, FileInputStream> getFileParams() {
+        Map<String, FileInputStream> files = new HashMap<String, FileInputStream>();
         if (this.file != null) {
             files.put("file", this.file);
         }
