@@ -18,7 +18,7 @@ import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.HttpParams;
 
-import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -26,12 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-/**
- *
- * @author Prajwal Tuladhar <praj@sailthru.com>
- */
 public class SailthruHttpClient extends DefaultHttpClient {
-
     public SailthruHttpClient(ThreadSafeClientConnManager connManager,
 			HttpParams params) {
         super(connManager, params);
@@ -39,7 +34,7 @@ public class SailthruHttpClient extends DefaultHttpClient {
 
     private HttpUriRequest buildRequest(String urlString, HttpRequestMethod method, Map<String, String> queryParams) throws UnsupportedEncodingException {
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-        
+
         for (Entry<String, String> entry : queryParams.entrySet()) {
             nameValuePairs.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
         }
@@ -58,10 +53,10 @@ public class SailthruHttpClient extends DefaultHttpClient {
         }
         return null;
     }
-    
-    private HttpUriRequest buildRequest(String urlString, HttpRequestMethod method, Map<String, String> queryParams, Map<String, File> files) throws UnsupportedEncodingException {
+
+    private HttpUriRequest buildRequest(String urlString, HttpRequestMethod method, Map<String, String> queryParams, Map<String, FileInputStream> files) throws UnsupportedEncodingException {
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-        
+
         for( Entry<String, String> entry : queryParams.entrySet() ) {
             nameValuePairs.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
         }
@@ -77,10 +72,10 @@ public class SailthruHttpClient extends DefaultHttpClient {
                 for (Entry<String, String> entry : queryParams.entrySet()) {
                     builder.addTextBody(entry.getKey(), entry.getValue());
                 }
-                for (Entry<String, File> fileEntry : files.entrySet()) {
+                for (Entry<String, FileInputStream> fileEntry : files.entrySet()) {
                     final String fileKey = fileEntry.getKey();
-                    final File file = fileEntry.getValue();
-                    final String filename = file.getName();
+                    final FileInputStream file = fileEntry.getValue();
+                    final String filename = "import_job_data.csv";
                     builder.addBinaryBody(fileKey, file, ContentType.APPLICATION_OCTET_STREAM, filename);
                 }
                 httpPost.setEntity(builder.build());
@@ -107,7 +102,7 @@ public class SailthruHttpClient extends DefaultHttpClient {
         return super.execute(request, responseHandler);
     }
     
-    public Object executeHttpRequest(String urlString, HttpRequestMethod method, Map<String, String> params, Map<String, File> fileParams, ResponseHandler<Object> responseHandler, Map<String, String> customHeaders)
+    public Object executeHttpRequest(String urlString, HttpRequestMethod method, Map<String, String> params, Map<String, FileInputStream> fileParams, ResponseHandler<Object> responseHandler, Map<String, String> customHeaders)
             throws IOException {
         HttpUriRequest request = this.buildRequest(urlString, method, params, fileParams);
         if (customHeaders != null && customHeaders.size() > 0) {
