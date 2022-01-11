@@ -5,28 +5,28 @@ import com.google.gson.reflect.TypeToken;
 import com.sailthru.client.SailthruUtil;
 import com.sailthru.client.params.ApiFileParams;
 import com.sailthru.client.params.query.Query;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.lang.reflect.Type;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @author Prajwal Tuladhar <praj@sailthru.com>
- */
 public class UpdateJob extends Job implements ApiFileParams {
-    
+    protected static Logger logger = LoggerFactory.getLogger(UpdateJob.class);
     private static final String JOB = "update";
-    
+
     protected String emails;
     protected String url;
-    protected transient File file;
+    protected transient FileInputStream file;
     protected Map<String, Object> update;
     protected Map<String, Object> query;
-    
+
     public UpdateJob() {
         this.job = JOB;
         this.update = new HashMap<String, Object>();
@@ -48,12 +48,20 @@ public class UpdateJob extends Job implements ApiFileParams {
     }
     
     public UpdateJob setFile(File file) {
-        this.file = file;
+        try {
+            this.file = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            logger.error(e.getMessage());
+        }
         return this;
     }
     
     public UpdateJob setFile(String file) {
-        this.file = new File(file);
+        try {
+            this.file = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            logger.error(e.getMessage());
+        }
         return this;
     }
     
@@ -87,8 +95,8 @@ public class UpdateJob extends Job implements ApiFileParams {
         return new TypeToken<UpdateJob>() {}.getType();
     }
 
-    public Map<String, File> getFileParams() {
-        Map<String, File> files = new HashMap<String, File>();
+    public Map<String, FileInputStream> getFileParams() {
+        Map<String, FileInputStream> files = new HashMap<String, FileInputStream>();
         if (this.file != null) {
             files.put("file", this.file);
         }
