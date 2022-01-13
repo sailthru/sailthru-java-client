@@ -58,8 +58,42 @@ public class SailthruHttpClient extends DefaultHttpClient {
         return null;
     }
 
-    private HttpUriRequest buildRequest(String urlString, HttpRequestMethod method, Map<String, String> queryParams, Map<String, Object> files)
-        throws UnsupportedEncodingException, FileNotFoundException {
+    private HttpUriRequest buildRequest(String urlString, HttpRequestMethod method, Map<String, String> queryParams, Map<String, File> files) {
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+
+        for( Entry<String, String> entry : queryParams.entrySet() ) {
+            nameValuePairs.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+        }
+
+        switch(method) {
+        case GET:
+            return new HttpGet(urlString + "?" + extractQueryString(nameValuePairs));
+
+        case POST:
+            HttpPost httpPost = new HttpPost(urlString);
+            MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+            builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+            for (Entry<String, String> entry : queryParams.entrySet()) {
+                builder.addTextBody(entry.getKey(), entry.getValue());
+            }
+            for (Entry<String, File> fileEntry : files.entrySet()) {
+                final String fileKey = fileEntry.getKey();
+                final File file = fileEntry.getValue();
+                final String filename = file.getName();
+                builder.addBinaryBody(fileKey, file, ContentType.APPLICATION_OCTET_STREAM, filename);
+            }
+            httpPost.setEntity(builder.build());
+
+            return httpPost;
+
+        case DELETE:
+            return new HttpDelete(urlString + "?" + extractQueryString(nameValuePairs));
+        }
+        return null;
+    }
+
+    private HttpUriRequest buildRequest2(String urlString, HttpRequestMethod method, Map<String, String> queryParams, Map<String, Object> files)
+        throws FileNotFoundException {
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
         for( Entry<String, String> entry : queryParams.entrySet() ) {
@@ -110,31 +144,35 @@ public class SailthruHttpClient extends DefaultHttpClient {
     public Object executeHttpRequest(String urlString, HttpRequestMethod method, Map<String, String> params, ResponseHandler<Object> responseHandler, Map<String, String> customHeaders)
             throws IOException {
         HttpUriRequest request = this.buildRequest(urlString, method, params);
-        if (customHeaders != null && customHeaders.size() > 0) {
-            for (Map.Entry<String, String> entry : customHeaders.entrySet()) {
-                final String key = entry.getKey();
-                final String value = entry.getValue();
-                request.setHeader(key, value);
-            }
-        }
-        
+        setHeaders(request, customHeaders);
         return super.execute(request, responseHandler);
     }
 
-    public Object executeHttpRequest(String urlString, HttpRequestMethod method, Map<String, String> params, Map<String, Object> fileParams, ResponseHandler<Object> responseHandler, Map<String, String> customHeaders)
+    public Object executeHttpRequest(String urlString, HttpRequestMethod method, Map<String, String> params, Map<String, File> fileParams, ResponseHandler<Object> responseHandler, Map<String, String> customHeaders)
             throws IOException {
         HttpUriRequest request = this.buildRequest(urlString, method, params, fileParams);
-        if (customHeaders != null && customHeaders.size() > 0) {
-            for (Map.Entry<String, String> entry : customHeaders.entrySet()) {
-                final String key = entry.getKey();
-                final String value = entry.getValue();
-                request.setHeader(key, value);
-            }
-        }
+        setHeaders(request, customHeaders);
+        return super.execute(request, responseHandler);
+    }
+
+    public Object executeHttpRequest2(String urlString, HttpRequestMethod method, Map<String, String> params, Map<String, Object> fileParams, ResponseHandler<Object> responseHandler, Map<String, String> customHeaders)
+        throws IOException {
+        HttpUriRequest request = this.buildRequest2(urlString, method, params, fileParams);
+        setHeaders(request, customHeaders);
         return super.execute(request, responseHandler);
     }
 
     private String extractQueryString(List<NameValuePair> params) {
         return URLEncodedUtils.format(params, SailthruClient.DEFAULT_ENCODING);
+    }
+
+    private void setHeaders(HttpUriRequest request, Map<String,String> customHeaders) {
+        if (customHeaders != null && customHeaders.size() > 0) {
+            for (Map.Entry<String, String> entry : customHeaders.entrySet()) {
+                final String key = entry.getKey();
+                final String value = entry.getValue();
+                request.setHeader(key, value);
+            }
+        }
     }
 }

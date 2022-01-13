@@ -192,7 +192,7 @@ public abstract class AbstractSailthruClient {
         String url = apiUrl + "/" + action.toString().toLowerCase();
         String json = GSON.toJson(apiParams, apiParams.getType());
         Map<String, String> params = buildPayload(json);
-        Object response = httpClient.executeHttpRequest(url, method, params, fileParams.getFileParams(), handler, customHeaders);
+        Object response = httpClient.executeHttpRequest2(url, method, params, fileParams.getFileParams(), handler, customHeaders);
         recordRateLimitInfo(action, method, response);
         return response;
     }
