@@ -5,13 +5,8 @@ import com.google.gson.reflect.TypeToken;
 import com.sailthru.client.SailthruUtil;
 import com.sailthru.client.params.ApiFileParams;
 import com.sailthru.client.params.query.Query;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.net.URI;
 import java.util.HashMap;
@@ -19,12 +14,11 @@ import java.util.List;
 import java.util.Map;
 
 public class UpdateJob extends Job implements ApiFileParams {
-    protected static Logger logger = LoggerFactory.getLogger(UpdateJob.class);
     private static final String JOB = "update";
 
     protected String emails;
     protected String url;
-    protected transient InputStream file;
+    protected transient File file;
     protected Map<String, Object> update;
     protected Map<String, Object> query;
 
@@ -49,20 +43,12 @@ public class UpdateJob extends Job implements ApiFileParams {
     }
     
     public UpdateJob setFile(File file) {
-        try {
-            this.file = new FileInputStream(file);
-        } catch (FileNotFoundException e) {
-            logger.error(e.getMessage());
-        }
+        this.file = file;
         return this;
     }
     
     public UpdateJob setFile(String file) {
-        try {
-            this.file = new FileInputStream(file);
-        } catch (FileNotFoundException e) {
-            logger.error(e.getMessage());
-        }
+        this.file = new File(file);
         return this;
     }
     
@@ -96,8 +82,8 @@ public class UpdateJob extends Job implements ApiFileParams {
         return new TypeToken<UpdateJob>() {}.getType();
     }
 
-    public Map<String, InputStream> getFileParams() {
-        Map<String, InputStream> files = new HashMap<String, InputStream>();
+    public Map<String, Object> getFileParams() {
+        Map<String, Object> files = new HashMap<String, Object>();
         if (this.file != null) {
             files.put("file", this.file);
         }
