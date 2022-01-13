@@ -84,6 +84,8 @@ public class SailthruHttpClient extends DefaultHttpClient {
                     String fileKey = fileObjectEntry.getKey();
                     String filename;
 
+                    // Object could either be File or ByteArrayInputStream
+                    // We type cast and see which one it is:
                     try {
                         file = (File) fileObjectEntry.getValue();
                         filename = file.getName();
