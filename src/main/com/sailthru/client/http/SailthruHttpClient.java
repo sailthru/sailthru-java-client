@@ -115,26 +115,26 @@ public class SailthruHttpClient extends DefaultHttpClient {
                 for (Entry<String, Object> fileObjectEntry : files.entrySet()) {
                     File file;
                     InputStream inputStream;
-                    String fileKey = fileObjectEntry.getKey();
-                    Object fileValue = fileObjectEntry.getValue();
+                    String fileObjKey = fileObjectEntry.getKey();
+                    Object fileObjValue = fileObjectEntry.getValue();
                     String filename;
 
                     // Object should either be File or InputStream
-                    if (fileValue instanceof File) {
-                      file = (File) fileValue;
+                    if (fileObjValue instanceof File) {
+                      file = (File) fileObjValue;
                       filename = file.getName();
                       inputStream = new FileInputStream(file);
-                    } else if (fileValue instanceof InputStream) {
-                      filename = "import_job_data_" + fileKey + ".csv";
-                      inputStream = (InputStream) fileObjectEntry.getValue();
+                    } else if (fileObjValue instanceof InputStream) {
+                      filename = "import_job_data_" + fileObjKey + ".csv";
+                      inputStream = (InputStream) fileObjValue;
                     } else {
                       throw new IllegalArgumentException("File param value should be of File or an InputStream type");
                     }
 
-                    builder.addBinaryBody(fileKey, inputStream, ContentType.APPLICATION_OCTET_STREAM, filename);
+                    builder.addBinaryBody(fileObjKey, inputStream, ContentType.APPLICATION_OCTET_STREAM, filename);
                 }
-                httpPost.setEntity(builder.build());
 
+                httpPost.setEntity(builder.build());
                 return httpPost;
 
             case DELETE:
