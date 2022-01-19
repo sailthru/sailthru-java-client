@@ -116,17 +116,19 @@ public class SailthruHttpClient extends DefaultHttpClient {
                     File file;
                     InputStream inputStream;
                     String fileKey = fileObjectEntry.getKey();
+                    Object fileValue = fileObjectEntry.getValue();
                     String filename;
 
-                    // Object could either be File or ByteArrayInputStream
-                    // We type cast and see which one it is:
-                    try {
-                        file = (File) fileObjectEntry.getValue();
-                        filename = file.getName();
-                        inputStream = new FileInputStream(file);
-                    } catch (ClassCastException e) {
-                        filename = "import_job_data_" + fileKey + ".csv";
-                        inputStream = (ByteArrayInputStream) fileObjectEntry.getValue();
+                    // Object should either be File or InputStream
+                    if (fileValue instanceof File) {
+                      file = (File) fileValue;
+                      filename = file.getName();
+                      inputStream = new FileInputStream(file);
+                    } else if (fileValue instanceof InputStream) {
+                      filename = "import_job_data_" + fileKey + ".csv";
+                      inputStream = (InputStream) fileObjectEntry.getValue();
+                    } else {
+                      throw new IllegalArgumentException("File param value should be of File or an InputStream type");
                     }
 
                     builder.addBinaryBody(fileKey, inputStream, ContentType.APPLICATION_OCTET_STREAM, filename);
