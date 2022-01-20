@@ -38,7 +38,7 @@ public class ImportJob extends Job implements ApiFileParams {
         return this;
     }
 
-    public ImportJob setFileInputStream(String data) {
+    public ImportJob setFileDataAsString(String data) {
         this.fileInputStream = new ByteArrayInputStream(data.getBytes());
         return this;
     }
