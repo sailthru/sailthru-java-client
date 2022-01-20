@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -58,38 +59,10 @@ public class SailthruHttpClient extends DefaultHttpClient {
         return null;
     }
 
-    private HttpUriRequest buildRequest(String urlString, HttpRequestMethod method, Map<String, String> queryParams, Map<String, File> files) {
-        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-
-        for( Entry<String, String> entry : queryParams.entrySet() ) {
-            nameValuePairs.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
-        }
-
-        switch(method) {
-        case GET:
-            return new HttpGet(urlString + "?" + extractQueryString(nameValuePairs));
-
-        case POST:
-            HttpPost httpPost = new HttpPost(urlString);
-            MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-            builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
-            for (Entry<String, String> entry : queryParams.entrySet()) {
-                builder.addTextBody(entry.getKey(), entry.getValue());
-            }
-            for (Entry<String, File> fileEntry : files.entrySet()) {
-                final String fileKey = fileEntry.getKey();
-                final File file = fileEntry.getValue();
-                final String filename = file.getName();
-                builder.addBinaryBody(fileKey, file, ContentType.APPLICATION_OCTET_STREAM, filename);
-            }
-            httpPost.setEntity(builder.build());
-
-            return httpPost;
-
-        case DELETE:
-            return new HttpDelete(urlString + "?" + extractQueryString(nameValuePairs));
-        }
-        return null;
+    private HttpUriRequest buildRequest(String urlString, HttpRequestMethod method, Map<String, String> queryParams, Map<String, File> files)
+      throws FileNotFoundException {
+      Map<String, Object> fileObj = new HashMap<String, Object>(files);
+      return buildRequest2(urlString, method, queryParams, fileObj);
     }
 
     private HttpUriRequest buildRequest2(String urlString, HttpRequestMethod method, Map<String, String> queryParams, Map<String, Object> files)
