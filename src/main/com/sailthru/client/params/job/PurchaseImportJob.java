@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PurchaseImportJob extends Job implements ApiFileParams {
-
     protected transient File file = null;
 
     public PurchaseImportJob() {
@@ -31,8 +30,8 @@ public class PurchaseImportJob extends Job implements ApiFileParams {
         return new TypeToken<PurchaseImportJob>() {}.getType();
     }
 
-    public Map<String, File> getFileParams() {
-        Map<String, File> files = new HashMap<String, File>();
+    public Map<String, Object> getFileParams() {
+        Map<String, Object> files = new HashMap<String, Object>();
         if (this.file != null) {
             files.put("file", this.file);
         }

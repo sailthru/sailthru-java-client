@@ -13,20 +13,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @author Prajwal Tuladhar <praj@sailthru.com>
- */
 public class UpdateJob extends Job implements ApiFileParams {
-    
     private static final String JOB = "update";
-    
+
     protected String emails;
     protected String url;
     protected transient File file;
     protected Map<String, Object> update;
     protected Map<String, Object> query;
-    
+
     public UpdateJob() {
         this.job = JOB;
         this.update = new HashMap<String, Object>();
@@ -87,8 +82,8 @@ public class UpdateJob extends Job implements ApiFileParams {
         return new TypeToken<UpdateJob>() {}.getType();
     }
 
-    public Map<String, File> getFileParams() {
-        Map<String, File> files = new HashMap<String, File>();
+    public Map<String, Object> getFileParams() {
+        Map<String, Object> files = new HashMap<String, Object>();
         if (this.file != null) {
             files.put("file", this.file);
         }
