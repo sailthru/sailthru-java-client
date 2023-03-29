@@ -22,6 +22,8 @@ public class User extends AbstractApiParams implements ApiParams {
     protected String optout_email;
     protected String optout_sms_status;
     protected Map<String, Object> login;
+    protected String sms_marketing_status;
+    protected String sms_transactional_status;
     
     public User(String id) {
         this.id = id;
@@ -73,6 +75,16 @@ public class User extends AbstractApiParams implements ApiParams {
 
     public User setLogin(Map<String, Object> login) {
         this.login = login;
+        return this;
+    }
+
+    public User setSms_marketing_status(String sms_marketing_status) {
+        this.sms_marketing_status = sms_marketing_status;
+        return this;
+    }
+
+    public User setSms_transactional_status(String sms_transactional_status) {
+        this.sms_transactional_status = sms_transactional_status;
         return this;
     }
 
