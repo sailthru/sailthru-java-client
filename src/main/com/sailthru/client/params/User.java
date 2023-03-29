@@ -22,8 +22,8 @@ public class User extends AbstractApiParams implements ApiParams {
     protected String optout_email;
     protected String optout_sms_status;
     protected Map<String, Object> login;
-    protected String sms_marketing_status;
-    protected String sms_transactional_status;
+    protected OptOutType smsMarketingStatus;
+    protected OptOutType smsTransactionalStatus;
     
     public User(String id) {
         this.id = id;
@@ -78,13 +78,13 @@ public class User extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-    public User setSms_marketing_status(String sms_marketing_status) {
-        this.sms_marketing_status = sms_marketing_status;
+    public User setSmsMarketingStatus(OptOutType smsMarketingStatus) {
+        this.smsMarketingStatus = smsMarketingStatus;
         return this;
     }
 
-    public User setSms_transactional_status(String sms_transactional_status) {
-        this.sms_transactional_status = sms_transactional_status;
+    public User setSmsTransactionalStatus(OptOutType smsTransactionalStatus) {
+        this.smsTransactionalStatus = smsTransactionalStatus;
         return this;
     }
 
@@ -95,5 +95,16 @@ public class User extends AbstractApiParams implements ApiParams {
 
     public ApiAction getApiCall() {
         return ApiAction.user;
+    }
+
+    public enum OptOutType {
+        OPT_OUT_TYPE_STOP("opt-out"),
+        OPT_OUT_TYPE_START("opt-in");
+
+        public final String optOutTypeStr;
+
+        OptOutType(String optOutTypeStr) {
+            this.optOutTypeStr = optOutTypeStr;
+        }
     }
 }
