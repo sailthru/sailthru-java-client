@@ -1,5 +1,7 @@
 package com.sailthru.client.params;
 
+import com.google.gson.*;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 import com.sailthru.client.ApiAction;
 import java.lang.reflect.Type;
@@ -22,8 +24,10 @@ public class User extends AbstractApiParams implements ApiParams {
     protected String optout_email;
     protected String optout_sms_status;
     protected Map<String, Object> login;
-    protected String sms_marketing_status;
-    protected String sms_transactional_status;
+    @SerializedName("sms_marketing_status")
+    protected OptOutType smsMarketingStatus;
+    @SerializedName("sms_transactional_status")
+    protected OptOutType smsTransactionalStatus;
     
     public User(String id) {
         this.id = id;
@@ -78,13 +82,13 @@ public class User extends AbstractApiParams implements ApiParams {
         return this;
     }
 
-    public User setSmsMarketingStatus(OptOutType optOutType) {
-        this.sms_marketing_status = optOutType.optOutTypeStr;
+    public User setSmsMarketingStatus(OptOutType smsMarketingStatus) {
+        this.smsMarketingStatus = smsMarketingStatus;
         return this;
     }
 
-    public User setSmsTransactionalStatus(OptOutType optOutType) {
-        this.sms_transactional_status = optOutType.optOutTypeStr;
+    public User setSmsTransactionalStatus(OptOutType smsTransactionalStatus) {
+        this.smsTransactionalStatus = smsTransactionalStatus;
         return this;
     }
 

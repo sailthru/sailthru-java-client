@@ -2,6 +2,7 @@ package com.sailthru.client;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.sailthru.client.params.User;
 import org.apache.commons.codec.digest.DigestUtils;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
@@ -52,6 +53,7 @@ public class SailthruUtil {
     public static Gson createGson() {
         return new GsonBuilder().setDateFormat(SAILTHRU_API_DATE_FORMAT)
                 .registerTypeHierarchyAdapter(Map.class, new NullSerializingMapTypeAdapter())
+                .registerTypeAdapter(User.OptOutType.class, new OptOutTypeAdapter())
                 .create();
     }
 
