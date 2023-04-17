@@ -1,5 +1,7 @@
 package com.sailthru.client.params;
 
+import com.google.gson.*;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 import com.sailthru.client.ApiAction;
 import java.lang.reflect.Type;
@@ -22,6 +24,10 @@ public class User extends AbstractApiParams implements ApiParams {
     protected String optout_email;
     protected String optout_sms_status;
     protected Map<String, Object> login;
+    @SerializedName("sms_marketing_status")
+    protected OptOutType smsMarketingStatus;
+    @SerializedName("sms_transactional_status")
+    protected OptOutType smsTransactionalStatus;
     
     public User(String id) {
         this.id = id;
@@ -76,6 +82,16 @@ public class User extends AbstractApiParams implements ApiParams {
         return this;
     }
 
+    public User setSmsMarketingStatus(OptOutType smsMarketingStatus) {
+        this.smsMarketingStatus = smsMarketingStatus;
+        return this;
+    }
+
+    public User setSmsTransactionalStatus(OptOutType smsTransactionalStatus) {
+        this.smsTransactionalStatus = smsTransactionalStatus;
+        return this;
+    }
+
     public Type getType() {
         java.lang.reflect.Type _type = new TypeToken<User>() {}.getType();
         return _type;
@@ -83,5 +99,16 @@ public class User extends AbstractApiParams implements ApiParams {
 
     public ApiAction getApiCall() {
         return ApiAction.user;
+    }
+
+    public enum OptOutType {
+        OPT_OUT_TYPE_STOP("opt-out"),
+        OPT_OUT_TYPE_START("opt-in");
+
+        public final String optOutTypeStr;
+
+        OptOutType(String optOutTypeStr) {
+            this.optOutTypeStr = optOutTypeStr;
+        }
     }
 }
