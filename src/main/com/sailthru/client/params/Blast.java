@@ -40,6 +40,7 @@ public class Blast extends AbstractApiParams implements ApiParams {
     protected String data_feed_url;
     protected String setup;
     protected Map<String, Object> vars;
+    protected Map<String, String> link_params;
 
     public Blast(String name, String list, String scheduleTime, String fromName, String fromEmail, String subject, String contentHtml, String contentText) {
         this.name = name;
@@ -134,6 +135,11 @@ public class Blast extends AbstractApiParams implements ApiParams {
 
     public Blast enableLinkTracking() {
         this.is_link_tracking = 1;
+        return this;
+    }
+
+    public Blast setLinkParams(Map<String, String> linkParams) {
+        this.link_params = linkParams;
         return this;
     }
 
