@@ -26,14 +26,16 @@ package com.sailthru.client.params;
 import com.google.gson.Gson;
 import com.sailthru.client.SailthruUtil;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TimeZone;
+
 import junit.framework.TestCase;
 
-import java.text.*;
 
 public class SendTest extends TestCase {
     private Gson gson = SailthruUtil.createGson();
@@ -132,9 +134,8 @@ public class SendTest extends TestCase {
     }
 
     public void testSetScheduleTimeDate(){
-        Date date = new Date(1380831494000L);
         format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
-        send.setScheduleTime(format.format(date));
+        send.setScheduleTime(format.format(THURSDAY_OCT_3));
 
         String expected = "{\"schedule_time\":\"Thu Oct 03 20:18:14 UTC 2013\",\"options\":{}}";
         String result = gson.toJson(send);
