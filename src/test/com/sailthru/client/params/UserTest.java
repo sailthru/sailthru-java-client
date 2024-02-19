@@ -118,7 +118,7 @@ public class UserTest extends TestCase {
         assertEquals(expected, result);
     }
 
-    public void testSetSmsMarketingStatus() {
+    public void testSetSmsMarketingStatusTypeStart() {
         user.setSmsMarketingStatus(User.OptOutType.OPT_OUT_TYPE_START);
 
         String expected = "{\"sms_marketing_status\":\"opt-in\"}";
@@ -126,10 +126,58 @@ public class UserTest extends TestCase {
         assertEquals(expected, result);
     }
 
-    public void testSetSmsTransactionalStatus() {
+    public void testSetSmsTransactionalStatusTypeStart() {
         user.setSmsTransactionalStatus(User.OptOutType.OPT_OUT_TYPE_START);
 
         String expected = "{\"sms_transactional_status\":\"opt-in\"}";
+        String result = gson.toJson(user);
+        assertEquals(expected, result);
+    }
+
+    public void testSetSmsMarketingStatusTypeStop() {
+        user.setSmsMarketingStatus(User.OptOutType.OPT_OUT_TYPE_STOP);
+
+        String expected = "{\"sms_marketing_status\":\"opt-out\"}";
+        String result = gson.toJson(user);
+        assertEquals(expected, result);
+    }
+
+    public void testSetSmsTransactionalStatusTypeStop() {
+        user.setSmsTransactionalStatus(User.OptOutType.OPT_OUT_TYPE_STOP);
+
+        String expected = "{\"sms_transactional_status\":\"opt-out\"}";
+        String result = gson.toJson(user);
+        assertEquals(expected, result);
+    }
+
+    public void testSetSmsMarketingStatusTypePending() {
+        user.setSmsMarketingStatus(User.OptOutType.OPT_OUT_TYPE_PENDING);
+
+        String expected = "{\"sms_marketing_status\":\"pending\"}";
+        String result = gson.toJson(user);
+        assertEquals(expected, result);
+    }
+
+    public void testSetSmsTransactionalStatusTypePending() {
+        user.setSmsTransactionalStatus(User.OptOutType.OPT_OUT_TYPE_PENDING);
+
+        String expected = "{\"sms_transactional_status\":\"pending\"}";
+        String result = gson.toJson(user);
+        assertEquals(expected, result);
+    }
+
+    public void testSetSmsMarketingStatusTypeDoubleOptIn() {
+        user.setSmsMarketingStatus(User.OptOutType.OPT_OUT_TYPE_DOUBLE_OPT_IN);
+
+        String expected = "{\"sms_marketing_status\":\"double-opt-in\"}";
+        String result = gson.toJson(user);
+        assertEquals(expected, result);
+    }
+
+    public void testSetSmsTransactionalStatusTypeDoubleOptIn() {
+        user.setSmsTransactionalStatus(User.OptOutType.OPT_OUT_TYPE_DOUBLE_OPT_IN);
+
+        String expected = "{\"sms_transactional_status\":\"double-opt-in\"}";
         String result = gson.toJson(user);
         assertEquals(expected, result);
     }
