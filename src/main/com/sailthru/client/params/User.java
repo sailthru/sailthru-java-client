@@ -103,8 +103,9 @@ public class User extends AbstractApiParams implements ApiParams {
 
     public enum OptOutType {
         OPT_OUT_TYPE_STOP("opt-out"),
-        OPT_OUT_TYPE_START("opt-in");
-
+        OPT_OUT_TYPE_START("opt-in"),
+        OPT_OUT_TYPE_PENDING("pending"),
+        OPT_OUT_TYPE_DOUBLE_OPT_IN("double-opt-in");
         public final String optOutTypeStr;
 
         OptOutType(String optOutTypeStr) {
