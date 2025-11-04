@@ -1,16 +1,16 @@
 package com.sailthru.client;
 
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Test;
 
-public class ApiActionTest {
+import static org.assertj.core.api.Assertions.assertThat;
 
-    @Test
-    public void testApiActionToString() {
+class ApiActionTest {
+
+    @Test void apiActionToString() {
         ApiAction watchAction = ApiAction.content_watch;
         ApiAction profileWatchAction = ApiAction.content_watch_profile;
-        assertEquals("content/watch", watchAction.toString());
-        assertEquals("content/watch/profile", profileWatchAction.toString());
+        assertThat(watchAction.toString()).isEqualTo("content/watch");
+        assertThat(profileWatchAction.toString()).isEqualTo("content/watch/profile");
 
     }
 }

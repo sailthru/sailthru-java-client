@@ -27,17 +27,19 @@ import com.google.gson.Gson;
 import com.sailthru.client.SailthruUtil;
 import java.util.HashMap;
 import java.util.Map;
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  *
  * @author ianwhite
  */
-public class UserTest extends TestCase {
+class UserTest {
     private Gson gson = SailthruUtil.createGson();
     private User user = new User();
 
-    public void testSerializationNull() {
+    @Test void serializationNull() {
         Map<String, Object> vars = new HashMap<String, Object>();
         vars.put("baz", null);
 
@@ -45,150 +47,150 @@ public class UserTest extends TestCase {
         
         String expected = "{\"vars\":{\"baz\":null}}";
         String result = gson.toJson(user);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
-    public void testSetId() {
+    @Test void setId() {
         User user = new User("foo@bar.com");
 
         String expected = "{\"id\":\"foo@bar.com\"}";
         String result = gson.toJson(user);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
-    public void testSetKey() {
+    @Test void setKey() {
         user.setKey("email");
 
         String expected = "{\"key\":\"email\"}";
         String result = gson.toJson(user);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
-    public void testSetFields() {
+    @Test void setFields() {
         Map<String, Object> fields = new HashMap<String, Object>();
         fields.put("keys", 1);
         user.setFields(fields);
 
         String expected = "{\"fields\":{\"keys\":1}}";
         String result = gson.toJson(user);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
-    public void testSetKeys() {
+    @Test void setKeys() {
         Map<String, String> keys = new HashMap<String, String>();
         keys.put("email", "foo@bar.com");
         user.setKeys(keys);
 
         String expected = "{\"keys\":{\"email\":\"foo@bar.com\"}}";
         String result = gson.toJson(user);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
-    public void testSetKeysConflict() {
+    @Test void setKeysConflict() {
         user.setKeysConflict("error");
 
         String expected = "{\"keysconflict\":\"error\"}";
         String result = gson.toJson(user);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
-    public void testSetLists() {
+    @Test void setLists() {
         Map<String, Integer> lists = new HashMap<String, Integer>();
         lists.put("test list", 1);
         user.setLists(lists);
 
         String expected = "{\"lists\":{\"test list\":1}}";
         String result = gson.toJson(user);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
-    public void testSetOptoutEmail() {
+    @Test void setOptoutEmail() {
         user.setOptoutEmail("none");
 
         String expected = "{\"optout_email\":\"none\"}";
         String result = gson.toJson(user);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
-    public void testSetOptoutSmsStatus() {
+    @Test void setOptoutSmsStatus() {
         user.setOptoutSmsStatus("opt-in");
 
         String expected = "{\"optout_sms_status\":\"opt-in\"}";
         String result = gson.toJson(user);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
-    public void testSetSmsMarketingStatusTypeStart() {
+    @Test void setSmsMarketingStatusTypeStart() {
         user.setSmsMarketingStatus(User.OptOutType.OPT_OUT_TYPE_START);
 
         String expected = "{\"sms_marketing_status\":\"opt-in\"}";
         String result = gson.toJson(user);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
-    public void testSetSmsTransactionalStatusTypeStart() {
+    @Test void setSmsTransactionalStatusTypeStart() {
         user.setSmsTransactionalStatus(User.OptOutType.OPT_OUT_TYPE_START);
 
         String expected = "{\"sms_transactional_status\":\"opt-in\"}";
         String result = gson.toJson(user);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
-    public void testSetSmsMarketingStatusTypeStop() {
+    @Test void setSmsMarketingStatusTypeStop() {
         user.setSmsMarketingStatus(User.OptOutType.OPT_OUT_TYPE_STOP);
 
         String expected = "{\"sms_marketing_status\":\"opt-out\"}";
         String result = gson.toJson(user);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
-    public void testSetSmsTransactionalStatusTypeStop() {
+    @Test void setSmsTransactionalStatusTypeStop() {
         user.setSmsTransactionalStatus(User.OptOutType.OPT_OUT_TYPE_STOP);
 
         String expected = "{\"sms_transactional_status\":\"opt-out\"}";
         String result = gson.toJson(user);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
-    public void testSetSmsMarketingStatusTypePending() {
+    @Test void setSmsMarketingStatusTypePending() {
         user.setSmsMarketingStatus(User.OptOutType.OPT_OUT_TYPE_PENDING);
 
         String expected = "{\"sms_marketing_status\":\"pending\"}";
         String result = gson.toJson(user);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
-    public void testSetSmsTransactionalStatusTypePending() {
+    @Test void setSmsTransactionalStatusTypePending() {
         user.setSmsTransactionalStatus(User.OptOutType.OPT_OUT_TYPE_PENDING);
 
         String expected = "{\"sms_transactional_status\":\"pending\"}";
         String result = gson.toJson(user);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
-    public void testSetSmsMarketingStatusTypeDoubleOptIn() {
+    @Test void setSmsMarketingStatusTypeDoubleOptIn() {
         user.setSmsMarketingStatus(User.OptOutType.OPT_OUT_TYPE_DOUBLE_OPT_IN);
 
         String expected = "{\"sms_marketing_status\":\"double-opt-in\"}";
         String result = gson.toJson(user);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
-    public void testSetSmsTransactionalStatusTypeDoubleOptIn() {
+    @Test void setSmsTransactionalStatusTypeDoubleOptIn() {
         user.setSmsTransactionalStatus(User.OptOutType.OPT_OUT_TYPE_DOUBLE_OPT_IN);
 
         String expected = "{\"sms_transactional_status\":\"double-opt-in\"}";
         String result = gson.toJson(user);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
-    public void testSetLogin() {
+    @Test void setLogin() {
         Map<String, Object> login = new HashMap<String, Object>();
         login.put("ip", "123.456.789.0");
         user.setLogin(login);
 
         String expected = "{\"login\":{\"ip\":\"123.456.789.0\"}}";
         String result = gson.toJson(user);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 }
