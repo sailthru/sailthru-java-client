@@ -40,7 +40,7 @@ class UserTest {
     private User user = new User();
 
     @Test void serializationNull() {
-        Map<String, Object> vars = new HashMap<String, Object>();
+        Map<String, Object> vars = new HashMap<>();
         vars.put("baz", null);
 
         user.setVars(vars);
@@ -67,7 +67,7 @@ class UserTest {
     }
 
     @Test void setFields() {
-        Map<String, Object> fields = new HashMap<String, Object>();
+        Map<String, Object> fields = new HashMap<>();
         fields.put("keys", 1);
         user.setFields(fields);
 
@@ -77,7 +77,7 @@ class UserTest {
     }
 
     @Test void setKeys() {
-        Map<String, String> keys = new HashMap<String, String>();
+        Map<String, String> keys = new HashMap<>();
         keys.put("email", "foo@bar.com");
         user.setKeys(keys);
 
@@ -95,7 +95,7 @@ class UserTest {
     }
 
     @Test void setLists() {
-        Map<String, Integer> lists = new HashMap<String, Integer>();
+        Map<String, Integer> lists = new HashMap<>();
         lists.put("test list", 1);
         user.setLists(lists);
 
@@ -185,7 +185,7 @@ class UserTest {
     }
 
     @Test void setLogin() {
-        Map<String, Object> login = new HashMap<String, Object>();
+        Map<String, Object> login = new HashMap<>();
         login.put("ip", "123.456.789.0");
         user.setLogin(login);
 

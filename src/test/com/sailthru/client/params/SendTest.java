@@ -85,9 +85,9 @@ class SendTest {
     }
 
     @Test void setVars() {
-        Map<String, Object> vars = new LinkedHashMap<String, Object>();
+        Map<String, Object> vars = new LinkedHashMap<>();
         vars.put("foo", "bar");
-        Map<String, Object> examplemap = new LinkedHashMap<String, Object>();
+        Map<String, Object> examplemap = new LinkedHashMap<>();
         examplemap.put("nullvalue", null);
         vars.put("example map", examplemap);
         send.setVars(vars);
@@ -122,7 +122,7 @@ class SendTest {
     }
 
     @Test void setLimitMap() {
-        Map<String, Object> limit = new LinkedHashMap<String, Object>();
+        Map<String, Object> limit = new LinkedHashMap<>();
         limit.put("name", "limit name");
         limit.put("conflict", "update");
         limit.put("within_time", "some amount of time");
@@ -153,7 +153,7 @@ class SendTest {
     }
 
     @Test void setScheduleTimeMap() {
-        Map<String, Object> date = new LinkedHashMap<String, Object>();
+        Map<String, Object> date = new LinkedHashMap<>();
         date.put("start_time", "+1 hour");
         date.put("end_time", "+10 hours");
         date.put("method","email");
@@ -189,7 +189,7 @@ class SendTest {
     }
 
     @Test void setOptions() {
-        Map<String, Object> options = new HashMap<String, Object>();
+        Map<String, Object> options = new HashMap<>();
         options.put("Cc", "support@sailthru.com");
         send.setOptions(options);
 

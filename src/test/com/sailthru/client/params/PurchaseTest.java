@@ -29,7 +29,7 @@ class PurchaseTest {
     }
 
     @Test void setItems() {
-        List<PurchaseItem> items = new ArrayList<PurchaseItem>();
+        List<PurchaseItem> items = new ArrayList<>();
         PurchaseItem firstpurchaseitem = new PurchaseItem(1, "example purchase item", 1999, "example id", "http://www.sailthru.com/example/purchase/url");
         PurchaseItem secondpurchaseitem = new PurchaseItem(2, "second purchase item", 2050, "example id2", "http://www.sailthru.com/2/example/purchase/url");
         items.add(firstpurchaseitem);
@@ -42,7 +42,7 @@ class PurchaseTest {
     }
 
     @Test void setPurchaseLevelVars() {
-        Map<String, Object> vars = new HashMap<String, Object>();
+        Map<String, Object> vars = new HashMap<>();
         vars.put("baz", "foo");
         Purchase purchase = new Purchase();
         purchase.setPurchaseLevelVars(vars);
@@ -52,7 +52,7 @@ class PurchaseTest {
     }
 
     @Test void setPurchaseKeys() {
-        Map<String, String> purchaseKeys = new HashMap<String, String>();
+        Map<String, String> purchaseKeys = new HashMap<>();
         purchaseKeys.put("extid", "123");
         Purchase purchase = new Purchase();
         purchase.setPurchaseKeys(purchaseKeys);
@@ -62,10 +62,10 @@ class PurchaseTest {
     }
 
     @Test void adjustments() {
-        Map<String, Object> adjustmentItem = new HashMap<String, Object>();
+        Map<String, Object> adjustmentItem = new HashMap<>();
         adjustmentItem.put("title", "bar");
         adjustmentItem.put("price", 1000);
-        ArrayList adjustments = new ArrayList();
+        ArrayList<Map<String, Object>> adjustments = new ArrayList<>();
         adjustments.add(adjustmentItem);
         Purchase purchase = new Purchase();
         purchase.setAdjustments(adjustments);
@@ -75,7 +75,7 @@ class PurchaseTest {
     }
 
     @Test void cookies() {
-        Map<String, String> cookies = new HashMap<String, String>();
+        Map<String, String> cookies = new HashMap<>();
         cookies.put("sailthru_pc", "003f54695cfdcf42189a6");
         Purchase purchase = new Purchase();
         purchase.setCookies(cookies);
@@ -85,10 +85,10 @@ class PurchaseTest {
     }
 
     @Test void tenders() {
-        Map<String, Object> TenderItem = new HashMap<String, Object>();
+        Map<String, Object> TenderItem = new HashMap<>();
         TenderItem.put("title", "bar");
         TenderItem.put("price", 1000);
-        ArrayList tenders = new ArrayList();
+        ArrayList<Map<String, Object>> tenders = new ArrayList<>();
         tenders.add(TenderItem);
         Purchase purchase = new Purchase();
         purchase.setTenders(tenders);

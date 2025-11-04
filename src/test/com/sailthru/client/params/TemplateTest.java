@@ -96,7 +96,7 @@ class TemplateTest {
     }
 
     @Test void setLinkParams() {
-        Map<String, String> linkParams = new LinkedHashMap<String, String>();
+        Map<String, String> linkParams = new LinkedHashMap<>();
         linkParams.put("utm_campaign", "Sailthru");
         linkParams.put("utm_template", "Example Template");
         linkParams.put("utm_date", "{date('MMddYYYY')}");

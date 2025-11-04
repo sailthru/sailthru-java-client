@@ -23,7 +23,7 @@ class ContentTest {
         content.setDate(format.format(date));
         content.setTitle("testGetContent Title");
         content.setUrl("http://sailthru.com");
-        Map<String, Object> vars = new HashMap<String, Object>();
+        Map<String, Object> vars = new HashMap<>();
         vars.put("baz", "foo");
         content.setVars(vars);
         String expected = "{\"url\":\"http://sailthru.com\",\"title\":\"testGetContent Title\",\"date\":\"Thu Oct 03 20:18:14 UTC 2013\",\"vars\":{\"baz\":\"foo\"}}";
@@ -72,7 +72,7 @@ class ContentTest {
 
     @Test void setTags() {
         Content content = new Content();
-        List tags = new ArrayList<String>();
+        List<String> tags = new ArrayList<>();
         tags.add("foo");
         tags.add("bar");
         content.setTags(tags);
@@ -92,7 +92,7 @@ class ContentTest {
 
     @Test void setVars() {
         Content content = new Content();
-        Map<String, Object> vars = new LinkedHashMap<String, Object>();
+        Map<String, Object> vars = new LinkedHashMap<>();
         vars.put("test","result");
         vars.put("test2","result2");
         vars.put("test3","result3");
@@ -123,10 +123,10 @@ class ContentTest {
 
     @Test void setImages() {
         Content content = new Content();
-        Map<String, Map<String, String>> images = new LinkedHashMap<String, Map<String, String>>();
-        Map<String, String> fullUrl = new HashMap<String, String>();
+        Map<String, Map<String, String>> images = new LinkedHashMap<>();
+        Map<String, String> fullUrl = new HashMap<>();
         fullUrl.put("url", "https://images.google.com/abc");
-        Map<String, String> thumbUrl = new HashMap<String, String>();
+        Map<String, String> thumbUrl = new HashMap<>();
         thumbUrl.put("url", "https://images.google.com/def");
         images.put("full", fullUrl);
         images.put("thumb", thumbUrl);
@@ -162,7 +162,7 @@ class ContentTest {
 
     @Test void setLocationObject() {
         Content content = new Content();
-        List<Double> location = new ArrayList<Double>();
+        List<Double> location = new ArrayList<>();
         location.add(40.256);
         location.add(-74.1239);
         content.setLocation(location);

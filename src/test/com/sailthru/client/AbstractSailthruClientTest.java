@@ -27,8 +27,7 @@ import java.util.Date;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -146,12 +145,14 @@ class AbstractSailthruClientTest {
         assertThat(postRateLimitInfo.getReset()).isEqualTo(postResetDate);
     }
 
+    @SuppressWarnings("unchecked")
     @Test void returnUrl() throws Exception {
         CloseableHttpResponse response = getMockHttpResponseWithRateLimitHeaders(1, 1, new Date());
         doReturn(response).when(httpClient).execute(any(HttpHost.class), any(HttpRequest.class), (HttpContext) any());
         sailthruClient.apiPost(ApiAction.RETURN, Collections.<String, Object>emptyMap());
+
         verify(httpClient).executeHttpRequest(eq("https://api.sailthru.com/return"), eq(AbstractSailthruClient.HttpRequestMethod.POST),
-                any(Map.class), any(ResponseHandler.class), (Map) any());
+                anyMap(), any(ResponseHandler.class), any());
     }
 
     private CloseableHttpResponse getMockHttpResponseWithRateLimitHeaders(int limit, int remaining, Date reset) {
