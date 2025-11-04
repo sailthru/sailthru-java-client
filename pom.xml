@@ -75,11 +75,13 @@
     </properties>
 
     <dependencies>
+        <!-- this is only needed for @VisibleForTesting annotation and tests -->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>${guava.version}</version>
             <scope>compile</scope>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
