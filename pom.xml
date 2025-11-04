@@ -8,7 +8,7 @@
 
     <name>sailthru-java-client</name>
     <description>Java client library for Sailthru API</description>
-    <url>http://getstarted.sailthru.com/</url>
+    <url>https://getstarted.sailthru.com/</url>
 
     <organization>
         <name>Sailthru, Inc.</name>
@@ -49,18 +49,21 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>8</maven.compiler.release>
 
-        <junit.version>5.14.1</junit.version>
-        <gson.version>2.13.2</gson.version>
-        <httpcomponents.version>4.5.14</httpcomponents.version>
-        <httpcore.version>4.4.16</httpcore.version>
+        <!-- dependencies -->
         <commons-codec.version>1.19.0</commons-codec.version>
-        <slf4j.version>2.0.17</slf4j.version>
-        <mockito.version>5.20.0</mockito.version>
-        <assertj.version>3.27.6</assertj.version>
-
+        <gson.version>2.13.2</gson.version>
         <!-- used for @VisibleForTesting annotation -->
         <guava.version>33.5.0-jre</guava.version>
+        <httpcomponents.version>4.5.14</httpcomponents.version>
+        <httpcore.version>4.4.16</httpcore.version>
+        <slf4j.version>2.0.17</slf4j.version>
 
+        <!-- test dependencies -->
+        <assertj.version>3.27.6</assertj.version>
+        <junit.version>5.14.1</junit.version>
+        <mockito.version>5.20.0</mockito.version>
+
+        <!-- plugins -->
         <nexus-staging-maven-plugin.version>1.7.0</nexus-staging-maven-plugin.version>
         <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
         <maven-release-plugin.version>3.1.1</maven-release-plugin.version>
@@ -254,62 +257,6 @@
                                         <arg>--pinentry-mode</arg>
                                         <arg>loopback</arg>
                                     </gpgArguments>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-
-        <profile>
-            <id>openrewrite</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.openrewrite.maven</groupId>
-                        <artifactId>rewrite-maven-plugin</artifactId>
-                        <version>6.22.1</version>
-                        <dependencies>
-                            <dependency>
-                                <groupId>org.openrewrite.recipe</groupId>
-                                <artifactId>rewrite-testing-frameworks</artifactId>
-                                <version>3.20.0</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>org.openrewrite.recipe</groupId>
-                                <artifactId>rewrite-migrate-java</artifactId>
-                                <version>3.20.0</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>org.openrewrite.recipe</groupId>
-                                <artifactId>rewrite-static-analysis</artifactId>
-                                <version>2.20.0</version>
-                            </dependency>
-                        </dependencies>
-                        <executions>
-                            <execution>
-                                <id>tests</id>
-                                <goals>
-                                    <goal>runNoFork</goal>
-                                </goals>
-                                <phase>verify</phase>
-                                <configuration>
-                                    <activeRecipes>
-                                        <!--recipe>org.openrewrite.java.testing.hamcrest.MigrateHamcrestToAssertJ</recipe>
-                                        <recipe>org.openrewrite.java.testing.junit5.AssertToAssertions</recipe!-->
-                                        <recipe>org.openrewrite.java.testing.assertj.JUnitToAssertj</recipe>
-                                        <!--recipe>org.openrewrite.java.testing.assertj.Assertj</recipe>
-                                        <recipe>org.openrewrite.java.migrate.UpgradeToJava17</recipe-->
-                                    </activeRecipes>
-                                    <exclusions>
-                                        <exclusion>**/src/main/java/**</exclusion>
-                                        <exclusion>**/pom.xml</exclusion>
-                                        <exclusion>**/target/**</exclusion>
-                                        <exclusion>**/generated/**</exclusion>
-                                        <exclusion>**/.git/**</exclusion>
-                                    </exclusions>
                                 </configuration>
                             </execution>
                         </executions>
