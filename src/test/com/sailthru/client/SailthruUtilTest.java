@@ -47,7 +47,8 @@ class SailthruUtilTest {
         java.util.Map<String, Object> map1 = new LinkedHashMap<>();
         map1.put("var1","value1");
         map1.put("var2","value2");
-        String expectedmap1 = "{\"var1\":\"value1\",\"var2\":\"value2\"}";
+        String expectedmap1 = """
+                {"var1":"value1","var2":"value2"}""";
         assertThat(gson.toJson(map1)).isEqualTo(expectedmap1);
 
         java.util.Map<String, Object> map2 = new LinkedHashMap<>();
@@ -57,7 +58,8 @@ class SailthruUtilTest {
         java.util.Map<String, Object> map3 = new LinkedHashMap<>();
         map3.put("var1",null);
         map3.put("var2","value2");
-        String expectedmap3 = "{\"var1\":null,\"var2\":\"value2\"}";
+        String expectedmap3 = """
+                {"var1":null,"var2":"value2"}""";
         assertThat(gson.toJson(map3)).isEqualTo(expectedmap3);
 
         java.util.Map<String, Object> map4 = new LinkedHashMap<>();
@@ -67,7 +69,8 @@ class SailthruUtilTest {
         java.util.Map<String, Object> map6 = new LinkedHashMap<>();
         map6.put("var2","value2");
         map4.put("var2",map6);
-        String expectedmap4 = "{\"var1\":{\"var1\":null},\"var2\":{\"var2\":\"value2\"}}";
+        String expectedmap4 = """
+                {"var1":{"var1":null},"var2":{"var2":"value2"}}""";
         assertThat(gson.toJson(map4)).isEqualTo(expectedmap4);
     }
 
@@ -76,7 +79,8 @@ class SailthruUtilTest {
         Map<String, Object> map = new HashMap<>();
         map.put("baz", null);
         
-        String expected = "{\"baz\":null}";
+        String expected = """
+                {"baz":null}""";
         String result = gson.toJson(map);
 
         assertThat(result).isEqualTo(expected);

@@ -45,7 +45,8 @@ class UserTest {
 
         user.setVars(vars);
         
-        String expected = "{\"vars\":{\"baz\":null}}";
+        String expected = """
+                {"vars":{"baz":null}}""";
         String result = gson.toJson(user);
         assertThat(result).isEqualTo(expected);
     }
@@ -53,7 +54,8 @@ class UserTest {
     @Test void setId() {
         User user = new User("foo@bar.com");
 
-        String expected = "{\"id\":\"foo@bar.com\"}";
+        String expected = """
+                {"id":"foo@bar.com"}""";
         String result = gson.toJson(user);
         assertThat(result).isEqualTo(expected);
     }
@@ -61,7 +63,8 @@ class UserTest {
     @Test void setKey() {
         user.setKey("email");
 
-        String expected = "{\"key\":\"email\"}";
+        String expected = """
+                {"key":"email"}""";
         String result = gson.toJson(user);
         assertThat(result).isEqualTo(expected);
     }
@@ -71,7 +74,8 @@ class UserTest {
         fields.put("keys", 1);
         user.setFields(fields);
 
-        String expected = "{\"fields\":{\"keys\":1}}";
+        String expected = """
+                {"fields":{"keys":1}}""";
         String result = gson.toJson(user);
         assertThat(result).isEqualTo(expected);
     }
@@ -81,7 +85,8 @@ class UserTest {
         keys.put("email", "foo@bar.com");
         user.setKeys(keys);
 
-        String expected = "{\"keys\":{\"email\":\"foo@bar.com\"}}";
+        String expected = """
+                {"keys":{"email":"foo@bar.com"}}""";
         String result = gson.toJson(user);
         assertThat(result).isEqualTo(expected);
     }
@@ -89,7 +94,8 @@ class UserTest {
     @Test void setKeysConflict() {
         user.setKeysConflict("error");
 
-        String expected = "{\"keysconflict\":\"error\"}";
+        String expected = """
+                {"keysconflict":"error"}""";
         String result = gson.toJson(user);
         assertThat(result).isEqualTo(expected);
     }
@@ -99,7 +105,8 @@ class UserTest {
         lists.put("test list", 1);
         user.setLists(lists);
 
-        String expected = "{\"lists\":{\"test list\":1}}";
+        String expected = """
+                {"lists":{"test list":1}}""";
         String result = gson.toJson(user);
         assertThat(result).isEqualTo(expected);
     }
@@ -107,7 +114,8 @@ class UserTest {
     @Test void setOptoutEmail() {
         user.setOptoutEmail("none");
 
-        String expected = "{\"optout_email\":\"none\"}";
+        String expected = """
+                {"optout_email":"none"}""";
         String result = gson.toJson(user);
         assertThat(result).isEqualTo(expected);
     }
@@ -115,7 +123,8 @@ class UserTest {
     @Test void setOptoutSmsStatus() {
         user.setOptoutSmsStatus("opt-in");
 
-        String expected = "{\"optout_sms_status\":\"opt-in\"}";
+        String expected = """
+                {"optout_sms_status":"opt-in"}""";
         String result = gson.toJson(user);
         assertThat(result).isEqualTo(expected);
     }
@@ -123,7 +132,8 @@ class UserTest {
     @Test void setSmsMarketingStatusTypeStart() {
         user.setSmsMarketingStatus(User.OptOutType.OPT_OUT_TYPE_START);
 
-        String expected = "{\"sms_marketing_status\":\"opt-in\"}";
+        String expected = """
+                {"sms_marketing_status":"opt-in"}""";
         String result = gson.toJson(user);
         assertThat(result).isEqualTo(expected);
     }
@@ -131,7 +141,8 @@ class UserTest {
     @Test void setSmsTransactionalStatusTypeStart() {
         user.setSmsTransactionalStatus(User.OptOutType.OPT_OUT_TYPE_START);
 
-        String expected = "{\"sms_transactional_status\":\"opt-in\"}";
+        String expected = """
+                {"sms_transactional_status":"opt-in"}""";
         String result = gson.toJson(user);
         assertThat(result).isEqualTo(expected);
     }
@@ -139,7 +150,8 @@ class UserTest {
     @Test void setSmsMarketingStatusTypeStop() {
         user.setSmsMarketingStatus(User.OptOutType.OPT_OUT_TYPE_STOP);
 
-        String expected = "{\"sms_marketing_status\":\"opt-out\"}";
+        String expected = """
+                {"sms_marketing_status":"opt-out"}""";
         String result = gson.toJson(user);
         assertThat(result).isEqualTo(expected);
     }
@@ -147,7 +159,8 @@ class UserTest {
     @Test void setSmsTransactionalStatusTypeStop() {
         user.setSmsTransactionalStatus(User.OptOutType.OPT_OUT_TYPE_STOP);
 
-        String expected = "{\"sms_transactional_status\":\"opt-out\"}";
+        String expected = """
+                {"sms_transactional_status":"opt-out"}""";
         String result = gson.toJson(user);
         assertThat(result).isEqualTo(expected);
     }
@@ -155,7 +168,8 @@ class UserTest {
     @Test void setSmsMarketingStatusTypePending() {
         user.setSmsMarketingStatus(User.OptOutType.OPT_OUT_TYPE_PENDING);
 
-        String expected = "{\"sms_marketing_status\":\"pending\"}";
+        String expected = """
+                {"sms_marketing_status":"pending"}""";
         String result = gson.toJson(user);
         assertThat(result).isEqualTo(expected);
     }
@@ -163,7 +177,8 @@ class UserTest {
     @Test void setSmsTransactionalStatusTypePending() {
         user.setSmsTransactionalStatus(User.OptOutType.OPT_OUT_TYPE_PENDING);
 
-        String expected = "{\"sms_transactional_status\":\"pending\"}";
+        String expected = """
+                {"sms_transactional_status":"pending"}""";
         String result = gson.toJson(user);
         assertThat(result).isEqualTo(expected);
     }
@@ -171,7 +186,8 @@ class UserTest {
     @Test void setSmsMarketingStatusTypeDoubleOptIn() {
         user.setSmsMarketingStatus(User.OptOutType.OPT_OUT_TYPE_DOUBLE_OPT_IN);
 
-        String expected = "{\"sms_marketing_status\":\"double-opt-in\"}";
+        String expected = """
+                {"sms_marketing_status":"double-opt-in"}""";
         String result = gson.toJson(user);
         assertThat(result).isEqualTo(expected);
     }
@@ -179,7 +195,8 @@ class UserTest {
     @Test void setSmsTransactionalStatusTypeDoubleOptIn() {
         user.setSmsTransactionalStatus(User.OptOutType.OPT_OUT_TYPE_DOUBLE_OPT_IN);
 
-        String expected = "{\"sms_transactional_status\":\"double-opt-in\"}";
+        String expected = """
+                {"sms_transactional_status":"double-opt-in"}""";
         String result = gson.toJson(user);
         assertThat(result).isEqualTo(expected);
     }
@@ -189,7 +206,8 @@ class UserTest {
         login.put("ip", "123.456.789.0");
         user.setLogin(login);
 
-        String expected = "{\"login\":{\"ip\":\"123.456.789.0\"}}";
+        String expected = """
+                {"login":{"ip":"123.456.789.0"}}""";
         String result = gson.toJson(user);
         assertThat(result).isEqualTo(expected);
     }

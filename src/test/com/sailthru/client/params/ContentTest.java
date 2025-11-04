@@ -26,7 +26,8 @@ class ContentTest {
         Map<String, Object> vars = new HashMap<>();
         vars.put("baz", "foo");
         content.setVars(vars);
-        String expected = "{\"url\":\"http://sailthru.com\",\"title\":\"testGetContent Title\",\"date\":\"Thu Oct 03 20:18:14 UTC 2013\",\"vars\":{\"baz\":\"foo\"}}";
+        String expected = """
+                {"url":"http://sailthru.com","title":"testGetContent Title","date":"Thu Oct 03 20:18:14 UTC 2013","vars":{"baz":"foo"}}""";
         String result = gson.toJson(content);
         assertThat(result).isEqualTo(expected);
     }
@@ -35,7 +36,8 @@ class ContentTest {
         Content content = new Content();
         String title = "Test Title";
         content.setTitle(title);
-        String expected = "{\"title\":\"Test Title\"}";
+        String expected = """
+                {"title":"Test Title"}""";
         String result = gson.toJson(content);
         assertThat(result).isEqualTo(expected);
     }
@@ -46,7 +48,8 @@ class ContentTest {
         keys.put("sku", "123abc");
         content.setKeys(keys);
 
-        String expected = "{\"keys\":{\"sku\":\"123abc\"}}";
+        String expected = """
+                {"keys":{"sku":"123abc"}}""";
         String result = gson.toJson(content);
         assertThat(result).isEqualTo(expected);
     }
@@ -55,7 +58,8 @@ class ContentTest {
         Content content = new Content();
         String url = "http://sailthru.com";
         content.setUrl(url);
-        String expected = "{\"url\":\"http://sailthru.com\"}";
+        String expected = """
+                {"url":"http://sailthru.com"}""";
         String result = gson.toJson(content);
         assertThat(result).isEqualTo(expected);
     }
@@ -65,7 +69,8 @@ class ContentTest {
         Date date = new Date(1380831494000L);
         format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
         content.setDate(format.format(date));
-        String expected = "{\"date\":\"Thu Oct 03 20:18:14 UTC 2013\"}";
+        String expected = """
+                {"date":"Thu Oct 03 20:18:14 UTC 2013"}""";
         String result = gson.toJson(content);
         assertThat(result).isEqualTo(expected);
     }
@@ -76,7 +81,8 @@ class ContentTest {
         tags.add("foo");
         tags.add("bar");
         content.setTags(tags);
-        String expected = "{\"tags\":[\"foo\",\"bar\"]}";
+        String expected = """
+                {"tags":["foo","bar"]}""";
         String result = gson.toJson(content);
         assertThat(result).isEqualTo(expected);
     }
@@ -85,7 +91,8 @@ class ContentTest {
         Content content = new Content();
         String date = "1380831494000L";
         content.setDate(date);
-        String expected = "{\"date\":\"1380831494000L\"}";
+        String expected = """
+                {"date":"1380831494000L"}""";
         String result = gson.toJson(content);
         assertThat(result).isEqualTo(expected);
     }
@@ -97,7 +104,8 @@ class ContentTest {
         vars.put("test2","result2");
         vars.put("test3","result3");
         content.setVars(vars);
-        String expected = "{\"vars\":{\"test\":\"result\",\"test2\":\"result2\",\"test3\":\"result3\"}}";
+        String expected = """
+                {"vars":{"test":"result","test2":"result2","test3":"result3"}}""";
         String result = gson.toJson(content);
         assertThat(result).isEqualTo(expected);
     }
@@ -131,7 +139,8 @@ class ContentTest {
         images.put("full", fullUrl);
         images.put("thumb", thumbUrl);
         content.setImages(images);
-        String expected = "{\"images\":{\"full\":{\"url\":\"https://images.google.com/abc\"},\"thumb\":{\"url\":\"https://images.google.com/def\"}}}";
+        String expected = """
+                {"images":{"full":{"url":"https://images.google.com/abc"},"thumb":{"url":"https://images.google.com/def"}}}""";
         String result = gson.toJson(content);
         assertThat(result).isEqualTo(expected);
     }
@@ -139,7 +148,8 @@ class ContentTest {
     @Test void setFullImage() {
         Content content = new Content();
         content.setFullImage("https://images.google.com/abc");
-        String expected = "{\"images\":{\"full\":{\"url\":\"https://images.google.com/abc\"}}}";
+        String expected = """
+                {"images":{"full":{"url":"https://images.google.com/abc"}}}""";
         String result = gson.toJson(content);
         assertThat(result).isEqualTo(expected);
     }
@@ -147,7 +157,8 @@ class ContentTest {
     @Test void setThumbImage() {
         Content content = new Content();
         content.setThumbImage("https://images.google.com/abc");
-        String expected = "{\"images\":{\"thumb\":{\"url\":\"https://images.google.com/abc\"}}}";
+        String expected = """
+                {"images":{"thumb":{"url":"https://images.google.com/abc"}}}""";
         String result = gson.toJson(content);
         assertThat(result).isEqualTo(expected);
     }
@@ -155,7 +166,8 @@ class ContentTest {
     @Test void setLocationValue() {
         Content content = new Content();
         content.setLocation(40.256, -74.1239);
-        String expected = "{\"location\":[40.256,-74.1239]}";
+        String expected = """
+                {"location":[40.256,-74.1239]}""";
         String result = gson.toJson(content);
         assertThat(result).isEqualTo(expected);
     }
@@ -166,7 +178,8 @@ class ContentTest {
         location.add(40.256);
         location.add(-74.1239);
         content.setLocation(location);
-        String expected = "{\"location\":[40.256,-74.1239]}";
+        String expected = """
+                {"location":[40.256,-74.1239]}""";
         String result = gson.toJson(content);
         assertThat(result).isEqualTo(expected);
     }
@@ -174,7 +187,8 @@ class ContentTest {
     @Test void setPrice() {
         Content content = new Content();
         content.setPrice(1200);
-        String expected = "{\"price\":1200}";
+        String expected = """
+                {"price":1200}""";
         String result = gson.toJson(content);
         assertThat(result).isEqualTo(expected);
     }
@@ -182,7 +196,8 @@ class ContentTest {
     @Test void setDescription() {
         Content content = new Content();
         content.setDescription("this is a test.");
-        String expected = "{\"description\":\"this is a test.\"}";
+        String expected = """
+                {"description":"this is a test."}""";
         String result = gson.toJson(content);
         assertThat(result).isEqualTo(expected);
     }
@@ -190,7 +205,8 @@ class ContentTest {
     @Test void setSiteName() {
         Content content = new Content();
         content.setSiteName("Hello New York");
-        String expected = "{\"site_name\":\"Hello New York\"}";
+        String expected = """
+                {"site_name":"Hello New York"}""";
         String result = gson.toJson(content);
         assertThat(result).isEqualTo(expected);
     }
@@ -198,7 +214,8 @@ class ContentTest {
     @Test void setAuthor() {
         Content content = new Content();
         content.setAuthor("Dr. Java");
-        String expected = "{\"author\":\"Dr. Java\"}";
+        String expected = """
+                {"author":"Dr. Java"}""";
         String result = gson.toJson(content);
         assertThat(result).isEqualTo(expected);
     }
@@ -206,7 +223,8 @@ class ContentTest {
     @Test void enableSpider() {
         Content content = new Content();
         content.enableSpider();
-        String expected = "{\"spider\":1}";
+        String expected = """
+                {"spider":1}""";
         String result = gson.toJson(content);
         assertThat(result).isEqualTo(expected);
     }

@@ -23,7 +23,8 @@ class PurchaseTest {
     @Test void setEmail() {
         Purchase purchase = new Purchase();
         purchase.setEmail("support@sailthru.com");
-        String expected = "{\"email\":\"support@sailthru.com\"}";
+        String expected = """
+                {"email":"support@sailthru.com"}""";
         String result = gson.toJson(purchase);
         assertThat(result).isEqualTo(expected);
     }
@@ -36,7 +37,8 @@ class PurchaseTest {
         items.add(secondpurchaseitem);
         Purchase purchase = new Purchase();
         purchase.setItems(items);
-        String expected = "{\"items\":[{\"qty\":\"1\",\"title\":\"example purchase item\",\"price\":\"1999\",\"id\":\"example id\",\"url\":\"http://www.sailthru.com/example/purchase/url\"},{\"qty\":\"2\",\"title\":\"second purchase item\",\"price\":\"2050\",\"id\":\"example id2\",\"url\":\"http://www.sailthru.com/2/example/purchase/url\"}]}";
+        String expected = """
+                {"items":[{"qty":"1","title":"example purchase item","price":"1999","id":"example id","url":"http://www.sailthru.com/example/purchase/url"},{"qty":"2","title":"second purchase item","price":"2050","id":"example id2","url":"http://www.sailthru.com/2/example/purchase/url"}]}""";
         String result = gson.toJson(purchase);
         assertThat(result).isEqualTo(expected);
     }
@@ -46,7 +48,8 @@ class PurchaseTest {
         vars.put("baz", "foo");
         Purchase purchase = new Purchase();
         purchase.setPurchaseLevelVars(vars);
-        String expected = "{\"vars\":{\"baz\":\"foo\"}}";
+        String expected = """
+                {"vars":{"baz":"foo"}}""";
         String result = gson.toJson(purchase);
         assertThat(result).isEqualTo(expected);
     }
@@ -56,7 +59,8 @@ class PurchaseTest {
         purchaseKeys.put("extid", "123");
         Purchase purchase = new Purchase();
         purchase.setPurchaseKeys(purchaseKeys);
-        String expected = "{\"purchase_keys\":{\"extid\":\"123\"}}";
+        String expected = """
+                {"purchase_keys":{"extid":"123"}}""";
         String result = gson.toJson(purchase);
         assertThat(result).isEqualTo(expected);
     }
@@ -69,7 +73,8 @@ class PurchaseTest {
         adjustments.add(adjustmentItem);
         Purchase purchase = new Purchase();
         purchase.setAdjustments(adjustments);
-        String expected = "{\"adjustments\":[{\"price\":1000,\"title\":\"bar\"}]}";
+        String expected = """
+                {"adjustments":[{"price":1000,"title":"bar"}]}""";
         String result = gson.toJson(purchase);
         assertThat(result).isEqualTo(expected);
     }
@@ -79,7 +84,8 @@ class PurchaseTest {
         cookies.put("sailthru_pc", "003f54695cfdcf42189a6");
         Purchase purchase = new Purchase();
         purchase.setCookies(cookies);
-        String expected = "{\"cookies\":{\"sailthru_pc\":\"003f54695cfdcf42189a6\"}}";
+        String expected = """
+                {"cookies":{"sailthru_pc":"003f54695cfdcf42189a6"}}""";
         String result = gson.toJson(purchase);
         assertThat(result).isEqualTo(expected);
     }
@@ -92,7 +98,8 @@ class PurchaseTest {
         tenders.add(TenderItem);
         Purchase purchase = new Purchase();
         purchase.setTenders(tenders);
-        String expected = "{\"tenders\":[{\"price\":1000,\"title\":\"bar\"}]}";
+        String expected = """
+                {"tenders":[{"price":1000,"title":"bar"}]}""";
         String result = gson.toJson(purchase);
         assertThat(result).isEqualTo(expected);
     }
@@ -100,7 +107,8 @@ class PurchaseTest {
     @Test void setAsIncomplete() {
         Purchase purchase = new Purchase();
         purchase.setAsIncomplete();
-        String expected = "{\"incomplete\":1}";
+        String expected = """
+                {"incomplete":1}""";
         String result = gson.toJson(purchase);
         assertThat(result).isEqualTo(expected);
     }
@@ -108,7 +116,8 @@ class PurchaseTest {
     @Test void setMessageId() {
         Purchase purchase = new Purchase();
         purchase.setMessageId("example message id");
-        String expected = "{\"message_id\":\"example message id\"}";
+        String expected = """
+                {"message_id":"example message id"}""";
         String result = gson.toJson(purchase);
         assertThat(result).isEqualTo(expected);
     }
@@ -116,7 +125,8 @@ class PurchaseTest {
     @Test void setReminderTemplate() {
         Purchase purchase = new Purchase();
         purchase.setReminderTemplate("example reminder template");
-        String expected = "{\"reminder_template\":\"example reminder template\"}";
+        String expected = """
+                {"reminder_template":"example reminder template"}""";
         String result = gson.toJson(purchase);
         assertThat(result).isEqualTo(expected);
     }
@@ -124,7 +134,8 @@ class PurchaseTest {
     @Test void setReminderTimeString() {
         Purchase purchase = new Purchase();
         purchase.setReminderTime("+10 days");
-        String expected = "{\"reminder_time\":\"+10 days\"}";
+        String expected = """
+                {"reminder_time":"+10 days"}""";
         String result = gson.toJson(purchase);
         assertThat(result).isEqualTo(expected);
     }
@@ -134,7 +145,8 @@ class PurchaseTest {
         Date date = new Date(1380831494000L);
         format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
         purchase.setReminderTime(format.format(date));
-        String expected = "{\"reminder_time\":\"Thu Oct 03 20:18:14 UTC 2013\"}";
+        String expected = """
+                {"reminder_time":"Thu Oct 03 20:18:14 UTC 2013"}""";
         String result = gson.toJson(purchase);
         assertThat(result).isEqualTo(expected);
     }
@@ -142,7 +154,8 @@ class PurchaseTest {
     @Test void setDateString() {
         Purchase purchase = new Purchase();
         purchase.setDate("+10 days");
-        String expected = "{\"date\":\"+10 days\"}";
+        String expected = """
+                {"date":"+10 days"}""";
         String result = gson.toJson(purchase);
         assertThat(result).isEqualTo(expected);
     }
@@ -152,7 +165,8 @@ class PurchaseTest {
         Date date = new Date(1380831494000L);
         format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
         purchase.setDate(format.format(date));
-        String expected = "{\"date\":\"Thu Oct 03 20:18:14 UTC 2013\"}";
+        String expected = """
+                {"date":"Thu Oct 03 20:18:14 UTC 2013"}""";
         String result = gson.toJson(purchase);
         assertThat(result).isEqualTo(expected);
     }
@@ -161,7 +175,8 @@ class PurchaseTest {
         String sendTemplate = "template name";
         Purchase purchase = new Purchase();
         purchase.setSendTemplate(sendTemplate);
-        String expected = "{\"send_template\":\"template name\"}";
+        String expected = """
+                {"send_template":"template name"}""";
         String result = gson.toJson(purchase);
         assertThat(result).isEqualTo(expected);
     }
@@ -169,7 +184,8 @@ class PurchaseTest {
     @Test void setChannel() {
         Purchase purchase = new Purchase();
         purchase.setChannel(Purchase.Channel.online);
-        String expected = "{\"channel\":\"online\"}";
+        String expected = """
+                {"channel":"online"}""";
         String result = gson.toJson(purchase);
         assertThat(result).isEqualTo(expected);
     }
@@ -179,7 +195,8 @@ class PurchaseTest {
         purchase.setChannel(Purchase.Channel.app);
         purchase.setAppId("applesfghidodkdjfhikodie");
         purchase.setDeviceId("deviceid");
-        String expected = "{\"channel\":\"app\",\"app_id\":\"applesfghidodkdjfhikodie\",\"device_id\":\"deviceid\"}";
+        String expected = """
+                {"channel":"app","app_id":"applesfghidodkdjfhikodie","device_id":"deviceid"}""";
         String result = gson.toJson(purchase);
         assertThat(result).isEqualTo(expected);
     }

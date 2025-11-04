@@ -25,7 +25,8 @@ class JsonHandlerTest {
 
     @Test void parseResponseWithContent() {
         // Given: JSON payload with nested object and vars
-        String content = "{\"url\":\"http://sailthru.com\",\"title\":\"testGetContent Title\",\"date\":\"Thu Oct 03 20:18:14 UTC 2013\",\"vars\":{\"baz\":\"foo\"}}";
+        String content = """
+                {"url":"http://sailthru.com","title":"testGetContent Title","date":"Thu Oct 03 20:18:14 UTC 2013","vars":{"baz":"foo"}}""";
 
         // When: parseResponse is called
         Object result = jsonHandler.parseResponse(content);
@@ -52,7 +53,8 @@ class JsonHandlerTest {
 
     @Test void parseResponseWithImages() {
         // Given: JSON payload with nested images structure
-        String images = "{\"images\":{\"full\":{\"url\":\"https://images.google.com/abc\"},\"thumb\":{\"url\":\"https://images.google.com/def\"}}}";
+        String images = """
+                {"images":{"full":{"url":"https://images.google.com/abc"},"thumb":{"url":"https://images.google.com/def"}}}""";
 
         // When: parseResponse is called
         Object result = jsonHandler.parseResponse(images);
@@ -94,7 +96,8 @@ class JsonHandlerTest {
 
     @Test void parseResponseWithLocation() {
         // Given: JSON payload with array of coordinates
-        String location = "{\"location\":[40.256,-74.1239]}";
+        String location = """
+                {"location":[40.256,-74.1239]}""";
 
         // When: parseResponse is called
         Object result = jsonHandler.parseResponse(location);
@@ -121,7 +124,8 @@ class JsonHandlerTest {
 
     @Test void parseResponseWithPrice() {
         // Given: JSON payload with simple numeric value
-        String price = "{\"price\":1200}";
+        String price = """
+                {"price":1200}""";
 
         // When: parseResponse is called
         Object result = jsonHandler.parseResponse(price);
@@ -137,13 +141,14 @@ class JsonHandlerTest {
 
     @Test void parseResponseWithComplexNestedStructure() {
         // Given: JSON payload combining all data types
-        String complexJson = "{\n" +
-                "                \"url\":\"http://example.com\",\n" +
-                "                \"images\":{\"full\":{\"url\":\"https://example.com/image.jpg\"}},\n" +
-                "                \"location\":[40.256,-74.1239],\n" +
-                "                \"price\":999.99,\n" +
-                "                \"metadata\":{\"key\":\"value\"}\n" +
-                "                }";
+        String complexJson = """
+                {
+                                "url":"http://example.com",
+                                "images":{"full":{"url":"https://example.com/image.jpg"}},
+                                "location":[40.256,-74.1239],
+                                "price":999.99,
+                                "metadata":{"key":"value"}
+                                }""";
 
         // When: parseResponse is called
         Object result = jsonHandler.parseResponse(complexJson);
@@ -179,7 +184,8 @@ class JsonHandlerTest {
 
     @Test void parseResponseReturnsMap() {
         // Given: Valid JSON payload
-        String json = "{\"key\":\"value\",\"number\":42}";
+        String json = """
+                {"key":"value","number":42}""";
 
         // When: parseResponse is called
         Object result = jsonHandler.parseResponse(json);
@@ -210,12 +216,13 @@ class JsonHandlerTest {
 
     @Test void parseResponseWithDifferentNumberFormats() {
         // Given: JSON payload with various number formats
-        String numberJson = "{\n" +
-                "                \"integer\":100,\n" +
-                "                \"decimal\":123.45,\n" +
-                "                \"negative\":-99,\n" +
-                "                \"scientific\":1.23E+3\n" +
-                "                }";
+        String numberJson = """
+                {
+                                "integer":100,
+                                "decimal":123.45,
+                                "negative":-99,
+                                "scientific":1.23E+3
+                                }""";
 
         // When: parseResponse is called
         Object result = jsonHandler.parseResponse(numberJson);
