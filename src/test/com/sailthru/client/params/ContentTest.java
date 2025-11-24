@@ -6,11 +6,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.*;
 import java.util.List;
-import org.junit.jupiter.api.Test;
 
 import java.text.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.jupiter.api.Test;
 
 public class ContentTest  {
     Gson gson = SailthruUtil.createGson();
