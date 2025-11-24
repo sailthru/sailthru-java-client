@@ -25,63 +25,72 @@ package com.sailthru.client.params;
 
 import com.google.gson.Gson;
 import com.sailthru.client.SailthruUtil;
+import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TimeZone;
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Test;
 
 import java.text.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
-public class SendTest extends TestCase {
+public class SendTest  {
     private Gson gson = SailthruUtil.createGson();
     private Send send = new Send();
     private static final Date THURSDAY_OCT_3 = new Date(1380831494000L);
 
     DateFormat format = new SimpleDateFormat("E MMM dd HH:mm:ss zzz yyyy");
 
+    @Test
     public void testSetSendID(){
         send.setSendId("abcdefghijkl");
 
         String expected = "{\"send_id\":\"abcdefghijkl\",\"options\":{}}";
         String result = gson.toJson(send);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
+    @Test
     public void testSetEmail(){
         send.setEmail("support@sailthru.com");
 
         String expected = "{\"email\":\"support@sailthru.com\",\"options\":{}}";
         String result = gson.toJson(send);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
+    @Test
     public void testSetTemplate(){
         send.setTemplate("example template");
 
         String expected = "{\"template\":\"example template\",\"options\":{}}";
         String result = gson.toJson(send);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
+    @Test
     public void testSetReplyTo(){
         send.setReplyTo("support@sailthru.com");
 
         String expected = "{\"options\":{\"replyto\":\"support@sailthru.com\"}}";
         String result = gson.toJson(send);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
+    @Test
     public void testSetIsTest(){
         send.setIsTest();
 
         String expected = "{\"options\":{\"test\":1}}";
         String result = gson.toJson(send);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
+    @Test
     public void testSetVars(){
         Map<String, Object> vars = new LinkedHashMap<String, Object>();
         vars.put("foo", "bar");
@@ -92,33 +101,37 @@ public class SendTest extends TestCase {
 
         String expected = "{\"vars\":{\"foo\":\"bar\",\"example map\":{\"nullvalue\":null}},\"options\":{}}";
         String result = gson.toJson(send);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
+    @Test
     public void testSetLimitString(){
         send.setLimit("limit name here");
 
         String expected = "{\"options\":{},\"limit\":{\"name\":\"limit name here\"}}";
         String result = gson.toJson(send);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
+    @Test
     public void testSetLimitStringString(){
         send.setLimit("limit name here", "within time here");
 
         String expected = "{\"options\":{},\"limit\":{\"name\":\"limit name here\",\"within_time\":\"within time here\"}}";
         String result = gson.toJson(send);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
+    @Test
     public void testSetLimitStringStringString(){
         send.setLimit("limit name", "within time", "update");
 
         String result = gson.toJson(send);
         String expected = "{\"options\":{},\"limit\":{\"name\":\"limit name\",\"within_time\":\"within time\",\"conflict\":\"update\"}}";
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
+    @Test
     public void testSetLimitMap(){
         Map<String, Object> limit = new LinkedHashMap<String, Object>();
         limit.put("name", "limit name");
@@ -128,9 +141,10 @@ public class SendTest extends TestCase {
 
         String expected = "{\"options\":{},\"limit\":{\"name\":\"limit name\",\"conflict\":\"update\",\"within_time\":\"some amount of time\"}}";
         String result = gson.toJson(send);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
+    @Test
     public void testSetScheduleTimeDate(){
         Date date = new Date(1380831494000L);
         format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
@@ -138,18 +152,20 @@ public class SendTest extends TestCase {
 
         String expected = "{\"schedule_time\":\"Thu Oct 03 20:18:14 UTC 2013\",\"options\":{}}";
         String result = gson.toJson(send);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
+    @Test
     public void testSetScheduleTimeString(){
         String date = "+ 1 hour";
         send.setScheduleTime(date);
 
         String expected = "{\"schedule_time\":\"+ 1 hour\",\"options\":{}}";
         String result = gson.toJson(send);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
+    @Test
     public void testSetScheduleTimeMap(){
         Map<String, Object> date = new LinkedHashMap<String, Object>();
         date.put("start_time", "+1 hour");
@@ -159,33 +175,37 @@ public class SendTest extends TestCase {
 
         String expected = "{\"schedule_time\":{\"start_time\":\"+1 hour\",\"end_time\":\"+10 hours\",\"method\":\"email\"},\"options\":{}}";
         String result = gson.toJson(send);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
+    @Test
     public void testSetScheduleTimeObjectObjectString(){
         send.setScheduleTime("+1 hour","+ 5 hours", "email");
 
         String expected = "{\"schedule_time\":{\"start_time\":\"+1 hour\",\"end_time\":\"+ 5 hours\",\"method\":\"email\"},\"options\":{}}";
         String result = gson.toJson(send);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
+    @Test
     public void testSetScheduleTimeObjectObject(){
         send.setScheduleTime("+1 hour", "+5 hours");
 
         String expected = "{\"schedule_time\":{\"start_time\":\"+1 hour\",\"end_time\":\"+5 hours\"},\"options\":{}}";
         String result = gson.toJson(send);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
+    @Test
     public void testSetBehalfEmail(){
         send.setBehalfEmail("support@sailthru.com");
 
         String expected = "{\"options\":{\"behalf_email\":\"support@sailthru.com\"}}";
         String result = gson.toJson(send);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 
+    @Test
     public void testSetOptions(){
         Map<String, Object> options = new HashMap<String, Object>();
         options.put("Cc", "support@sailthru.com");
@@ -193,6 +213,6 @@ public class SendTest extends TestCase {
 
         String expected = "{\"options\":{\"Cc\":\"support@sailthru.com\"}}";
         String result = gson.toJson(send);
-        assertEquals(expected, result);
+        assertThat(result).isEqualTo(expected);
     }
 }

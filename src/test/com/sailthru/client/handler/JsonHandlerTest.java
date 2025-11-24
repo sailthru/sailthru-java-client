@@ -1,25 +1,26 @@
 package com.sailthru.client.handler;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class JsonHandlerTest {
 
     private JsonHandler jsonHandler;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         jsonHandler = new JsonHandler();
     }
 
     @Test
     public void testGetFormat() {
-        assertEquals("json", jsonHandler.getFormat());
+        assertThat(jsonHandler.getFormat()).isEqualTo("json");
     }
 
     @Test
@@ -28,12 +29,12 @@ public class JsonHandlerTest {
 
         Map<String, Object> result = parseAsMap(json);
 
-        assertEquals("http://sailthru.com", result.get("url"));
-        assertEquals("testGetContent Title", result.get("title"));
-        assertEquals("Thu Oct 03 20:18:14 UTC 2013", result.get("date"));
+        assertThat(result.get("url")).isEqualTo("http://sailthru.com");
+        assertThat(result.get("title")).isEqualTo("testGetContent Title");
+        assertThat(result.get("date")).isEqualTo("Thu Oct 03 20:18:14 UTC 2013");
 
         Map<String, Object> vars = getNestedMap(result, "vars");
-        assertEquals("foo", vars.get("baz"));
+        assertThat(vars.get("baz")).isEqualTo("foo");
     }
 
     @Test
@@ -45,8 +46,8 @@ public class JsonHandlerTest {
         Map<String, Object> full = getNestedMap(images, "full");
         Map<String, Object> thumb = getNestedMap(images, "thumb");
 
-        assertEquals("https://images.google.com/abc", full.get("url"));
-        assertEquals("https://images.google.com/def", thumb.get("url"));
+        assertThat(full.get("url")).isEqualTo("https://images.google.com/abc");
+        assertThat(thumb.get("url")).isEqualTo("https://images.google.com/def");
     }
 
     @Test
@@ -56,9 +57,9 @@ public class JsonHandlerTest {
         Map<String, Object> result = parseAsMap(json);
         List<Object> location = getNestedList(result, "location");
 
-        assertEquals(2, location.size());
-        assertTrue(location.contains(40.256));
-        assertTrue(location.contains(-74.1239));
+        assertThat(location).hasSize(2);
+        assertThat(location).contains(40.256);
+        assertThat(location).contains(-74.1239);
     }
 
     @Test
@@ -67,7 +68,7 @@ public class JsonHandlerTest {
 
         Map<String, Object> result = parseAsMap(json);
 
-        assertEquals(1200.0, result.get("price"));
+        assertThat(result.get("price")).isEqualTo(1200.0);
     }
 
     @Test
@@ -76,29 +77,30 @@ public class JsonHandlerTest {
 
         Map<String, Object> result = parseAsMap(json);
 
-        assertEquals("http://example.com", result.get("url"));
-        assertEquals(999.99, result.get("price"));
-        assertTrue(result.containsKey("images"));
-        assertTrue(result.containsKey("location"));
-        assertTrue(result.containsKey("metadata"));
+        assertThat(result.get("url")).isEqualTo("http://example.com");
+        assertThat(result.get("price")).isEqualTo(999.99);
+        assertThat(result).containsKey("images");
+        assertThat(result).containsKey("location");
+        assertThat(result).containsKey("metadata");
     }
 
     @Test
     public void testParseResponseWithEmptyJson() {
         Map<String, Object> result = parseAsMap("{}");
-        assertTrue(result.isEmpty());
+        assertThat(result).isEmpty();
     }
 
     @Test
     public void testParseResponseReturnsMap() {
         String json = "{\"key\":\"value\",\"number\":42}";
         Object result = jsonHandler.parseResponse(json);
-        assertTrue(result instanceof Map);
+        assertThat(result).isInstanceOf(Map.class);
     }
 
-    @Test(expected = Exception.class)
+    @Test
     public void testParseResponseWithMalformedJson() {
-        jsonHandler.parseResponse("{\"key\":\"value\"");
+        assertThatThrownBy(() -> jsonHandler.parseResponse("{\"key\":\"value\""))
+            .isInstanceOf(Exception.class);
     }
 
     @Test
@@ -107,25 +109,25 @@ public class JsonHandlerTest {
 
         Map<String, Object> result = parseAsMap(json);
 
-        assertEquals(100L, result.get("integer"));
-        assertEquals(123.45, result.get("decimal"));
-        assertEquals(-99L, result.get("negative"));
+        assertThat(result.get("integer")).isEqualTo(100L);
+        assertThat(result.get("decimal")).isEqualTo(123.45);
+        assertThat(result.get("negative")).isEqualTo(-99L);
     }
 
     @Test
     public void testParseResponseWithNullValues() {
         Map<String, Object> result = parseAsMap("{\"key\":null}");
 
-        assertTrue(result.containsKey("key"));
-        assertNull(result.get("key"));
+        assertThat(result).containsKey("key");
+        assertThat(result.get("key")).isNull();
     }
 
     @Test
     public void testParseResponseWithBooleanValues() {
         Map<String, Object> result = parseAsMap("{\"flagTrue\":true,\"flagFalse\":false}");
 
-        assertEquals(true, result.get("flagTrue"));
-        assertEquals(false, result.get("flagFalse"));
+        assertThat(result.get("flagTrue")).isEqualTo(true);
+        assertThat(result.get("flagFalse")).isEqualTo(false);
     }
 
     @Test
@@ -133,8 +135,8 @@ public class JsonHandlerTest {
         Map<String, Object> result = parseAsMap("{\"emptyArray\":[],\"emptyString\":\"\"}");
 
         List<?> emptyArray = getNestedList(result, "emptyArray");
-        assertTrue(emptyArray.isEmpty());
-        assertEquals("", result.get("emptyString"));
+        assertThat(emptyArray).isEmpty();
+        assertThat(result.get("emptyString")).isEqualTo("");
     }
 
     @Test
@@ -142,53 +144,53 @@ public class JsonHandlerTest {
         Map<String, Object> result = parseAsMap("{\"matrix\":[[1,2],[3,4]]}");
 
         List<Object> matrix = getNestedList(result, "matrix");
-        assertEquals(2, matrix.size());
+        assertThat(matrix).hasSize(2);
 
         List<Object> firstRow = castToList(matrix.get(0));
-        assertEquals(1L, firstRow.get(0));
-        assertEquals(2L, firstRow.get(1));
+        assertThat(firstRow.get(0)).isEqualTo(1L);
+        assertThat(firstRow.get(1)).isEqualTo(2L);
 
         List<Object> secondRow = castToList(matrix.get(1));
-        assertEquals(3L, secondRow.get(0));
-        assertEquals(4L, secondRow.get(1));
+        assertThat(secondRow.get(0)).isEqualTo(3L);
+        assertThat(secondRow.get(1)).isEqualTo(4L);
     }
 
     @Test
     public void testParseResponseWithLargeNumbers() {
         Map<String, Object> result = parseAsMap("{\"bigNumber\":9223372036854775807}");
-        assertEquals(9223372036854775807L, result.get("bigNumber"));
+        assertThat(result.get("bigNumber")).isEqualTo(9223372036854775807L);
     }
 
     // Helper methods
 
     private Map<String, Object> parseAsMap(String json) {
         Object result = jsonHandler.parseResponse(json);
-        assertTrue("Expected result to be a Map", result instanceof Map);
+        assertThat(result).as("Expected result to be a Map").isInstanceOf(Map.class);
         @SuppressWarnings("unchecked")
         Map<String, Object> map = (Map<String, Object>) result;
         return map;
     }
 
     private Map<String, Object> getNestedMap(Map<String, Object> parent, String key) {
-        assertTrue("Expected key '" + key + "' to exist", parent.containsKey(key));
+        assertThat(parent).as("Expected key '" + key + "' to exist").containsKey(key);
         Object value = parent.get(key);
-        assertTrue("Expected '" + key + "' to be a Map", value instanceof Map);
+        assertThat(value).as("Expected '" + key + "' to be a Map").isInstanceOf(Map.class);
         @SuppressWarnings("unchecked")
         Map<String, Object> map = (Map<String, Object>) value;
         return map;
     }
 
     private List<Object> getNestedList(Map<String, Object> parent, String key) {
-        assertTrue("Expected key '" + key + "' to exist", parent.containsKey(key));
+        assertThat(parent).as("Expected key '" + key + "' to exist").containsKey(key);
         Object value = parent.get(key);
-        assertTrue("Expected '" + key + "' to be a List", value instanceof List);
+        assertThat(value).as("Expected '" + key + "' to be a List").isInstanceOf(List.class);
         @SuppressWarnings("unchecked")
         List<Object> list = (List<Object>) value;
         return list;
     }
 
     private List<Object> castToList(Object value) {
-        assertTrue("Expected value to be a List", value instanceof List);
+        assertThat(value).as("Expected value to be a List").isInstanceOf(List.class);
         @SuppressWarnings("unchecked")
         List<Object> list = (List<Object>) value;
         return list;
