@@ -2,18 +2,27 @@ package com.sailthru.client.params;
 
 import com.google.gson.Gson;
 import com.sailthru.client.SailthruUtil;
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.Date;
 import java.util.List;
 
-import java.text.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.TimeZone;
 
-public class ContentTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class ContentTest {
     Gson gson = SailthruUtil.createGson();
 
     DateFormat format = new SimpleDateFormat("E MMM dd HH:mm:ss zzz yyyy");
 
+    @Test
     public void testGetContent() {
         Content content = new Content();
         Date date = new Date(1380831494000L);
@@ -29,6 +38,7 @@ public class ContentTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetTitle(){
         Content content = new Content();
         String title = "Test Title";
@@ -38,6 +48,7 @@ public class ContentTest extends TestCase {
         assertEquals(expected,result);
     }
 
+    @Test
     public void testSetKeys() {
         Content content = new Content();
         Map<String, String> keys = new HashMap<String, String>();
@@ -49,6 +60,7 @@ public class ContentTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetUrl(){
         Content content = new Content();
         String url = "http://sailthru.com";
@@ -58,6 +70,7 @@ public class ContentTest extends TestCase {
         assertEquals(expected,result);
     }
 
+    @Test
     public void testSetDateFormat(){
         Content content = new Content();
         Date date = new Date(1380831494000L);
@@ -68,6 +81,7 @@ public class ContentTest extends TestCase {
         assertEquals(expected,result);
     }
 
+    @Test
     public void testSetTags(){
         Content content = new Content();
         List tags = new ArrayList<String>();
@@ -79,6 +93,7 @@ public class ContentTest extends TestCase {
         assertEquals(expected,result);
     }
 
+    @Test
     public void testSetDateString(){
         Content content = new Content();
         String date = "1380831494000L";
@@ -88,6 +103,7 @@ public class ContentTest extends TestCase {
         assertEquals(expected,result);
     }
 
+    @Test
     public void testSetVars(){
         Content content = new Content();
         Map<String, Object> vars = new LinkedHashMap<String, Object>();
@@ -100,6 +116,7 @@ public class ContentTest extends TestCase {
         assertEquals(expected,result);
     }
 
+    @Test
     public void testSetExpireDate(){
         Content content = new Content();
         Date date = new Date(1380831494000L);
@@ -110,6 +127,7 @@ public class ContentTest extends TestCase {
         assertEquals(expected,result);
     }
 
+    @Test
     public void testSetExpireDateString(){
         Content content = new Content();
         String date = "1380831494000L";
@@ -119,6 +137,7 @@ public class ContentTest extends TestCase {
         assertEquals(expected,result);
     }
 
+    @Test
     public void testSetImages() {
         Content content = new Content();
         Map<String, Map<String, String>> images = new LinkedHashMap<String, Map<String, String>>();
@@ -134,6 +153,7 @@ public class ContentTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetFullImage() {
         Content content = new Content();
         content.setFullImage("https://images.google.com/abc");
@@ -142,6 +162,7 @@ public class ContentTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetThumbImage() {
         Content content = new Content();
         content.setThumbImage("https://images.google.com/abc");
@@ -150,6 +171,7 @@ public class ContentTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetLocationValue() {
         Content content = new Content();
         content.setLocation(40.256, -74.1239);
@@ -158,6 +180,7 @@ public class ContentTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetLocationObject() {
         Content content = new Content();
         List<Double> location = new ArrayList<Double>();
@@ -169,6 +192,7 @@ public class ContentTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetPrice() {
         Content content = new Content();
         content.setPrice(1200);
@@ -177,6 +201,7 @@ public class ContentTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetDescription() {
         Content content = new Content();
         content.setDescription("this is a test.");
@@ -185,6 +210,7 @@ public class ContentTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetSiteName() {
         Content content = new Content();
         content.setSiteName("Hello New York");
@@ -193,6 +219,7 @@ public class ContentTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetAuthor() {
         Content content = new Content();
         content.setAuthor("Dr. Java");
@@ -201,6 +228,7 @@ public class ContentTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testEnableSpider() {
         Content content = new Content();
         content.enableSpider();
