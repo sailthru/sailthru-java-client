@@ -3,9 +3,9 @@ package com.sailthru.client;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SailthruHttpClientConfigurationTest {
 
@@ -16,12 +16,12 @@ public class SailthruHttpClientConfigurationTest {
         SailthruHttpClientConfiguration httpClientConfiguration = new CustomSailthruHttpClientConfiguration();
         SailthruClient client = new SailthruClient(key, secret, httpClientConfiguration);
         HttpParams params = client.httpClient.getParams();
-        assertEquals("connection timeout", httpClientConfiguration.getConnectionTimeout(), HttpConnectionParams.getConnectionTimeout(params));
-        assertEquals("socket timeout", httpClientConfiguration.getSoTimeout(), HttpConnectionParams.getSoTimeout(params));
+        assertEquals(httpClientConfiguration.getConnectionTimeout(), HttpConnectionParams.getConnectionTimeout(params), "connection timeout");
+        assertEquals(httpClientConfiguration.getSoTimeout(), HttpConnectionParams.getSoTimeout(params), "socket timeout");
 
         ThreadSafeClientConnManager connManager = (ThreadSafeClientConnManager) client.httpClient.getConnectionManager();
-        assertEquals("max total connections", httpClientConfiguration.getMaxTotalConnections(), connManager.getMaxTotal());
-        assertEquals("default max connections per route", httpClientConfiguration.getDefaultMaxConnectionsPerRoute(), connManager.getDefaultMaxPerRoute());
+        assertEquals(httpClientConfiguration.getMaxTotalConnections(), connManager.getMaxTotal(), "max total connections");
+        assertEquals(httpClientConfiguration.getDefaultMaxConnectionsPerRoute(), connManager.getDefaultMaxPerRoute(), "default max connections per route");
     }
 
     private static class CustomSailthruHttpClientConfiguration implements SailthruHttpClientConfiguration {

@@ -25,23 +25,27 @@ package com.sailthru.client.params;
 
 import com.google.gson.Gson;
 import com.sailthru.client.SailthruUtil;
+import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TimeZone;
-import junit.framework.TestCase;
 
-import java.text.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
-public class SendTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class SendTest {
     private Gson gson = SailthruUtil.createGson();
     private Send send = new Send();
     private static final Date THURSDAY_OCT_3 = new Date(1380831494000L);
 
     DateFormat format = new SimpleDateFormat("E MMM dd HH:mm:ss zzz yyyy");
 
+    @Test
     public void testSetSendID(){
         send.setSendId("abcdefghijkl");
 
@@ -50,6 +54,7 @@ public class SendTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetEmail(){
         send.setEmail("support@sailthru.com");
 
@@ -58,6 +63,7 @@ public class SendTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetTemplate(){
         send.setTemplate("example template");
 
@@ -66,6 +72,7 @@ public class SendTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetReplyTo(){
         send.setReplyTo("support@sailthru.com");
 
@@ -74,6 +81,7 @@ public class SendTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetIsTest(){
         send.setIsTest();
 
@@ -82,6 +90,7 @@ public class SendTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetVars(){
         Map<String, Object> vars = new LinkedHashMap<String, Object>();
         vars.put("foo", "bar");
@@ -95,6 +104,7 @@ public class SendTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetLimitString(){
         send.setLimit("limit name here");
 
@@ -103,6 +113,7 @@ public class SendTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetLimitStringString(){
         send.setLimit("limit name here", "within time here");
 
@@ -111,6 +122,7 @@ public class SendTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetLimitStringStringString(){
         send.setLimit("limit name", "within time", "update");
 
@@ -119,6 +131,7 @@ public class SendTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetLimitMap(){
         Map<String, Object> limit = new LinkedHashMap<String, Object>();
         limit.put("name", "limit name");
@@ -131,6 +144,7 @@ public class SendTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetScheduleTimeDate(){
         Date date = new Date(1380831494000L);
         format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
@@ -141,6 +155,7 @@ public class SendTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetScheduleTimeString(){
         String date = "+ 1 hour";
         send.setScheduleTime(date);
@@ -150,6 +165,7 @@ public class SendTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetScheduleTimeMap(){
         Map<String, Object> date = new LinkedHashMap<String, Object>();
         date.put("start_time", "+1 hour");
@@ -162,6 +178,7 @@ public class SendTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetScheduleTimeObjectObjectString(){
         send.setScheduleTime("+1 hour","+ 5 hours", "email");
 
@@ -170,6 +187,7 @@ public class SendTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetScheduleTimeObjectObject(){
         send.setScheduleTime("+1 hour", "+5 hours");
 
@@ -178,6 +196,7 @@ public class SendTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetBehalfEmail(){
         send.setBehalfEmail("support@sailthru.com");
 
@@ -186,6 +205,7 @@ public class SendTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetOptions(){
         Map<String, Object> options = new HashMap<String, Object>();
         options.put("Cc", "support@sailthru.com");

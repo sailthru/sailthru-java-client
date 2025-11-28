@@ -25,18 +25,22 @@ package com.sailthru.client.params;
 
 import com.google.gson.Gson;
 import com.sailthru.client.SailthruUtil;
+import org.junit.jupiter.api.Test;
+
 import java.util.HashMap;
 import java.util.Map;
-import junit.framework.TestCase;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  *
  * @author ianwhite
  */
-public class UserTest extends TestCase {
+public class UserTest {
     private Gson gson = SailthruUtil.createGson();
     private User user = new User();
 
+    @Test
     public void testSerializationNull() {
         Map<String, Object> vars = new HashMap<String, Object>();
         vars.put("baz", null);
@@ -48,6 +52,7 @@ public class UserTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetId() {
         User user = new User("foo@bar.com");
 
@@ -56,6 +61,7 @@ public class UserTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetKey() {
         user.setKey("email");
 
@@ -64,6 +70,7 @@ public class UserTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetFields() {
         Map<String, Object> fields = new HashMap<String, Object>();
         fields.put("keys", 1);
@@ -74,6 +81,7 @@ public class UserTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetKeys() {
         Map<String, String> keys = new HashMap<String, String>();
         keys.put("email", "foo@bar.com");
@@ -84,6 +92,7 @@ public class UserTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetKeysConflict() {
         user.setKeysConflict("error");
 
@@ -92,6 +101,7 @@ public class UserTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetLists() {
         Map<String, Integer> lists = new HashMap<String, Integer>();
         lists.put("test list", 1);
@@ -102,6 +112,7 @@ public class UserTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetOptoutEmail() {
         user.setOptoutEmail("none");
 
@@ -110,6 +121,7 @@ public class UserTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetOptoutSmsStatus() {
         user.setOptoutSmsStatus("opt-in");
 
@@ -118,6 +130,7 @@ public class UserTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetSmsMarketingStatusTypeStart() {
         user.setSmsMarketingStatus(User.OptOutType.OPT_OUT_TYPE_START);
 
@@ -126,6 +139,7 @@ public class UserTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetSmsTransactionalStatusTypeStart() {
         user.setSmsTransactionalStatus(User.OptOutType.OPT_OUT_TYPE_START);
 
@@ -134,6 +148,7 @@ public class UserTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetSmsMarketingStatusTypeStop() {
         user.setSmsMarketingStatus(User.OptOutType.OPT_OUT_TYPE_STOP);
 
@@ -142,6 +157,7 @@ public class UserTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetSmsTransactionalStatusTypeStop() {
         user.setSmsTransactionalStatus(User.OptOutType.OPT_OUT_TYPE_STOP);
 
@@ -150,6 +166,7 @@ public class UserTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetSmsMarketingStatusTypePending() {
         user.setSmsMarketingStatus(User.OptOutType.OPT_OUT_TYPE_PENDING);
 
@@ -158,6 +175,7 @@ public class UserTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetSmsTransactionalStatusTypePending() {
         user.setSmsTransactionalStatus(User.OptOutType.OPT_OUT_TYPE_PENDING);
 
@@ -166,6 +184,7 @@ public class UserTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetSmsMarketingStatusTypeDoubleOptIn() {
         user.setSmsMarketingStatus(User.OptOutType.OPT_OUT_TYPE_DOUBLE_OPT_IN);
 
@@ -174,6 +193,7 @@ public class UserTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetSmsTransactionalStatusTypeDoubleOptIn() {
         user.setSmsTransactionalStatus(User.OptOutType.OPT_OUT_TYPE_DOUBLE_OPT_IN);
 
@@ -182,6 +202,7 @@ public class UserTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetLogin() {
         Map<String, Object> login = new HashMap<String, Object>();
         login.put("ip", "123.456.789.0");
