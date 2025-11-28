@@ -14,12 +14,10 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicStatusLine;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HttpContext;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.junit.jupiter.MockitoSettings;
-import org.mockito.quality.Strictness;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -27,7 +25,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
@@ -36,13 +34,12 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class)
-@MockitoSettings(strictness = Strictness.LENIENT)
+@RunWith(MockitoJUnitRunner.class)
 public class AbstractSailthruClientTest {
     private DummySailthruClient sailthruClient;
     private SailthruHttpClient httpClient;
 
-    @BeforeEach
+    @Before
     public void setUp() {
         ThreadSafeClientConnManager mockConnManager = mock(ThreadSafeClientConnManager.class);
         HttpParams mockHttpParams = mock(HttpParams.class);
@@ -66,9 +63,9 @@ public class AbstractSailthruClientTest {
         sailthruClient.apiGet(ApiAction.send, ImmutableMap.<String,Object>of(Send.PARAM_SEND_ID, "some valid send id"));
 
         LastRateLimitInfo rateLimitInfo = sailthruClient.getLastRateLimitInfo(ApiAction.send, AbstractSailthruClient.HttpRequestMethod.GET);
-        assertThat(rateLimitInfo.getLimit()).isEqualTo(limit);
-        assertThat(rateLimitInfo.getRemaining()).isEqualTo(remaining);
-        assertThat(rateLimitInfo.getReset()).isEqualTo(resetDate);
+        assertEquals(limit, rateLimitInfo.getLimit());
+        assertEquals(remaining, rateLimitInfo.getRemaining());
+        assertEquals(resetDate, rateLimitInfo.getReset());
     }
 
     @Test
@@ -104,19 +101,19 @@ public class AbstractSailthruClientTest {
         sailthruClient.apiPost(ApiAction.RETURN, ImmutableMap.of("email", "foo@bar.com", "items", Collections.emptyList()));
 
         LastRateLimitInfo sendRateLimitInfo = sailthruClient.getLastRateLimitInfo(ApiAction.send, AbstractSailthruClient.HttpRequestMethod.GET);
-        assertThat(sendRateLimitInfo.getLimit()).isEqualTo(sendLimit);
-        assertThat(sendRateLimitInfo.getRemaining()).isEqualTo(sendRemaining);
-        assertThat(sendRateLimitInfo.getReset()).isEqualTo(sendResetDate);
+        assertEquals(sendLimit, sendRateLimitInfo.getLimit());
+        assertEquals(sendRemaining, sendRateLimitInfo.getRemaining());
+        assertEquals(sendResetDate, sendRateLimitInfo.getReset());
 
         LastRateLimitInfo listRateLimitInfo = sailthruClient.getLastRateLimitInfo(ApiAction.list, AbstractSailthruClient.HttpRequestMethod.GET);
-        assertThat(listRateLimitInfo.getLimit()).isEqualTo(listLimit);
-        assertThat(listRateLimitInfo.getRemaining()).isEqualTo(listRemaining);
-        assertThat(listRateLimitInfo.getReset()).isEqualTo(listResetDate);
+        assertEquals(listLimit, listRateLimitInfo.getLimit());
+        assertEquals(listRemaining, listRateLimitInfo.getRemaining());
+        assertEquals(listResetDate, listRateLimitInfo.getReset());
 
         LastRateLimitInfo returnRateLimitInfo = sailthruClient.getLastRateLimitInfo(ApiAction.RETURN, AbstractSailthruClient.HttpRequestMethod.POST);
-        assertThat(returnRateLimitInfo.getLimit()).isEqualTo(returnLimit);
-        assertThat(returnRateLimitInfo.getRemaining()).isEqualTo(returnRemaining);
-        assertThat(returnRateLimitInfo.getReset()).isEqualTo(returnResetDate);
+        assertEquals(returnLimit, returnRateLimitInfo.getLimit());
+        assertEquals(returnRemaining, returnRateLimitInfo.getRemaining());
+        assertEquals(returnResetDate, returnRateLimitInfo.getReset());
     }
 
     @Test
@@ -141,14 +138,14 @@ public class AbstractSailthruClientTest {
         sailthruClient.apiPost(ApiAction.list, ImmutableMap.<String,Object>of("list", "some new list"));
 
         LastRateLimitInfo getLastRateLimitInfo = sailthruClient.getLastRateLimitInfo(ApiAction.list, AbstractSailthruClient.HttpRequestMethod.GET);
-        assertThat(getLastRateLimitInfo.getLimit()).isEqualTo(getLimit);
-        assertThat(getLastRateLimitInfo.getRemaining()).isEqualTo(getRemaining);
-        assertThat(getLastRateLimitInfo.getReset()).isEqualTo(getResetDate);
+        assertEquals(getLimit, getLastRateLimitInfo.getLimit());
+        assertEquals(getRemaining, getLastRateLimitInfo.getRemaining());
+        assertEquals(getResetDate, getLastRateLimitInfo.getReset());
 
         LastRateLimitInfo postRateLimitInfo = sailthruClient.getLastRateLimitInfo(ApiAction.list, AbstractSailthruClient.HttpRequestMethod.POST);
-        assertThat(postRateLimitInfo.getLimit()).isEqualTo(postLimit);
-        assertThat(postRateLimitInfo.getRemaining()).isEqualTo(postRemaining);
-        assertThat(postRateLimitInfo.getReset()).isEqualTo(postResetDate);
+        assertEquals(postLimit, postRateLimitInfo.getLimit());
+        assertEquals(postRemaining, postRateLimitInfo.getRemaining());
+        assertEquals(postResetDate, postRateLimitInfo.getReset());
     }
 
     @Test

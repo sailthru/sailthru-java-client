@@ -3,9 +3,9 @@ package com.sailthru.client;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 
 public class SailthruHttpClientConfigurationTest {
 
@@ -16,20 +16,12 @@ public class SailthruHttpClientConfigurationTest {
         SailthruHttpClientConfiguration httpClientConfiguration = new CustomSailthruHttpClientConfiguration();
         SailthruClient client = new SailthruClient(key, secret, httpClientConfiguration);
         HttpParams params = client.httpClient.getParams();
-        assertThat(HttpConnectionParams.getConnectionTimeout(params))
-                .as("connection timeout")
-                .isEqualTo(httpClientConfiguration.getConnectionTimeout());
-        assertThat(HttpConnectionParams.getSoTimeout(params))
-                .as("socket timeout")
-                .isEqualTo(httpClientConfiguration.getSoTimeout());
+        assertEquals("connection timeout", httpClientConfiguration.getConnectionTimeout(), HttpConnectionParams.getConnectionTimeout(params));
+        assertEquals("socket timeout", httpClientConfiguration.getSoTimeout(), HttpConnectionParams.getSoTimeout(params));
 
         ThreadSafeClientConnManager connManager = (ThreadSafeClientConnManager) client.httpClient.getConnectionManager();
-        assertThat(connManager.getMaxTotal())
-                .as("max total connections")
-                .isEqualTo(httpClientConfiguration.getMaxTotalConnections());
-        assertThat(connManager.getDefaultMaxPerRoute())
-                .as("default max connections per route")
-                .isEqualTo(httpClientConfiguration.getDefaultMaxConnectionsPerRoute());
+        assertEquals("max total connections", httpClientConfiguration.getMaxTotalConnections(), connManager.getMaxTotal());
+        assertEquals("default max connections per route", httpClientConfiguration.getDefaultMaxConnectionsPerRoute(), connManager.getDefaultMaxPerRoute());
     }
 
     private static class CustomSailthruHttpClientConfiguration implements SailthruHttpClientConfiguration {

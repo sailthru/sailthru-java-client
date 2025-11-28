@@ -2,10 +2,8 @@ package com.sailthru.client.params;
 
 import com.google.gson.Gson;
 import com.sailthru.client.SailthruUtil;
-import org.junit.jupiter.api.Test;
+import junit.framework.TestCase;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,23 +11,21 @@ import java.util.List;
 import java.util.Date;
 import java.util.TimeZone;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.text.*;
 
-public class PurchaseTest  {
+public class PurchaseTest extends TestCase {
     Gson gson = SailthruUtil.createGson();
 
     DateFormat format = new SimpleDateFormat("E MMM dd HH:mm:ss zzz yyyy");
 
-    @Test
     public void testSetEmail() {
         Purchase purchase = new Purchase();
         purchase.setEmail("support@sailthru.com");
         String expected = "{\"email\":\"support@sailthru.com\"}";
         String result = gson.toJson(purchase);
-        assertThat(result).isEqualTo(expected);
+        assertEquals(expected, result);
     }
 
-    @Test
     public void testSetItems() {
         List<PurchaseItem> items = new ArrayList<PurchaseItem>();
         PurchaseItem firstpurchaseitem = new PurchaseItem(1, "example purchase item", 1999, "example id", "http://www.sailthru.com/example/purchase/url");
@@ -40,10 +36,9 @@ public class PurchaseTest  {
         purchase.setItems(items);
         String expected = "{\"items\":[{\"qty\":\"1\",\"title\":\"example purchase item\",\"price\":\"1999\",\"id\":\"example id\",\"url\":\"http://www.sailthru.com/example/purchase/url\"},{\"qty\":\"2\",\"title\":\"second purchase item\",\"price\":\"2050\",\"id\":\"example id2\",\"url\":\"http://www.sailthru.com/2/example/purchase/url\"}]}";
         String result = gson.toJson(purchase);
-        assertThat(result).isEqualTo(expected);
+        assertEquals(expected, result);
     }
 
-    @Test
     public void testSetPurchaseLevelVars() {
         Map<String, Object> vars = new HashMap<String, Object>();
         vars.put("baz", "foo");
@@ -51,10 +46,9 @@ public class PurchaseTest  {
         purchase.setPurchaseLevelVars(vars);
         String expected = "{\"vars\":{\"baz\":\"foo\"}}";
         String result = gson.toJson(purchase);
-        assertThat(result).isEqualTo(expected);
+        assertEquals(expected, result);
     }
 
-    @Test
     public void testSetPurchaseKeys() {
         Map<String, String> purchaseKeys = new HashMap<String, String>();
         purchaseKeys.put("extid", "123");
@@ -62,10 +56,9 @@ public class PurchaseTest  {
         purchase.setPurchaseKeys(purchaseKeys);
         String expected = "{\"purchase_keys\":{\"extid\":\"123\"}}";
         String result = gson.toJson(purchase);
-        assertThat(result).isEqualTo(expected);
+        assertEquals(expected, result);
     }
 
-    @Test
     public void testAdjustments() {
         Map<String, Object> adjustmentItem = new HashMap<String, Object>();
         adjustmentItem.put("title", "bar");
@@ -76,10 +69,9 @@ public class PurchaseTest  {
         purchase.setAdjustments(adjustments);
         String expected = "{\"adjustments\":[{\"price\":1000,\"title\":\"bar\"}]}";
         String result = gson.toJson(purchase);
-        assertThat(result).isEqualTo(expected);
+        assertEquals(expected, result);
     }
 
-    @Test
     public void testCookies() {
         Map<String, String> cookies = new HashMap<String, String>();
         cookies.put("sailthru_pc", "003f54695cfdcf42189a6");
@@ -87,10 +79,9 @@ public class PurchaseTest  {
         purchase.setCookies(cookies);
         String expected = "{\"cookies\":{\"sailthru_pc\":\"003f54695cfdcf42189a6\"}}";
         String result = gson.toJson(purchase);
-        assertThat(result).isEqualTo(expected);
+        assertEquals(expected, result);
     }
 
-    @Test
     public void testTenders() {
         Map<String, Object> TenderItem = new HashMap<String, Object>();
         TenderItem.put("title", "bar");
@@ -101,46 +92,41 @@ public class PurchaseTest  {
         purchase.setTenders(tenders);
         String expected = "{\"tenders\":[{\"price\":1000,\"title\":\"bar\"}]}";
         String result = gson.toJson(purchase);
-        assertThat(result).isEqualTo(expected);
+        assertEquals(expected, result);
     }
 
-    @Test
     public void testSetAsIncomplete() {
         Purchase purchase = new Purchase();
         purchase.setAsIncomplete();
         String expected = "{\"incomplete\":1}";
         String result = gson.toJson(purchase);
-        assertThat(result).isEqualTo(expected);
+        assertEquals(expected, result);
     }
 
-    @Test
     public void testSetMessageId() {
         Purchase purchase = new Purchase();
         purchase.setMessageId("example message id");
         String expected = "{\"message_id\":\"example message id\"}";
         String result = gson.toJson(purchase);
-        assertThat(result).isEqualTo(expected);
+        assertEquals(expected, result);
     }
 
-    @Test
     public void testSetReminderTemplate() {
         Purchase purchase = new Purchase();
         purchase.setReminderTemplate("example reminder template");
         String expected = "{\"reminder_template\":\"example reminder template\"}";
         String result = gson.toJson(purchase);
-        assertThat(result).isEqualTo(expected);
+        assertEquals(expected, result);
     }
 
-    @Test
     public void testSetReminderTimeString() {
         Purchase purchase = new Purchase();
         purchase.setReminderTime("+10 days");
         String expected = "{\"reminder_time\":\"+10 days\"}";
         String result = gson.toJson(purchase);
-        assertThat(result).isEqualTo(expected);
+        assertEquals(expected, result);
     }
 
-    @Test
     public void testSetReminderTimeDate() {
         Purchase purchase = new Purchase();
         Date date = new Date(1380831494000L);
@@ -148,19 +134,17 @@ public class PurchaseTest  {
         purchase.setReminderTime(format.format(date));
         String expected = "{\"reminder_time\":\"Thu Oct 03 20:18:14 UTC 2013\"}";
         String result = gson.toJson(purchase);
-        assertThat(result).isEqualTo(expected);
+        assertEquals(expected, result);
     }
 
-    @Test
     public void testSetDateString() {
         Purchase purchase = new Purchase();
         purchase.setDate("+10 days");
         String expected = "{\"date\":\"+10 days\"}";
         String result = gson.toJson(purchase);
-        assertThat(result).isEqualTo(expected);
+        assertEquals(expected, result);
     }
 
-    @Test
     public void testSetDateDate() {
         Purchase purchase = new Purchase();
         Date date = new Date(1380831494000L);
@@ -168,29 +152,26 @@ public class PurchaseTest  {
         purchase.setDate(format.format(date));
         String expected = "{\"date\":\"Thu Oct 03 20:18:14 UTC 2013\"}";
         String result = gson.toJson(purchase);
-        assertThat(result).isEqualTo(expected);
+        assertEquals(expected, result);
     }
 
-    @Test
     public void testSendTemplate() {
         String sendTemplate = "template name";
         Purchase purchase = new Purchase();
         purchase.setSendTemplate(sendTemplate);
         String expected = "{\"send_template\":\"template name\"}";
         String result = gson.toJson(purchase);
-        assertThat(result).isEqualTo(expected);
+        assertEquals(expected, result);
     }
 
-    @Test
     public void testSetChannel() {
         Purchase purchase = new Purchase();
         purchase.setChannel(Purchase.Channel.online);
         String expected = "{\"channel\":\"online\"}";
         String result = gson.toJson(purchase);
-        assertThat(result).isEqualTo(expected);
+        assertEquals(expected, result);
     }
 
-    @Test
     public void testSetChannelApp() {
         Purchase purchase = new Purchase();
         purchase.setChannel(Purchase.Channel.app);
@@ -198,7 +179,7 @@ public class PurchaseTest  {
         purchase.setDeviceId("deviceid");
         String expected = "{\"channel\":\"app\",\"app_id\":\"applesfghidodkdjfhikodie\",\"device_id\":\"deviceid\"}";
         String result = gson.toJson(purchase);
-        assertThat(result).isEqualTo(expected);
+        assertEquals(expected, result);
     }
 
 }

@@ -2,9 +2,9 @@ package com.sailthru.client;
 
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 
 public class DefaultSailthruHttpClientConfigurationTest {
 
@@ -15,11 +15,7 @@ public class DefaultSailthruHttpClientConfigurationTest {
         String secret = "***";
         SailthruClient client = new SailthruClient(key, secret); // use DefaultSailthruHttpClientConfiguration
         HttpParams params = client.httpClient.getParams();
-        assertThat(HttpConnectionParams.getConnectionTimeout(params))
-                .as("connection timeout")
-                .isEqualTo(httpClientConfiguration.getConnectionTimeout());
-        assertThat(HttpConnectionParams.getSoTimeout(params))
-                .as("socket timeout")
-                .isEqualTo(httpClientConfiguration.getSoTimeout());
+        assertEquals("connection timeout", httpClientConfiguration.getConnectionTimeout(), HttpConnectionParams.getConnectionTimeout(params));
+        assertEquals("socket timeout", httpClientConfiguration.getSoTimeout(), HttpConnectionParams.getSoTimeout(params));
     }
 }
