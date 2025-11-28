@@ -28,7 +28,7 @@ public class SailthruUtilTest {
         String expectedHash1 = "99b1ff8f11781541f7f89f9bd41c4a17";
         assertEquals(hash1, expectedHash1);
     }
-    
+
     @Test
     public void testArrayListToCSV() {
         java.util.List<String> list1 = new ArrayList<String>();
@@ -37,7 +37,7 @@ public class SailthruUtilTest {
         list1.add("BSD");
         String expectedList1 = "windows,linux,BSD";
         assertEquals(expectedList1, SailthruUtil.arrayListToCSV(list1));
-        
+
         java.util.List<String> list2 = new ArrayList<String>();
         list2.add("one_item");
         String expectedList2 = "one_item";
@@ -73,16 +73,16 @@ public class SailthruUtilTest {
         String expectedmap4 = "{\"var1\":{\"var1\":null},\"var2\":{\"var2\":\"value2\"}}";
         assertEquals(expectedmap4, gson.toJson(map4));
     }
-    
+
     @Test
     public void testGsonNull() {
         gson = SailthruUtil.createGson();
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("baz", null);
-        
+
         String expected = "{\"baz\":null}";
         String result = gson.toJson(map);
-        
+
         assertEquals(expected, result);
     }
 
