@@ -4,14 +4,18 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.ToNumberPolicy;
-import junit.framework.TestCase;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
 
-public class JsonHandlerTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
+public class JsonHandlerTest {
 
     private JsonHandler jsonHandler;
 
@@ -20,7 +24,7 @@ public class JsonHandlerTest extends TestCase {
         public int negativeValue;
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
         jsonHandler = new JsonHandler();
     }
@@ -81,7 +85,21 @@ public class JsonHandlerTest extends TestCase {
 
     @Test
     public void testParseResponseWithComplexNestedStructure() {
-        String json = "{\"url\":\"http://example.com\",\"images\":{\"full\":{\"url\":\"https://example.com/image.jpg\"}},\"location\":[40.256,-74.1239],\"price\":999.99,\"metadata\":{\"key\":\"value\"}}";
+        String json = """
+        {
+          "url": "http://example.com",
+          "images": {
+            "full": {
+              "url": "https://example.com/image.jpg"
+            }
+          },
+          "location": [40.256, -74.1239],
+          "price": 999.99,
+          "metadata": {
+            "key": "value"
+          }
+        }
+        """;
 
         Map<String, Object> result = parseAsMap(json);
 
@@ -228,32 +246,32 @@ public class JsonHandlerTest extends TestCase {
 
     private Map<String, Object> parseAsMap(String json) {
         Object result = jsonHandler.parseResponse(json);
-        assertTrue("Expected result to be a Map", result instanceof Map);
+        assertTrue(result instanceof Map, "Expected result to be a Map");
         @SuppressWarnings("unchecked")
         Map<String, Object> map = (Map<String, Object>) result;
         return map;
     }
 
     private Map<String, Object> getNestedMap(Map<String, Object> parent, String key) {
-        assertTrue("Expected key '" + key + "' to exist", parent.containsKey(key));
+        assertTrue(parent.containsKey(key), "Expected key '" + key + "' to exist");
         Object value = parent.get(key);
-        assertTrue("Expected '" + key + "' to be a Map", value instanceof Map);
+        assertTrue(value instanceof Map, "Expected '" + key + "' to be a Map");
         @SuppressWarnings("unchecked")
         Map<String, Object> map = (Map<String, Object>) value;
         return map;
     }
 
     private List<Object> getNestedList(Map<String, Object> parent, String key) {
-        assertTrue("Expected key '" + key + "' to exist", parent.containsKey(key));
+        assertTrue(parent.containsKey(key), "Expected key '" + key + "' to exist");
         Object value = parent.get(key);
-        assertTrue("Expected '" + key + "' to be a List", value instanceof List);
+        assertTrue(value instanceof List, "Expected '" + key + "' to be a List");
         @SuppressWarnings("unchecked")
         List<Object> list = (List<Object>) value;
         return list;
     }
 
     private List<Object> castToList(Object value) {
-        assertTrue("Expected value to be a List", value instanceof List);
+        assertTrue(value instanceof List, "Expected value to be a List");
         @SuppressWarnings("unchecked")
         List<Object> list = (List<Object>) value;
         return list;

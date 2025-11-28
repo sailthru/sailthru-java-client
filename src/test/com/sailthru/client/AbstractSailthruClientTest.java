@@ -96,9 +96,9 @@ public class AbstractSailthruClientTest {
         CloseableHttpResponse returnHttpResponse = getMockHttpResponseWithRateLimitHeaders(returnLimit, returnRemaining, returnResetDate);
 
         doReturn(sendHttpResponse).doReturn(listHttpResponse)
-                .doReturn(returnHttpResponse)
-                .when(httpClient)
-                .execute(any(HttpHost.class), any(HttpRequest.class), (HttpContext)any());
+                                  .doReturn(returnHttpResponse)
+                                  .when(httpClient)
+                                  .execute(any(HttpHost.class), any(HttpRequest.class), (HttpContext)any());
 
         sailthruClient.apiGet(ApiAction.send, ImmutableMap.<String,Object>of(Send.PARAM_SEND_ID, "some valid send id"));
         sailthruClient.apiGet(ApiAction.list, ImmutableMap.<String,Object>of("list", "some list"));
@@ -158,7 +158,7 @@ public class AbstractSailthruClientTest {
         doReturn(response).when(httpClient).execute(any(HttpHost.class), any(HttpRequest.class), (HttpContext)any());
         sailthruClient.apiPost(ApiAction.RETURN, Collections.<String, Object>emptyMap());
         verify(httpClient).executeHttpRequest(eq("https://api.sailthru.com/return"), eq(AbstractSailthruClient.HttpRequestMethod.POST),
-                any(Map.class), any(ResponseHandler.class), (Map)any());
+            any(Map.class), any(ResponseHandler.class), (Map)any());
     }
 
     private CloseableHttpResponse getMockHttpResponseWithRateLimitHeaders(int limit, int remaining, Date reset) {
