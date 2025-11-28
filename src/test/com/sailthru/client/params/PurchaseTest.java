@@ -2,8 +2,10 @@ package com.sailthru.client.params;
 
 import com.google.gson.Gson;
 import com.sailthru.client.SailthruUtil;
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Test;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,13 +13,14 @@ import java.util.List;
 import java.util.Date;
 import java.util.TimeZone;
 
-import java.text.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class PurchaseTest extends TestCase {
+public class PurchaseTest {
     Gson gson = SailthruUtil.createGson();
 
     DateFormat format = new SimpleDateFormat("E MMM dd HH:mm:ss zzz yyyy");
 
+    @Test
     public void testSetEmail() {
         Purchase purchase = new Purchase();
         purchase.setEmail("support@sailthru.com");
@@ -26,6 +29,7 @@ public class PurchaseTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetItems() {
         List<PurchaseItem> items = new ArrayList<PurchaseItem>();
         PurchaseItem firstpurchaseitem = new PurchaseItem(1, "example purchase item", 1999, "example id", "http://www.sailthru.com/example/purchase/url");
@@ -39,6 +43,7 @@ public class PurchaseTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetPurchaseLevelVars() {
         Map<String, Object> vars = new HashMap<String, Object>();
         vars.put("baz", "foo");
@@ -49,6 +54,7 @@ public class PurchaseTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetPurchaseKeys() {
         Map<String, String> purchaseKeys = new HashMap<String, String>();
         purchaseKeys.put("extid", "123");
@@ -59,6 +65,7 @@ public class PurchaseTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testAdjustments() {
         Map<String, Object> adjustmentItem = new HashMap<String, Object>();
         adjustmentItem.put("title", "bar");
@@ -72,6 +79,7 @@ public class PurchaseTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testCookies() {
         Map<String, String> cookies = new HashMap<String, String>();
         cookies.put("sailthru_pc", "003f54695cfdcf42189a6");
@@ -82,6 +90,7 @@ public class PurchaseTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testTenders() {
         Map<String, Object> TenderItem = new HashMap<String, Object>();
         TenderItem.put("title", "bar");
@@ -95,6 +104,7 @@ public class PurchaseTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetAsIncomplete() {
         Purchase purchase = new Purchase();
         purchase.setAsIncomplete();
@@ -103,6 +113,7 @@ public class PurchaseTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetMessageId() {
         Purchase purchase = new Purchase();
         purchase.setMessageId("example message id");
@@ -111,6 +122,7 @@ public class PurchaseTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetReminderTemplate() {
         Purchase purchase = new Purchase();
         purchase.setReminderTemplate("example reminder template");
@@ -119,6 +131,7 @@ public class PurchaseTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetReminderTimeString() {
         Purchase purchase = new Purchase();
         purchase.setReminderTime("+10 days");
@@ -127,6 +140,7 @@ public class PurchaseTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetReminderTimeDate() {
         Purchase purchase = new Purchase();
         Date date = new Date(1380831494000L);
@@ -137,6 +151,7 @@ public class PurchaseTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetDateString() {
         Purchase purchase = new Purchase();
         purchase.setDate("+10 days");
@@ -145,6 +160,7 @@ public class PurchaseTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetDateDate() {
         Purchase purchase = new Purchase();
         Date date = new Date(1380831494000L);
@@ -155,6 +171,7 @@ public class PurchaseTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSendTemplate() {
         String sendTemplate = "template name";
         Purchase purchase = new Purchase();
@@ -164,6 +181,7 @@ public class PurchaseTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetChannel() {
         Purchase purchase = new Purchase();
         purchase.setChannel(Purchase.Channel.online);
@@ -172,6 +190,7 @@ public class PurchaseTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetChannelApp() {
         Purchase purchase = new Purchase();
         purchase.setChannel(Purchase.Channel.app);

@@ -3,16 +3,18 @@ package com.sailthru.client.params;
 
 import com.google.gson.Gson;
 import com.sailthru.client.SailthruUtil;
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Test;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.HashMap;
 
-public class TemplateTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class TemplateTest {
     private Gson gson = SailthruUtil.createGson();
     private Template template = new Template();
 
+    @Test
     public void testSetTemplate(){
         template.setTemplate("example template");
 
@@ -21,6 +23,7 @@ public class TemplateTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetSample(){
         template.setSample("A");
 
@@ -29,6 +32,7 @@ public class TemplateTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetFromName(){
         template.setFromName("Sailthru");
 
@@ -37,6 +41,7 @@ public class TemplateTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetFromEmail(){
         template.setFromEmail("support@sailthru.com");
 
@@ -45,6 +50,7 @@ public class TemplateTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetSubject(){
         template.setSubject("This is my subject");
 
@@ -53,6 +59,7 @@ public class TemplateTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetContentHTML(){
         template.setContentHtml("This is my content in HTML");
 
@@ -61,6 +68,7 @@ public class TemplateTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetContentText(){
         template.setContentText("This is my content text");
 
@@ -69,6 +77,7 @@ public class TemplateTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetContentSMS(){
         template.setContentSms("This is my SMS content");
 
@@ -77,6 +86,7 @@ public class TemplateTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testEnableLinkTracking(){
         template.enableLinkTracking();
 
@@ -85,6 +95,7 @@ public class TemplateTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testEnableGoogleAnalytics(){
         template.enableGoogleAnalytics();
 
@@ -93,6 +104,7 @@ public class TemplateTest extends TestCase {
         assertEquals(expected, result);
     }
 
+    @Test
     public void testSetLinkParams(){
         Map<String, String> linkParams = new LinkedHashMap<String, String>();
         linkParams.put("utm_campaign", "Sailthru");
