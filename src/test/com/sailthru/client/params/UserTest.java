@@ -46,7 +46,7 @@ public class UserTest {
         vars.put("baz", null);
 
         user.setVars(vars);
-        
+
         String expected = "{\"vars\":{\"baz\":null}}";
         String result = gson.toJson(user);
         assertEquals(expected, result);
