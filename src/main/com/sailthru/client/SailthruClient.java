@@ -1,12 +1,31 @@
 package com.sailthru.client;
 
-import com.sailthru.client.handler.response.JsonResponse;
-import com.sailthru.client.params.*;
-import com.sailthru.client.params.job.*;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.sailthru.client.handler.response.JsonResponse;
+import com.sailthru.client.params.Alert;
+import com.sailthru.client.params.Blast;
+import com.sailthru.client.params.BlastStat;
+import com.sailthru.client.params.Content;
+import com.sailthru.client.params.Email;
+import com.sailthru.client.params.Event;
+import com.sailthru.client.params.List;
+import com.sailthru.client.params.ListStat;
+import com.sailthru.client.params.MultiSend;
+import com.sailthru.client.params.Purchase;
+import com.sailthru.client.params.Send;
+import com.sailthru.client.params.Stats;
+import com.sailthru.client.params.Template;
+import com.sailthru.client.params.User;
+import com.sailthru.client.params.job.BlastQueryJob;
+import com.sailthru.client.params.job.ExportListDataJob;
+import com.sailthru.client.params.job.ImportJob;
+import com.sailthru.client.params.job.Job;
+import com.sailthru.client.params.job.SnapshotJob;
+import com.sailthru.client.params.job.UpdateJob;
 
 /**
  * Main class exposing API calls for Sailthru API as per http://docs.sailthru.com/api
@@ -53,6 +72,7 @@ public class SailthruClient extends AbstractSailthruClient {
      * @return singleton instance of SailthruClient
      * @deprecated
      */
+    @Deprecated
     public static synchronized SailthruClient getInstance(String apiKey, String apiSecret) {
         if (_instance == null) {
             _instance = new SailthruClient(apiKey, apiSecret, DEFAULT_API_URL);
@@ -68,6 +88,7 @@ public class SailthruClient extends AbstractSailthruClient {
      * @return singleton instance of SailthruClient
      * @deprecated
      */
+    @Deprecated
     public static synchronized SailthruClient getInstance(String apiKey, String apiSecret, String apiUrl) {
         if (_instance == null) {
             _instance = new SailthruClient(apiKey, apiSecret, apiUrl);
@@ -120,7 +141,7 @@ public class SailthruClient extends AbstractSailthruClient {
      * @param multiSend
      * @throws IOException
      */
-    public JsonResponse multiSend(MultiSend multiSend) throws IOException {        
+    public JsonResponse multiSend(MultiSend multiSend) throws IOException {
         return apiPost(multiSend);
     }
 
@@ -135,7 +156,7 @@ public class SailthruClient extends AbstractSailthruClient {
         data.put(Send.PARAM_SEND_ID, sendId);
         return apiDelete(ApiAction.send, data);
     }
-    
+
     /**
      * Cancel a send that was scheduled for a future time.
      * @param send
@@ -312,7 +333,7 @@ public class SailthruClient extends AbstractSailthruClient {
     public JsonResponse pushContent(Content content) throws IOException {
         return apiPost(content);
     }
-    
+
     /**
      * Push an event to Sailthru, triggering any applicable triggers.
      * @param event
@@ -367,6 +388,30 @@ public class SailthruClient extends AbstractSailthruClient {
     }
 
     /**
+     * Get Metadata info for all lists
+     *
+     * @return
+     * @throws IOException
+     */
+    public JsonResponse getAllListsMetadata() throws IOException {
+        return getListMetadata(null);
+    }
+
+    /**
+     * Get Metadata info of given listId
+     * @param listId list id
+     * @return
+     * @throws IOException
+     */
+    public JsonResponse getListMetadata(String listId) throws IOException {
+        Map<String, Object> data = new HashMap<String, Object>();
+        if ((listId != null) && (listId.trim().length() != 0)) {
+            data.put(List.PARAM_LIST_ID, listId);
+        }
+        return apiGet(ApiAction.list, data);
+    }
+
+    /**
      * Make stats API request
      * @param stats
      * @throws IOException
@@ -394,61 +439,61 @@ public class SailthruClient extends AbstractSailthruClient {
     public Map<String, Object> blastStats(BlastStat stat) throws IOException {
         return (Map<String, Object>)this.stats(stat);
     }
-    
-    
+
+
     /**
      * Get status of a job
      * @param jobId
      * @return JsonResponse
-     * @throws IOException 
+     * @throws IOException
      */
     public JsonResponse getJobStatus(String jobId) throws IOException {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put(Job.JOB_ID, jobId);
         return apiGet(ApiAction.job, params);
     }
-    
-    
+
+
     /**
      * Process import job from given email string CSV or file path of a CSV or email per line file
      * @param job
-     * @throws IOException 
+     * @throws IOException
      */
     public JsonResponse processImportJob(ImportJob job) throws IOException {
         return apiPost(job, job);
     }
-    
-    
+
+
     /**
      * Query user data set and generate a detailed snapshot of their analytics similar to that shown in the Snapshot Report in the Sailthru interface.
      * @param job SnapshotJob
-     * @throws IOException 
+     * @throws IOException
      */
     public JsonResponse processSnapshotJob(SnapshotJob job) throws IOException {
         return apiPost(job);
     }
-    
-    
+
+
     /**
      * Export blast data in CSV format
      * @param job BlastQueryJob
-     * @throws IOException 
+     * @throws IOException
      */
     public JsonResponse processBlastQueryJob(BlastQueryJob job) throws IOException {
         return apiPost(job);
     }
-    
-    
+
+
     /**
      * Export user data from a list in CSV format
      * @param job ExportListDataJob
-     * @throws IOException 
+     * @throws IOException
      */
     public JsonResponse processExportListDataJob(ExportListDataJob job) throws IOException {
         return apiPost(job);
     }
-    
-    
+
+
     /**
      * Perform a bulk update of any number of user profiles
      * @param job UpdateJob
