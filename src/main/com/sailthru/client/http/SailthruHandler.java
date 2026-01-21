@@ -33,6 +33,8 @@ public class SailthruHandler implements ResponseHandler<Object> {
 
     /* Supported HTTP Status codes */
     public static final int STATUS_OK = 200;
+    public static final int STATUS_CREATED = 201;
+    public static final int STATUS_NO_CONTENT = 204;
     public static final int STATUS_BAD_REQUEST = 400;
     public static final int STATUS_UNAUTHORIZED = 401;
     public static final int STATUS_FORBIDDEN = 403;
@@ -59,6 +61,8 @@ public class SailthruHandler implements ResponseHandler<Object> {
 
         switch (statusCode) {
             case STATUS_OK:
+            case STATUS_CREATED:
+            case STATUS_NO_CONTENT:
                 break;
 
             case STATUS_BAD_REQUEST:
