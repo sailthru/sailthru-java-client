@@ -16,9 +16,11 @@ public class Send extends AbstractApiParams implements ApiParams {
     
     public static final String PARAM_SEND_ID = "send_id";
 
-    protected String send_id; 
+    protected String send_id;
     protected String template;
     protected String email;
+    protected SendKey key;
+    protected String id;
     protected Map<String, Object> vars;
     protected Object schedule_time;
     protected Map<String, Object> options;
@@ -35,6 +37,16 @@ public class Send extends AbstractApiParams implements ApiParams {
 
     public Send setEmail(String email) {
         this.email = email;
+        return this;
+    }
+
+    public Send setKey(SendKey key) {
+        this.key = key;
+        return this;
+    }
+
+    public Send setId(String id) {
+        this.id = id;
         return this;
     }
 
