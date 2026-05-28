@@ -206,6 +206,33 @@ public class SendTest {
     }
 
     @Test
+    public void testSetKeyProfileId() {
+        send.setKey(SendKey.PROFILE_ID).setId("507f1f77bcf86cd799439011");
+
+        String expected = "{\"key\":\"profile_id\",\"id\":\"507f1f77bcf86cd799439011\",\"options\":{}}";
+        String result = gson.toJson(send);
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testSetKeySid() {
+        send.setKey(SendKey.SID).setId("507f1f77bcf86cd799439011");
+
+        String expected = "{\"key\":\"sid\",\"id\":\"507f1f77bcf86cd799439011\",\"options\":{}}";
+        String result = gson.toJson(send);
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testSetKeyDeviceId() {
+        send.setKey(SendKey.DEVICE_ID).setId("abc123devicetoken");
+
+        String expected = "{\"key\":\"device_id\",\"id\":\"abc123devicetoken\",\"options\":{}}";
+        String result = gson.toJson(send);
+        assertEquals(expected, result);
+    }
+
+    @Test
     public void testSetOptions(){
         Map<String, Object> options = new HashMap<String, Object>();
         options.put("Cc", "support@sailthru.com");
