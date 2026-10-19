@@ -1,0 +1,42 @@
+name: Code Quality Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    # Check runtime compatibility every Monday at 04:27 UTC.
+    - cron: '27 4 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Java ${{ matrix.java }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    strategy:
+      fail-fast: false
+      matrix:
+        # Tests require Java 17; current follows the latest stable Temurin JDK.
+        java: ['17', '21', '25', 'current']
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          # A stable version range follows new major releases, not early-access builds.
+          java-version: ${{ matrix.java == 'current' && '>=17' || matrix.java }}
+          check-latest: true
+          cache: maven
+          overwrite-settings: false
+
+      - name: Test and smoke-test the packaged client
+        run: mvn --batch-mode --no-transfer-progress clean verify

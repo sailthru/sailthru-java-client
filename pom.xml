@@ -80,6 +80,8 @@
         <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
         <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
+        <maven-invoker-plugin.version>3.10.1</maven-invoker-plugin.version>
+        <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
     </properties>
 
     <dependencies>
@@ -201,6 +203,41 @@
                                 <arg>-Xlint:unchecked</arg>
                             </compilerArgs>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <failIfNoTests>true</failIfNoTests>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-invoker-plugin</artifactId>
+                <version>${maven-invoker-plugin.version}</version>
+                <configuration>
+                    <projectsDirectory>src/it</projectsDirectory>
+                    <cloneProjectsTo>${project.build.directory}/package-smoke</cloneProjectsTo>
+                    <localRepositoryPath>${project.build.directory}/package-smoke-repository</localRepositoryPath>
+                    <javaHome>${java.home}</javaHome>
+                    <goals>
+                        <goal>verify</goal>
+                    </goals>
+                    <streamLogs>true</streamLogs>
+                    <timeoutInSeconds>300</timeoutInSeconds>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>smoke-test-packaged-client</id>
+                        <!-- Verify the actual JAR and consumer dependencies before deploy. -->
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>install</goal>
+                            <goal>run</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
