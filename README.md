@@ -11,37 +11,16 @@ By default, it will make request in `JSON` format.
 Development and compatibility checks
 ------------------------------------
 
-The library is compiled with a Java 8 target. Building and running its test suite
-requires JDK 17 or newer. CI checks JDK 17, 21, 25, and the latest stable Eclipse
-Temurin JDK. The `current` matrix entry uses the stable version range `>=17` with
-`check-latest: true`, so it follows new stable releases without editing the workflow.
-Early-access runtimes are not included.
-
-Run the complete checks locally with Maven 3.9 and JDK 17 or newer:
+Use Maven 3.9 and JDK 17+; the library retains its Java 8 compilation target.
+CI tests Java 17, 21, 25, and the latest stable Temurin JDK on PRs, pushes to
+`main`, weekly, and manual runs.
 
 ```bash
 mvn --batch-mode --no-transfer-progress clean verify
 ```
 
-This runs the existing JUnit suite, builds the JAR, and smoke-tests it through a
-separate consumer project in `src/it/package-smoke`. The Maven Invoker stages the
-fresh JAR and its POM in `target/package-smoke-repository` and runs the consumer
-from `target/package-smoke`. The consumer loads the JAR with only its declared
-consumer dependencies, creates a client with fake credentials, and sends a POST
-to a loopback HTTP server. It checks the request fields, signature format, and
-parsed response without contacting the Sailthru API or changing customer data.
-Generated files stay under `target` and are removed by `mvn clean`.
-
-The package smoke check is bound to `verify`, before the normal Maven `install`
-and `deploy` phases. The command above validates locally; it does not publish.
-For only the existing unit tests, run `mvn test`.
-
-GitHub Actions runs the complete checks on pull requests, pushes to `main`, and
-weekly on Mondays at 04:27 UTC. A manual run is also available. Schedules start
-after the workflow is merged into the default branch. Maintainers should check
-that schedules remain enabled: GitHub automatically disables scheduled workflows
-in public repositories after 60 days without repository activity; see
-[GitHub's schedule documentation](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule).
+This runs unit tests and tests the built JAR through a separate consumer using a
+local server and dummy credentials. It does not publish. Use `mvn test` for unit tests only.
 
 Examples
 --------
