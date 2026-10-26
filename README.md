@@ -8,6 +8,20 @@ A simple client library to remotely access the `Sailthru REST API` as per [http:
 
 By default, it will make request in `JSON` format.
 
+Development and compatibility checks
+------------------------------------
+
+Use Maven 3.9 and JDK 17+; the library retains its Java 8 compilation target.
+CI discovers every Java feature version from 17 through the latest stable Temurin
+JDK on PRs, pushes to `main`, weekly, and manual runs.
+
+```bash
+mvn --batch-mode --no-transfer-progress clean verify
+```
+
+This runs unit tests and tests the built JAR through a separate consumer using a
+local server and dummy credentials. It does not publish. Use `mvn test` for unit tests only.
+
 Examples
 --------
 
