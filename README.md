@@ -12,8 +12,8 @@ Development and compatibility checks
 ------------------------------------
 
 Use Maven 3.9 and JDK 17+; the library retains its Java 8 compilation target.
-CI tests Java 17, 21, 25, and the latest stable Temurin JDK on PRs, pushes to
-`main`, weekly, and manual runs.
+CI discovers every Java feature version from 17 through the latest stable Temurin
+JDK on PRs, pushes to `main`, weekly, and manual runs.
 
 ```bash
 mvn --batch-mode --no-transfer-progress clean verify
